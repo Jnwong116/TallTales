@@ -1,20 +1,15 @@
 import React from "react";
 
-import "./score_style.css";
+import "./score.css";
 
 class Score extends React.Component {
-
-    render() {
-        const {
-            user
-        } = this.props;
-
-        return (
-            <div>
-                <span>SCORE: {user.score}</span>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div className="score">
+        <span>score: {this.props.score}</span>
+      </div>
+    );
+  }
 }
 
 export default Score;
