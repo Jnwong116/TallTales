@@ -1,0 +1,26 @@
+{
+    "stories": [
+        {
+            "backstory": [
+                "prompt1", "prompt2", "prompt3"
+            ],
+            "conflict": [
+                "prompt1", "prompt2", "prompt3", "prompt4"
+            ],
+            "resolution": [
+                "prompt1", "prompt2", "prompt3"
+            ]
+        },
+        {
+            "backstory": [
+                "prompt1", "prompt2", "prompt3"
+            ],
+            "conflict": [
+                "prompt1", "prompt2", "prompt3", "prompt4"
+            ],
+            "resolution": [
+                "prompt1", "prompt2", "prompt3"
+            ]
+        }
+    ]
+}

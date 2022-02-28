@@ -8,6 +8,15 @@
             "sentence": "",
             "raconteur": true,
             "host": true
+        },
+        {
+            "username": "user2",
+            "password": "user2",
+            "score": "0",
+            "icon": "",
+            "sentence": "",
+            "raconteur": false,
+            "host": false
         }
     ]
 }
