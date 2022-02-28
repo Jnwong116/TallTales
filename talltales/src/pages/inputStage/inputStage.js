@@ -22,7 +22,7 @@ class InputStage extends React.Component {
       <div className="input-stage">
         <div className="input-stage-header">
           <AppName></AppName>
-          <Score></Score>
+          <Score score={0}></Score>
         </div>
       </div>
     );
