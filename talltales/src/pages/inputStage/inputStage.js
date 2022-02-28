@@ -1,4 +1,5 @@
 import React from "react";
+import AppName from '../../components/appName/appName.js';
 
 class InputStage extends React.Component {
   constructor() {
@@ -15,7 +16,11 @@ class InputStage extends React.Component {
     });
   }
   render() {
-    return <div>hisss</div>;
+    return (
+        <div>
+            <AppName></AppName>
+        </div>
+    );
   }
 }
 
