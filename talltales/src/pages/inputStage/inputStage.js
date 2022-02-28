@@ -1,6 +1,7 @@
 import React from "react";
 import AppName from '../../components/appName/appName.js';
 import Button from '../../components/button/button.js';
+import UserInput from "../../components/userInput/userInput.js";
 
 class InputStage extends React.Component {
   constructor() {
@@ -26,6 +27,7 @@ class InputStage extends React.Component {
     return (
         <div>
             <AppName></AppName>
+            <UserInput tag="Set up the backstory!"></UserInput>
             <Button text="SEND" handleClick={this.handleClick}></Button>
         </div>
     );
