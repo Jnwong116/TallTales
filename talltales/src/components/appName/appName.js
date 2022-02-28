@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./appName_style.css";
+import "./appName.css";
 
 class AppName extends React.Component {
     
