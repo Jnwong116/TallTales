@@ -1,11 +1,11 @@
 import logo from "./logo.svg";
-import Backstory from "./pages/gameInput/Backstory";
+import InputStage from "./pages/inputStage/inputStage";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <Backstory></Backstory>
+      <InputStage></InputStage>
     </div>
   );
 }

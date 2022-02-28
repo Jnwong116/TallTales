@@ -1,6 +1,6 @@
 import React from "react";
 
-class Backstory extends React.Component {
+class InputStage extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -19,4 +19,4 @@ class Backstory extends React.Component {
   }
 }
 
-export default Backstory;
+export default InputStage;
