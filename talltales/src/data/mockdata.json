@@ -1,0 +1,13 @@
+{
+    "users": [
+        {
+            "username": "user1",
+            "password": "user1",
+            "score": "0",
+            "icon": "",
+            "sentence": "",
+            "raconteur": true,
+            "host": true
+        }
+    ]
+}
