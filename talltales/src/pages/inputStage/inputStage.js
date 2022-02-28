@@ -2,6 +2,7 @@ import React from "react";
 import "./inputStage.css";
 import AppName from "../../components/appName/appName.js";
 import Score from "../../components/score/score.js";
+import UserInput from "../../components/userInput/userInput.js";
 
 class InputStage extends React.Component {
   constructor() {
@@ -24,6 +25,7 @@ class InputStage extends React.Component {
           <AppName></AppName>
           <Score score={0}></Score>
         </div>
+        <UserInput tag="Set up the backstory!"></UserInput>
       </div>
     );
   }

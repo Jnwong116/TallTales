@@ -1,0 +1,17 @@
+.user-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-input-title {
+  font-family: "Inter";
+  font-size: 60px;
+  padding-bottom: 20px;
+}
+
+.user-input-tag {
+  font-family: "Inter";
+  font-size: 30px;
+  padding-bottom: 20px;
+}
