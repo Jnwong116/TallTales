@@ -1,5 +1,7 @@
 import React from "react";
-import AppName from '../../components/appName/appName.js';
+import "./inputStage.css";
+import AppName from "../../components/appName/appName.js";
+import Score from "../../components/score/score.js";
 
 class InputStage extends React.Component {
   constructor() {
@@ -17,9 +19,12 @@ class InputStage extends React.Component {
   }
   render() {
     return (
-        <div>
-            <AppName></AppName>
+      <div className="input-stage">
+        <div className="input-stage-header">
+          <AppName></AppName>
+          <Score></Score>
         </div>
+      </div>
     );
   }
 }
