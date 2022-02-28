@@ -1,13 +1,31 @@
-import logo from "./logo.svg";
-import InputStage from "./pages/inputStage/inputStage";
+import React from "react";
+
 import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <InputStage></InputStage>
-    </div>
-  );
+// Import Components
+import InputStage from "./pages/inputStage/inputStage";
+import Story from "./components/story/story";
+
+class App extends React.Component {
+  state = {
+    stories: [],
+    users: []
+  }
+
+  render() {
+    // Import mock data
+  this.stories = require('./data/stories.json');
+  this.users = require('./data/users.json');
+
+    return(
+      <div>
+        <InputStage></InputStage>
+        <Story story={this.stories.stories[0]}></Story>
+      </div>
+    )
+
+
+  }
 }
 
 export default App;
