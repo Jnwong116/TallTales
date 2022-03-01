@@ -64,6 +64,11 @@ class InputStage extends React.Component {
     // Import mock data
     this.stories = require('./../../data/stories.json');
     this.users = require('./../../data/users.json');
+
+    // Resets the story
+    this.stories.stories[0].currStory = "GAZI PLEASE COPY THE CURR STORY HERE";
+
+    // Switches the prompt
     switch (this.state.stage) {
       case 0:
         this.prompt = this.stories.stories[0].backstory[this.state.prompt];
