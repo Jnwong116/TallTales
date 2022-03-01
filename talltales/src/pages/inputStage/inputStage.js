@@ -1,6 +1,7 @@
 import React from "react";
 import AppName from "../../components/appName/appName.js";
 import UserInput from "../../components/userInput/userInput.js";
+import UserIcon from "../../components/userIcon/userIcon.js";
 
 class InputStage extends React.Component {
   constructor() {
@@ -21,6 +22,7 @@ class InputStage extends React.Component {
       <div>
         <AppName></AppName>
         <UserInput tag="Set up the backstory!"></UserInput>
+        <UserIcon />
       </div>
     );
   }
