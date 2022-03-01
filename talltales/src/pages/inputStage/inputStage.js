@@ -1,5 +1,7 @@
 import React from "react";
+import "./inputStage.css";
 import AppName from "../../components/appName/appName.js";
+import Score from "../../components/score/score.js";
 import UserInput from "../../components/userInput/userInput.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
 
@@ -19,8 +21,11 @@ class InputStage extends React.Component {
   }
   render() {
     return (
-      <div>
-        <AppName></AppName>
+      <div className="input-stage">
+        <div className="input-stage-header">
+          <AppName></AppName>
+          <Score score={0}></Score>
+        </div>
         <UserInput tag="Set up the backstory!"></UserInput>
         <UserIcon />
       </div>
