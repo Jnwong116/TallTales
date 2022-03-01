@@ -2,6 +2,7 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import rightArrow from '../../assets/images/rightArrow.png';
 import UserIcon from "../userIcon/userIcon.js";
+import Prompt from "../prompt/prompt";
 import "./userInput.css";
 
 class UserInput extends React.Component {
@@ -11,7 +12,9 @@ class UserInput extends React.Component {
         <div className="user-input-header">TYPE YOUR SENTENCE</div>
         <div className="stage-indicator">
             <img src={rightArrow} className="stage-arrow" alt="Right Arrow"/>
-            <div className="user-input-tag">{this.props.tag}</div>
+            <div className="user-input-tag">
+              <Prompt prompt={this.props.prompt}></Prompt>
+            </div>
         </div>
         <div className="stage-indicator user-input-field">
             <UserIcon user={this.props.user}></UserIcon>
