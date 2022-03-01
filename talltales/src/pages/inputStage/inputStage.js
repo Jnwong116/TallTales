@@ -4,6 +4,7 @@ import Button from '../../components/button/button.js';
 import "./inputStage.css";
 import Score from "../../components/score/score.js";
 import UserInput from "../../components/userInput/userInput.js";
+import UserIcon from "../../components/userIcon/userIcon.js";
 
 class InputStage extends React.Component {
   constructor() {
@@ -33,6 +34,7 @@ class InputStage extends React.Component {
           <Score score={0}></Score>
         </div>
         <UserInput tag="Set up the backstory!"></UserInput>
+        <UserIcon />
         <Button text="SEND" handleClick={this.handleClick}></Button>
       </div>
     );
