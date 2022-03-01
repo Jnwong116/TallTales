@@ -9,8 +9,7 @@
             ],
             "resolution": [
                 "prompt1", "prompt2", "prompt3"
-            ],
-            "currStory": "Wowza"
+            ]
         },
         {
             "backstory": [
@@ -21,8 +20,7 @@
             ],
             "resolution": [
                 "prompt1", "prompt2", "prompt3"
-            ],
-            "currStory": ""
+            ]
         }
     ]
 }
