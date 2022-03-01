@@ -1,5 +1,5 @@
 import React from "react";
-import avatar from '../../data/images/avatars/avatar01.png';
+import avatar from '../../assets/images/avatar01.png';
 import "./userIcon_style.css";
 
 class UserIcon extends React.Component {
