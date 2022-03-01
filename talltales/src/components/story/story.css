@@ -1,0 +1,21 @@
+.story {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.story-title {
+  font-family: "Inter";
+  font-size: 40px;
+  font-weight: bolder;
+  padding-bottom: 20px;
+  color: #e6e5dc;
+}
+
+.story-current {
+  font-family: "Inter";
+  font-size: 23px;
+  padding-bottom: 80px;
+  max-width: 600px;
+  align-self: center;
+}
