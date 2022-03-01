@@ -4,7 +4,7 @@
   justify-content: center;
 }
 
-.user-input-title {
+.user-input-header {
   font-family: "Inter";
   font-size: 60px;
   font-weight: bold;
@@ -19,12 +19,12 @@
   padding-bottom: 20px;
 }
 
-.flex-container {
+.stage-indicator {
     display: flex;
     justify-content: center;
 }
 
-.right-arrow {
+.stage-arrow {
     height: 40px;
     width: 40px;
 }
