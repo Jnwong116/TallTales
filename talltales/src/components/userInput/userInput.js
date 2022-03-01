@@ -19,7 +19,7 @@ class UserInput extends React.Component {
         <div className="stage-indicator user-input-field">
             <UserIcon user={this.props.user}></UserIcon>
             <TextField
-                id="outlined-basic"
+                id="user-input"
                 label="OKAY AND THEN..."
                 variant="filled"
                 margin="normal"

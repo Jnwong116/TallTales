@@ -49,9 +49,14 @@ class InputStage extends React.Component {
       });
     }
 
-    const input = document.getElementById("user-input").value;
+    let input = document.getElementById("user-input").value;
+    // Adds period to end of sentence if user hasn't.
+    if (input.charAt(input.length - 1) !== ".") {
+      input = input + ".";
+    }
     this.stories.stories[0].currStory =
-      this.stories.stories[0].currStory + " " + input;
+    this.stories.stories[0].currStory + " " + input;
+    document.getElementById("user-input").value = "";
   }
 
   render() {
@@ -60,8 +65,11 @@ class InputStage extends React.Component {
     this.users = require("./../../data/users.json");
 
     // Resets the story
-    this.stories.stories[0].currStory =
+    if (this.state.stage === 0 && this.state.prompt === 0) {
+      this.stories.stories[0].currStory =
       "chris and jordan are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means.";
+    }
+    
 
     // Switches the prompt
     switch (this.state.stage) {
