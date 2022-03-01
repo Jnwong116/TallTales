@@ -91,8 +91,7 @@ class InputStage extends React.Component {
           <Score user={this.users.users[0]}></Score>
         </div>
         <Story story={this.stories.stories[0]}></Story>
-        <UserInput prompt={this.prompt}></UserInput>
-        <UserIcon />
+        <UserInput prompt={this.prompt} user={this.users.users[0]}></UserInput>
         <Button text="SEND" handleClick={() => {
           this.handleClick(this.state)
         }}></Button>

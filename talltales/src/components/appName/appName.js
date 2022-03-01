@@ -4,7 +4,7 @@ import "./appName.css";
 
 class AppName extends React.Component {
   render() {
-    return <p className="app-name">tall tales</p>;
+    return <p className="app-name">Tall Tales</p>;
   }
 }
 
