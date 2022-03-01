@@ -1,6 +1,7 @@
 import React from "react";
+import AppName from '../../components/appName/appName.js';
+import Button from '../../components/button/button.js';
 import "./inputStage.css";
-import AppName from "../../components/appName/appName.js";
 import Score from "../../components/score/score.js";
 import UserInput from "../../components/userInput/userInput.js";
 
@@ -18,7 +19,13 @@ class InputStage extends React.Component {
       activeKey: eventKey
     });
   }
+  handleClick() {
+    console.log("send");
+    
+    }
+
   render() {
+
     return (
       <div className="input-stage">
         <div className="input-stage-header">
@@ -26,6 +33,7 @@ class InputStage extends React.Component {
           <Score score={0}></Score>
         </div>
         <UserInput tag="Set up the backstory!"></UserInput>
+        <Button text="SEND" handleClick={this.handleClick}></Button>
       </div>
     );
   }
