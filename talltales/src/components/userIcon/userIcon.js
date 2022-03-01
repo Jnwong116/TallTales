@@ -7,7 +7,7 @@ class UserIcon extends React.Component {
     return (
       <div className="UserIcon">
           <img src={avatar} className="avatar" alt="Avatar" />
-          
+          <span>{this.props.user.username}</span>
       </div>
     );
   }
