@@ -1,28 +1,16 @@
 {
-    "stories": [
-        {
-            "backstory": [
-                "prompt1", "prompt2", "prompt3"
-            ],
-            "conflict": [
-                "prompt1", "prompt2", "prompt3", "prompt4"
-            ],
-            "resolution": [
-                "prompt1", "prompt2", "prompt3"
-            ],
-            "currStory": "Wowza"
-        },
-        {
-            "backstory": [
-                "prompt1", "prompt2", "prompt3"
-            ],
-            "conflict": [
-                "prompt1", "prompt2", "prompt3", "prompt4"
-            ],
-            "resolution": [
-                "prompt1", "prompt2", "prompt3"
-            ],
-            "currStory": ""
-        }
-    ]
+  "stories": [
+    {
+      "backstory": ["Where does the story take place?", "Who else is involved?", "Anything else to set up?"],
+      "conflict": ["How can we make the story more spicy?", "What if one of our heroes got attacked by a monkey?", "Oh my god! Rats everywhere!", "Okay, wrap up the conflict!"],
+      "resolution": ["Okay, time to wrap things up.", "Any loose ends left?", "Final chance!"],
+      "currStory": "chris and jordan are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means."
+    },
+    {
+      "backstory": ["Where does the story take place?", "Who else is involved?", "Anything else to set up?"],
+      "conflict": ["How can we make the story more spicy?", "What if one of our heroes got attacked by a monkey?", "Oh my god! Rats everywhere!", "Okay, wrap up the conflict!"],
+      "resolution": ["Okay, time to wrap things up.", "Any loose ends left?", "Final chance!"],
+      "currStory": "chris and jordan are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means."
+    }
+  ]
 }
