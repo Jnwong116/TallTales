@@ -3,6 +3,7 @@ import AppName from '../../components/appName/appName.js';
 import Button from '../../components/button/button.js';
 import "./inputStage.css";
 import Score from "../../components/score/score.js";
+import Story from "../../components/story/story.js";
 import UserInput from "../../components/userInput/userInput.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
 
@@ -37,6 +38,7 @@ class InputStage extends React.Component {
           <AppName></AppName>
           <Score user={this.users.users[0]}></Score>
         </div>
+        <Story story={this.stories.stories[0]}></Story>
         <UserInput tag="Set up the backstory!"></UserInput>
         <UserIcon />
         <Button text="SEND" handleClick={this.handleClick}></Button>
