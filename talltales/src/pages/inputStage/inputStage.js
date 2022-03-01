@@ -28,7 +28,6 @@ class InputStage extends React.Component {
   }
 
   handleClick(state) {
-    console.log(state);
     if (state.prompt === 2 && state.stage === 0) {
       this.setState({
         stage: 1,
@@ -56,8 +55,9 @@ class InputStage extends React.Component {
       })
     }
 
-    
-    
+    const input = document.getElementById('user-input').value;
+    this.stories.stories[0].currStory = this.stories.stories[0].currStory + " " + input;
+
     }
 
   render() {

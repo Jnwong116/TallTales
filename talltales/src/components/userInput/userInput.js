@@ -10,7 +10,7 @@ class UserInput extends React.Component {
         <div className="user-input-title">type your sentence</div>
         <Prompt prompt={this.props.prompt}></Prompt>
         <div className="user-input-bar">
-          <TextField id="outlined-basic" label="Prompt" variant="outlined" />
+          <TextField id="user-input" label="Prompt" variant="outlined" />
         </div>
       </div>
     );
