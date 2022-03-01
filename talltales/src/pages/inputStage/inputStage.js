@@ -1,6 +1,8 @@
 import React from "react";
 import AppName from '../../components/appName/appName.js';
 import Button from '../../components/button/button.js';
+import "./inputStage.css";
+import Score from "../../components/score/score.js";
 import UserInput from "../../components/userInput/userInput.js";
 
 class InputStage extends React.Component {
@@ -25,11 +27,14 @@ class InputStage extends React.Component {
   render() {
 
     return (
-        <div>
-            <AppName></AppName>
-            <UserInput tag="Set up the backstory!"></UserInput>
-            <Button text="SEND" handleClick={this.handleClick}></Button>
+      <div className="input-stage">
+        <div className="input-stage-header">
+          <AppName></AppName>
+          <Score score={0}></Score>
         </div>
+        <UserInput tag="Set up the backstory!"></UserInput>
+        <Button text="SEND" handleClick={this.handleClick}></Button>
+      </div>
     );
   }
 }
