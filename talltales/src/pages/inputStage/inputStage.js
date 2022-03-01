@@ -39,8 +39,7 @@ class InputStage extends React.Component {
           <Score user={this.users.users[0]}></Score>
         </div>
         <Story story={this.stories.stories[0]}></Story>
-        <UserInput tag="Set up the backstory!"></UserInput>
-        <UserIcon user={this.users.users[0]} />
+        <UserInput tag="set up the backstory!" user={this.users.users[0]}></UserInput>
         <Button text="SEND" handleClick={this.handleClick}></Button>
       </div>
     );
