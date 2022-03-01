@@ -22,8 +22,41 @@ class InputStage extends React.Component {
   //   });
   // }
 
-  handleClick() {
-    console.log("send");
+  state = {
+    stage: 0,
+    prompt: 0
+  }
+
+  handleClick(state) {
+    console.log(state);
+    if (state.prompt === 2 && state.stage === 0) {
+      this.setState({
+        stage: 1,
+        prompt: 0
+      })
+    }
+
+    else if (state.prompt === 3 && state.stage === 1) {
+      this.setState({
+        stage: 2,
+        prompt: 0
+      })
+    }
+
+    else if (state.prompt === 2 && state.stage === 2) {
+      this.setState({
+        stage: 3,
+        prompt: 0
+      })
+    }
+
+    else {
+      this.setState({
+        prompt: state.prompt + 1
+      })
+    }
+
+    
     
     }
 
@@ -31,6 +64,20 @@ class InputStage extends React.Component {
     // Import mock data
     this.stories = require('./../../data/stories.json');
     this.users = require('./../../data/users.json');
+    switch (this.state.stage) {
+      case 0:
+        this.prompt = this.stories.stories[0].backstory[this.state.prompt];
+        break;
+      case 1:
+        this.prompt = this.stories.stories[0].conflict[this.state.prompt];
+        break;
+      case 2:
+        this.prompt = this.stories.stories[0].resolution[this.state.prompt];
+        break;
+      default:
+        this.prompt = "Story is complete!"
+        break;
+    }
 
     return (
       <div className="input-stage">
@@ -39,9 +86,11 @@ class InputStage extends React.Component {
           <Score user={this.users.users[0]}></Score>
         </div>
         <Story story={this.stories.stories[0]}></Story>
-        <UserInput tag="Set up the backstory!"></UserInput>
+        <UserInput prompt={this.prompt}></UserInput>
         <UserIcon />
-        <Button text="SEND" handleClick={this.handleClick}></Button>
+        <Button text="SEND" handleClick={() => {
+          this.handleClick(this.state)
+        }}></Button>
       </div>
     );
   }
