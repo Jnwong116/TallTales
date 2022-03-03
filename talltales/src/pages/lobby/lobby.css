@@ -1,0 +1,58 @@
+.header {
+  display: flex;
+}
+.lobby-header {
+  font-size: 56px;
+  font-style: "Inter";
+  font-weight: bolder;
+  padding-bottom: 50px;
+  color: #363636;
+}
+.lobby-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.lobby-players {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 480px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+.lobby-player {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  font-style: "Inter";
+  font-weight: bold;
+  color: #7d7d7d;
+  padding: 30px;
+}
+
+.lobby-player img {
+  height: 90px;
+  width: 90px;
+  object-fit: contain;
+}
+
+.buttonStyle {
+  color: #ededed;
+  background-color: #292929;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 50px;
+  border: none;
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+.buttonStyle:hover {
+  background-color: #292929;
+  color: #989494;
+  cursor: pointer;
+}
