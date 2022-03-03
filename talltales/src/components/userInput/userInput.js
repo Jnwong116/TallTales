@@ -26,7 +26,6 @@ class UserInput extends React.Component {
                 multiline="true"
                 maxRows="5"
                 color="secondary"
-
             />
         </div>
       </div>
