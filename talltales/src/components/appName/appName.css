@@ -1,7 +1,22 @@
 .app-name {
-  color: black;
-  font-size: 70px;
-  font-family: "Inter";
-  font-weight: 1000;
-  padding-left: 80px;
+    padding-left: 80px;
+    margin-bottom: 70px;
+    margin-top: 70px;
+}
+
+.app-name-name {
+    color: black;
+    font-size: 70px;
+    font-family: "Inter";
+    font-weight: 1000;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.app-name-tag {
+    color: #808080;
+    font-size: 15px;
+    font-family: "Inter";
+    font-weight: 600;
+
 }
