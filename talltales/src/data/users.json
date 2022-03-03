@@ -1,22 +1,40 @@
 {
-    "users": [
-        {
-            "username": "user1",
-            "password": "user1",
-            "score": "102",
-            "icon": "",
-            "sentence": "",
-            "raconteur": true,
-            "host": true
-        },
-        {
-            "username": "user2",
-            "password": "user2",
-            "score": "0",
-            "icon": "",
-            "sentence": "",
-            "raconteur": false,
-            "host": false
-        }
-    ]
+  "users": [
+    {
+      "username": "gazi",
+      "password": "gazi",
+      "score": "102",
+      "icon": "avatar01.png",
+      "sentence": "",
+      "raconteur": true,
+      "host": true
+    },
+    {
+      "username": "jasper",
+      "password": "jasper",
+      "score": "0",
+      "icon": "avatar02.png",
+      "sentence": "",
+      "raconteur": false,
+      "host": false
+    },
+    {
+      "username": "jordan",
+      "password": "jordan",
+      "score": "0",
+      "icon": "avatar03.png",
+      "sentence": "",
+      "raconteur": false,
+      "host": false
+    },
+    {
+      "username": "chris",
+      "password": "chris",
+      "score": "0",
+      "icon": "avatar04.png",
+      "sentence": "",
+      "raconteur": false,
+      "host": false
+    }
+  ]
 }
