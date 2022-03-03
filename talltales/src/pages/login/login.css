@@ -1,0 +1,18 @@
+.login-header {
+    display: flex;
+    justify-content: left;
+  }
+
+.signup-message {
+    font-weight: bold;
+    color: #808080;
+}
+
+.signup-link {
+    color: white;
+}
+
+.signup-link:hover {
+    color: #525151;
+    cursor: pointer;
+}
