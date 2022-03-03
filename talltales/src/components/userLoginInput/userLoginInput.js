@@ -20,7 +20,7 @@ class UserLoginInput extends React.Component {
                         multiline="true"
                     />
                    <TextField
-                        id="user-name"
+                        id="password"
                         label="<password>"
                         variant="filled"
                         margin="normal"

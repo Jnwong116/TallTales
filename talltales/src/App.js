@@ -8,8 +8,8 @@ function App() {
   return (
     <div className="App">
       {/* <InputStage></InputStage> */}
-      {/* <Login></Login> */}
-      <Register></Register>
+      <Login></Login>
+      {/* <Register></Register> */}
     </div>
   );
 }
