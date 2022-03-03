@@ -1,11 +1,12 @@
 import React from "react";
 import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
-import "./inputStage.css";
 import Score from "../../components/score/score.js";
 import Story from "../../components/story/story.js";
 import UserInput from "../../components/userInput/userInput.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
+
+import "./inputStage.css";
 
 class InputStage extends React.Component {
   // constructor() {
