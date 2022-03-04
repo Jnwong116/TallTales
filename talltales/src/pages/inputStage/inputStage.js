@@ -56,7 +56,7 @@ class InputStage extends React.Component {
       input = input + ".";
     }
     this.stories.stories[0].currStory =
-    this.stories.stories[0].currStory + " " + input;
+      this.stories.stories[0].currStory + " " + input;
     document.getElementById("user-input").value = "";
   }
 
@@ -68,9 +68,8 @@ class InputStage extends React.Component {
     // Resets the story
     if (this.state.stage === 0 && this.state.prompt === 0) {
       this.stories.stories[0].currStory =
-      "chris and jordan are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means.";
+        "chris and jordan are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means.";
     }
-    
 
     // Switches the prompt
     switch (this.state.stage) {
