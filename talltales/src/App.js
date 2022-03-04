@@ -16,8 +16,7 @@ import {
 function App() {
   return (
     <div className="App">
-      <InputStage></InputStage>
-      {/* <Router>
+      <Router>
         <Switch>
           <Route path="/lobby" element={<Lobby />} />
           <Route path="/" element={<Login />} />
@@ -25,7 +24,7 @@ function App() {
           <Route path="/gameStage" element={<InputStage />} />
           <Route path="/voteStage" element={<VoteStage />} />
         </Switch>
-      </Router> */}
+      </Router>
     </div>
   );
 }
