@@ -1,0 +1,93 @@
+.vote-stage-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.vote-stage-story {
+  margin-left: 10%;
+}
+.story-title {
+  font-size: 36px;
+  font-style: "Inter";
+  font-weight: bolder;
+  padding-bottom: 50px;
+  color: #676767;
+}
+.story-current {
+  font-family: "Inter";
+  font-size: 23px;
+  max-width: 500px;
+}
+
+.vote-stage-turns {
+  margin-right: 10%;
+}
+.vote-stage-raconteur {
+  font-size: 36px;
+  font-style: "Inter";
+  font-weight: bolder;
+  color: #676767;
+}
+
+.raconteur {
+  color: #292929;
+}
+
+.vote-stage-option {
+  display: flex;
+  flex-direction: row;
+  height: 150px;
+  width: 600px;
+}
+
+.vote-option-text {
+  color: #ededed;
+  font-style: "Courier Prime", monospace;
+  background-color: #292929;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 50px;
+  border: none;
+  font-weight: bold;
+  font-size: 20px;
+  width: 320px;
+  height: 30px;
+}
+
+.vote-option-text:hover {
+  background-color: #292929;
+  color: #989494;
+  cursor: pointer;
+}
+
+.vote-stage-sentence {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+.sentence-title {
+  font-size: 36px;
+  font-style: "Inter";
+  font-weight: bolder;
+  padding-right: 40px;
+  color: #676767;
+}
+
+.sentence-content {
+  color: #626262;
+  font-style: "Inter";
+  background-color: #9a9a9a;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border: none;
+  font-weight: bold;
+  font-size: 20px;
+  width: 320px;
+  height: 30px;
+}
