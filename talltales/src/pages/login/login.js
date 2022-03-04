@@ -12,7 +12,7 @@ class Login extends React.Component {
         return (
             <div className="login-page">
                 <div className="login-header">
-                    <AppName></AppName>
+                    <AppName showTagline></AppName>
                 </div>
                 <UserLoginInput text="LOGIN"></UserLoginInput>
                 <TextButton text="<ENTER TO PLAY>" 

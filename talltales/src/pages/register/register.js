@@ -11,7 +11,7 @@ class Register extends React.Component {
         return (
             <div className="register-page">
                 <div className="register-header">
-                    <AppName></AppName>
+                    <AppName showTagline></AppName>
                 </div>
                 <UserLoginInput text="REGISTER"></UserLoginInput>
                 <TextButton text="<CONFIRM REGISTRATION>" 
