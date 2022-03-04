@@ -2,17 +2,24 @@
   display: flex;
 }
 
-.dashboardMenuContainer {
+.dashboardMenuOuterContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   position: fixed;
   right: 0px; bottom: 0px;
+}
+
+.dashboardMenuInnerContainer {
+  display: flex;
+  flex-direction: row;
+  padding-left: 80px;
+  padding-right: 80px;
+  gap: 80px;
 }
 
 .dashboardMenu {
   display: flex;
   flex-direction: column;
-  padding-right: 80px;
   padding-bottom: 70px;
 }
 
@@ -31,4 +38,10 @@
 
 .buttonStyle:hover {
   cursor: pointer;
+}
+
+.userIconContainer {
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
 }
