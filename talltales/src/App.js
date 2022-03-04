@@ -1,25 +1,19 @@
+import "./App.css";
 import logo from "./logo.svg";
 import InputStage from "./pages/inputStage/inputStage";
 import Login from "./pages/login/login";
-import Register from "./pages/register/register";
-import "./App.css";
+import Register from "./pages/register/register"
 import Lobby from "./pages/lobby/lobby";
-import VoteStage from "./pages/voteStage/voteStage";
-
-import { BrowserRouter as Router, Routes as Switch, Route, Link } from "react-router-dom";
+import Dashboard from "./pages/dashboard/dashboard"
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Switch>
-          <Route path="/lobby" element={<Lobby />} />
-          <Route path="/" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/gameStage" element={<InputStage />} />
-          <Route path="/voteStage" element={<VoteStage />} />
-        </Switch>
-      </Router>
+      {<Dashboard></Dashboard>}
+      {/*<InputStage></InputStage>*/}
+      {/*<Lobby></Lobby>*/}
+      {/*<Login></Login>*/}
+      {/*<Register></Register>*/}
     </div>
   );
 }
