@@ -3,6 +3,8 @@ import AppName from "../../components/appName/appName.js";
 import UserLoginInput from "../../components/userLoginInput/userLoginInput.js";
 import TextButton from "../../components/textButton/textButton.js";
 
+import { Link } from "react-router-dom";
+
 import "./register.css";
 
 class Register extends React.Component {
@@ -14,9 +16,14 @@ class Register extends React.Component {
                     <AppName></AppName>
                 </div>
                 <UserLoginInput text="REGISTER"></UserLoginInput>
-                <TextButton text="<CONFIRM REGISTRATION>" 
-                    handleClick={() => {window.alert('REGISTER!');}}>
-                </TextButton>
+                <Link to={{
+                    pathname: '/'
+                }} className="link">
+                    <TextButton text="<CONFIRM REGISTRATION>" 
+                        handleClick={() => {}}>
+                    </TextButton>
+                </Link>
+                
             </div>
         );
     }

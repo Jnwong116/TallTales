@@ -3,6 +3,8 @@ import AppName from "../../components/appName/appName.js";
 import UserLoginInput from "../../components/userLoginInput/userLoginInput.js";
 import TextButton from "../../components/textButton/textButton.js";
 
+import { Link } from "react-router-dom";
+
 import "./login.css";
 
 class Login extends React.Component {
@@ -15,16 +17,25 @@ class Login extends React.Component {
                     <AppName></AppName>
                 </div>
                 <UserLoginInput text="LOGIN"></UserLoginInput>
-                <TextButton text="<ENTER TO PLAY>" 
-                    handleClick={() => {window.alert('LOGIN!');}}>
-                </TextButton>
+                
+                <Link to={{
+                    pathname: '/lobby'
+                }} className="link">
+                    <TextButton text="<ENTER TO PLAY>" />
+                </Link>
+                
+                
                 <div className="signup-message">
                     NEW? SIGN UP 
-                    <strong 
-                        className="signup-link"
-                        onClick={() => {window.alert('SIGNUP!')}}
-                    > HERE</strong>!
+                    <Link to={{
+                        pathname: '/register'
+                    }} className="link">
+                        <strong 
+                            className="signup-link"
+                        > HERE</strong>!
+                    </Link>
                 </div>
+                
             </div>
         );
     }
