@@ -9,22 +9,35 @@ import "./login.css";
 
 class Login extends React.Component {
 
+    handleClick(users) {
+        const currUserName = document.getElementById("user-name").value;
+        const currPassword = document.getElementById("password").value;
+
+        const targetUser = users.users.filter(user => user.username === currUserName);
+
+        if(targetUser.length && targetUser[0].password === currPassword) {
+            window.alert("Successful login!");
+        }
+        else {
+            window.alert("Incorrect login :(");
+        }
+    }
+
     render() {
+        // import data
+        this.users = require("./../../data/users.json");
 
         return (
             <div className="login-page">
                 <div className="login-header">
-                    <AppName></AppName>
+                    <AppName showTagline></AppName>
                 </div>
                 <UserLoginInput text="LOGIN"></UserLoginInput>
-                
                 <Link to={{
                     pathname: '/lobby'
                 }} className="link">
                     <TextButton text="<ENTER TO PLAY>" />
                 </Link>
-                
-                
                 <div className="signup-message">
                     NEW? SIGN UP 
                     <Link to={{
