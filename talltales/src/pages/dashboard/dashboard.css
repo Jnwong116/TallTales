@@ -1,0 +1,34 @@
+.header {
+  display: flex;
+}
+
+.dashboardMenuContainer {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  right: 0px; bottom: 0px;
+}
+
+.dashboardMenu {
+  display: flex;
+  flex-direction: column;
+  padding-right: 80px;
+  padding-bottom: 70px;
+}
+
+.buttonStyle {
+  color: #ededed;
+  background-color: #292929;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 25px;
+  border: none;
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+.buttonStyle:hover {
+  cursor: pointer;
+}
