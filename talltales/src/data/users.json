@@ -7,7 +7,8 @@
       "icon": "avatar01.png",
       "sentence": "",
       "raconteur": true,
-      "host": true
+      "host": true,
+      "currentSentence": "chris tries to murder a rabbit"
     },
     {
       "username": "jasper",
@@ -16,7 +17,8 @@
       "icon": "avatar02.png",
       "sentence": "",
       "raconteur": false,
-      "host": false
+      "host": false,
+      "currentSentence": "however, something goes wrong"
     },
     {
       "username": "jordan",
@@ -25,7 +27,8 @@
       "icon": "avatar03.png",
       "sentence": "",
       "raconteur": false,
-      "host": false
+      "host": false,
+      "currentSentence": "we try to explore the jungle"
     },
     {
       "username": "chris",
@@ -34,7 +37,8 @@
       "icon": "avatar04.png",
       "sentence": "",
       "raconteur": false,
-      "host": false
+      "host": false,
+      "currentSentence": "we turn to cannibalism"
     }
   ]
 }
