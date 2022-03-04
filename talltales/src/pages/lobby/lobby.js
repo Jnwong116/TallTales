@@ -4,6 +4,8 @@ import Button from "../../components/button/button.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
 import "./lobby.css";
 
+import { Link } from "react-router-dom";
+
 class Lobby extends React.Component {
   state = {
     stage: 0,
@@ -32,12 +34,17 @@ class Lobby extends React.Component {
             })}
           </div>
         </div>
-        <Button
-          text="START GAME"
-          handleClick={() => {
-            this.handleClick(this.state);
-          }}
-        ></Button>
+
+        <Link to={{
+          pathname: '/gameStage'
+        }} className="link">
+          <Button
+            text="START GAME"
+            handleClick={() => {
+              this.handleClick(this.state);
+            }}
+          ></Button>
+        </Link>
       </div>
     );
   }
