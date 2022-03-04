@@ -17,14 +17,14 @@ class UserLoginInput extends React.Component {
                         label="<user-name>"
                         variant="filled"
                         margin="normal"
-                        multiline="true"
+                        maxRows="1"
                     />
                    <TextField
                         id="password"
                         label="<password>"
                         variant="filled"
                         margin="normal"
-                        multiline="true"
+                        maxRows="1"
                     />
                 </div>
             </div> 
