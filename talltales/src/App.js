@@ -17,6 +17,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/gameStage" element={<InputStage />} />
+          <Route path="/voteStage" element={<VoteStage />} />
         </Switch>
       </Router>
     </div>
