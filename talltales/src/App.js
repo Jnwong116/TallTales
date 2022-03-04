@@ -6,14 +6,19 @@ import "./App.css";
 import Lobby from "./pages/lobby/lobby";
 import VoteStage from "./pages/voteStage/voteStage";
 
+import { BrowserRouter as Router, Routes as Switch, Route, Link } from "react-router-dom";
+
 function App() {
   return (
     <div className="App">
-      {/* <InputStage></InputStage> */}
-      {/* <Lobby></Lobby> */}
-      <VoteStage></VoteStage>
-      {/* <Login></Login> */}
-      {/* <Register></Register> */}
+      <Router>
+        <Switch>
+          <Route path="/lobby" element={<Lobby />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/gameStage" element={<InputStage />} />
+        </Switch>
+      </Router>
     </div>
   );
 }
