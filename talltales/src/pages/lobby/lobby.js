@@ -1,6 +1,7 @@
 import React from "react";
 import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
+import DropDown from "../../components/dropDown/dropDown.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
 import "./lobby.css";
 
@@ -15,6 +16,10 @@ class Lobby extends React.Component {
   render() {
     // Import mock data
     this.usersData = require("./../../data/users.json");
+    this.storiesData = require("./../../data/stories.json");
+
+    // Array of genres
+    const genres = this.storiesData.stories.map(object => object.genre);
 
     return (
       <div className="lobby">
@@ -23,18 +28,20 @@ class Lobby extends React.Component {
           <AppName></AppName>
         </div>
         <div className="lobby-content">
-          <div className="lobby-header">LOBBY</div>
-          <div className="lobby-players">
-            {this.usersData.users.map((e, i) => {
-              return (
-                <div key={i} className="lobby-player">
-                  <UserIcon username={e.username} icon={e.icon}></UserIcon>
-                </div>
-              );
-            })}
-          </div>
+            <div className="lobby-header">LOBBY</div>
+            <div className="lobby-players">
+                {this.usersData.users.map((e, i) => {
+                return (
+                    <div key={i} className="lobby-player">
+                    <UserIcon username={e.username} icon={e.icon}></UserIcon>
+                    </div>
+                );
+                })}
+            </div>
         </div>
-
+        <div className="lobby-genre">
+            <DropDown items={genres}></DropDown>
+        </div>
         <Link to={{
           pathname: '/gameStage'
         }} className="link">
