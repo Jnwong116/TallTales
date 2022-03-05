@@ -6,7 +6,13 @@ import Lobby from "./pages/lobby/lobby";
 import VoteStage from "./pages/voteStage/voteStage";
 import React from "react";
 
-import { BrowserRouter as Router, Routes as Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes as Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 
 // import data
 const users = require("./data/users.json");

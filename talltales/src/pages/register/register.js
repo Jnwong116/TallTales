@@ -3,6 +3,8 @@ import AppName from "../../components/appName/appName.js";
 import UserLoginInput from "../../components/userLoginInput/userLoginInput.js";
 import TextButton from "../../components/textButton/textButton.js";
 
+import { Link } from "react-router-dom";
+
 import "./register.css";
 
 class Register extends React.Component {

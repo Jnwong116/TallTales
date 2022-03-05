@@ -37,6 +37,7 @@ class Login extends React.Component {
                     <AppName showTagline></AppName>
                 </div>
                 <UserLoginInput text="LOGIN"></UserLoginInput>
+
                 <TextButton text="<ENTER TO PLAY>" 
                     handleClick={() => {this.handleClick(this.props.app.state.users)}}>
                 </TextButton>
@@ -47,6 +48,7 @@ class Login extends React.Component {
                             onClick={() => {this.redirect()}}
                         > HERE</strong>!
                 </div>
+                
             </div>
         );
     }

@@ -1,12 +1,17 @@
 import React from "react";
 import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
+import DropDown from "../../components/dropDown/dropDown.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
 import "./lobby.css";
 
+import { Link } from "react-router-dom";
+
 class Lobby extends React.Component {
   render() {
-    console.log(this.props.app.state)
+    // Array of genres
+    const genres = this.storiesData.stories.map(object => object.genre);
+
     return (
       <div className="lobby">
         {/* TODO: Make this header into a component so it's reusable in every page */}
@@ -24,13 +29,20 @@ class Lobby extends React.Component {
               );
             })}
           </div>
+
+        <div className="lobby-genre">
+            <DropDown items={genres}></DropDown>
         </div>
-        <Button
-          text="START GAME"
-          handleClick={() => {
-            this.handleClick(this.state);
-          }}
-        ></Button>
+        <Link to={{
+          pathname: '/gameStage'
+        }} className="link">
+          <Button
+            text="START GAME"
+            handleClick={() => {
+              this.handleClick(this.state);
+            }}
+          ></Button>
+        </Link>
       </div>
     );
   }
