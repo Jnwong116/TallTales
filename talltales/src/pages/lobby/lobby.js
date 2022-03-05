@@ -8,16 +8,7 @@ import "./lobby.css";
 import { Link } from "react-router-dom";
 
 class Lobby extends React.Component {
-  state = {
-    stage: 0,
-    prompt: 0
-  };
-
   render() {
-    // Import mock data
-    this.usersData = require("./../../data/users.json");
-    this.storiesData = require("./../../data/stories.json");
-
     // Array of genres
     const genres = this.storiesData.stories.map(object => object.genre);
 
@@ -28,17 +19,17 @@ class Lobby extends React.Component {
           <AppName></AppName>
         </div>
         <div className="lobby-content">
-            <div className="lobby-header">LOBBY</div>
-            <div className="lobby-players">
-                {this.usersData.users.map((e, i) => {
-                return (
-                    <div key={i} className="lobby-player">
-                    <UserIcon username={e.username} icon={e.icon}></UserIcon>
-                    </div>
-                );
-                })}
-            </div>
-        </div>
+          <div className="lobby-header">LOBBY</div>
+          <div className="lobby-players">
+            {this.props.app.state.users.users.map((e, i) => {
+              return (
+                <div key={i} className="lobby-player">
+                  <UserIcon username={e.username} icon={e.icon}></UserIcon>
+                </div>
+              );
+            })}
+          </div>
+
         <div className="lobby-genre">
             <DropDown items={genres}></DropDown>
         </div>

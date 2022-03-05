@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import "./login.css";
 
 class Login extends React.Component {
-
     handleClick(users) {
         const currUserName = document.getElementById("user-name").value;
         const currPassword = document.getElementById("password").value;
@@ -16,37 +15,38 @@ class Login extends React.Component {
         const targetUser = users.users.filter(user => user.username === currUserName);
 
         if(targetUser.length && targetUser[0].password === currPassword) {
-            window.alert("Successful login!");
+            this.props.app.setState({
+                currUser: targetUser[0]
+            });
         }
         else {
             window.alert("Incorrect login :(");
         }
     }
 
-    render() {
-        // import data
-        this.users = require("./../../data/users.json");
+    redirect() {
+        this.props.app.setState({
+            page: 1
+        });
+    }
 
+    render() {
         return (
             <div className="login-page">
                 <div className="login-header">
                     <AppName showTagline></AppName>
                 </div>
                 <UserLoginInput text="LOGIN"></UserLoginInput>
-                <Link to={{
-                    pathname: '/lobby'
-                }} className="link">
-                    <TextButton text="<ENTER TO PLAY>" />
-                </Link>
+
+                <TextButton text="<ENTER TO PLAY>" 
+                    handleClick={() => {this.handleClick(this.props.app.state.users)}}>
+                </TextButton>
                 <div className="signup-message">
                     NEW? SIGN UP 
-                    <Link to={{
-                        pathname: '/register'
-                    }} className="link">
                         <strong 
                             className="signup-link"
+                            onClick={() => {this.redirect()}}
                         > HERE</strong>!
-                    </Link>
                 </div>
                 
             </div>
