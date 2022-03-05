@@ -6,11 +6,6 @@ import TextButton from "../../components/textButton/textButton.js";
 import "./register.css";
 
 class Register extends React.Component {
-
-    writeUsersToFile(newUsers) {
-        
-    }
-
     handleClick(users) {
         const currUserName = document.getElementById("user-name").value;
         const currPassword = document.getElementById("password").value;
@@ -29,13 +24,15 @@ class Register extends React.Component {
         }
 
         users.users.push(newUser);
-        console.log(users);
+        
+        this.props.app.setState({
+            page: 0
+        });
+        
     }
 
     render() {
-        // import data
-        this.users = require("./../../data/users.json");
-
+        // console.log(this.props)
         return (
             <div className="register-page">
                 <div className="register-header">
@@ -43,7 +40,7 @@ class Register extends React.Component {
                 </div>
                 <UserLoginInput text="REGISTER"></UserLoginInput>
                 <TextButton text="<CONFIRM REGISTRATION>" 
-                    handleClick={() => {this.handleClick(this.users)}}>
+                    handleClick={() => {this.handleClick(this.props.app.state.users)}}>
                 </TextButton>
             </div>
         );
