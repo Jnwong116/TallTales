@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 class Lobby extends React.Component {
   render() {
     // Array of genres
-    const genres = this.storiesData.stories.map(object => object.genre);
+    const genres = this.props.app.state.stories.stories.map(object => object.genre);
 
     return (
       <div className="lobby">
@@ -29,18 +29,24 @@ class Lobby extends React.Component {
               );
             })}
           </div>
+        </div>
 
         <div className="lobby-genre">
             <DropDown items={genres}></DropDown>
         </div>
         <Link to={{
-          pathname: '/gameStage'
+          pathname: '/gameStage',
+          state: {
+            currUser: this.props.app.state.currUser,
+            users: this.props.app.state.users,
+            stories: this.props.app.state.stories
+          }
         }} className="link">
           <Button
             text="START GAME"
-            handleClick={() => {
-              this.handleClick(this.state);
-            }}
+            // handleClick={() => {
+            //   this.handleClick(this.state);
+            // }}
           ></Button>
         </Link>
       </div>

@@ -9,20 +9,6 @@ import UserIcon from "../../components/userIcon/userIcon.js";
 import "./inputStage.css";
 
 class InputStage extends React.Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     expanded: true,
-  //     activeKey: "1"
-  //   };
-  //   this.handleSelect = this.handleSelect.bind(this);
-  // }
-  // handleSelect(eventKey) {
-  //   this.setState({
-  //     activeKey: eventKey
-  //   });
-  // }
-
   state = {
     stage: 0,
     prompt: 0
@@ -55,32 +41,32 @@ class InputStage extends React.Component {
     if (input.charAt(input.length - 1) !== ".") {
       input = input + ".";
     }
-    this.stories.stories[0].currStory =
-      this.stories.stories[0].currStory + " " + input;
+    this.stories.currStory.story =
+      this.stories.currStory.story + " " + input;
     document.getElementById("user-input").value = "";
   }
 
   render() {
     // Import mock data
-    this.stories = require("./../../data/stories.json");
-    this.users = require("./../../data/users.json");
+    this.stories = this.props.app.state.stories; // Change to match the actual genre
+    this.users = this.props.app.state.users;
 
     // Resets the story
     if (this.state.stage === 0 && this.state.prompt === 0) {
-      this.stories.stories[0].currStory =
-        "chris and jordan are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means.";
+      this.stories.currStory.story =
+      this.stories.stories[0].starts[0];
     }
 
     // Switches the prompt
     switch (this.state.stage) {
       case 0:
-        this.prompt = this.stories.stories[0].backstory[this.state.prompt];
+        this.prompt = this.stories.prompts[0].backstory[this.state.prompt];
         break;
       case 1:
-        this.prompt = this.stories.stories[0].conflict[this.state.prompt];
+        this.prompt = this.stories.prompts[0].conflict[this.state.prompt];
         break;
       case 2:
-        this.prompt = this.stories.stories[0].resolution[this.state.prompt];
+        this.prompt = this.stories.prompts[0].resolution[this.state.prompt];
         break;
       default:
         this.prompt = "Story is complete!";
@@ -91,10 +77,10 @@ class InputStage extends React.Component {
       <div className="input-stage">
         <div className="input-stage-header">
           <AppName></AppName>
-          <Score user={this.users.users[0]}></Score>
+          <Score user={this.props.app.state.currUser}></Score>
         </div>
-        <Story story={this.stories.stories[0]}></Story>
-        <UserInput prompt={this.prompt} user={this.users.users[0]}></UserInput>
+        <Story story={this.stories.currStory.story}></Story>
+        <UserInput prompt={this.prompt} user={this.props.app.state.currUser}></UserInput>
         <Button
           text="SEND"
           handleClick={() => {
