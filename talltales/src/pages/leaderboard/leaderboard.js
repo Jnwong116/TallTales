@@ -36,15 +36,6 @@ class Leaderboard extends React.Component {
             5: "leaderboard-player-3-4-5"
         }
 
-        // DELETE: mock data to test styling
-        const contributions = [
-            "We turn to cannibalism.",
-            "However, something goes wrong.",
-            "None of us can figure out what, but we all know something bad will happen",
-            "We share a deafening silence.",
-            "It seems like someone is watching us from afar."
-        ]
-
         return (
             <div className="leaderboard">
                 <div className="header">
