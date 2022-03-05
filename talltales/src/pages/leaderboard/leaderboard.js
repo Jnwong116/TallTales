@@ -62,16 +62,29 @@ class Leaderboard extends React.Component {
                         <div className="leaderboard-title">
                             {"<LEADERBOARD>"}   
                         </div>
+                        <div className="leaderboard-players-winner">
+                            <div key={0} className={indexToClass[0]}>
+                                <UserIcon username={this.usersData.users[0].username} icon={this.usersData.users[0].icon}></UserIcon>
+                                <div className="leaderboard-player-score">
+                                    {this.usersData.users[0].score}
+                                </div>
+                             </div>
+                        </div>
+                        
                         <div className="leaderboard-players">
                             {this.usersData.users.map((e, i) => {
-                                return (
-                                    <div key={i} className={indexToClass[i]}>
-                                        <UserIcon username={e.username} icon={e.icon}></UserIcon>
-                                        <div className="leaderboard-player-score">
-                                            {e.score}
+                                if(i > 0) {
+                                    return (
+                                        <div key={i} className={indexToClass[i]}>
+                                            <UserIcon username={e.username} icon={e.icon}></UserIcon>
+                                            <div className="leaderboard-player-score">
+                                                {e.score}
+                                            </div>
                                         </div>
-                                    </div>
-                                );
+                                    );
+                                }
+                                return null;
+                            
                             })}
                         </div>                       
                     </div>   

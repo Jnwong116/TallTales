@@ -50,9 +50,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 490px;
-    height: 400px;
-    margin: 0 auto;
+    width: 400px;
+    height: 300px;
+    margin-top: -30px;
     justify-content: center;
   }
 
@@ -64,9 +64,16 @@
     margin-top: -25px;
 }
 
+.leaderboard-players-winner {
+    display: flex;
+    justify-content: center;
+    margin-top: -30px;
+  }
+
 .leaderboard-player-0 img{
     height: 150px;
     width: 150px;
+    justify-content: center;
 }
 
 .leaderboard-player-1-2 img{
