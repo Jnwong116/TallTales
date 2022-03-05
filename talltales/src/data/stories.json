@@ -28,6 +28,7 @@
         }
     ],
     "currStory": {
+        "start": "",
         "story": "",
         "contributions": []
     }
