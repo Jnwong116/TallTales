@@ -5,6 +5,7 @@ import Register from "./pages/register/register";
 import "./App.css";
 import Lobby from "./pages/lobby/lobby";
 import VoteStage from "./pages/voteStage/voteStage";
+import Leaderboard from "./pages/leaderboard/leaderboard";
 
 import {
   BrowserRouter as Router,
@@ -23,6 +24,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/gameStage" element={<InputStage />} />
           <Route path="/voteStage" element={<VoteStage />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
         </Switch>
       </Router>
     </div>
