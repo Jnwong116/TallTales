@@ -2,6 +2,8 @@ import React from "react";
 import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
+import ArrowLeft from "../../components/cssArrows/arrowLeft.js";
+import ArrowRight from "../../components/cssArrows/arrowRight.js";
 import "./dashboard.css";
 
 class Dashboard extends React.Component {
@@ -46,13 +48,13 @@ class Dashboard extends React.Component {
           </div>
           <div className="storiesNavigation">
             <span className="browseStoriesLeftArrow">
-              &lt;
+              <ArrowLeft />
             </span>
             <span className="browseStoriesHeader">
-              Latest Stories
+              Completed Stories (1/1)
             </span>
-            <span className="browseStoriesLeftArrow">
-              &gt;
+            <span className="browseStoriesRightArrow">
+              <ArrowRight />
             </span>
           </div>
           <div className="storiesDisplay">

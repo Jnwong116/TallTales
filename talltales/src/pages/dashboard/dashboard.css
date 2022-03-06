@@ -1,9 +1,5 @@
-div {
-    border: 1px solid blue;
-}
-
-span {
-    border: 1px solid red;
+.browseStoriesHeader {
+  font-weight: bold;
 }
 
 .header {
