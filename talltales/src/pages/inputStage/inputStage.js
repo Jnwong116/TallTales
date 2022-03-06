@@ -41,8 +41,7 @@ class InputStage extends React.Component {
     if (input.charAt(input.length - 1) !== ".") {
       input = input + ".";
     }
-    this.stories.currStory.story =
-      this.stories.currStory.story + " " + input;
+    this.stories.currStory.story = this.stories.currStory.story + " " + input;
     document.getElementById("user-input").value = "";
   }
 
@@ -53,8 +52,7 @@ class InputStage extends React.Component {
 
     // Resets the story
     if (this.state.stage === 0 && this.state.prompt === 0) {
-      this.stories.currStory.story =
-      this.stories.stories[0].starts[0];
+      this.stories.currStory.story = this.stories.stories[0].starts[0];
     }
 
     // Switches the prompt
@@ -80,9 +78,12 @@ class InputStage extends React.Component {
           <Score user={this.props.app.state.currUser}></Score>
         </div>
         <Story story={this.stories.currStory.story}></Story>
-        <UserInput prompt={this.prompt} user={this.props.app.state.currUser}></UserInput>
+        <UserInput
+          prompt={this.prompt}
+          user={this.props.app.state.currUser}
+        ></UserInput>
         <Button
-          text="SEND"
+          text="SUBMIT"
           handleClick={() => {
             this.handleClick(this.state);
           }}
