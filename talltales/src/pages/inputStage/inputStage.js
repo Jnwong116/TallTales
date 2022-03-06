@@ -4,7 +4,6 @@ import Button from "../../components/button/button.js";
 import Score from "../../components/score/score.js";
 import Story from "../../components/story/story.js";
 import UserInput from "../../components/userInput/userInput.js";
-import { Link } from "react-router-dom";
 
 import { displayPrompt, isRaconteur } from "../../actions/prompt/displayPrompt.js";
 import { saveInput } from "../../actions/input/input.js";

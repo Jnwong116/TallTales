@@ -33,8 +33,8 @@ export const AIVote = (users, stories, raconteur, app, page) => {
 
         const user = users.users[vote];
         const input = user.currentSentence;
-        // Add styling to make new selected sentence stand out
-        stories.currStory.story = stories.currStory.story + " " + input;
+
+        document.getElementById('last-sentence').childNodes[0].nodeValue = " " + input;
         user.score = user.score + 10;
         document.getElementById(user.username).classList.add("vote-option-text-selected");
 
@@ -52,6 +52,7 @@ export const AIVote = (users, stories, raconteur, app, page) => {
         console.log(vote);
 
         setTimeout(() => {
+            stories.currStory.story = stories.currStory.story + " " + input;
             updatePrompt(app);
             chooseRaconteur(users.users);
             app.setState({
@@ -69,8 +70,7 @@ export const confirmVote = (users, stories, app, page) => {
         if (users.users[i].currentSentence === input) {
             const selectUser = users.users[i];
 
-            // Add styling to make new selected sentence stand out
-            stories.currStory.story = stories.currStory.story + " " + input;
+            document.getElementById('last-sentence').childNodes[0].nodeValue = " " + input;
             selectUser.score = selectUser.score + 10;
             
 
@@ -85,6 +85,7 @@ export const confirmVote = (users, stories, app, page) => {
             })
 
             setTimeout(() => {
+                stories.currStory.story = stories.currStory.story + " " + input;
                 updatePrompt(app);
                 chooseRaconteur(users.users);
                 app.setState({
