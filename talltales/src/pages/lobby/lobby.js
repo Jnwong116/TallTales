@@ -1,18 +1,18 @@
 import React from "react";
 import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
+import DropDown from "../../components/dropDown/dropDown.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
 import "./lobby.css";
 
-class Lobby extends React.Component {
-  state = {
-    stage: 0,
-    prompt: 0
-  };
+import { Link } from "react-router-dom";
 
+class Lobby extends React.Component {
   render() {
-    // Import mock data
-    this.usersData = require("./../../data/users.json");
+    // Array of genres
+    const genres = this.props.app.state.stories.stories.map(
+      object => object.genre
+    );
 
     return (
       <div className="lobby">
@@ -21,23 +21,40 @@ class Lobby extends React.Component {
           <AppName></AppName>
         </div>
         <div className="lobby-content">
-          <div className="lobby-header">LOBBY</div>
-          <div className="lobby-players">
-            {this.usersData.users.map((e, i) => {
-              return (
-                <div key={i} className="lobby-player">
-                  <UserIcon username={e.username} icon={e.icon}></UserIcon>
-                </div>
-              );
-            })}
+          <div className="lobby-genre">
+            <DropDown items={genres}></DropDown>
+          </div>
+          <div className="lobby-column">
+            <div className="lobby-header">LOBBY</div>
+            <div className="lobby-players">
+              {this.props.app.state.users.users.map((e, i) => {
+                return (
+                  <div key={i} className="lobby-player">
+                    <UserIcon username={e.username} icon={e.icon}></UserIcon>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
-        <Button
-          text="START GAME"
-          handleClick={() => {
-            this.handleClick(this.state);
+        <Link
+          to={{
+            pathname: "/gameStage",
+            state: {
+              currUser: this.props.app.state.currUser,
+              users: this.props.app.state.users,
+              stories: this.props.app.state.stories
+            }
           }}
-        ></Button>
+          className="link"
+        >
+          <Button
+            text="START GAME"
+            // handleClick={() => {
+            //   this.handleClick(this.state);
+            // }}
+          ></Button>
+        </Link>
       </div>
     );
   }
