@@ -79,6 +79,9 @@ class VoteStage extends React.Component {
             <div className="sentence-content-choice">
               {this.props.app.state.currUser.currentSentence}
             </div>
+            <div className="checkMarkContainer">
+              <img src={require("../../assets/images/pixelCheckmark.png")} width="30" height="30" alt="" />
+            </div>
           </div>
           :
           <div className="vote-stage-sentence">

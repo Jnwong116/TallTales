@@ -74,7 +74,9 @@
 }
 
 .sentence-title {
-  font-size: 36px;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
   font-style: "IBM Plex Mono";
   font-weight: bolder;
   padding-right: 40px;
@@ -82,9 +84,9 @@
 }
 
 .sentence-content {
-  color: #626262;
+  color: #808080;
   font-style: "Inter";
-  background-color: #9a9a9a;
+  background-color: #dedede;
   padding-left: 50px;
   padding-right: 50px;
   padding-top: 20px;
