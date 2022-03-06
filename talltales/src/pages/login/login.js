@@ -2,9 +2,8 @@ import React from "react";
 import AppName from "../../components/appName/appName.js";
 import UserLoginInput from "../../components/userLoginInput/userLoginInput.js";
 import TextButton from "../../components/textButton/textButton.js";
-import { Link } from "react-router-dom";
 
-import { login } from "../../actions/login/authenticate.js";
+import { login, register } from "../../actions/login/authenticate.js";
 
 import "./login.css";
 
@@ -43,14 +42,10 @@ class Login extends React.Component {
         ></TextButton>
         <div className="signup-message">
           NEW? SIGN UP
-          <Link to={{
-            pathname: '/register'
-          }} className="link">
-            <strong className="signup-link">
+            <strong className="signup-link" onClick={() => {register(this.props.app)}}>
               {" "}
               HERE.
             </strong>
-          </Link>
         </div>
       </div>
     );

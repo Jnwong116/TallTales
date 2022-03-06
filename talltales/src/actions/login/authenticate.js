@@ -8,11 +8,22 @@ export const login = (app, users) => {
     user => user.username === currUserName
   );
 
+  if(!targetUser.length) {
+      window.alert("Username does not exist :(");
+      return;
+  }
+
   if (targetUser.length && targetUser[0].password === currPassword) {
     app.setState({
       currUser: targetUser[0]
     });
   } else {
-    window.alert("Incorrect login :(");
+    window.alert("Password invalid :(");
   }
+}
+
+export const register = (app) => {
+  app.setState({
+    page: 1
+  })
 }
