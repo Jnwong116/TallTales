@@ -15,7 +15,8 @@ export const login = (app, users) => {
 
   if (targetUser.length && targetUser[0].password === currPassword) {
     app.setState({
-      currUser: targetUser[0]
+      currUser: targetUser[0],
+      page: 2
     });
   } else {
     window.alert("Password invalid :(");

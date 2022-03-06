@@ -32,7 +32,7 @@ class VoteStage extends React.Component {
     this.users = this.props.app.state.users;
 
     this.raconteur = this.users.users[findRaconteur(this.users.users)].username;
-    console.log(this.props.app.state);
+    // console.log(this.props.app.state);
 
     return (
       <div className="vote-stage">

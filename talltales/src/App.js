@@ -33,16 +33,27 @@ class App extends React.Component {
         <Router>
           <Switch>
             <Route path="/">
-              {!this.state.currUser ? (this.state.page === 0 ? <Route path="/" element={<Login app={this} />} /> : <Route path="/" element={<Register app={this} />} /> ) : <Route path="/" element={<Lobby app={this} />} />}
+              {!this.state.currUser ? 
+              (this.state.page === 0 ? <Route path="/" element={<Login app={this} />} /> : 
+                <Route path="/" element={<Register app={this} />} /> ) : 
+              (this.state.page === 2 ? <Route path="/" element={<Lobby app={this} />} /> : 
+                (this.state.page === 0 ? <Route path="/" element={<InputStage app={this} />} /> :
+                  (this.state.page === 1 ? <Route path="/" element={<VoteStage app={this} />} /> :
+                    <Route path="/" element={<Leaderboard app={this} />} /> 
+                  )
+                )
+              )   
+              }
             </Route>
-            <Route path="/game">
+            {/* <Route path="/game">
               {this.state.page === 0 ? <Route path="/game" element={<InputStage app={this} />} /> : (this.state.page === 1 ? <Route path="/game" element={<VoteStage app={this} />} /> : <Route path="/game" element={<Leaderboard app={this} />} /> )}
-            </Route>
+            </Route> */}
             {/* <Route path="/" element={<Login app={this} /> } /> */}
             {/* <Route path="/register" element={<Register app={this} /> } /> */}
             {/* <Route path="/lobby" element={<Lobby app={this} /> } /> */}
             {/* <Route path="/inputStage" element={<InputStage app={this} />} />
             <Route path="/voteStage" element={<VoteStage app={this} />} /> */}
+            {/* <Route path="/leader" element={<Leaderboard app={this} />}></Route> */}
           </Switch>
         </Router>
       </div>
