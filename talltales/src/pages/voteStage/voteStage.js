@@ -60,7 +60,7 @@ class VoteStage extends React.Component {
               {this.users.users.map((e, i) => {
                 if (e.username !== this.raconteur) {
                   return (
-                    <div key={i} className="vote-stage-option newClass">
+                    <div key={i} className="vote-stage-option">
                       <UserIcon username={e.username} icon={e.icon}></UserIcon>
                       <div className="vote-option-text" id={e.username}>
                         {e.currentSentence}
@@ -74,7 +74,12 @@ class VoteStage extends React.Component {
         </div>
         {
           this.props.app.state.currUser.raconteur ?
-          <span></span>
+          <div className="vote-stage-sentence">
+            <div className="sentence-title">YOUR CHOICE</div>
+            <div className="sentence-content-choice">
+              {this.props.app.state.currUser.currentSentence}
+            </div>
+          </div>
           :
           <div className="vote-stage-sentence">
             <div className="sentence-title">YOUR SENTENCE</div>

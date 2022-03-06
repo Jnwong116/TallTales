@@ -56,6 +56,10 @@
   height: 30px;
 }
 
+.vote-option-text-selected {
+  background-color: #a2a2a2;
+}
+
 .vote-option-text:hover {
   background-color: #292929;
   color: #989494;
@@ -90,4 +94,25 @@
   font-size: 20px;
   width: 320px;
   height: 30px;
+}
+
+.sentence-content-choice {
+  color: #808080;
+  font-style: "Inter";
+  background-color: #dedede;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border: none;
+  font-weight: bold;
+  font-size: 20px;
+  width: 320px;
+  height: 30px;
+}
+
+.checkMarkContainer {
+  display: flex;
+  align-items: center;
+  padding-left: 40px;
 }
