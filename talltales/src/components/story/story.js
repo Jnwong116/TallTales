@@ -9,7 +9,7 @@ class Story extends React.Component {
     return (
       <div className="story">
         <div className="story-title">STORY</div>
-        <div className="story-current">{story.currStory}</div>
+        <div className="story-current">{story}<strong id="last-sentence"> </strong></div>
       </div>
     );
   }

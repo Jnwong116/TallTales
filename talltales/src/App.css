@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Courier+Prime&family=Inter&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@500&family=Inter&display=swap");
 .App {
   text-align: center;
   height: 100vh;
-  background-color: #cacaca;
 }

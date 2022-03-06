@@ -13,7 +13,7 @@ class UserInput extends React.Component {
         <div className="stage-indicator">
           <img src={rightArrow} className="stage-arrow" alt="Right Arrow" />
           <div className="user-input-tag">
-            <Prompt prompt={this.props.prompt}></Prompt>
+            <Prompt prompt={this.props.prompt.toUpperCase()}></Prompt>
           </div>
         </div>
         <div className="stage-indicator user-input-field">
@@ -21,15 +21,17 @@ class UserInput extends React.Component {
             username={this.props.user.username}
             icon={this.props.user.icon}
           ></UserIcon>
-          <TextField
-            id="user-input"
-            label="OKAY AND THEN..."
-            variant="filled"
-            margin="normal"
-            multiline="true"
-            maxRows="5"
-            color="secondary"
-          />
+          <div className="user-input-text-field">
+            <TextField
+              id="user-input"
+              label="OKAY AND THEN..."
+              variant="filled"
+              margin="normal"
+              multiline="true"
+              maxRows="5"
+              color="secondary"
+            />
+          </div>
         </div>
       </div>
     );
