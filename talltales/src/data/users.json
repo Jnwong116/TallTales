@@ -40,5 +40,11 @@
       "host": false,
       "currentSentence": "we turn to cannibalism"
     }
+  ],
+  "inputs": [
+    {
+      "user": "gazi",
+      "inputs": ["senteces", "sentences"]
+    }
   ]
 }
