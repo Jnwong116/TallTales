@@ -28,6 +28,13 @@ span {
   flex-direction: column;
 }
 
+.userIconContainer {
+  height: 233px;
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
 .dashboardMenu {
   display: flex;
   flex-direction: column;
@@ -44,9 +51,12 @@ span {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  height: 60px;
 }
 
 .storiesDisplay {
+  margin-top: 20px;
   width: 600px;
   display: flex;
   text-align: justify;
@@ -70,10 +80,4 @@ span {
 
 .buttonStyle:hover {
   cursor: pointer;
-}
-
-.userIconContainer {
-  display: flex;
-  justify-content: center;
-  text-transform: uppercase;
 }

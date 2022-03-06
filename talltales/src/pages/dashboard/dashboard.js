@@ -20,13 +20,16 @@ class Dashboard extends React.Component {
             <Button text="HOST NEW GAME"
                     handleClick={() => {
                     this.handleClick(this.state);}} />
-            <Button text="CHANGE USERNAME"
+            <Button text="JOIN GAME"
                     handleClick={() => {
                       this.handleClick(this.state);}} />
-            <Button text="LEADERBOARD"
+            <Button text="HOW TO PLAY"
                     handleClick={() => {
                     this.handleClick(this.state);}} />
-            <Button text="HOW TO PLAY"
+            <Button text="PROFILE"
+                    handleClick={() => {
+                    this.handleClick(this.state);}} />
+            <Button text="LOG OUT"
                     handleClick={() => {
                     this.handleClick(this.state);}} />
           </span>
