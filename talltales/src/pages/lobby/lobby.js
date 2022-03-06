@@ -12,6 +12,8 @@ class Lobby extends React.Component {
     // Array of genres
     const genres = this.props.app.state.stories.stories.map(object => object.genre);
 
+    // console.log(this.props.app.state);
+
     return (
       <div className="lobby">
         {/* TODO: Make this header into a component so it's reusable in every page */}
@@ -35,7 +37,7 @@ class Lobby extends React.Component {
             <DropDown items={genres}></DropDown>
         </div>
         <Link to={{
-          pathname: '/gameStage',
+          pathname: '/inputStage',
           state: {
             currUser: this.props.app.state.currUser,
             users: this.props.app.state.users,
