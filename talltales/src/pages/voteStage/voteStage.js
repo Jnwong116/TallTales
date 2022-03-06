@@ -42,7 +42,7 @@ class VoteStage extends React.Component {
                   return (
                     <div key={i} className="vote-stage-option">
                       <UserIcon username={e.username} icon={e.icon}></UserIcon>
-                      <div className="vote-option-text">
+                      <div className="vote-option-text vote-option-text-selected">
                         {e.currentSentence}
                       </div>
                     </div>
