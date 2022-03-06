@@ -10,7 +10,9 @@ import { Link } from "react-router-dom";
 class Lobby extends React.Component {
   render() {
     // Array of genres
-    const genres = this.props.app.state.stories.stories.map(object => object.genre);
+    const genres = this.props.app.state.stories.stories.map(
+      object => object.genre
+    );
 
     // console.log(this.props.app.state);
 
@@ -21,20 +23,21 @@ class Lobby extends React.Component {
           <AppName></AppName>
         </div>
         <div className="lobby-content">
-          <div className="lobby-header">LOBBY</div>
-          <div className="lobby-players">
-            {this.props.app.state.users.users.map((e, i) => {
-              return (
-                <div key={i} className="lobby-player">
-                  <UserIcon username={e.username} icon={e.icon}></UserIcon>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="lobby-genre">
+          <div className="lobby-genre">
             <DropDown items={genres}></DropDown>
+          </div>
+          <div className="lobby-column">
+            <div className="lobby-header">LOBBY</div>
+            <div className="lobby-players">
+              {this.props.app.state.users.users.map((e, i) => {
+                return (
+                  <div key={i} className="lobby-player">
+                    <UserIcon username={e.username} icon={e.icon}></UserIcon>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
         <Link to={{
           pathname: '/inputStage',
