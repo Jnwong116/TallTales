@@ -6,11 +6,12 @@ import UserIcon from "../../components/userIcon/userIcon.js";
 import "./voteStage.css";
 
 import { findRaconteur} from "../../actions/vote/raconteur.js";
-import { generateAIinput, AIinput, AIVote } from "../../actions/vote/vote.js";
+import { generateAIinput, AIinput, AIVote, select, confirmVote } from "../../actions/vote/vote.js";
 
 class VoteStage extends React.Component {
   state = {
-    loading: true
+    loading: true,
+    choice: "Choose a sentence"
   }
 
   componentDidMount() {
@@ -62,7 +63,7 @@ class VoteStage extends React.Component {
                   return (
                     <div key={i} className="vote-stage-option">
                       <UserIcon username={e.username} icon={e.icon}></UserIcon>
-                      <div className="vote-option-text" id={e.username}>
+                      <div className="vote-option-text" id={e.username} onClick={() => {select(this.users, e.username, this.raconteur, this.props.app, this);}}>
                         {e.currentSentence}
                       </div>
                     </div>
@@ -77,9 +78,9 @@ class VoteStage extends React.Component {
           <div className="vote-stage-sentence">
             <div className="sentence-title">YOUR CHOICE</div>
             <div className="sentence-content-choice">
-              {this.props.app.state.currUser.currentSentence}
+              {this.state.choice}
             </div>
-            <div className="checkMarkContainer">
+            <div className="checkMarkContainer" onClick={() => {confirmVote(this.users, this.stories, this.props.app, this);}}>
               <img src={require("../../assets/images/pixelCheckmark.png")} width="30" height="30" alt="" />
             </div>
           </div>
