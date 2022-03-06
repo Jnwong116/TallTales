@@ -4,27 +4,16 @@ import Button from "../../components/button/button.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
 import "./leaderboard.css"
 
+import { sortPlayers } from "../../actions/leaderboard/displayScores.js";
+
 class Leaderboard extends React.Component {
 
     render() {
-        // Import mock data
-        this.usersData = require("./../../data/users.json");
-        this.storiesData = require("./../../data/stories.json");
+        this.stories = this.props.app.state.stories;
+        this.users = this.props.app.state.users;
 
         // Sort the users from highest to lowest points
-        function highestToLowest( a, b ) {
-            const aScore = parseInt(a.score);
-            const bScore = parseInt(b.score);
-            if(aScore > bScore) {
-                return -1;
-            }
-            if(aScore < bScore) {
-                return 1;
-            }
-            return 0;
-        }
-
-        this.usersData.users.sort(highestToLowest);
+        this.users.users.sort(sortPlayers);
 
         // Map number index user to className
         const indexToClass = {
@@ -47,9 +36,9 @@ class Leaderboard extends React.Component {
                             {"<THE STORY>"}
                         </div>
                         <div className="leaderboard-story-start">
-                            {this.storiesData.currStory.start}
+                            {this.stories.currStory.start}
                         </div>
-                        {this.storiesData.currStory.contributions.map((obj, i) => {
+                        {this.stories.currStory.contributions.map((obj, i) => {
                             return (
                                 <div key={i} className="leaderboard-story-contribution">
                                     {obj.sentence}
@@ -64,15 +53,15 @@ class Leaderboard extends React.Component {
                         </div>
                         <div className="leaderboard-players-winner">
                             <div key={0} className={indexToClass[0]}>
-                                <UserIcon username={this.usersData.users[0].username} icon={this.usersData.users[0].icon}></UserIcon>
+                                <UserIcon username={this.users.users[0].username} icon={this.users.users[0].icon}></UserIcon>
                                 <div className="leaderboard-player-score">
-                                    {this.usersData.users[0].score}
+                                    {this.users.users[0].score}
                                 </div>
                              </div>
                         </div>
                         
                         <div className="leaderboard-players">
-                            {this.usersData.users.map((e, i) => {
+                            {this.users.users.map((e, i) => {
                                 if(i > 0) {
                                     return (
                                         <div key={i} className={indexToClass[i]}>
@@ -89,9 +78,8 @@ class Leaderboard extends React.Component {
                         </div>                       
                     </div>   
                 </div>
-                {/* TODO: placeholer score here. Change to THIS user's score */}
                 <div className="your-score">
-                    YOUR SCORE: <strong>187</strong>
+                    YOUR SCORE: <strong>{this.props.app.state.currUser.score}</strong>
                 </div>
                 <Button
                     text="DONE"

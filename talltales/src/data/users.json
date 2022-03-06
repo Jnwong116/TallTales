@@ -98,11 +98,5 @@
             "Chris and Jordan went on to win the upcoming science fair for presenting their new werewolf transformer."
         ]
     }
-  ],
-  "inputs": [
-    {
-      "user": "gazi",
-      "inputs": ["senteces", "sentences"]
-    }
   ]
 }
