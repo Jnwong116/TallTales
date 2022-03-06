@@ -22,7 +22,9 @@ class App extends React.Component {
     users: users,
     stories: stories,
     currUser: null,
-    page: 0
+    page: 0,
+    stage: 0,
+    prompt: 0
   }
 
   render () {
@@ -33,14 +35,14 @@ class App extends React.Component {
             <Route path="/">
               {!this.state.currUser ? (this.state.page === 0 ? <Route path="/" element={<Login app={this} />} /> : <Route path="/" element={<Register app={this} />} /> ) : <Route path="/" element={<Lobby app={this} />} />}
             </Route>
-            {/* <Route path="/game">
-              {}
-            </Route> */}
+            <Route path="/game">
+              {this.state.page === 0 ? <Route path="/game" element={<InputStage app={this} />} /> : <Route path="/game" element={<VoteStage app={this} />} />}
+            </Route>
             {/* <Route path="/" element={<Login app={this} /> } /> */}
             {/* <Route path="/register" element={<Register app={this} /> } /> */}
             {/* <Route path="/lobby" element={<Lobby app={this} /> } /> */}
-            <Route path="/inputStage" element={<InputStage app={this} />} />
-            <Route path="/voteStage" element={<VoteStage app={this} />} />
+            {/* <Route path="/inputStage" element={<InputStage app={this} />} />
+            <Route path="/voteStage" element={<VoteStage app={this} />} /> */}
           </Switch>
         </Router>
       </div>
