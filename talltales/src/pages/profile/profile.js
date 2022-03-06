@@ -35,6 +35,9 @@ class Profile extends React.Component {
             <div className="profileInterfaceDivider" />
 
               <ChangeNothing />
+              {/*<ChangeName />*/}
+              {/*<ChangePassword />*/}
+              {/*<ChangeAvatar />*/}
 
           </div>
         </span>

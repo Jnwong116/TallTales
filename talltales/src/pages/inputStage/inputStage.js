@@ -4,9 +4,8 @@ import Button from "../../components/button/button.js";
 import Score from "../../components/score/score.js";
 import Story from "../../components/story/story.js";
 import UserInput from "../../components/userInput/userInput.js";
-import { Link } from "react-router-dom";
 
-import { displayPrompt, isRaconteur } from "../../actions/prompt/displayPrompt.js";
+import { displayPrompt, isRaconteur, storyComplete } from "../../actions/prompt/displayPrompt.js";
 import { saveInput } from "../../actions/input/input.js";
 
 import "./inputStage.css";
@@ -17,16 +16,12 @@ class InputStage extends React.Component {
     this.stories = this.props.app.state.stories; // Change to match the actual genre
     this.users = this.props.app.state.users;
 
+    // Checks if story is complete
+    storyComplete(this.props.app);
+
     // Checks if user is raconteur
     isRaconteur(this.props.app, this.props.app.state.currUser, this.users);
 
-    // Resets the story
-    if (this.props.app.state.stage === 0 && this.props.app.state.prompt === 0) {
-      this.stories.currStory.story = this.stories.stories[0].starts[0];
-    }
-
-    // Switches the prompt
-    
     this.prompt = displayPrompt(this.props.app, this.stories);
 
     return (

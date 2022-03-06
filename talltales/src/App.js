@@ -8,6 +8,8 @@ import VoteStage from "./pages/voteStage/voteStage";
 import Dashboard from "./pages/dashboard/dashboard"
 import HowToPlay from "./pages/howToPlay/howToPlay"
 import Profile from "./pages/profile/profile"
+import Leaderboard from "./pages/leaderboard/leaderboard";
+
 import React from "react";
 
 import {
@@ -16,7 +18,6 @@ import {
   Route,
   Link
 } from "react-router-dom";
-
 
 // import data
 const users = require("./data/users.json");
@@ -41,7 +42,7 @@ class App extends React.Component {
               {!this.state.currUser ? (this.state.page === 0 ? <Route path="/" element={<Login app={this} />} /> : <Route path="/" element={<Register app={this} />} /> ) : <Route path="/" element={<Lobby app={this} />} />}
             </Route>
             <Route path="/game">
-              {this.state.page === 0 ? <Route path="/game" element={<InputStage app={this} />} /> : <Route path="/game" element={<VoteStage app={this} />} />}
+              {this.state.page === 0 ? <Route path="/game" element={<InputStage app={this} />} /> : (this.state.page === 1 ? <Route path="/game" element={<VoteStage app={this} />} /> : <Route path="/game" element={<Leaderboard app={this} />} /> )}
             </Route>
             {/* <Route path="/" element={<Login app={this} /> } /> */}
             {/* <Route path="/register" element={<Register app={this} /> } /> */}

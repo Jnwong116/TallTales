@@ -35,6 +35,12 @@ export const updatePrompt = (app) => {
 }
 
 export const displayPrompt = (app, stories) => {
+    // Resets the story
+    if (app.state.stage === 0 && app.state.prompt === 0) {
+      stories.currStory.start = stories.stories[0].starts[0];
+      stories.currStory.story = stories.currStory.start;
+    }
+
     switch (app.state.stage) {
         case 0:
           return stories.prompts[0].backstory[app.state.prompt];
@@ -59,6 +65,14 @@ export const isRaconteur = (app, currUser, users) => {
 
     app.setState({
       page: 1
+    })
+  }
+}
+
+export const storyComplete = (app) => {
+  if (app.state.stage === 3) {
+    app.setState({
+      page: 2
     })
   }
 }
