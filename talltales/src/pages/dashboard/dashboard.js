@@ -25,7 +25,7 @@ class Dashboard extends React.Component {
             <Button text="JOIN GAME"
                     handleClick={() => {
                       this.handleClick(this.state);}} />
-            <Button text="INSTRUCTIONS"
+            <Button text="HOW TO PLAY"
                     handleClick={() => {
                     this.handleClick(this.state);}} />
             <Button text="PROFILE"
