@@ -53,10 +53,13 @@ class VoteStage extends React.Component {
           </div>
         </div>
         <div className="vote-stage-sentence">
-          <div className="sentence-title">YOUR SENTENCE</div>
+          <div className="sentence-title">YOUR CHOICE</div>
           {/* TODO: placeholder sentence here. Change to what you picked in InputStage. */}
           <div className="sentence-content">
             {this.props.app.state.currUser.currentSentence}
+          </div>
+          <div className="checkMarkContainer">
+            <img src={require("../../assets/images/pixelCheckmark.png")} width="30" height="30" alt="" />
           </div>
         </div>
       </div>
