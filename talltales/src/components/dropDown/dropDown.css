@@ -3,14 +3,6 @@
   background-color: rgba(241, 241, 241, 0.655) !important;
 }
 
-/* .MuiInputLabel-root.MuiInputLabel-formControl {
-  font-family: "IBM Plex Sans" !important;
-  font-weight: 1000;
-  font-size: 20px !important;
-  color: rgb(74, 74, 74) !important;
-  left: 0px !important;
-} */
-
 .MuiPaper-root {
   background-color: transparent !important;
 }
