@@ -21,3 +21,9 @@ export const login = (app, users) => {
     window.alert("Password invalid :(");
   }
 }
+
+export const register = (app) => {
+  app.setState({
+    page: 1
+  })
+}

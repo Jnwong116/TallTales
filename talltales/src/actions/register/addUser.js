@@ -38,4 +38,8 @@ export const addUser = (app, users) => {
     }
 
     users.users.push(newUser);
+
+    app.setState({
+        page: 0
+    });
 }

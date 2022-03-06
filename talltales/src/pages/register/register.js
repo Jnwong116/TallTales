@@ -2,7 +2,6 @@ import React from "react";
 import AppName from "../../components/appName/appName.js";
 import UserLoginInput from "../../components/userLoginInput/userLoginInput.js";
 import TextButton from "../../components/textButton/textButton.js";
-import { Link } from "react-router-dom";
 
 import { addUser } from "../../actions/register/addUser.js";
 
@@ -42,14 +41,7 @@ class Register extends React.Component {
                     <AppName showTagline></AppName>
                 </div>
                 <UserLoginInput text="REGISTER"></UserLoginInput>
-                <Link onClick={() => {addUser(this.props.app, this.props.app.state.users)}} to={{
-                    pathname: '/',
-                    state: {
-                        users: this.props.app.state.users
-                    }
-                }} className="link">
-                    <TextButton text="<CONFIRM REGISTRATION>" />
-                </Link>
+                <TextButton text="<CONFIRM REGISTRATION>" handleClick={() => {addUser(this.props.app, this.props.app.state.users)}}/>
                 
             </div>
         );
