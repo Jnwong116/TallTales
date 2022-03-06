@@ -7,7 +7,6 @@ import Lobby from "./pages/lobby/lobby";
 import VoteStage from "./pages/voteStage/voteStage";
 import React from "react";
 import Dashboard from "./pages/dashboard/dashboard"
-np
 
 import {
   BrowserRouter as Router,
