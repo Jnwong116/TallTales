@@ -6,15 +6,10 @@ import UserIcon from "../../components/userIcon/userIcon.js";
 import "./voteStage.css";
 
 class VoteStage extends React.Component {
-  state = {
-    stage: 0,
-    prompt: 0
-  };
-
   render() {
     // Import mock data
-    this.stories = require("./../../data/stories.json");
-    this.usersData = require("./../../data/users.json");
+    this.stories = this.props.app.state.stories;
+    this.usersData = this.props.app.state.users;
 
     let raconteur;
     for (var i in this.usersData.users) {
@@ -29,12 +24,12 @@ class VoteStage extends React.Component {
         {/* TODO: Make this header into a component so it's reusable in every page */}
         <div className="input-stage-header">
           <AppName></AppName>
-          <Score user={this.usersData.users[0]}></Score>
+          <Score user={this.props.app.state.currUser}></Score>
         </div>
         <div className="vote-stage-content">
           <div className="vote-stage-story">
             <div className="story-content">
-              <Story story={this.stories.stories[0]}></Story>
+              <Story story={this.stories.currStory.story}></Story>
             </div>
           </div>
           <div className="vote-stage-turns">
@@ -43,7 +38,7 @@ class VoteStage extends React.Component {
             </div>
             <div className="vote-stage-options">
               {this.usersData.users.map((e, i) => {
-                if (e.username != raconteur) {
+                if (e.username !== raconteur) {
                   return (
                     <div key={i} className="vote-stage-option">
                       <UserIcon username={e.username} icon={e.icon}></UserIcon>
@@ -60,7 +55,7 @@ class VoteStage extends React.Component {
         <div className="vote-stage-sentence">
           <div className="sentence-title">YOUR SENTENCE</div>
           {/* TODO: placeholder sentence here. Change to what you picked in InputStage. */}
-          <div className="sentence-content">chris tries to murder a rabbit</div>
+          <div className="sentence-content">{this.props.app.state.currUser.currentSentence}</div>
         </div>
       </div>
     );

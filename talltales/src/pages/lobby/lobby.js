@@ -14,6 +14,8 @@ class Lobby extends React.Component {
       object => object.genre
     );
 
+    // console.log(this.props.app.state);
+
     return (
       <div className="lobby">
         {/* TODO: Make this header into a component so it's reusable in every page */}
@@ -37,17 +39,14 @@ class Lobby extends React.Component {
             </div>
           </div>
         </div>
-        <Link
-          to={{
-            pathname: "/gameStage",
-            state: {
-              currUser: this.props.app.state.currUser,
-              users: this.props.app.state.users,
-              stories: this.props.app.state.stories
-            }
-          }}
-          className="link"
-        >
+        <Link to={{
+          pathname: '/inputStage',
+          state: {
+            currUser: this.props.app.state.currUser,
+            users: this.props.app.state.users,
+            stories: this.props.app.state.stories
+          }
+        }} className="link">
           <Button
             text="START GAME"
             // handleClick={() => {

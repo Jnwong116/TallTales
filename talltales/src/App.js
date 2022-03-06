@@ -9,8 +9,7 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Routes as Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 
@@ -23,7 +22,6 @@ class App extends React.Component {
     users: users,
     stories: stories,
     currUser: null,
-    page: 0
   }
 
   render () {
@@ -32,9 +30,15 @@ class App extends React.Component {
         <Router>
           <Switch>
             <Route path="/">
-              {!this.state.currUser ? (this.state.page === 0 ? <Route path="/" element={<Login app={this} />} /> : <Route path="/" element={<Register app={this} />} />) : <Route path="/" element={<Lobby app={this} />} />}
+              {!this.state.currUser ? <Route path="/" element={<Login app={this} />} /> : <Route path="/" element={<Lobby app={this} />} />}
             </Route>
-            <Route path="/gameStage" element={<InputStage app={this} />} />
+            {/* <Route path="/game">
+              {}
+            </Route> */}
+            {/* <Route path="/" element={<Login app={this} /> } /> */}
+            <Route path="/register" element={<Register app={this} /> } />
+            {/* <Route path="/lobby" element={<Lobby app={this} /> } /> */}
+            <Route path="/inputStage" element={<InputStage app={this} />} />
             <Route path="/voteStage" element={<VoteStage app={this} />} />
           </Switch>
         </Router>
