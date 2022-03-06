@@ -6,29 +6,28 @@ import Story from "../../components/story/story.js";
 import UserInput from "../../components/userInput/userInput.js";
 import { Link } from "react-router-dom";
 
-import { updatePrompt, displayPrompt } from "../../actions/prompt/displayPrompt.js";
+import { displayPrompt, isRaconteur } from "../../actions/prompt/displayPrompt.js";
 import { saveInput } from "../../actions/input/input.js";
 
 import "./inputStage.css";
 
 class InputStage extends React.Component {
-  state = {
-    stage: 0,
-    prompt: 0
-  };
-
   render() {
     // Import mock data
     this.stories = this.props.app.state.stories; // Change to match the actual genre
     this.users = this.props.app.state.users;
 
+    // Checks if user is raconteur
+    isRaconteur(this.props.app, this.props.app.state.currUser, this.users);
+
     // Resets the story
-    if (this.state.stage === 0 && this.state.prompt === 0) {
+    if (this.props.app.state.stage === 0 && this.props.app.state.prompt === 0) {
       this.stories.currStory.story = this.stories.stories[0].starts[0];
     }
 
     // Switches the prompt
-    this.prompt = displayPrompt(this, this.stories);
+    
+    this.prompt = displayPrompt(this.props.app, this.stories);
 
     return (
       <div className="input-stage">
@@ -38,22 +37,12 @@ class InputStage extends React.Component {
         </div>
         <Story story={this.stories.currStory.story}></Story>
         <UserInput prompt={this.prompt} user={this.props.app.state.currUser}></UserInput>
-        <Link onClick={() => {
-          saveInput(this.props.app.state.currUser);
-          updatePrompt(this.props.app)
-        }}
-        to={{
-          pathname: '/voteStage',
-          state: {
-            stories: this.stories,
-            currUser: this.props.app.state.currUser,
-            users: this.users
-          }
-        }}>
-          <Button
-            text="SUBMIT"
-          ></Button>
-        </Link>
+        <Button
+          text="SUBMIT"
+          handleClick={() => {
+            saveInput(this.props.app.state.currUser, this.props.app);
+          }}
+        ></Button>
       </div>
     );
   }

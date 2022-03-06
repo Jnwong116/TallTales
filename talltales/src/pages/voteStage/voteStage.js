@@ -5,19 +5,34 @@ import Story from "../../components/story/story.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
 import "./voteStage.css";
 
+import { findRaconteur} from "../../actions/vote/raconteur.js";
+import { generateAIinput, AIinput, AIVote, select, confirmVote } from "../../actions/vote/vote.js";
+
 class VoteStage extends React.Component {
+  state = {
+    loading: true,
+    choice: "Choose a sentence"
+  }
+
+  componentDidMount() {
+    if (this.state.loading) {
+      if (this.raconteur === this.props.app.state.currUser.username) {
+        generateAIinput(this.users, this.props.app, this);
+      }
+      else {
+        AIinput(this.users, this.props.app, this);
+        AIVote(this.users, this.stories, this.raconteur, this.props.app, this);
+      }
+    }
+  }
+
   render() {
     // Import mock data
     this.stories = this.props.app.state.stories;
-    this.usersData = this.props.app.state.users;
+    this.users = this.props.app.state.users;
 
-    let raconteur;
-    for (var i in this.usersData.users) {
-      let user = this.usersData.users[i];
-      if (user.raconteur) {
-        raconteur = user.username;
-      }
-    }
+    this.raconteur = this.users.users[findRaconteur(this.users.users)].username;
+    console.log(this.props.app.state);
 
     return (
       <div className="vote-stage">
@@ -33,16 +48,22 @@ class VoteStage extends React.Component {
             </div>
           </div>
           <div className="vote-stage-turns">
-            <div className="vote-stage-raconteur">
-              <span className="raconteur">{raconteur}</span>'s turn
-            </div>
+            {
+              this.raconteur === this.props.app.state.currUser.username ?
+              <div className="vote-stage-raconteur">
+                <span className="raconteur">YOUR</span> TURN
+              </div> :
+              <div className="vote-stage-raconteur">
+                <span className="raconteur">{this.raconteur}</span>'s TURN
+              </div>
+            }
             <div className="vote-stage-options">
-              {this.usersData.users.map((e, i) => {
-                if (e.username !== raconteur) {
+              {this.users.users.map((e, i) => {
+                if (e.username !== this.raconteur) {
                   return (
                     <div key={i} className="vote-stage-option">
                       <UserIcon username={e.username} icon={e.icon}></UserIcon>
-                      <div className="vote-option-text">
+                      <div className="vote-option-text" id={e.username} onClick={() => {select(this.users, e.username, this.raconteur, this.props.app, this);}}>
                         {e.currentSentence}
                       </div>
                     </div>
@@ -52,11 +73,27 @@ class VoteStage extends React.Component {
             </div>
           </div>
         </div>
-        <div className="vote-stage-sentence">
-          <div className="sentence-title">YOUR SENTENCE</div>
-          {/* TODO: placeholder sentence here. Change to what you picked in InputStage. */}
-          <div className="sentence-content">{this.props.app.state.currUser.currentSentence}</div>
-        </div>
+        {
+          this.props.app.state.currUser.raconteur ?
+          <div className="vote-stage-sentence">
+            <div className="sentence-title">YOUR CHOICE</div>
+            <div className="sentence-content-choice">
+              {this.state.choice}
+            </div>
+            <div className="checkMarkContainer" onClick={() => {confirmVote(this.users, this.stories, this.props.app, this);}}>
+              <img src={require("../../assets/images/pixelCheckmark.png")} width="30" height="30" alt="" />
+            </div>
+          </div>
+          :
+          <div className="vote-stage-sentence">
+            <div className="sentence-title">YOUR SENTENCE</div>
+            {/* TODO: placeholder sentence here. Change to what you picked in InputStage. */}
+            <div className="sentence-content">
+              {this.props.app.state.currUser.currentSentence}
+            </div>
+          </div> 
+        }
+        
       </div>
     );
   }

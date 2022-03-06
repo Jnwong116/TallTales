@@ -40,7 +40,7 @@ class Lobby extends React.Component {
           </div>
         </div>
         <Link to={{
-          pathname: '/inputStage',
+          pathname: '/game',
           state: {
             currUser: this.props.app.state.currUser,
             users: this.props.app.state.users,

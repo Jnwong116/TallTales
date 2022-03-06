@@ -8,14 +8,15 @@
 }
 .vote-stage .story-title {
   font-size: 36px;
-  font-style: "Inter";
+  font-style: "IBM Plex Sans";
   font-weight: bolder;
-  padding-bottom: 50px;
-  color: #676767;
+  color: #1b1b1b;
 }
 .vote-stage .story-current {
-  font-family: "Inter";
-  font-size: 23px;
+  font-family: "IBM Plex Sans";
+  font-size: 26px;
+  font-style: italic;
+  color: rgb(83, 83, 83);
   max-width: 500px;
 }
 
@@ -26,11 +27,11 @@
   font-size: 36px;
   font-style: "Inter";
   font-weight: bolder;
-  color: #676767;
+  color: #1b1b1b;
 }
 
 .raconteur {
-  color: #292929;
+  color: #676767;
 }
 
 .vote-stage-option {
@@ -42,18 +43,21 @@
 
 .vote-option-text {
   color: #ededed;
-  font-style: "Courier Prime", monospace;
-  background-color: #292929;
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  font-family: "IBM Plex Mono";
+  background-color: #2d2d2d;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   margin-top: 50px;
   border: none;
-  font-weight: bold;
-  font-size: 20px;
+  font-size: 16px;
   width: 320px;
   height: 30px;
+}
+
+.vote-option-text-selected {
+  background-color: #a2a2a2;
 }
 
 .vote-option-text:hover {
@@ -70,17 +74,19 @@
 }
 
 .sentence-title {
-  font-size: 36px;
-  font-style: "Inter";
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-style: "IBM Plex Mono";
   font-weight: bolder;
   padding-right: 40px;
   color: #676767;
 }
 
 .sentence-content {
-  color: #626262;
+  color: #808080;
   font-style: "Inter";
-  background-color: #9a9a9a;
+  background-color: #dedede;
   padding-left: 50px;
   padding-right: 50px;
   padding-top: 20px;
@@ -90,4 +96,25 @@
   font-size: 20px;
   width: 320px;
   height: 30px;
+}
+
+.sentence-content-choice {
+  color: #808080;
+  font-style: "Inter";
+  background-color: #dedede;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border: none;
+  font-weight: bold;
+  font-size: 20px;
+  width: 320px;
+  height: 30px;
+}
+
+.checkMarkContainer {
+  display: flex;
+  align-items: center;
+  padding-left: 40px;
 }

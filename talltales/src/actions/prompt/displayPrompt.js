@@ -46,3 +46,19 @@ export const displayPrompt = (app, stories) => {
           return "Story is complete!";
       }
 }
+
+export const isRaconteur = (app, currUser, users) => {
+  if (currUser.raconteur) {
+    // Resets all user inputs to . . .
+    for (let i = 0; i < users.users.length; i++) {
+      if (users.users[i].raconteur !== true) {
+        users.users[i].currentSentence = ". . ."
+      }
+  }
+
+
+    app.setState({
+      page: 1
+    })
+  }
+}
