@@ -4,6 +4,7 @@ import Button from "../../components/button/button.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
 import ArrowLeft from "../../components/cssArrows/arrowLeft.js";
 import ArrowRight from "../../components/cssArrows/arrowRight.js";
+import DashboardMenu from "../../components/dashboardMenu/dashboardMenu.js";
 import "./dashboard.css";
 
 class Dashboard extends React.Component {
@@ -18,23 +19,7 @@ class Dashboard extends React.Component {
           <div className="header">
             <AppName></AppName>
           </div>
-          <span className="dashboardMenu">
-            <Button text="HOST NEW GAME"
-                    handleClick={() => {
-                    this.handleClick(this.state);}} />
-            <Button text="JOIN GAME"
-                    handleClick={() => {
-                      this.handleClick(this.state);}} />
-            <Button text="HOW TO PLAY"
-                    handleClick={() => {
-                    this.handleClick(this.state);}} />
-            <Button text="PROFILE"
-                    handleClick={() => {
-                    this.handleClick(this.state);}} />
-            <Button text="LOG OUT"
-                    handleClick={() => {
-                    this.handleClick(this.state);}} />
-          </span>
+            <DashboardMenu></DashboardMenu>
         </span>
 
         <span className="dashboardDivider">
