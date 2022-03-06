@@ -6,6 +6,7 @@ import Register from "./pages/register/register"
 import Lobby from "./pages/lobby/lobby";
 import VoteStage from "./pages/voteStage/voteStage";
 import Dashboard from "./pages/dashboard/dashboard"
+import HowToPlay from "./pages/howToPlay/howToPlay"
 import React from "react";
 
 import {
@@ -47,6 +48,7 @@ class App extends React.Component {
             {/* <Route path="/inputStage" element={<InputStage app={this} />} />
                 <Route path="/voteStage" element={<VoteStage app={this} />} /> */}
                 <Route path="/dashboard" element={<Dashboard app={this} />} />
+                <Route path="/howToPlay" element={<HowToPlay app={this} />} />
           </Switch>
         </Router>
       </div>
