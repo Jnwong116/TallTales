@@ -24,8 +24,7 @@ class InputStage extends React.Component {
 
     // Resets the story
     if (this.state.stage === 0 && this.state.prompt === 0) {
-      this.stories.currStory.story =
-      this.stories.stories[0].starts[0];
+      this.stories.currStory.story = this.stories.stories[0].starts[0];
     }
 
     // Switches the prompt
@@ -52,7 +51,7 @@ class InputStage extends React.Component {
           }
         }}>
           <Button
-            text="SEND"
+            text="SUBMIT"
           ></Button>
         </Link>
       </div>

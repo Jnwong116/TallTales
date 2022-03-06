@@ -5,26 +5,29 @@
 }
 
 .user-input-header {
-  font-family: "Inter";
-  font-size: 60px;
+  font-family: "IBM Plex Sans";
+  font-size: 40px;
   font-weight: bold;
   padding-bottom: 20px;
 }
 
 .user-input-tag {
-  font-family: "Inter";
-  font-size: 30px;
+  font-family: "IBM Plex Mono";
   font-weight: bold;
-  color: #555353;
-  padding-bottom: 20px;
+  font-style: italic;
+  color: #6f6f6f;
 }
 
+.user-input-text-field {
+  margin: auto 0;
+}
 .stage-indicator {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .stage-arrow {
-    height: 40px;
-    width: 40px;
+  height: 26px;
+  width: 26px;
+  padding-right: 10px;
 }
