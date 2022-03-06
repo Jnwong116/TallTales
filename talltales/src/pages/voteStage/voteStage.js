@@ -34,7 +34,7 @@ class VoteStage extends React.Component {
           </div>
           <div className="vote-stage-turns">
             <div className="vote-stage-raconteur">
-              <span className="raconteur">{raconteur}</span>'s turn
+              <span className="raconteur">{raconteur}</span>'s TURN
             </div>
             <div className="vote-stage-options">
               {this.usersData.users.map((e, i) => {
@@ -55,7 +55,9 @@ class VoteStage extends React.Component {
         <div className="vote-stage-sentence">
           <div className="sentence-title">YOUR SENTENCE</div>
           {/* TODO: placeholder sentence here. Change to what you picked in InputStage. */}
-          <div className="sentence-content">{this.props.app.state.currUser.currentSentence}</div>
+          <div className="sentence-content">
+            {this.props.app.state.currUser.currentSentence}
+          </div>
         </div>
       </div>
     );
