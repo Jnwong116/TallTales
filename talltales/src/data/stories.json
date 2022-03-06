@@ -28,9 +28,14 @@
         }
     ],
     "currStory": {
-        "start": "",
+        "start": "chris and jordan are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means.",
         "story": "",
-        "contributions": []
+        "contributions": [
+            {"users": "jasper",
+            "sentence": "temp sentence example"},
+            {"users": "gazi",
+                "sentence": "temp sentence example2"}
+        ]
     }
   }
   

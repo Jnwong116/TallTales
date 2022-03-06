@@ -4,6 +4,7 @@ import Register from "./pages/register/register";
 import "./App.css";
 import Lobby from "./pages/lobby/lobby";
 import VoteStage from "./pages/voteStage/voteStage";
+import Leaderboard from "./pages/leaderboard/leaderboard";
 import React from "react";
 
 import {
@@ -11,7 +12,6 @@ import {
   Routes as Switch,
   Route
 } from "react-router-dom";
-
 
 // import data
 const users = require("./data/users.json");
