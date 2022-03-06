@@ -1,39 +1,71 @@
+div {
+    border: 1px solid blue;
+}
+
+span {
+    border: 1px solid red;
+}
+
 .header {
   display: flex;
 }
 
-.dashboardMenuOuterContainer {
+.dashboard {
   display: flex;
-  flex-direction: column;
-  position: fixed;
-  right: 0px; bottom: 0px;
 }
 
-.dashboardMenuInnerContainer {
+.dashboardLeft {
   display: flex;
-  flex-direction: row;
-  padding-left: 80px;
-  padding-right: 80px;
-  gap: 80px;
+  flex-direction: column;
+}
+
+.dashboardDivider {
+  width: 150px;
+}
+
+.dashboardRight {
+  display: flex;
+  flex-direction: column;
 }
 
 .dashboardMenu {
   display: flex;
   flex-direction: column;
-  padding-bottom: 70px;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.userIconContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.storiesNavigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.storiesDisplay {
+  width: 600px;
+  display: flex;
+  text-align: justify;
 }
 
 .buttonStyle {
+  width: 310px;
+  height: 60px;
   color: #ededed;
   background-color: #292929;
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  margin-top: 25px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin-top: 0px;
+  margin-bottom: 20px;
   border: none;
   font-weight: bolder;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .buttonStyle:hover {
