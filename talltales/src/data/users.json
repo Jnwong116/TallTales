@@ -6,7 +6,7 @@
       "score": 0,
       "icon": "avatar01.png",
       "raconteur": false,
-      "host": true,
+      "host": false,
       "currentSentence": ". . .",
       "stories": []
     },
