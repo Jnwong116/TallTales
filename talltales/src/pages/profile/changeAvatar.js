@@ -5,7 +5,7 @@ import ArrowLeft from "../../components/cssArrows/arrowLeft.js";
 import ArrowRight from "../../components/cssArrows/arrowRight.js";
 import Button from "../../components/button/button.js";
 
-import { changeAvatar, prevAvatar } from "../../actions/editProfile/editProfile";
+import { changeAvatar, prevAvatar, nextAvatar } from "../../actions/editProfile/editProfile";
 
 class ChangeAvatar extends React.Component {
   state = {
@@ -22,7 +22,7 @@ class ChangeAvatar extends React.Component {
         <div className="changeAvatarBrowser">
           <span onClick={() => prevAvatar(this.state.avatar, this)}><ArrowLeft /></span>
           <UserAvatar icon={this.state.avatar} />
-          <span><ArrowRight /></span>
+          <span onClick={() => nextAvatar(this.state.avatar, this)}><ArrowRight /></span>
         </div>
 
         <Button text="CHANGE AVATAR"

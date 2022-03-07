@@ -60,11 +60,11 @@ export const prevAvatar = (avatar, page) => {
     let newAvatar;
     
     switch (currAvatar) {
-        case 1:
+        case '1':
             newAvatar = 4
             break;
         default: 
-            newAvatar = currAvatar - 1
+            newAvatar = parseInt(currAvatar) - 1
             break;
     }
 
@@ -74,5 +74,19 @@ export const prevAvatar = (avatar, page) => {
 }
 
 export const nextAvatar = (avatar, page) => {
+    const currAvatar =  avatar.charAt(7);
+    let newAvatar;
+    
+    switch (currAvatar) {
+        case '4':
+            newAvatar = 1
+            break;
+        default: 
+            newAvatar = parseInt(currAvatar) + 1
+            break;
+    }
 
+    page.setState({
+        avatar: "avatar0" + newAvatar + ".png"
+    })
 }
