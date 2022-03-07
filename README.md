@@ -39,6 +39,8 @@ We've coded the app using React, so all that's needed to get it to run is to pul
  2. Sign Up Page
 
 	Users are asked to enter a new username and password, and click the `CONFIRM REGISTRATION` link. This will temporarily add a new user to our javascript database (to be upgraded to a real database at a later stage), and bring the user back to the Login page, where they must enter their new credential to proceed. The program will check that neither the username nor password is empty, and that the username is not already taken.
+	
+	For testing: If you test registering an account, make sure you login with that exact account. If you accidentally register 2 accounts or register an account and log in with a different account, refresh the app so that the game can be testing properly.
 
  3. Dashboard
 
