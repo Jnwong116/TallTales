@@ -12,8 +12,6 @@ We have set up a number of users to demo the app more convincingly. They are lis
 
 	user:user
 	admin:admin
-	gazi:gazi
-	jasper:jasper
 	jordan:jordan
 	chris:chris
 
@@ -70,7 +68,7 @@ We've coded the app using React, so all that's needed to get it to run is to pul
 
 	The lobby displays all currently logged in users. Since we haven't implemented concurrency yet, this is currently done via mock data. Only one user may host a game at a time. Here we are prompted to select the story genre (currently only Adventure and Mystery are available, though we may add more genres further down the line) that we want our prompts to be about. Once that's done, we can click `Start Game` to proceed to the Gameplay View.
 
-	Note: For phase 1, gazi will always be the game host.
+	Note: For phase 1, admin will always be the game host.
 
 10. Gameplay View (Join Game)
 	

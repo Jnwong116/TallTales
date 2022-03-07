@@ -2,11 +2,12 @@ import { updatePrompt } from "../prompt/displayPrompt";
 import { chooseRaconteur } from "./raconteur";
 
 export const AIinput = (users, app, page) => {
+    // Gets passed in array of users from database
     const input = app.state.stage + app.state.prompt;
     for (let i = 0; i < users.users.length; i++) {
         if (users.users[i].raconteur !== true) {
             if (users.users[i].username !== app.state.currUser.username) {
-                // document.getElementById(users.users[i].username).childNodes[0].nodeValue = users.inputs[i].inputs[input];
+                // Requires server call to change AI user inputs to a preset input from the database
                 users.users[i].currentSentence = users.inputs[i].inputs[input];
             }
         }
@@ -18,12 +19,14 @@ export const AIinput = (users, app, page) => {
 }
 
 export const generateAIinput = (users, app, page) => {    
+    // Gets passed in array of users from database
     setTimeout(() => {
         AIinput(users, app, page)
     }, 3000);
 }
 
 export const AIVote = (users, stories, raconteur, app, page) => {
+    // Gets passed in array of users and stories from database
     setTimeout(() => {
         let vote = (Math.floor(Math.random() * users.users.length));
         // let vote = 0;
@@ -35,10 +38,12 @@ export const AIVote = (users, stories, raconteur, app, page) => {
         const input = user.currentSentence;
 
         document.getElementById('last-sentence').childNodes[0].nodeValue = " " + input;
+        // Requires server call to update user's score
         user.score = user.score + 100;
         document.getElementById(user.username).classList.add("vote-option-text-selected");
 
         // Adds contributions
+        // Requires server call to add contribution to story
         stories.currStory.contributions.push({
             username: user.username,
             sentence: input
@@ -52,6 +57,7 @@ export const AIVote = (users, stories, raconteur, app, page) => {
         // console.log(vote);
 
         setTimeout(() => {
+            // Requires server call to add contribution to story
             stories.currStory.story = stories.currStory.story + " " + input;
             updatePrompt(app);
             chooseRaconteur(users.users);
@@ -64,6 +70,7 @@ export const AIVote = (users, stories, raconteur, app, page) => {
 }
 
 export const confirmVote = (users, stories, app, page) => {
+    // Gets passed in array of users and stories from database
     const input = page.state.choice;
 
     for (let i = 0; i < users.users.length; i++) {
@@ -71,10 +78,12 @@ export const confirmVote = (users, stories, app, page) => {
             const selectUser = users.users[i];
 
             document.getElementById('last-sentence').childNodes[0].nodeValue = " " + input;
+            // Requires server call to update user's score
             selectUser.score = selectUser.score + 100;
             
 
             // Adds contributions
+            // Requires server call to add contribution to story
             stories.currStory.contributions.push({
                 username: selectUser.username,
                 sentence: input
@@ -85,6 +94,7 @@ export const confirmVote = (users, stories, app, page) => {
             })
 
             setTimeout(() => {
+                // Requires server call to add contribution to story
                 stories.currStory.story = stories.currStory.story + " " + input;
                 updatePrompt(app);
                 chooseRaconteur(users.users);
@@ -99,6 +109,7 @@ export const confirmVote = (users, stories, app, page) => {
 }
 
 export const select = (users, user, raconteur, app, page) => {
+    // Gets passed in array of users and stories from database
     if (app.state.currUser.username === raconteur) {
         for (let i = 0; i < users.users.length; i++) {
             if (users.users[i].username === user) {

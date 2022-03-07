@@ -1,4 +1,5 @@
 export const changeName = (users, app, page) => {
+    // Gets passed in array of users from database
     const newName = document.getElementById('change-username').value;
     const currUser = app.state.currUser.username;
 
@@ -9,6 +10,7 @@ export const changeName = (users, app, page) => {
 
     for (let i = 0; i < users.users.length; i++) {
         if (users.users[i].username === currUser) {
+            // Requires server call to change user's username
             users.users[i].username = newName;
         }
     }
@@ -20,6 +22,7 @@ export const changeName = (users, app, page) => {
 }
 
 export const changePassword = (users, app, page) => {
+    // Gets passed in array of users from database
     const newPass = document.getElementById('change-password').value;
     const currUser = app.state.currUser.username;
 
@@ -30,6 +33,7 @@ export const changePassword = (users, app, page) => {
 
     for (let i = 0; i < users.users.length; i++) {
         if (users.users[i].username === currUser) {
+            // Requires server call to change user's password
             users.users[i].password = newPass;
         }
     }
@@ -41,10 +45,12 @@ export const changePassword = (users, app, page) => {
 }
 
 export const changeAvatar = (users, app, page, avatar) => {
+    // Gets passed in array of users from database
     const currUser = app.state.currUser.username;
 
     for (let i = 0; i < users.users.length; i++) {
         if (users.users[i].username === currUser) {
+            // Requires server call to change user's avatar
             users.users[i].icon = avatar;
         }
     }

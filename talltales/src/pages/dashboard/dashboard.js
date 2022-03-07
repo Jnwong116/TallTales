@@ -1,6 +1,6 @@
 import React from "react";
 import AppName from "../../components/appName/appName.js";
-import Button from "../../components/button/button.js";
+// import Button from "../../components/button/button.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
 import ArrowLeft from "../../components/cssArrows/arrowLeft.js";
 import ArrowRight from "../../components/cssArrows/arrowRight.js";
@@ -11,6 +11,7 @@ class Dashboard extends React.Component {
 
   render() {
     // Import mock data
+    // Requires server call to get list of stories and users from server
     this.stories = this.props.app.state.stories;
     this.users = this.props.app.state.users;
 

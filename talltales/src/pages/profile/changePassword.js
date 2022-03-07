@@ -9,6 +9,7 @@ class ChangePassword extends React.Component {
 
   render() {
     // Import mock data
+    // Requires server call to get list of stories and users from server
     this.stories = this.props.app.state.stories;
     this.users = this.props.app.state.users;
 

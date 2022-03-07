@@ -8,23 +8,6 @@ import { login, register } from "../../actions/login/authenticate.js";
 import "./login.css";
 
 class Login extends React.Component {
-  // handleClick(users) {
-  //   const currUserName = document.getElementById("user-name").value;
-  //   const currPassword = document.getElementById("password").value;
-
-  //   const targetUser = users.users.filter(
-  //     user => user.username === currUserName
-  //   );
-
-  //   if (targetUser.length && targetUser[0].password === currPassword) {
-  //     this.props.app.setState({
-  //       currUser: targetUser[0]
-  //     });
-  //   } else {
-  //     window.alert("Incorrect login :(");
-  //   }
-  // }
-
   render() {
     // console.log(this.props.app.state)
     return (
