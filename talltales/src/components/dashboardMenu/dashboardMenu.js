@@ -2,7 +2,7 @@ import React from "react";
 import Button from "../button/button.js";
 import "./dashboardMenu.css";
 
-import { menuRedirect, logout } from "../../actions/dashboard/menu.js";
+import { menuRedirect, logout, startGame } from "../../actions/dashboard/menu.js";
 
 class DashboardMenu extends React.Component {
   render() {
@@ -14,10 +14,10 @@ class DashboardMenu extends React.Component {
         <span className="dashboardMenu">
                 <Button text="HOST NEW GAME"
                         handleClick={() => {
-                        menuRedirect(this.props.app, 2)}} />
+                        startGame(true, this.users, this.props.app, 2)}} />
                 <Button text="JOIN GAME"
                         handleClick={() => {
-                        menuRedirect(this.props.app, 2)}} />
+                        startGame(false, this.users, this.props.app, 2)}} />
                 <Button text="HOW TO PLAY"
                         handleClick={() => {
                         menuRedirect(this.props.app, 5)}} />
