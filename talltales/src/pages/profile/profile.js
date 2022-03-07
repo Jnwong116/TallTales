@@ -21,23 +21,22 @@ class Profile extends React.Component {
 
     return (
       <div className="profile">
-        <span className="profileLeft">
-          <div className="header">
+          <div className="profile-header">
             <AppName />
           </div>
+          <span>
             <ProfileMenu app={this.props.app}/>
         </span>
 
         <span className="profileDivider">
         </span>
 
-        <span className="profileRight">
+        <div className="profileRight">
           <div className="profileInterface">
             <div className="profileAvatarContainer">
               <UserIcon icon={this.props.app.state.currUser.icon} username={this.props.app.state.currUser.username} />
             </div>
             <div className="profileInterfaceDivider" />
-
               {
                 this.props.app.state.page === 6 ? <ChangeNothing app={this.props.app} parent={this} /> :
                 (
@@ -49,7 +48,7 @@ class Profile extends React.Component {
                 )
               }
           </div>
-        </span>
+        </div>
       </div>
     );
   }

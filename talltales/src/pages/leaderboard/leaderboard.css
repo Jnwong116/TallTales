@@ -42,8 +42,7 @@
     max-width: 600px;
     color: #808080;
     /* Indent if multiple lines for one contribution */
-    margin-left: 20px;
-    text-indent: -20px;
+    text-indent: 40px;
 }
 
 .leaderboard-players {
