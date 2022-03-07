@@ -1,18 +1,18 @@
 {
   "users": [
     {
-      "username": "gazi",
-      "password": "gazi",
+      "username": "admin",
+      "password": "admin",
       "score": 0,
       "icon": "avatar01.png",
       "raconteur": false,
-      "host": false,
+      "host": true,
       "currentSentence": ". . .",
       "stories": []
     },
     {
-      "username": "jasper",
-      "password": "jasper",
+      "username": "user",
+      "password": "user",
       "score": 0,
       "icon": "avatar02.png",
       "raconteur": true,
@@ -39,26 +39,6 @@
       "host": false,
       "currentSentence": ". . .",
       "stories": []
-    },
-    {
-        "username": "user",
-        "password": "user",
-        "score": 0,
-        "icon": "avatar01.png",
-        "raconteur": false,
-        "host": false,
-        "currentSentence": ". . .",
-        "stories": []
-    },
-    {
-        "username": "admin",
-        "password": "admin",
-        "score": 0,
-        "icon": "avatar02.png",
-        "raconteur": false,
-        "host": false,
-        "currentSentence": ". . .",
-        "stories": []
     }
   ],
   "inputs": [
