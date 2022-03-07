@@ -24,9 +24,9 @@ class Profile extends React.Component {
           <div className="profile-header">
             <AppName />
           </div>
-          <span>
+          <div className="profileLeft">
             <ProfileMenu app={this.props.app}/>
-        </span>
+        </div>
 
         <span className="profileDivider">
         </span>
