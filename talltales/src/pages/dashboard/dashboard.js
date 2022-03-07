@@ -7,8 +7,12 @@ import ArrowRight from "../../components/cssArrows/arrowRight.js";
 import DashboardMenu from "../../components/dashboardMenu/dashboardMenu.js";
 import "./dashboard.css";
 
-class Dashboard extends React.Component {
+import { nextStory, prevStory } from "../../actions/dashboard/stories.js";
 
+class Dashboard extends React.Component {
+  state = {
+    story: 0
+  }
   render() {
     // Import mock data
     // Requires server call to get list of stories and users from server
@@ -34,18 +38,27 @@ class Dashboard extends React.Component {
             </div>
           </div>
           <div className="storiesNavigation">
-            <span className="browseStoriesLeftArrow">
+            <span className="browseStoriesLeftArrow" onClick={() => {prevStory(this.state.story, this.props.app.state.currUser, this)}}>
               <ArrowLeft />
             </span>
             <span className="browseStoriesHeader">
-              Completed Stories (1/1)
+              {
+                this.props.app.state.currUser.stories.length === 0 ? 
+                "Completed Stories" :
+                "Completed Stories (" + (this.state.story + 1) + "/" + this.props.app.state.currUser.stories.length + ")"
+              }
+              
             </span>
-            <span className="browseStoriesRightArrow">
+            <span className="browseStoriesRightArrow" onClick={() => {nextStory(this.state.story, this.props.app.state.currUser, this)}}>
               <ArrowRight />
             </span>
           </div>
           <div className="storiesDisplay">
-            Chris and Jordan are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means. This is all happening on a fishing boat in northern Canada. Gazi and Jasper watch on, bemused. No one thought to bring a can opener with them.  Chris reminds everyone he's on a plant-based diet. A hostile, carnivorous monkey attacks Chris shortly after this proclamation. A swarm of rats emerges from the lower decks and start chipping the cans open. Jordan throws a can at the monkey, scoring a direct hit. The monkey faints and falls off a slightly chewed-on Chris.  While this was happening, the rats opened all the cans and carried away the pet food. Luckily, since northern Canada is basically a freezer, the expiration date had no effect, so the remaining food is edible, with plenty of plant-based options. Chris and Jasper eat canned sauerkraut, while Jordan and Gazi cook up some monkey stew.
+            {
+              this.props.app.state.currUser.stories.length === 0 ? 
+              "You have not completed any stories yet! Go play a game and come back to see your completed stories!" :
+              this.props.app.state.currUser.stories[this.state.story]
+            }
           </div>
         </span>
       </div>
