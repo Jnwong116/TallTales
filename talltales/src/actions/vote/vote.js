@@ -35,7 +35,7 @@ export const AIVote = (users, stories, raconteur, app, page) => {
         const input = user.currentSentence;
 
         document.getElementById('last-sentence').childNodes[0].nodeValue = " " + input;
-        user.score = user.score + 10;
+        user.score = user.score + 100;
         document.getElementById(user.username).classList.add("vote-option-text-selected");
 
         // Adds contributions
@@ -71,7 +71,7 @@ export const confirmVote = (users, stories, app, page) => {
             const selectUser = users.users[i];
 
             document.getElementById('last-sentence').childNodes[0].nodeValue = " " + input;
-            selectUser.score = selectUser.score + 10;
+            selectUser.score = selectUser.score + 100;
             
 
             // Adds contributions
