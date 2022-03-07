@@ -1,6 +1,7 @@
 import React from "react";
 import "./profile.css";
 import Button from "../../components/button/button.js";
+import TextField from "@mui/material/TextField";
 
 class ChangePassword extends React.Component {
 
@@ -11,9 +12,13 @@ class ChangePassword extends React.Component {
     return (
       <div className="changeUserDetailsInterface">
         <div className="profileInputSection">
-          <span>
-          <input type="text" name="newUserName" placeholder="<New Password>" />
-          </span>
+          <TextField
+                id="change-password"
+                label="<NEW-PASSWORD>"
+                variant="filled"
+                margin="normal"
+                maxRows="1"
+            />
         </div>
 
         <div className="profileInputButton">

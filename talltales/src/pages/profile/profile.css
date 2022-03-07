@@ -1,14 +1,19 @@
-.header {
+.profile-header {
   display: flex;
+  position: absolute;
 }
 
 .profile {
   display: flex;
+  justify-content: space-between;
+
 }
 
 .profileLeft {
   display: flex;
   flex-direction: column;
+  margin-left: 5%;
+  margin-top: 15%;
 }
 
 .profileDivider {
@@ -18,8 +23,8 @@
 .profileRight {
   display: flex;
   flex-direction: column;
-  width: 800px;
   justify-content: flex-start;
+  margin-right: 5%;
 }
 
 .userIconContainer {

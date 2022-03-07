@@ -17,17 +17,18 @@ class Profile extends React.Component {
 
     return (
       <div className="profile">
-        <span className="profileLeft">
-          <div className="header">
+          <div className="profile-header">
             <AppName />
           </div>
+        <div className="profileLeft">
+          
             <ProfileMenu />
-        </span>
+        </div>
 
         <span className="profileDivider">
         </span>
 
-        <span className="profileRight">
+        <div className="profileRight">
           <div className="profileInterface">
             <div className="profileAvatarContainer">
               <UserIcon icon="avatar01.png" username="UserName" />
@@ -35,12 +36,12 @@ class Profile extends React.Component {
             <div className="profileInterfaceDivider" />
 
               <ChangeNothing />
-              {/*<ChangeName />*/}
-              {/*<ChangePassword />*/}
-              {/*<ChangeAvatar />*/}
+              {/* <ChangeName /> */}
+              {/* <ChangePassword /> */}
+              {/* <ChangeAvatar /> */}
 
           </div>
-        </span>
+        </div>
       </div>
     );
   }
