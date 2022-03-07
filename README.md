@@ -1,4 +1,5 @@
 # team19
+## (Chris, Gazi, Jasper, Jordan)
 
 GENERAL GAME DESCRIPTION
 ========================
@@ -8,7 +9,7 @@ Tall Tales is a multiplayer collaborative story-telling web app for 3-6 players,
 REGISTERED USERS
 ================
 
-We have set up a number of users to demo the app more convincingly. They are listed below in the username:password format. (Since the usernames play an important part in our app, we decided to go with example accounts titled gazi, jasper, jordan, chris, etc. instead of the suggested user1, user2, convention.)
+We have set up a number of users to demo the app more convincingly. They are listed below in the username:password format. (Since the usernames play an important part in our game (representing characters in a story), we decided to go with example accounts titled after people, such as gazi, jasper, jordan, chris, etc. instead of the suggested user1, user2, convention.)
 
 	user:user
 	admin:admin
@@ -92,4 +93,3 @@ We've coded the app using React, so all that's needed to get it to run is to pul
 	Once the game has concluded, we have a final screen displaying each player's score, where the user with the highest score is displayed most prominently. We are also displaying the story one more time for all to see. We can click the `DONE` button to indicate that we've finished playing. This takes us back to the dashboard.
 
 THANK YOU FOR CHECKING OUT OUR GAME :-)
-=======================================
