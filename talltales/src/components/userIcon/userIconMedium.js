@@ -5,8 +5,8 @@ class UserIconMedium extends React.Component {
   render() {
     return (
       <div className="userIconMedium">
-        <img className="mediumAvatar" src={require("../../assets/images/" + this.props.icon)}></img>
-        <div className="mediumAvatarCaption"> currentUser's profile {this.props.username} </div>
+        <img alt="img" className="mediumAvatar" src={require("../../assets/images/" + this.props.icon)}></img>
+        <div className="mediumAvatarCaption"> {this.props.username}'s Profile </div>
       </div>
     );
   }

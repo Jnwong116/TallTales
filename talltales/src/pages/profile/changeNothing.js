@@ -7,11 +7,12 @@ class ChangeNothing extends React.Component {
 
   render() {
     // Import mock data
-    this.usersData = require("./../../data/users.json");
-
+    this.stories = this.props.app.state.stories;
+    this.users = this.props.app.state.users;
+    
     return (
       <div className="profileHomeInterface">
-        <UserIconMedium icon="avatar01.png" />
+        <UserIconMedium username={this.props.app.state.currUser.username} icon={this.props.app.state.currUser.icon} />
       </div>
     )
   }

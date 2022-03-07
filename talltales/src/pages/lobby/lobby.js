@@ -23,9 +23,14 @@ class Lobby extends React.Component {
           <AppName></AppName>
         </div>
         <div className="lobby-content">
-          <div className="lobby-genre">
-            <DropDown items={genres}></DropDown>
-          </div>
+          {
+            this.props.app.state.currUser.host ? 
+            <div className="lobby-genre">
+              <DropDown items={genres}></DropDown>
+            </div> :
+            <span></span>
+          }
+          
           <div className="lobby-column">
             <div className="lobby-header">LOBBY</div>
             <div className="lobby-players">

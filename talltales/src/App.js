@@ -15,8 +15,7 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Routes as Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 // import data
@@ -40,15 +39,21 @@ class App extends React.Component {
           <Switch>
             <Route path="/">
               {!this.state.currUser ? 
-              (this.state.page === 0 ? <Route path="/" element={<Login app={this} />} /> : 
-                <Route path="/" element={<Register app={this} />} /> ) : 
-              (this.state.page === 2 ? <Route path="/" element={<Lobby app={this} />} /> : 
-                (this.state.page === 0 ? <Route path="/" element={<InputStage app={this} />} /> :
-                  (this.state.page === 1 ? <Route path="/" element={<VoteStage app={this} />} /> :
-                    <Route path="/" element={<Leaderboard app={this} />} /> 
+                  (this.state.page === 0 ? <Route path="/" element={<Login app={this} />} /> : 
+                    <Route path="/" element={<Register app={this} />} /> ) : 
+                  (this.state.page === 2 ? <Route path="/" element={<Lobby app={this} />} /> : 
+                    (this.state.page === 0 ? <Route path="/" element={<InputStage app={this} />} /> :
+                      (this.state.page === 1 ? <Route path="/" element={<VoteStage app={this} />} /> :
+                        (this.state.page === 4 ? <Route path="/" element={<Dashboard app={this} />} /> :
+                          (this.state.page === 5 ? <Route path="/" element={<HowToPlay app={this} />} /> :
+                            (this.state.page === 3 ? <Route path="/" element={<Leaderboard app={this} />} />  :
+                              <Route path="/" element={<Profile app={this} />} /> 
+                            )
+                        )
+                      )
+                    )
                   )
-                )
-              )   
+                )   
               }
             </Route>
             {/* <Route path="/game">
@@ -59,9 +64,9 @@ class App extends React.Component {
             {/* <Route path="/lobby" element={<Lobby app={this} /> } /> */}
             {/* <Route path="/inputStage" element={<InputStage app={this} />} />
                 <Route path="/voteStage" element={<VoteStage app={this} />} /> */}
-                <Route path="/dashboard" element={<Dashboard app={this} />} />
-                <Route path="/howToPlay" element={<HowToPlay app={this} />} />
-                <Route path="/profile" element={<Profile app={this} />} />
+                {/* <Route path="/dashboard" element={<Dashboard app={this} />} /> */}
+                {/* <Route path="/howToPlay" element={<HowToPlay app={this} />} />
+                <Route path="/profile" element={<Profile app={this} />} /> */}
 
             {/* <Route path="/leader" element={<Leaderboard app={this} />}></Route> */}
           </Switch>
