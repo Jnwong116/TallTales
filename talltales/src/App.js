@@ -1,16 +1,22 @@
+import "./App.css";
+import logo from "./logo.svg";
 import InputStage from "./pages/inputStage/inputStage";
 import Login from "./pages/login/login";
-import Register from "./pages/register/register";
-import "./App.css";
+import Register from "./pages/register/register"
 import Lobby from "./pages/lobby/lobby";
 import VoteStage from "./pages/voteStage/voteStage";
+import Dashboard from "./pages/dashboard/dashboard"
+import HowToPlay from "./pages/howToPlay/howToPlay"
+import Profile from "./pages/profile/profile"
 import Leaderboard from "./pages/leaderboard/leaderboard";
+
 import React from "react";
 
 import {
   BrowserRouter as Router,
   Routes as Switch,
-  Route
+  Route,
+  Link
 } from "react-router-dom";
 
 // import data
@@ -52,7 +58,11 @@ class App extends React.Component {
             {/* <Route path="/register" element={<Register app={this} /> } /> */}
             {/* <Route path="/lobby" element={<Lobby app={this} /> } /> */}
             {/* <Route path="/inputStage" element={<InputStage app={this} />} />
-            <Route path="/voteStage" element={<VoteStage app={this} />} /> */}
+                <Route path="/voteStage" element={<VoteStage app={this} />} /> */}
+                <Route path="/dashboard" element={<Dashboard app={this} />} />
+                <Route path="/howToPlay" element={<HowToPlay app={this} />} />
+                <Route path="/profile" element={<Profile app={this} />} />
+
             {/* <Route path="/leader" element={<Leaderboard app={this} />}></Route> */}
           </Switch>
         </Router>
