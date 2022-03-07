@@ -13,6 +13,7 @@ import "./inputStage.css";
 class InputStage extends React.Component {
   render() {
     // Import mock data
+    // Requires server call to get list of stories and users from server
     this.stories = this.props.app.state.stories; // Change to match the actual genre
     this.users = this.props.app.state.users;
 

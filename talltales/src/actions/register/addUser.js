@@ -1,6 +1,7 @@
 // const log = console.log
 
 export const addUser = (app, users) => {
+    // Gets passed in array of users from database
     const currUserName = document.getElementById("user-name").value;
     const currPassword = document.getElementById("password").value;
     // numAvatars is used to randomly assign avatar in range avatar01 -> avatarnumAvatars
@@ -37,6 +38,7 @@ export const addUser = (app, users) => {
         "currentSentence": ""
     }
 
+    // Requires server call to add new user to database
     users.users.push(newUser);
 
     app.setState({

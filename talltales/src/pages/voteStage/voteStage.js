@@ -28,6 +28,7 @@ class VoteStage extends React.Component {
 
   render() {
     // Import mock data
+    // Requires server call to get list of stories and users from server
     this.stories = this.props.app.state.stories;
     this.users = this.props.app.state.users;
 
@@ -87,7 +88,6 @@ class VoteStage extends React.Component {
           :
           <div className="vote-stage-sentence">
             <div className="sentence-title">YOUR SENTENCE</div>
-            {/* TODO: placeholder sentence here. Change to what you picked in InputStage. */}
             <div className="sentence-content">
               {this.props.app.state.currUser.currentSentence}
             </div>

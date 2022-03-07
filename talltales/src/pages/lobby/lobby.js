@@ -10,6 +10,7 @@ import { redirect } from "../../actions/lobby/redirect.js";
 class Lobby extends React.Component {
   render() {
     // Array of genres
+    // Requires server call to get list of stories and go through all genres
     const genres = this.props.app.state.stories.stories.map(
       object => object.genre
     );

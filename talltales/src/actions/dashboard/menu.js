@@ -12,9 +12,11 @@ export const logout = (app) => {
 }
 
 export const startGame = (host, users, app, page) => {
+    // Gets passed in array of users from database
     if (host) {
         for (let i = 0; i < users.users.length; i++) {
             if (users.users[i].username === app.state.currUser.username) {
+                // Requires server call to make a user host
                 users.users[i].host = true;
             }
         }
@@ -27,6 +29,7 @@ export const startGame = (host, users, app, page) => {
         for (let i = 0; i < users.users.length; i++) {
             if (hosted === false) {
                 if (users.users[i].username !== app.state.currUser.username) {
+                    // Requires server call to make a user host
                     users.users[i].host = true;
                     hosted = true;
                 }
