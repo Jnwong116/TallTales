@@ -11,7 +11,8 @@ class Dashboard extends React.Component {
 
   render() {
     // Import mock data
-    this.usersData = require("./../../data/users.json");
+    this.stories = this.props.app.state.stories;
+    this.users = this.props.app.state.users;
 
     return (
       <div className="dashboard">
@@ -19,7 +20,7 @@ class Dashboard extends React.Component {
           <div className="header">
             <AppName></AppName>
           </div>
-          <DashboardMenu></DashboardMenu>
+          <DashboardMenu app={this.props.app}></DashboardMenu>
         </span>
 
         <span className="dashboardDivider">
@@ -28,7 +29,7 @@ class Dashboard extends React.Component {
         <span className="dashboardRight">
           <div className="userIconContainer">
             <div className="userIconContainer">
-              <UserIcon icon="avatar01.png" username="Welcome back, gazi!" />
+              <UserIcon icon="avatar01.png" username={"Welcome back, " + this.props.app.state.currUser.username + "!"} />
             </div>
           </div>
           <div className="storiesNavigation">

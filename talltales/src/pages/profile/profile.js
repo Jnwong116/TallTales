@@ -10,10 +10,14 @@ import ChangeAvatar from "./changeAvatar.js";
 import "./profile.css";
 
 class Profile extends React.Component {
+  state = {
+    loading: true
+  }
 
   render() {
     // Import mock data
-    this.usersData = require("./../../data/users.json");
+    this.stories = this.props.app.state.stories;
+    this.users = this.props.app.state.users;
 
     return (
       <div className="profile">
@@ -21,7 +25,7 @@ class Profile extends React.Component {
           <div className="header">
             <AppName />
           </div>
-            <ProfileMenu />
+            <ProfileMenu app={this.props.app}/>
         </span>
 
         <span className="profileDivider">
@@ -30,15 +34,20 @@ class Profile extends React.Component {
         <span className="profileRight">
           <div className="profileInterface">
             <div className="profileAvatarContainer">
-              <UserIcon icon="avatar01.png" username="UserName" />
+              <UserIcon icon={this.props.app.state.currUser.icon} username={this.props.app.state.currUser.username} />
             </div>
             <div className="profileInterfaceDivider" />
 
-              <ChangeNothing />
-              {/*<ChangeName />*/}
-              {/*<ChangePassword />*/}
-              {/*<ChangeAvatar />*/}
-
+              {
+                this.props.app.state.page === 6 ? <ChangeNothing app={this.props.app} parent={this} /> :
+                (
+                  this.props.app.state.page === 7 ? <ChangeName app={this.props.app} parent={this} /> :
+                  (
+                    this.props.app.state.page === 8 ? <ChangePassword app={this.props.app} parent={this} /> :
+                    <ChangeAvatar app={this.props.app} parent={this} />
+                  )
+                )
+              }
           </div>
         </span>
       </div>

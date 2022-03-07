@@ -2,31 +2,34 @@ import React from "react";
 import Button from "../button/button.js";
 import "./dashboardMenu.css";
 
+import { menuRedirect, logout } from "../../actions/dashboard/menu.js";
+
 class DashboardMenu extends React.Component {
   render() {
     // Import mock data
-    this.usersData = require("./../../data/users.json");
+    this.stories = this.props.app.state.stories;
+    this.users = this.props.app.state.users;
 
-    return (
-      <span className="dashboardMenu">
-        <Button text="HOST NEW GAME"
-                handleClick={() => {
-                this.handleClick(this.state);}} />
-        <Button text="JOIN GAME"
-                handleClick={() => {
-                this.handleClick(this.state);}} />
-        <Button text="HOW TO PLAY"
-                handleClick={() => {
-                this.handleClick(this.state);}} />
-        <Button text="PROFILE"
-                handleClick={() => {
-                this.handleClick(this.state);}} />
-        <Button text="LOG OUT"
-                handleClick={() => {
-                this.handleClick(this.state);}} />
-      </span>
-    )
-  }
+        return (
+        <span className="dashboardMenu">
+                <Button text="HOST NEW GAME"
+                        handleClick={() => {
+                        menuRedirect(this.props.app, 2)}} />
+                <Button text="JOIN GAME"
+                        handleClick={() => {
+                        menuRedirect(this.props.app, 2)}} />
+                <Button text="HOW TO PLAY"
+                        handleClick={() => {
+                        menuRedirect(this.props.app, 5)}} />
+                <Button text="PROFILE"
+                        handleClick={() => {
+                        menuRedirect(this.props.app, 6);}} />
+                <Button text="LOG OUT"
+                        handleClick={() => {
+                        logout(this.props.app)}} />
+        </span>
+        )
+        }
 }
 
 export default DashboardMenu

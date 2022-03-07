@@ -2,25 +2,28 @@ import React from "react";
 import Button from "../button/button.js";
 import "./dashboardMenu.css";
 
+import { menuRedirect } from "../../actions/dashboard/menu.js";
+
 class ProfileMenu extends React.Component {
   render() {
     // Import mock data
-    this.usersData = require("./../../data/users.json");
+    this.stories = this.props.app.state.stories;
+    this.users = this.props.app.state.users;
 
     return (
       <span className="dashboardMenu">
         <Button text="CHANGE USERNAME"
                 handleClick={() => {
-                this.handleClick(this.state);}} />
+                  menuRedirect(this.props.app, 7)}} />
         <Button text="CHANGE PASSWORD"
                 handleClick={() => {
-                this.handleClick(this.state);}} />
+                 menuRedirect(this.props.app, 8)}} />
         <Button text="CHANGE AVATAR"
                 handleClick={() => {
-                this.handleClick(this.state);}} />
+                 menuRedirect(this.props.app, 9)}} />
         <Button text="BACK"
                 handleClick={() => {
-                this.handleClick(this.state);}} />
+                  menuRedirect(this.props.app, 4)}} />
       </span>
     )
   }
