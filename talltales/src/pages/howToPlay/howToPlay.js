@@ -29,7 +29,7 @@ class Dashboard extends React.Component {
         <span className="dashboardRight">
           <div className="userIconContainer">
             <div className="userIconContainer">
-              <UserIcon icon="avatar01.png" username={"Welcome back, " + this.props.app.state.currUser.username + "!"} />
+              <UserIcon icon={this.props.app.state.currUser.icon} username={"Welcome back, " + this.props.app.state.currUser.username + "!"} />
             </div>
           </div>
           <div className="storiesNavigation">
