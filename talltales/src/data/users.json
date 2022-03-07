@@ -39,6 +39,26 @@
       "host": false,
       "currentSentence": ". . .",
       "stories": []
+    },
+    {
+        "username": "user",
+        "password": "user",
+        "score": 0,
+        "icon": "avatar01.png",
+        "raconteur": false,
+        "host": false,
+        "currentSentence": ". . .",
+        "stories": []
+    },
+    {
+        "username": "admin",
+        "password": "admin",
+        "score": 0,
+        "icon": "avatar02.png",
+        "raconteur": false,
+        "host": false,
+        "currentSentence": ". . .",
+        "stories": []
     }
   ],
   "inputs": [
