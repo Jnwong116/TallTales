@@ -115,3 +115,8 @@
   align-items: center;
   padding-left: 40px;
 }
+
+.checkMarkContainer:hover {
+    opacity: 50%;
+    cursor: pointer;
+  }
