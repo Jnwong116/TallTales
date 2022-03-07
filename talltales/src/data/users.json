@@ -7,7 +7,8 @@
       "icon": "avatar01.png",
       "raconteur": false,
       "host": true,
-      "currentSentence": ". . ."
+      "currentSentence": ". . .",
+      "stories": []
     },
     {
       "username": "jasper",
@@ -16,7 +17,8 @@
       "icon": "avatar02.png",
       "raconteur": true,
       "host": false,
-      "currentSentence": ". . ."
+      "currentSentence": ". . .",
+      "stories": []
     },
     {
       "username": "jordan",
@@ -25,7 +27,8 @@
       "icon": "avatar03.png",
       "raconteur": false,
       "host": false,
-      "currentSentence": ". . ."
+      "currentSentence": ". . .",
+      "stories": []
     },
     {
       "username": "chris",
@@ -34,7 +37,8 @@
       "icon": "avatar04.png",
       "raconteur": false,
       "host": false,
-      "currentSentence": ". . ."
+      "currentSentence": ". . .",
+      "stories": []
     }
   ],
   "inputs": [

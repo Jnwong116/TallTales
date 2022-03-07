@@ -4,7 +4,7 @@ import Button from "../../components/button/button.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
 import "./leaderboard.css"
 
-import { sortPlayers } from "../../actions/leaderboard/displayScores.js";
+import { sortPlayers, saveStory } from "../../actions/leaderboard/displayScores.js";
 
 class Leaderboard extends React.Component {
 
@@ -24,6 +24,8 @@ class Leaderboard extends React.Component {
             4: "leaderboard-player-3-4-5",
             5: "leaderboard-player-3-4-5"
         }
+
+        // console.log(this.props.app.state)
 
         return (
             <div className="leaderboard">
@@ -81,10 +83,11 @@ class Leaderboard extends React.Component {
                 <div className="your-score">
                     YOUR SCORE: <strong>{this.props.app.state.currUser.score}</strong>
                 </div>
-                <Button
-                    text="DONE"
-                    handleClick={() => {window.alert('back to dashboard')}}
-                ></Button>
+                <Button text="DONE" 
+                    handleClick={() => {
+                        saveStory(this.users, this.stories, this.props.app)
+                    }}
+                />               
             </div>    
         )
     }

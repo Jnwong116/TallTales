@@ -23,24 +23,22 @@ export const updatePrompt = (app) => {
           prompt: state.prompt + 1
         });
       }
+}
 
-      // let input = document.getElementById("user-input").value;
-      //   // Adds period to end of sentence if user hasn't.
-      //   if (input.charAt(input.length - 1) !== ".") {
-      //     input = input + ".";
-      //   }
-      //   stories.currStory.story =
-      //     stories.currStory.story + " " + input;
-      //   document.getElementById("user-input").value = "";
+export const resetGame = (app, stories, users) => {
+  // Resets the story
+  if (app.state.stage === 0 && app.state.prompt === 0) {
+    stories.currStory.start = stories.stories[0].starts[0];
+    stories.currStory.story = stories.currStory.start;
+    stories.currStory.contributions = [];
+
+    for (let i = 0; i < users.users.length; i++) {
+      users.users[i].score = 0;
+    }
+  }
 }
 
 export const displayPrompt = (app, stories) => {
-    // Resets the story
-    if (app.state.stage === 0 && app.state.prompt === 0) {
-      stories.currStory.start = stories.stories[0].starts[0];
-      stories.currStory.story = stories.currStory.start;
-    }
-
     switch (app.state.stage) {
         case 0:
           return stories.prompts[0].backstory[app.state.prompt];
@@ -72,7 +70,7 @@ export const isRaconteur = (app, currUser, users) => {
 export const storyComplete = (app) => {
   if (app.state.stage === 3) {
     app.setState({
-      page: 2
+      page: 3
     })
   }
 }

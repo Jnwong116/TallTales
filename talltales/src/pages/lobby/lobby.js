@@ -5,7 +5,7 @@ import DropDown from "../../components/dropDown/dropDown.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
 import "./lobby.css";
 
-import { Link } from "react-router-dom";
+import { redirect } from "../../actions/lobby/redirect.js";
 
 class Lobby extends React.Component {
   render() {
@@ -14,7 +14,7 @@ class Lobby extends React.Component {
       object => object.genre
     );
 
-    // console.log(this.props.app.state);
+    console.log(this.props.app.state);
 
     return (
       <div className="lobby">
@@ -39,21 +39,10 @@ class Lobby extends React.Component {
             </div>
           </div>
         </div>
-        <Link to={{
-          pathname: '/game',
-          state: {
-            currUser: this.props.app.state.currUser,
-            users: this.props.app.state.users,
-            stories: this.props.app.state.stories
-          }
-        }} className="link">
-          <Button
-            text="START GAME"
-            // handleClick={() => {
-            //   this.handleClick(this.state);
-            // }}
-          ></Button>
-        </Link>
+        <Button
+          text="START GAME"
+          handleClick={() => {redirect(this.props.app)}}
+        ></Button>
       </div>
     );
   }

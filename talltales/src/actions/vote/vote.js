@@ -49,7 +49,7 @@ export const AIVote = (users, stories, raconteur, app, page) => {
         })
         // document.getElementsByClassName("story-current")[0].childNodes[0].nodeValue = stories.currStory.story;
 
-        console.log(vote);
+        // console.log(vote);
 
         setTimeout(() => {
             stories.currStory.story = stories.currStory.story + " " + input;

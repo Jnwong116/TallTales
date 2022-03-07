@@ -5,7 +5,7 @@ import Score from "../../components/score/score.js";
 import Story from "../../components/story/story.js";
 import UserInput from "../../components/userInput/userInput.js";
 
-import { displayPrompt, isRaconteur, storyComplete } from "../../actions/prompt/displayPrompt.js";
+import { displayPrompt, isRaconteur, storyComplete, resetGame } from "../../actions/prompt/displayPrompt.js";
 import { saveInput } from "../../actions/input/input.js";
 
 import "./inputStage.css";
@@ -15,6 +15,11 @@ class InputStage extends React.Component {
     // Import mock data
     this.stories = this.props.app.state.stories; // Change to match the actual genre
     this.users = this.props.app.state.users;
+
+    // console.log(this.props.app)
+
+    // Resets story if needed
+    resetGame(this.props.app, this.stories, this.users);
 
     // Checks if story is complete
     storyComplete(this.props.app);
