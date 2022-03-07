@@ -1,5 +1,4 @@
-# team19
-## (Chris, Gazi, Jasper, Jordan)
+# team19 (Chris, Gazi, Jasper, Jordan)
 
 GENERAL GAME DESCRIPTION
 ========================
@@ -93,3 +92,4 @@ We've coded the app using React, so all that's needed to get it to run is to pul
 	Once the game has concluded, we have a final screen displaying each player's score, where the user with the highest score is displayed most prominently. We are also displaying the story one more time for all to see. We can click the `DONE` button to indicate that we've finished playing. This takes us back to the dashboard.
 
 THANK YOU FOR CHECKING OUT OUR GAME :-)
+=======================================
