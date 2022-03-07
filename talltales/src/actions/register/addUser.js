@@ -35,7 +35,8 @@ export const addUser = (app, users) => {
         "sentence": "",
         "raconteur": false,
         "host": false,
-        "currentSentence": ""
+        "currentSentence": "",
+        "stories": []
     }
 
     // Requires server call to add new user to database
