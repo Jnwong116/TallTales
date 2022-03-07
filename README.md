@@ -18,7 +18,8 @@ We have set up a number of users to demo the app more convincingly. They are lis
 Of course, new users are also able to create their own accounts. More on that later.
 
 DATA INFORMATION
-==================
+================
+
 For the purposes of Phase 1, we hard-coded mock data into our json files so that we would not have to copy and paste the same mock data into every game page. With our implemention, we update the data used in our game by passing in modified data through the React app states. Note that we did not save or change the actual json files, as instructed in the Phase 1 handout.
 
 USAGE INSTRUCTIONS
@@ -40,7 +41,7 @@ We've coded the app using React, so all that's needed to get it to run is to pul
 
 	Users are asked to enter a new username and password, and click the `CONFIRM REGISTRATION` link. This will temporarily add a new user to our javascript database (to be upgraded to a real database at a later stage), and bring the user back to the Login page, where they must enter their new credential to proceed. The program will check that neither the username nor password is empty, and that the username is not already taken.
 	
-	For testing: If you test registering an account, make sure you login with that exact account. If you accidentally register 2 accounts or register an account and log in with a different account, refresh the app so that the game can be testing properly.
+	For testing: If you test registering an account, make sure you login with that exact account. If you accidentally register 2 accounts or register an account and log in with a different account, refresh the app to reset the data, so that the game can be tested properly.
 
  3. Dashboard
 
@@ -70,7 +71,7 @@ We've coded the app using React, so all that's needed to get it to run is to pul
 
 	The lobby displays all currently logged in users. Since we haven't implemented concurrency yet, this is currently done via mock data. Only one user may host a game at a time. Here we are prompted to select the story genre (currently only Adventure and Mystery are available, though we may add more genres further down the line) that we want our prompts to be about. Once that's done, we can click `Start Game` to proceed to the Gameplay View.
 
-	Note: For phase 1, admin will always be the game host.
+	Note: For phase 1, admin will always be the game host. The admin/host has additional privileges over normal players. For instance, they can change the the story genre. 
 
 10. Gameplay View (Join Game)
 	
@@ -78,7 +79,7 @@ We've coded the app using React, so all that's needed to get it to run is to pul
 
 	The gameplay view features a score in the top-right corner, which keeps track of the current player's score. In the middle of the screen we have our story thus far, which begins with a pre-generated snippet from our mock database. The player is given a prompt, starting with the backstory, and they are prompted to type in their sentence in the input field labeled `OKAY AND THEN...`. Once they've done so, they can click the `SUBMIT` button. After every player has submitted their sentence, the game will select a Raconteur, who will select their favorite submission to be chosen for formal addition to the story. (We are currently simulating this via rudimentary AI coded in Javascript.) The Raconteur will be identified by the text `USER's turn`, where USER is the current Raconteur. The current user will also see the chosen sentence via interface cues. The winning sentence is then added to the story and the winning player's score is increased. From there, a new round begins. 
 		
-    For testing: Type a random sentence when the game prompts you to. Click submit and play out the game!
+    For testing: Type a random sentence when the game prompts you to. Click submit, repeat, and play out the game!
 
     10.2. As a Raconteur
 
