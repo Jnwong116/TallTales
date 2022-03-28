@@ -19,6 +19,6 @@ export const saveStory = (users, stories, app) => {
     }
 
     app.setState({
-        page: 2
+        page: 4
     })
 }
