@@ -4,7 +4,8 @@
   "main": "server.js",
   "scripts": {
     "setup": "npm install && cd client && npm install && npm run build && cd ..",
-    "start": "node server.js"
+    "start": "nodemon server.js",
+    "heroku-postbuild": "npm run setup"
   },
   "author": "",
   "dependencies": {
