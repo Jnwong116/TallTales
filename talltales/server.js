@@ -22,9 +22,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "/client/build")));
 
 const userRouter = require('./routes/users');
+const storyRouter = require('./routes/stories');
 
 app.use('/users', userRouter);
-
+app.use('/stories', storyRouter);
 
 app.get("*", (req, res) => {
     const pageRoutes = ["/"];
