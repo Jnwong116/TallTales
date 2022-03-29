@@ -10,7 +10,8 @@ const userSchema = new Schema({
     host: {type: Boolean, default: false},
     currentSentence: {type: String, default: ". . ."},
     stories: {type: Array, default: []},
-    prompts: {type: Array, default: []}
+    prompts: {type: Array, default: []},
+    admin: {type: Boolean, required: true, default: false}
 })
 
 const User = mongoose.model('User', userSchema);

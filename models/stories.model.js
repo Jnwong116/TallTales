@@ -10,13 +10,18 @@ const promptSchema = new Schema({
 const genreSchema = new Schema({
     genre: {type: String, required: true},
     starts: {type: Array, required: true, default: []},
-    prompts: {type: Array, required: true, default: []}
+    prompts: {type: [promptSchema], required: true, default: []}
+})
+
+const contributionSchema = new Schema({
+    username: {type: String, required: true},
+    sentence: {type: String, required: true}
 })
 
 const currStorySchema = new Schema({
     start: {type: String, required: true},
     story: {type: String, default: ""},
-    contributions: {type: Array, default: []}
+    contributions: {type: [contributionSchema], default: []}
 })
 
 const Genre = mongoose.model('Genre', genreSchema);
