@@ -19,6 +19,7 @@
     "express-session": "^1.17.2",
     "mongodb": "^4.4.1",
     "mongoose": "^6.2.9",
+    "nodemon": "^2.0.15",
     "validator": "^13.7.0"
   },
   "license": "ISC",
