@@ -25,7 +25,6 @@ const currStorySchema = new Schema({
 })
 
 const Genre = mongoose.model('Genre', genreSchema);
-const Prompt = mongoose.model('Prompt', promptSchema);
 const currStory = mongoose.model('currStory', currStorySchema);
 
-module.exports = { Genre, Prompt, currStory }
+module.exports = { Genre, currStory }
