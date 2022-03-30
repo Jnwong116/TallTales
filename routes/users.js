@@ -40,8 +40,11 @@ router.route('/login').post((req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    User.findOne({ username: username })
-    .then()
+    User.findByUsernamePassword(username, password)
+        .then(() => res.send({ currentUser: username, currentPassword: password}))
+        .catch(error => {
+            res.status(400).send(error);
+        })
 })
 
 module.exports = router;
