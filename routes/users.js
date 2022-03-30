@@ -29,4 +29,19 @@ router.route('/').get((req, res) => {
         });
 });
 
+// Login User
+/*
+    {
+        "username": <String>,
+        "password": <String>
+    }
+*/
+router.route('/login').post((req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    User.findOne({ username: username })
+    .then()
+})
+
 module.exports = router;
