@@ -22,8 +22,6 @@ const initialRows = (users.users.map((user) => ({
   isAdmin: user.isAdmin,
   gamesPlayed: user.gamesPlayed,
   highScore: user.highScore,
-  resetPassword: () => <RestartAltIcon />,
-  deleteUser: () => <DeleteIcon />,
 })));
 
 function AdminBrowseUsers(props) {
@@ -37,10 +35,11 @@ function AdminBrowseUsers(props) {
     { field: 'highScore',     editable: true,  type: 'number',   headerName: 'High Score',     width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
     { field: 'divider',       editable: false, type: 'number',   headerName: '',                flex:   1, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
     { field: 'resetPassword', editable: false, type: 'actions',  headerName: 'Reset Pass',     width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator',
-      getActions: (params) => [ <GridActionsCellItem icon={<RestartAltIcon />} label="Delete" onClick={resetPassword(params.id)} />, ], },
+      getActions: (params) =>
+      [ <GridActionsCellItem icon={<RestartAltIcon />} label="Delete" onClick={resetPassword(params.id)} />, ], },
     { field: 'deleteUser',    editable: false, type: 'actions',  headerName: 'Delete User',    width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator',
-      getActions: (params) => [ <GridActionsCellItem icon={<DeleteIcon />} label="Delete" onClick={deleteUser(params.id)} />, ],
-    },
+      getActions: (params) =>
+      [ <GridActionsCellItem icon={<DeleteIcon />} label="Delete" onClick={deleteUser(params.id)} />, ], }
   ];
 
   const deleteUser = React.useCallback(
