@@ -3,9 +3,20 @@ const express = require("express")
 const log = console.log
 
 const router = express.Router();
+const app = express();
+
 const { ObjectID } = require('mongodb');
 
 const { User } = require('../models/user.model');
+
+
+app.use(
+    session({
+        secret: "thisisasecretkeyasdfkl",
+        resave: false,
+        saveUninitialized: false,
+    })
+)
 
 // Adds a User
 /*
@@ -46,11 +57,25 @@ router.route('/login').post((req, res) => {
     const password = req.body.password;
 
     User.findByUsernamePassword(username, password)
-        .then(() => res.send({ currentUser: username }))
+        .then(user => {
+            // Add the user's id to the session
+            req.session.userid = user._id;
+            req.session.username = user.username;
+            res.send({ currentUser: user.username });
+        })
         .catch(error => {
             res.status(400).send(error);
         })
 })
+
+// A route to check if a user is logged in on the session
+app.get("/check-session", (req, res) => {
+    if (req.session.user) {
+        res.send({ currentUser: req.session.username });
+    } else {
+        res.status(401).send();
+    }
+});
 
 
 // Gets all users
