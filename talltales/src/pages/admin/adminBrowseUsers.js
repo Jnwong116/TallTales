@@ -6,79 +6,99 @@ import AdminMenu from "../../components/dashboardMenu/adminMenu.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
 import "./dashboard.css";
 
+import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import Checkbox from '@mui/material/Checkbox';
-import { DataGrid } from '@mui/x-data-grid/DataGrid';
+
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const users = require("../../data/users.json");
 
-let id = 0;
+let count = 0;
 
-// const rows: GridRowsProp = [
-//   { id: 1, col1: 'Hello', col2: 'World' },
-//   { id: 2, col1: 'DataGridPro', col2: 'is Awesome' },
-//   { id: 3, col1: 'MUI', col2: 'is Amazing' },
-//   { id: 4, col1: 'MUI', col2: 'is Amazing' },
-//   { id: 5, col1: 'MUI', col2: 'is Amazing' },
-// ];
-
-const rows: GridRowsProps = (users.users.map((user) => ({
-  id: id++,
-  col1: user.username,
-  col2: () => <RestartAltIcon />,
-  col3: 'delete user',
-  col4: user.isAdmin,
+const initialRows = (users.users.map((user) => ({
+  id: count++,
+  username: user.username,
+  isAdmin: user.isAdmin,
+  gamesPlayed: user.gamesPlayed,
+  highScore: user.highScore,
+  resetPassword: () => <RestartAltIcon />,
+  deleteUser: () => <DeleteIcon />,
 })));
 
-const columns: GridColDef[] = [
-  { field: 'col1', editable: true, headerName: 'Username', width: 150, headerClassName: 'lastcolumnSeparator' },
-  { field: 'col2', headerName: 'Reset Password', width: 150, headerClassName: 'lastcolumnSeparator' },
-  { field: 'col3', headerName: 'Delete User', width: 150, headerClassName: 'lastcolumnSeparator' },
-  { field: 'col4', editable: true, type: 'boolean', headerName: 'Admin', width: 150, headerClassName: 'lastcolumnSeparator' },
-];
+function AdminBrowseUsers(props) {
 
+  const [rows, setRows] = React.useState(initialRows);
 
-class AdminBrowseUsers extends React.Component {
+  const columns: GridColDef[] = [
+    { field: 'username',      editable: true,  type: 'string',   headerName: 'Username',       width: 150, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
+    { field: 'isAdmin',       editable: true,  type: 'boolean',  headerName: 'Admin',          width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
+    { field: 'gamesPlayed',   editable: true,  type: 'number',   headerName: 'Games',          width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
+    { field: 'highScore',     editable: true,  type: 'number',   headerName: 'High Score',     width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
+    { field: 'divider',       editable: false, type: 'number',   headerName: '',               flex:  1,   headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
+    { field: 'resetPassword', editable: false, type: 'actions',  headerName: '', width: 50, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator',
+      getActions: (params) => [ <GridActionsCellItem icon={<RestartAltIcon />} label="Delete" onClick={resetPassword(params.id)} />, ], },
+    { field: 'deleteUser',    editable: false, type: 'actions',  headerName: '',    width: 50, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator',
+      getActions: (params) => [ <GridActionsCellItem icon={<DeleteIcon />} label="Delete" onClick={deleteUser(params.id)} />, ],
+    },
+  ];
 
-  render() {
-    // Import mock data
-    this.usersData = require("./../../data/users.json");
+  const deleteUser = React.useCallback(
+    (id) => () => {
+      setTimeout(() => {
+        setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+      });
+    },
+    [],
+  );
 
-    return (
-      <div className="dashboard">
-        <span className="dashboardLeft">
-          <div className="header">
-            <AppName></AppName>
-          </div>
-            <AdminMenu></AdminMenu>
-        </span>
+  const resetPassword = React.useCallback(
+    (id) => () => {
+      alert("Password reset!")
+    },
+    [],
+  );
 
-        <span className="dashboardDivider">
-        </span>
-
-        <span className="dashboardRight">
-
-        <div className="profileAvatarContainer">
-          <UserIcon icon={this.props.app.state.currUser.icon} username={this.props.app.state.currUser.username} />
+  return (
+    <div className="dashboard">
+      <span className="dashboardLeft">
+        <div className="header">
+          <AppName></AppName>
         </div>
+          <AdminMenu></AdminMenu>
+      </span>
 
-        <div className="adminContent">
-          <div style={{ display: 'flex', height: '100%',  width: '100%' }}>
-            <div style={{ flexGrow: 1 }}>
-              <DataGrid
-                rows={rows}
-                columns={columns}
-                experimentalFeatures={{ newEditingApi: true }}
-                autoHeight
-              />
-            </div>
-          </div>
-        </div>
+      <span className="dashboardDivider">
+      </span>
 
-        </span>
+      <span className="dashboardRight">
+
+      <div className="profileAvatarContainer">
+        <UserIcon icon={props.app.state.currUser.icon} username={props.app.state.currUser.username} />
       </div>
-    );
-  }
+
+      <div className="adminContent">
+        <div style={{ display: 'flex', height: '100%',  width: '100%' }}>
+          <div style={{ height: '526px', width:'100%' }}>  {/* used to be: 371px */}
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              experimentalFeatures={{ newEditingApi: true }}
+              rowsPerPageOptions={[8]}
+              initialState={{
+                pagination: {
+                  pageSize: 8,
+                },
+              }}
+              hideFooterSelectedRowCount= {true}
+            />
+          </div>
+        </div>
+      </div>
+
+      </span>
+    </div>
+  );
 }
 
 export default AdminBrowseUsers;

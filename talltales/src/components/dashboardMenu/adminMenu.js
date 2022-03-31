@@ -15,9 +15,6 @@ class AdminMenu extends React.Component {
         <Button text="BROWSE PROMPTS"
                 handleClick={() => {
                 this.handleClick(this.state);}} />
-        <Button text="RESET DATABASE"
-                handleClick={() => {
-                this.handleClick(this.state);}} />
         <Button text="LOG OUT"
                 handleClick={() => {
                 this.handleClick(this.state);}} />
