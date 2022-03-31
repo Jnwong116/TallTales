@@ -9,6 +9,7 @@ import Dashboard from "./pages/dashboard/dashboard"
 import HowToPlay from "./pages/howToPlay/howToPlay"
 import Profile from "./pages/profile/profile"
 import Leaderboard from "./pages/leaderboard/leaderboard";
+import AdminBrowseUsers from "./pages/admin/adminBrowseUsers";
 
 import React from "react";
 
@@ -38,22 +39,22 @@ class App extends React.Component {
         <Router>
           <Switch>
             <Route path="/">
-              {!this.state.currUser ? 
-                  (this.state.page === 0 ? <Route path="/" element={<Login app={this} />} /> : 
-                    <Route path="/" element={<Register app={this} />} /> ) : 
-                  (this.state.page === 2 ? <Route path="/" element={<Lobby app={this} />} /> : 
+              {!this.state.currUser ?
+                  (this.state.page === 0 ? <Route path="/" element={<Login app={this} />} /> :
+                    <Route path="/" element={<Register app={this} />} /> ) :
+                  (this.state.page === 2 ? <Route path="/" element={<Lobby app={this} />} /> :
                     (this.state.page === 0 ? <Route path="/" element={<InputStage app={this} />} /> :
                       (this.state.page === 1 ? <Route path="/" element={<VoteStage app={this} />} /> :
-                        (this.state.page === 4 ? <Route path="/" element={<Dashboard app={this} />} /> :
+                        (this.state.page === 4 ? <Route path="/" element={<AdminBrowseUsers app={this} />} /> :
                           (this.state.page === 5 ? <Route path="/" element={<HowToPlay app={this} />} /> :
                             (this.state.page === 3 ? <Route path="/" element={<Leaderboard app={this} />} />  :
-                              <Route path="/" element={<Profile app={this} />} /> 
+                              <Route path="/" element={<Profile app={this} />} />
                             )
                         )
                       )
                     )
                   )
-                )   
+                )
               }
             </Route>
             {/* <Route path="/game">
