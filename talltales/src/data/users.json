@@ -8,7 +8,8 @@
       "raconteur": false,
       "host": true,
       "currentSentence": ". . .",
-      "stories": []
+      "stories": [],
+      "isAdmin": true
     },
     {
       "username": "user",
@@ -18,7 +19,8 @@
       "raconteur": true,
       "host": false,
       "currentSentence": ". . .",
-      "stories": []
+      "stories": [],
+      "isAdmin": false
     },
     {
       "username": "jordan",
@@ -28,7 +30,8 @@
       "raconteur": false,
       "host": false,
       "currentSentence": ". . .",
-      "stories": []
+      "stories": [],
+      "isAdmin": false
     },
     {
       "username": "chris",
@@ -38,14 +41,15 @@
       "raconteur": false,
       "host": false,
       "currentSentence": ". . .",
-      "stories": []
+      "stories": [],
+      "isAdmin": false
     }
   ],
   "inputs": [
     {
         "user": "gazi",
         "inputs": [
-            "This is all happening on a fishing boat in northern Canada.", 
+            "This is all happening on a fishing boat in northern Canada.",
             "Gazi and Jasper watch on, bemused.",
             "No one thought to bring a can opener with them.",
             "Chris reminds everyone he's on a plant-based diet.",
@@ -60,7 +64,7 @@
     {
         "user": "jasper",
         "inputs": [
-            "Our story begins in an empty grocery store, in the midst of a zombie apocalypse.", 
+            "Our story begins in an empty grocery store, in the midst of a zombie apocalypse.",
             "Gazi and Jasper return from frozen aisle, confirming that they have 2 remaining days of food rations.",
             "There was not a can opener in sight.",
             "Jordan shouts in excitement, he spots pack of perfectly packed Twinkies.",
@@ -75,7 +79,7 @@
     {
         "user": "jordan",
         "inputs": [
-            "The snow continues falling, piling around the the cabin that Chris and Jordan find themselves trapped in.", 
+            "The snow continues falling, piling around the the cabin that Chris and Jordan find themselves trapped in.",
             "Out of nowhere, Jasper climbs out of the chimney and Gazi walks out of a bedroom. They have been trapped as well.",
             "Our newly formed group starts to panic, realizing that their food rations will not feed all 4 of them.",
             "Instantly, Jordan leaps to horde the cans of food, convinced that expired pet food is better than no food.",
@@ -90,7 +94,7 @@
     {
         "user": "chris",
         "inputs": [
-            "Chris and Jordan stand in front of their kitchen table, determined to win their upcoming science fair with their canned food transformer.", 
+            "Chris and Jordan stand in front of their kitchen table, determined to win their upcoming science fair with their canned food transformer.",
             "Gazi and Jasper patiently sit across from them, excited to taste test what their friends' invention has made.",
             "Jasper takes a can and opens it. He brings a spoonful of goo to his mouth.",
             "Jasper screams. The food starts to turn him into a werewolf.",
