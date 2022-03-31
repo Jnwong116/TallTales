@@ -9,7 +9,9 @@
       "host": true,
       "currentSentence": ". . .",
       "stories": [],
-      "isAdmin": true
+      "isAdmin": true,
+      "gamesPlayed": 12,
+      "highScore": 250
     },
     {
       "username": "user",
@@ -20,7 +22,9 @@
       "host": false,
       "currentSentence": ". . .",
       "stories": [],
-      "isAdmin": false
+      "isAdmin": false,
+      "gamesPlayed": 5,
+      "highScore": 360
     },
     {
       "username": "jordan",
@@ -31,7 +35,9 @@
       "host": false,
       "currentSentence": ". . .",
       "stories": [],
-      "isAdmin": false
+      "isAdmin": true,
+      "gamesPlayed": 8,
+      "highScore": 190
     },
     {
       "username": "chris",
@@ -42,7 +48,83 @@
       "host": false,
       "currentSentence": ". . .",
       "stories": [],
-      "isAdmin": false
+      "isAdmin": true,
+      "gamesPlayed": 3,
+      "highScore": 870
+    },
+    {
+      "username": "jasper",
+      "password": "jasper",
+      "score": 0,
+      "icon": "avatar01.png",
+      "raconteur": false,
+      "host": false,
+      "currentSentence": ". . .",
+      "stories": [],
+      "isAdmin": true,
+      "gamesPlayed": 1,
+      "highScore": 400
+    },
+    {
+      "username": "gazi",
+      "password": "gazi",
+      "score": 0,
+      "icon": "avatar02.png",
+      "raconteur": false,
+      "host": false,
+      "currentSentence": ". . .",
+      "stories": [],
+      "isAdmin": true,
+      "gamesPlayed": 57,
+      "highScore": 220
+    },
+    {
+      "username": "chrisee",
+      "isAdmin": false,
+      "gamesPlayed": 23,
+      "highScore": 220
+    },
+    {
+      "username": "seiken",
+      "isAdmin": false,
+      "gamesPlayed": 5,
+      "highScore": 413
+    },
+    {
+      "username": "angie",
+      "isAdmin": false,
+      "gamesPlayed": 13,
+      "highScore": 250
+    },
+    {
+      "username": "fenil",
+      "isAdmin": true,
+      "gamesPlayed": 42,
+      "highScore": 280
+    },
+    {
+      "username": "saad",
+      "isAdmin": true,
+      "gamesPlayed": 69,
+      "highScore": 100
+    },
+    {
+      "username": "anna",
+      "isAdmin": false,
+      "gamesPlayed": 10,
+      "highScore": 320
+    },
+    {
+      "username": "cordelia",
+      "isAdmin": false,
+      "gamesPlayed": 4,
+      "highScore": 500
+    },
+    {
+      "username": "thom",
+      "isAdmin": false,
+      "gamesPlayed": 124,
+      "highScore": 420
     }
   ],
   "inputs": [
@@ -93,6 +175,36 @@
     },
     {
         "user": "chris",
+        "inputs": [
+            "Chris and Jordan stand in front of their kitchen table, determined to win their upcoming science fair with their canned food transformer.",
+            "Gazi and Jasper patiently sit across from them, excited to taste test what their friends' invention has made.",
+            "Jasper takes a can and opens it. He brings a spoonful of goo to his mouth.",
+            "Jasper screams. The food starts to turn him into a werewolf.",
+            "As if his body is moving on its own, the werewolf slashes at Jordan, causing a gash on Jordan's arm.",
+            "A rat falls from above.",
+            "The werewolf takes a look at the rat and reaches for it. He puts it in his mouth.",
+            "The werewolf howls as if ingesting the rat has caused it an immense amount of pain.",
+            "All of a sudden, the werewolf transforms back to Jasper's human form. It appears that eating a rat will reverse the effects of the werewolf transformation.",
+            "Chris and Jordan went on to win the upcoming science fair for presenting their new werewolf transformer."
+        ]
+    },
+    {
+        "user": "jasper",
+        "inputs": [
+            "Chris and Jordan stand in front of their kitchen table, determined to win their upcoming science fair with their canned food transformer.",
+            "Gazi and Jasper patiently sit across from them, excited to taste test what their friends' invention has made.",
+            "Jasper takes a can and opens it. He brings a spoonful of goo to his mouth.",
+            "Jasper screams. The food starts to turn him into a werewolf.",
+            "As if his body is moving on its own, the werewolf slashes at Jordan, causing a gash on Jordan's arm.",
+            "A rat falls from above.",
+            "The werewolf takes a look at the rat and reaches for it. He puts it in his mouth.",
+            "The werewolf howls as if ingesting the rat has caused it an immense amount of pain.",
+            "All of a sudden, the werewolf transforms back to Jasper's human form. It appears that eating a rat will reverse the effects of the werewolf transformation.",
+            "Chris and Jordan went on to win the upcoming science fair for presenting their new werewolf transformer."
+        ]
+    },
+    {
+        "user": "gazi",
         "inputs": [
             "Chris and Jordan stand in front of their kitchen table, determined to win their upcoming science fair with their canned food transformer.",
             "Gazi and Jasper patiently sit across from them, excited to taste test what their friends' invention has made.",
