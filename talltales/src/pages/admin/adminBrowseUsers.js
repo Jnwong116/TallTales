@@ -35,10 +35,10 @@ function AdminBrowseUsers(props) {
     { field: 'isAdmin',       editable: true,  type: 'boolean',  headerName: 'Admin',          width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
     { field: 'gamesPlayed',   editable: true,  type: 'number',   headerName: 'Games',          width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
     { field: 'highScore',     editable: true,  type: 'number',   headerName: 'High Score',     width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
-    { field: 'divider',       editable: false, type: 'number',   headerName: '',               flex:  1,   headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
-    { field: 'resetPassword', editable: false, type: 'actions',  headerName: '', width: 50, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator',
+    { field: 'divider',       editable: false, type: 'number',   headerName: '',                flex:   1, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
+    { field: 'resetPassword', editable: false, type: 'actions',  headerName: 'Reset Pass',     width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator',
       getActions: (params) => [ <GridActionsCellItem icon={<RestartAltIcon />} label="Delete" onClick={resetPassword(params.id)} />, ], },
-    { field: 'deleteUser',    editable: false, type: 'actions',  headerName: '',    width: 50, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator',
+    { field: 'deleteUser',    editable: false, type: 'actions',  headerName: 'Delete User',    width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator',
       getActions: (params) => [ <GridActionsCellItem icon={<DeleteIcon />} label="Delete" onClick={deleteUser(params.id)} />, ],
     },
   ];
