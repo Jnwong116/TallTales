@@ -57,6 +57,10 @@ router.route('/genre/:genre').get((req, res) => {
 
     Genre.findOne({genre: genre})
         .then((result) => {
+            if (!result) {
+                res.status(404).send('Genre not found');
+                return;
+            }
             res.send(result);
         })
         .catch(err => {
@@ -71,6 +75,10 @@ router.route('/genre/:genre/').delete((req, res) => {
 
     Genre.findOneAndDelete({genre: genre})
         .then((result) => {
+            if (!result) {
+                res.status(404).send('Genre not found');
+                return;
+            }
             res.send(result);
         })
         .catch(err => {
@@ -93,7 +101,7 @@ router.route('/genre/:genre/starts').delete(async (req, res) => {
 
     // Checks to make sure it exists
     if (curGenre === null) {
-        res.status(404).send('Resource not found');
+        res.status(404).send('Genre not found');
         return;
     }
 
@@ -130,7 +138,7 @@ router.route('/prompt/:genre').post(async (req, res) => {
 
     // Checks to make sure it exists
     if (curGenre === null) {
-        res.status(404).send('Resource not found');
+        res.status(404).send('Genre not found');
         return;
     }
 
@@ -154,7 +162,7 @@ router.route('/prompt/:genre').get(async (req, res) => {
 
     // Checks to make sure it exists
     if (curGenre === null) {
-        res.status(404).send('Resource not found');
+        res.status(404).send('Genre not found');
         return;
     }
 
@@ -177,7 +185,7 @@ router.route('/prompt/:genre/').delete(async (req, res) => {
 
     // Checks to make sure it exists
     if (curGenre === null) {
-        res.status(404).send('Resource not found');
+        res.status(404).send('Genre not found');
         return;
     }
 
@@ -197,6 +205,7 @@ router.route('/prompt/:genre/').delete(async (req, res) => {
             return;
         }
     }
+    res.status(404).send('Prompt not found');
 });
 
 
@@ -210,6 +219,10 @@ router.route('/prompt/:genre/').delete(async (req, res) => {
 router.route('/story').get((req, res) => {
     currStory.find()
         .then((story) => {
+            if (!story) {
+                res.status(404).send('currStory not found');
+                return;
+            }
             res.json(story);
         })
         .catch((err) => {
@@ -261,7 +274,7 @@ router.route('/contribute').post(async (req, res) => {
 
     // Checks to make sure it exists
     if (curStory === null) {
-        res.status(404).send('Resource not found');
+        res.status(404).send('curStory not found');
         return;
     }
     
