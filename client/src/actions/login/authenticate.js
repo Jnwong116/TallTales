@@ -1,4 +1,5 @@
 // const log = console.log
+import { errorToast } from "../../actions/toastify/toastify.js";
 
 export const login = (app, users) => {
   // Gets passed in array of users from database
@@ -10,8 +11,8 @@ export const login = (app, users) => {
   );
 
   if(!targetUser.length) {
-      window.alert("Username does not exist :(");
-      return;
+    errorToast("username does not exist!");
+    return;
   }
 
   // Requires server call to authenticate user and make sure the password is the same as in the server
@@ -21,7 +22,7 @@ export const login = (app, users) => {
       page: 4
     });
   } else {
-    window.alert("Password invalid :(");
+    errorToast("password invalid!");
   }
 }
 

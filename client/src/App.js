@@ -9,6 +9,8 @@ import Dashboard from "./pages/dashboard/dashboard"
 import HowToPlay from "./pages/howToPlay/howToPlay"
 import Profile from "./pages/profile/profile"
 import Leaderboard from "./pages/leaderboard/leaderboard";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import React from "react";
 
@@ -17,6 +19,7 @@ import {
   Routes as Switch,
   Route
 } from "react-router-dom";
+// import { css } from "@emotion/react";
 
 // import data
 const users = require("./data/users.json");
@@ -70,7 +73,9 @@ class App extends React.Component {
 
             {/* <Route path="/leader" element={<Leaderboard app={this} />}></Route> */}
           </Switch>
+          <ToastContainer limit={1}/>
         </Router>
+
       </div>
     );
   }

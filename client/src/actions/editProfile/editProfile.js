@@ -1,10 +1,12 @@
+import { errorToast } from "../../actions/toastify/toastify.js";
+
 export const changeName = (users, app, page) => {
     // Gets passed in array of users from database
     const newName = document.getElementById('change-username').value;
     const currUser = app.state.currUser.username;
 
     if (newName === "") {
-        window.alert("Username can't be blank :O");
+        errorToast("username can't be blank!");
         return;    
     }
 
@@ -27,7 +29,7 @@ export const changePassword = (users, app, page) => {
     const currUser = app.state.currUser.username;
 
     if (newPass === "") {
-        window.alert("Password can't be blank :O");
+        errorToast("password can't be blank!");
         return;    
     }
 
