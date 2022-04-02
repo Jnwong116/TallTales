@@ -7,11 +7,6 @@ import { changeName } from "../../actions/editProfile/editProfile";
 
 class ChangeName extends React.Component {
   render() {
-    // Import mock data
-    // Requires server call to get list of stories and users from server
-    this.stories = this.props.app.state.stories;
-    this.users = this.props.app.state.users;
-
     return (
       <div className="changeUserDetailsInterface">
         <div className="profileInputSection">
@@ -27,7 +22,7 @@ class ChangeName extends React.Component {
         <div className="profileInputButton">
           <Button text="CHANGE USERNAME"
                   handleClick={() => {
-                  changeName(this.users, this.props.app, this.props.parent)}} />
+                  changeName(this.props.app, this.props.parent)}} />
         </div>
       </div>
     )

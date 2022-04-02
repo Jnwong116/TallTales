@@ -20,7 +20,7 @@ router.route('/register').post(async (req, res) => {
     let curUser = await User.findOne({username: req.body.username});
 
     if (curUser !== null) {
-        res.status(400).json('Username taken already');
+        res.status(400).send('Username taken already');
         return;
     }
 
@@ -48,6 +48,7 @@ router.route('/login').post((req, res) => {
     User.findByUsernamePassword(username, password)
         .then(() => res.send({ currentUser: username }))
         .catch(error => {
+            // log(error)
             res.status(400).send(error);
         })
 })

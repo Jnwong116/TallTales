@@ -11,7 +11,7 @@ const MongoStore = require("connect-mongo");
 const { ObjectID } = require("mongodb");
 
 const env = process.env.NODE_ENV;
-const port = process.env.PORT || 5008;
+const port = process.env.PORT || 5000;
 
 const app = require("express")();
 const server = require("http").createServer(app);

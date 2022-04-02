@@ -6,12 +6,13 @@
     "setup": "npm install && cd client && npm install && npm run build && cd ..",
     "start": "node server.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
-    "start-dev": "nodemon server.js"
+    "start-dev": "concurrently \"nodemon server\" \"cd client && npm start\""
   },
   "author": "",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.2",
+    "concurrently": "^7.0.0",
     "connect-mongo": "^4.6.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",

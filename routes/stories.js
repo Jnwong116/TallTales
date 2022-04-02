@@ -5,7 +5,7 @@ const log = console.log
 const router = express.Router();
 const { ObjectID } = require('mongodb');
 
-const { Genre, currStory } = require('../models/stories.model');
+const { Genre, Story } = require('../models/stories.model');
 
 // Adds a Genre/Start
 /*
@@ -211,16 +211,18 @@ router.route('/prompt/:genre/').delete(async (req, res) => {
 
 
 /*
----------------------------------------------- CurrStory
+---------------------------------------------- Story
 */
 
 
-// Gets currStory
-router.route('/story').get((req, res) => {
-    currStory.find()
+// Gets Story
+router.route('/story/:story').get((req, res) => {
+    const story = req.params.story;
+
+    Story.findById(story)
         .then((story) => {
             if (!story) {
-                res.status(404).send('currStory not found');
+                res.status(404).send('Story not found');
                 return;
             }
             res.json(story);
@@ -231,28 +233,16 @@ router.route('/story').get((req, res) => {
 });
 
 
-// Starts the currStory
+// Starts a new Story
 /*
-    Expects a start to the story
     {
         "start": <String>
     }
 */
 router.route('/start').post(async (req, res) => {
-    // Checks if theres a currStory in the DB already
+    const story = new Story(req.body);
 
-    let curStory = await currStory.findOne();
-    if (curStory === null) { // None exists
-        curStory = new currStory(req.body);
-    }
-
-    else { // Resets currStory
-        curStory.start = req.body.start;
-        curStory.story = req.body.start;
-        curStory.contributions = [];
-    }
-
-    curStory.save()
+    story.save()
         .then((result) => {
             res.send(result);
         })
@@ -269,12 +259,13 @@ router.route('/start').post(async (req, res) => {
         "sentence": <String>
     }
 */
-router.route('/contribute').post(async (req, res) => {
-    const curStory = await currStory.findOne();
+router.route('/contribute/:story').post(async (req, res) => {
+    const story = req.params.story;
+    const curStory = await Story.findById(story);
 
     // Checks to make sure it exists
     if (curStory === null) {
-        res.status(404).send('curStory not found');
+        res.status(404).send('Story not found');
         return;
     }
     

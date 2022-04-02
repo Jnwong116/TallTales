@@ -48,8 +48,12 @@ export const addUser = (app, users) => {
         }
 
         else {
-            window.alert('Username was taken already');
+            // window.alert('Username was taken already');
+            return res.text();
         }
+    })
+    .then((errMessage) => {
+        window.alert(errMessage);
     })
     .catch(err => {
         log(err);
