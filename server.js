@@ -10,7 +10,7 @@ const { mongoose } = require("./db/mongoose");
 const MongoStore = require("connect-mongo");
 const { ObjectID } = require("mongodb");
 
-require('dotenv').config({ path: path.resolve(__dirname, '../config.env') });
+require("dotenv").config({ path: path.resolve(__dirname, "../config.env") });
 
 const env = process.env.NODE_ENV;
 const port = process.env.PORT;
@@ -47,8 +47,8 @@ app.get("*", (req, res) => {
 // HELPERS
 // TODO: Move to utils
 
-const users = [];
-const rooms = {
+let users = [];
+let rooms = {
   room1: [],
   room2: [],
   room3: [],
@@ -81,12 +81,6 @@ function userLeave(id) {
 }
 
 io.on("connection", socket => {
-  // User has joined
-  socket.broadcast.emit("message", "User has joined");
-  socket.on("disconnect", () => {
-    io.emit("message", "User has exited");
-  });
-
   // Join user to room
   socket.on("join-room", ({ user, room }) => {
     const currUser = userJoin(
@@ -104,6 +98,10 @@ io.on("connection", socket => {
       users: getRoomUsers(currUser.room),
       rooms: rooms
     });
+  });
+
+  socket.on("change-host", changedUsers => {
+    users = changedUsers;
   });
 
   // Runs when client disconnects

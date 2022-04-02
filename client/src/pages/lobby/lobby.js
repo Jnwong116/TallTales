@@ -3,7 +3,7 @@ import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
 import DropDown from "../../components/dropDown/dropDown.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
-import ENV from './../../config.js';
+import ENV from "./../../config.js";
 import "./lobby.css";
 
 import { io } from "socket.io-client";
@@ -32,9 +32,10 @@ class Lobby extends React.Component {
           <AppName></AppName>
         </div>
         <div className="lobby-content">
-          {this.props.app.state.currUser.host ? (
+          {this.props.app.state.users[0].username ===
+          this.props.app.state.currUser ? (
             <div className="lobby-genre">
-              <DropDown items={genres}></DropDown>
+              <DropDown app={this.props.app} items={genres}></DropDown>
             </div>
           ) : (
             <span></span>
@@ -54,12 +55,17 @@ class Lobby extends React.Component {
             </div>
           </div>
         </div>
-        <Button
-          text="START GAME"
-          handleClick={() => {
-            redirect(this.props.app);
-          }}
-        ></Button>
+        {this.props.app.state.users[0].username ===
+        this.props.app.state.currUser ? (
+          <Button
+            text="START GAME"
+            handleClick={() => {
+              redirect(this.props.app);
+            }}
+          ></Button>
+        ) : (
+          <></>
+        )}
       </div>
     );
   }
