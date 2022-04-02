@@ -9,15 +9,6 @@ const { ObjectID } = require('mongodb');
 
 const { User } = require('../models/user.model');
 
-
-app.use(
-    session({
-        secret: "thisisasecretkeyasdfkl",
-        resave: false,
-        saveUninitialized: false,
-    })
-)
-
 // Adds a User
 /*
     {
@@ -68,9 +59,21 @@ router.route('/login').post((req, res) => {
         })
 })
 
+router.route('/logout').get((req, res) => {
+    // Remove the session
+    req.session.destroy(error => {
+        if (error) {
+            res.status(500).send(error);
+        } else {
+            res.send();
+        }
+    });
+})
+
+
 // A route to check if a user is logged in on the session
 app.get("/check-session", (req, res) => {
-    if (req.session.user) {
+    if (req.session.userid) {
         res.send({ currentUser: req.session.username });
     } else {
         res.status(401).send();

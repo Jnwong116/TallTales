@@ -27,6 +27,14 @@ const storyRouter = require('./routes/stories');
 app.use('/users', userRouter);
 app.use('/stories', storyRouter);
 
+app.use(
+    session({
+        secret: "thisisasecretkeyasdfkl",
+        resave: false,
+        saveUninitialized: false,
+    })
+)
+
 app.get("*", (req, res) => {
     const pageRoutes = ["/"];
     if (!pageRoutes.includes(req.url)) {

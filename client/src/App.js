@@ -9,6 +9,7 @@ import Dashboard from "./pages/dashboard/dashboard"
 import HowToPlay from "./pages/howToPlay/howToPlay"
 import Profile from "./pages/profile/profile"
 import Leaderboard from "./pages/leaderboard/leaderboard";
+import { checkSession } from "./actions/checkSession/checkSession";
 
 import React from "react";
 
@@ -23,6 +24,11 @@ const users = require("./data/users.json");
 const stories = require("./data/stories.json");
 
 class App extends React.Component {
+    // Using session, check if user is logged in
+    componentDidMount() {
+        checkSession(this);
+    }
+
   state = {
     users: users,
     stories: stories,
