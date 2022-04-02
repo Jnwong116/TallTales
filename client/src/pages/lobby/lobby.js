@@ -23,7 +23,7 @@ class Lobby extends React.Component {
       object => object.genre
     );
 
-    console.log(this.props.app.state);
+    // console.log(this.props.app.state);
 
     return (
       <div className="lobby">

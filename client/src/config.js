@@ -1,6 +1,4 @@
-const { REACT_APP_MY_ENV } = process.env;
-
-const port = REACT_APP_MY_ENV.PORT;
+const port = 5000;
 
 const prod = {
     env: 'production',

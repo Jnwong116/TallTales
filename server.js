@@ -56,8 +56,8 @@ const rooms = {
 };
 
 // Join user to chat
-function userJoin(id, username, icon, password, score, host, room) {
-  const user = { id, username, icon, password, score, host, room };
+function userJoin(id, username, icon, score, host, room) {
+  const user = { id, username, icon, score, host, room };
 
   users.push(user);
   rooms[room].push(username);
@@ -93,7 +93,6 @@ io.on("connection", socket => {
       socket.id,
       user.username,
       user.icon,
-      user.password,
       user.score,
       user.host,
       room

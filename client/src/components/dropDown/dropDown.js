@@ -11,13 +11,20 @@ import {
   logout,
   startGame
 } from "../../actions/dashboard/menu.js";
+import { getUser } from "../../actions/global/users.js";
 
 class DropDown extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      selected: ""
-    };
+  state = {
+    selected: "",
+    user: {
+      username: "",
+      icon: "avatar01.png",
+      stories: []
+    }
+  }
+
+  componentDidMount() {
+    getUser(this, this.props.app);
   }
 
   render() {
@@ -25,6 +32,7 @@ class DropDown extends React.Component {
     const items = this.props.items;
     const label = this.props.label ? this.props.label : "<GENRE>";
     const user = this.props.user ? this.props.user : {};
+    // console.log(this.state.user);
 
     const handleChange = event => {
       this.setState({ selected: event.target.value });
@@ -32,13 +40,17 @@ class DropDown extends React.Component {
       if (user) {
         // User and room emit
         socket.emit("join-room", {
-          user: user,
+          user: {
+            username: this.state.user.username,
+            icon: this.state.user.icon,
+            score: 0,
+            host: false
+          },
           room: event.target.value
         });
         socket.on("room-users", ({ room, users, rooms }) => {
-          if (rooms[room].length == 1) {
+          if (rooms[room].length === 1) {
             users[0].host = true;
-            this.props.app.state.currUser.host = true;
           }
           this.props.app.setState({
             page: 2,
