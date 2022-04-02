@@ -1,17 +1,13 @@
 // const log = console.log
-
 export const login = (app, users) => {
   // Gets passed in array of users from database
   const currUserName = document.getElementById("user-name").value;
   const currPassword = document.getElementById("password").value;
+  const targetUser = users.users.filter(user => user.username === currUserName);
 
-  const targetUser = users.users.filter(
-    user => user.username === currUserName
-  );
-
-  if(!targetUser.length) {
-      window.alert("Username does not exist :(");
-      return;
+  if (!targetUser.length) {
+    window.alert("Username does not exist :(");
+    return;
   }
 
   // Requires server call to authenticate user and make sure the password is the same as in the server
@@ -23,10 +19,10 @@ export const login = (app, users) => {
   } else {
     window.alert("Password invalid :(");
   }
-}
+};
 
-export const register = (app) => {
+export const register = app => {
   app.setState({
     page: 1
-  })
-}
+  });
+};

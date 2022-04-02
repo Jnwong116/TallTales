@@ -25,6 +25,7 @@ class App extends React.Component {
   state = {
     users: users,
     stories: stories,
+    rooms: { room1: [], room2: [], room2: [] },
     currUser: null,
     page: 0,
     stage: 0,
