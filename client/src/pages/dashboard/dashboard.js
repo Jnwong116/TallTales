@@ -8,17 +8,22 @@ import DashboardMenu from "../../components/dashboardMenu/dashboardMenu.js";
 import "./dashboard.css";
 
 import { nextStory, prevStory } from "../../actions/dashboard/stories.js";
+import { getUser } from "../../actions/global/users.js";
 
 class Dashboard extends React.Component {
   state = {
-    story: 0
+    story: 0,
+    user: {
+      username: "",
+      icon: "avatar01.png",
+      stories: []
+    }
+  }
+
+  componentDidMount() {
+    getUser(this, this.props.app);
   }
   render() {
-    // Import mock data
-    // Requires server call to get list of stories and users from server
-    this.stories = this.props.app.state.stories;
-    this.users = this.props.app.state.users;
-
     return (
       <div className="dashboard">
         <span className="dashboardLeft">
@@ -34,30 +39,30 @@ class Dashboard extends React.Component {
         <span className="dashboardRight">
           <div className="userIconContainer">
             <div className="userIconContainer">
-              <UserIcon icon={this.props.app.state.currUser.icon} username={"Welcome back, " + this.props.app.state.currUser.username + "!"} />
+              <UserIcon icon={this.state.user.icon} username={"Welcome back, " + this.state.user.username + "!"} />
             </div>
           </div>
           <div className="storiesNavigation">
-            <span className="browseStoriesLeftArrow" onClick={() => {prevStory(this.state.story, this.props.app.state.currUser, this)}}>
+            <span className="browseStoriesLeftArrow" onClick={() => {prevStory(this.state.story, this.state.user, this)}}>
               <ArrowLeft />
             </span>
             <span className="browseStoriesHeader">
               {
-                this.props.app.state.currUser.stories.length === 0 ? 
+                this.state.user.stories.length === 0 ? 
                 "Completed Stories" :
-                "Completed Stories (" + (this.state.story + 1) + "/" + this.props.app.state.currUser.stories.length + ")"
+                "Completed Stories (" + (this.state.story + 1) + "/" + this.state.user.stories.length + ")"
               }
               
             </span>
-            <span className="browseStoriesRightArrow" onClick={() => {nextStory(this.state.story, this.props.app.state.currUser, this)}}>
+            <span className="browseStoriesRightArrow" onClick={() => {nextStory(this.state.story, this.state.user, this)}}>
               <ArrowRight />
             </span>
           </div>
           <div className="storiesDisplay">
             {
-              this.props.app.state.currUser.stories.length === 0 ? 
+              this.state.user.stories.length === 0 ? 
               "You have not completed any stories yet! Go play a game and come back to see your completed stories!" :
-              this.props.app.state.currUser.stories[this.state.story]
+              this.state.user.stories[this.state.story]
             }
           </div>
         </span>

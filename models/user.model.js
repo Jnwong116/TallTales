@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 
 const userSchema = new Schema({
     username: {type: String, required: true, minlength: 1, trim: true},
-    password: {type: String, required: true, minlength: 1, trim: true},
+    password: {type: String, required: true, minlength: 1, trim: true, select: false},
     icon: {type: String, required: true},
     // score: {type: Number, default: 0},
     // raconteur: {type: Boolean, default: false},
@@ -37,7 +37,8 @@ userSchema.statics.findByUsernamePassword = function(username, password) {
     const User = this;
 
     // Find if user's username exists
-    return User.findOne({ username: username }).then((user) => {
+    return User.findOne({ username: username }).select('+password')
+    .then((user) => {
         if(!user) {
             return Promise.reject('Username does not exist');
         }

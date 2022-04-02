@@ -9,16 +9,22 @@ import ChangePassword from "./changePassword.js";
 import ChangeAvatar from "./changeAvatar.js";
 import "./profile.css";
 
+import { getUser } from "../../actions/global/users.js";
+
 class Profile extends React.Component {
   state = {
-    loading: true
+    user: {
+      username: "",
+      icon: "avatar01.png",
+      stories: []
+    }
+  }
+
+  componentDidMount() {
+    getUser(this, this.props.app);
   }
 
   render() {
-    // Import mock data
-    this.stories = this.props.app.state.stories;
-    this.users = this.props.app.state.users;
-
     return (
       <div className="profile">
           <div className="profile-header">
@@ -34,7 +40,7 @@ class Profile extends React.Component {
         <div className="profileRight">
           <div className="profileInterface">
             <div className="profileAvatarContainer">
-              <UserIcon icon={this.props.app.state.currUser.icon} username={this.props.app.state.currUser.username} />
+              <UserIcon icon={this.state.user.icon} username={this.state.user.username} />
             </div>
             <div className="profileInterfaceDivider" />
               {

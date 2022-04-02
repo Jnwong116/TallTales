@@ -1,64 +1,161 @@
-export const changeName = (users, app, page) => {
+import ENV from './../../config.js';
+import { getUser } from '../global/users.js';
+
+const API_HOST = ENV.api_host;
+const log = console.log
+
+export const changeName = (app, page) => {
     // Gets passed in array of users from database
     const newName = document.getElementById('change-username').value;
-    const currUser = app.state.currUser.username;
+    const currUser = app.state.currUser;
 
     if (newName === "") {
         window.alert("Username can't be blank :O");
-        return;    
+        return;
     }
 
-    for (let i = 0; i < users.users.length; i++) {
-        if (users.users[i].username === currUser) {
-            // Requires server call to change user's username
-            users.users[i].username = newName;
+    const newUser = {
+        "username": newName
+    };
+
+    const url = `${API_HOST}/users/edit/username/${currUser}`;
+
+    const request = new Request(url, {
+        method: "post",
+        body: JSON.stringify(newUser),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
         }
-    }
+    });
 
-    page.setState({
-        loading: false
+    fetch(request)
+    .then((res) => {
+        if (res.status === 200) {
+            return res.json();
+        }
+        else {
+            return res.text();
+        }
     })
-
+    .then((result) => {
+        if (typeof(result) === 'object') {
+            app.setState({
+              currUser: result.username
+            });
+            getUser(page, app);
+            return;
+          }
+          else {
+            window.alert(result);
+            return;
+          }
+    })
+    .catch(err => {
+        log(err);
+    })
 }
 
-export const changePassword = (users, app, page) => {
-    // Gets passed in array of users from database
+export const changePassword = (app) => {
     const newPass = document.getElementById('change-password').value;
-    const currUser = app.state.currUser.username;
+    const currUser = app.state.currUser;
+
+    log(currUser)
 
     if (newPass === "") {
         window.alert("Password can't be blank :O");
         return;    
     }
 
-    for (let i = 0; i < users.users.length; i++) {
-        if (users.users[i].username === currUser) {
-            // Requires server call to change user's password
-            users.users[i].password = newPass;
-        }
+    const newUser = {
+        "password": newPass
     }
 
-    page.setState({
-        loading: false
-    })
+    const url = `${API_HOST}/users/edit/password/${currUser}`;
 
+    const request = new Request(url, {
+        method: "post",
+        body: JSON.stringify(newUser),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    });
+
+    fetch(request)
+    .then((res) => {
+        if (res.status === 200) {
+            return res.json();
+        }
+        else {
+            return res.text();
+        }
+    })
+    .then((result) => {
+        if (typeof(result) === 'object') {
+            app.setState({
+              currUser: result.username
+            });
+            return;
+          }
+          else {
+            window.alert(result);
+            return;
+          }
+    })
+    .catch(err => {
+        log(err);
+    })
 }
 
 export const changeAvatar = (users, app, page, avatar) => {
-    // Gets passed in array of users from database
-    const currUser = app.state.currUser.username;
+    const currUser = app.state.currUser;
 
-    for (let i = 0; i < users.users.length; i++) {
-        if (users.users[i].username === currUser) {
-            // Requires server call to change user's avatar
-            users.users[i].icon = avatar;
-        }
+    const newUser = {
+        "icon": avatar
     }
 
-    page.setState({
-        loading: false
-    })
+    const url = `${API_HOST}/users/edit/avatar/${currUser}`;
 
+    log(currUser);
+
+    const request = new Request(url, {
+        method: "post",
+        body: JSON.stringify(newUser),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    });
+
+    fetch(request)
+    .then((res) => {
+        if (res.status === 200) {
+            return res.json();
+        }
+        else {
+            return res.text();
+        }
+    })
+    .then((result) => {
+        if (typeof(result) === 'object') {
+            app.setState({
+              currUser: result.username
+            });
+            getUser(page, app);
+            // page.setState({
+            //     user: result
+            // })
+            return;
+          }
+          else {
+            window.alert(result);
+            return;
+          }
+    })
+    .catch(err => {
+        log(err);
+    })
 }
 
 export const prevAvatar = (avatar, page) => {
