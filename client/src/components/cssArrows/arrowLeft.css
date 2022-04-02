@@ -5,3 +5,8 @@
   border-bottom: 8px solid transparent;
   border-right: 8px solid
 }
+
+.arrowLeft:hover {
+    cursor: pointer;
+    opacity: 50%;
+}
