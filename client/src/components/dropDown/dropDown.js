@@ -4,6 +4,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { io } from "socket.io-client";
+import ENV from './../../config.js';
 import "./dropDown.css";
 import {
   menuRedirect,
@@ -20,7 +21,7 @@ class DropDown extends React.Component {
   }
 
   render() {
-    const socket = io("http://localhost:5008/");
+    const socket = io(ENV.api_host);
     const items = this.props.items;
     const label = this.props.label ? this.props.label : "<GENRE>";
     const user = this.props.user ? this.props.user : {};

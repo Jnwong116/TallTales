@@ -3,6 +3,7 @@ import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
 import DropDown from "../../components/dropDown/dropDown.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
+import ENV from './../../config.js';
 import "./lobby.css";
 
 import { io } from "socket.io-client";
@@ -11,7 +12,7 @@ import { redirect } from "../../actions/lobby/redirect.js";
 
 class Lobby extends React.Component {
   render() {
-    const socket = io("http://localhost:5008/");
+    const socket = io(ENV.api_host);
 
     socket.on("current-rooms", rooms => {
       console.log(rooms);

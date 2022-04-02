@@ -10,8 +10,10 @@ const { mongoose } = require("./db/mongoose");
 const MongoStore = require("connect-mongo");
 const { ObjectID } = require("mongodb");
 
+require('dotenv').config({ path: path.resolve(__dirname, '../config.env') });
+
 const env = process.env.NODE_ENV;
-const port = process.env.PORT || 5000;
+const port = process.env.PORT;
 
 const app = require("express")();
 const server = require("http").createServer(app);
