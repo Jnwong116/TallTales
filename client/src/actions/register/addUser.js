@@ -49,8 +49,11 @@ export const addUser = (app, users) => {
         }
 
         else {
-            errorToast("username is already taken!");
+            return res.text();
         }
+    })
+    .then((errMessage) => {
+        errorToast(errMessage);
     })
     .catch(err => {
         log(err);
