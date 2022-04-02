@@ -1,18 +1,20 @@
 import React from "react";
-import "./profile.css";
 import Button from "../../components/button/button.js";
 import TextField from "@mui/material/TextField";
 
-import { changeName } from "../../actions/editProfile/editProfile";
+import "./changePassword.css";
 
-class ChangeName extends React.Component {
+import { changePassword } from "../../actions/editProfile/editProfile";
+
+class ChangePassword extends React.Component {
+
   render() {
     return (
       <div className="changeUserDetailsInterface">
         <div className="profileInputSection">
-            <TextField
-                id="change-username"
-                label="<NEW-USERNAME>"
+          <TextField
+                id="change-password"
+                label="<NEW-PASSWORD>"
                 variant="filled"
                 margin="normal"
                 maxRows="1"
@@ -20,13 +22,13 @@ class ChangeName extends React.Component {
         </div>
 
         <div className="profileInputButton">
-          <Button text="CHANGE USERNAME"
+          <Button text="CHANGE PASSWORD"
                   handleClick={() => {
-                  changeName(this.props.app, this.props.parent)}} />
+                  changePassword(this.props.app)}} />
         </div>
       </div>
     )
   }
 }
 
-export default ChangeName;
+export default ChangePassword;

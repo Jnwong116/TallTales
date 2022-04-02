@@ -18,9 +18,6 @@ class DashboardMenu extends React.Component {
                 <Button text="JOIN GAME"
                         handleClick={() => {
                         startGame(false, this.users, this.props.app, 2)}} />
-                <Button text="HOW TO PLAY"
-                        handleClick={() => {
-                        menuRedirect(this.props.app, 5)}} />
                 <Button text="PROFILE"
                         handleClick={() => {
                         menuRedirect(this.props.app, 6);}} />

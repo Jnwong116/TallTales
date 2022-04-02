@@ -12,6 +12,10 @@ class ProfileMenu extends React.Component {
 
     return (
       <span className="dashboardMenu">
+        
+        <Button text="COMPLETED STORIES"
+                handleClick={() => {
+                  menuRedirect(this.props.app, 6)}} />
         <Button text="CHANGE USERNAME"
                 handleClick={() => {
                   menuRedirect(this.props.app, 7)}} />

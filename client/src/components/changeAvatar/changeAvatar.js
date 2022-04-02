@@ -1,9 +1,10 @@
 import React from "react";
-import "./profile.css";
 import UserAvatar from "../../components/userIcon/userAvatar.js";
 import ArrowLeft from "../../components/cssArrows/arrowLeft.js";
 import ArrowRight from "../../components/cssArrows/arrowRight.js";
 import Button from "../../components/button/button.js";
+
+import "./changeAvatar.css";
 
 import { changeAvatar, prevAvatar, nextAvatar } from "../../actions/editProfile/editProfile";
 
