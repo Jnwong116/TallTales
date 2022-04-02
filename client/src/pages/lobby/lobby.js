@@ -5,10 +5,17 @@ import DropDown from "../../components/dropDown/dropDown.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
 import "./lobby.css";
 
+import { io } from "socket.io-client";
+
 import { redirect } from "../../actions/lobby/redirect.js";
 
 class Lobby extends React.Component {
   render() {
+    const socket = io("http://localhost:5008/");
+
+    socket.on("current-rooms", rooms => {
+      console.log(rooms);
+    });
     // Array of genres
     // Requires server call to get list of stories and go through all genres
     const genres = this.props.app.state.stories.stories.map(
@@ -24,19 +31,19 @@ class Lobby extends React.Component {
           <AppName></AppName>
         </div>
         <div className="lobby-content">
-          {
-            this.props.app.state.currUser.host ? 
+          {this.props.app.state.currUser.host ? (
             <div className="lobby-genre">
               <DropDown items={genres}></DropDown>
-            </div> :
+            </div>
+          ) : (
             <span></span>
-          }
-          
+          )}
+
           <div className="lobby-column">
             <div className="lobby-header">LOBBY</div>
             <div className="lobby-players">
-              {this.props.app.state.users.users.map((e, i) => {
-                  const username = (e.host) ? e.username + " (h)": e.username;
+              {this.props.app.state.users.map((e, i) => {
+                const username = e.host ? e.username + " (h)" : e.username;
                 return (
                   <div key={i} className="lobby-player">
                     <UserIcon username={username} icon={e.icon}></UserIcon>
@@ -48,7 +55,9 @@ class Lobby extends React.Component {
         </div>
         <Button
           text="START GAME"
-          handleClick={() => {redirect(this.props.app)}}
+          handleClick={() => {
+            redirect(this.props.app);
+          }}
         ></Button>
       </div>
     );

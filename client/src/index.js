@@ -1,16 +1,8 @@
 import React from "react";
-import { io } from "socket.io-client";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-
-const socket = io("http://localhost:5008/");
-socket.on("connect", () => {
-  console.log("you connected bro!");
-});
-
-socket.emit("custom-event", 10, "Hi", { a: "a" });
 
 ReactDOM.render(
   <React.StrictMode>
