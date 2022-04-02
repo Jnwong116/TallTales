@@ -3,30 +3,69 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-
+import { io } from "socket.io-client";
+import ENV from './../../config.js';
 import "./dropDown.css";
+import {
+  menuRedirect,
+  logout,
+  startGame
+} from "../../actions/dashboard/menu.js";
+import { getUser } from "../../actions/global/users.js";
 
 class DropDown extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      genre: ""
-    };
+  state = {
+    selected: "",
+    user: {
+      username: "",
+      icon: "avatar01.png",
+      stories: []
+    }
+  }
+
+  componentDidMount() {
+    getUser(this, this.props.app);
   }
 
   render() {
-    const { items } = this.props;
+    const socket = io(ENV.api_host);
+    const items = this.props.items;
+    const label = this.props.label ? this.props.label : "<GENRE>";
+    const user = this.props.user ? this.props.user : {};
+    // console.log(this.state.user);
 
     const handleChange = event => {
-      this.setState({ genre: event.target.value });
+      this.setState({ selected: event.target.value });
+
+      if (user) {
+        // User and room emit
+        socket.emit("join-room", {
+          user: {
+            username: this.state.user.username,
+            icon: this.state.user.icon,
+            score: 0,
+            host: false
+          },
+          room: event.target.value
+        });
+        socket.on("room-users", ({ room, users, rooms }) => {
+          if (rooms[room].length === 1) {
+            users[0].host = true;
+          }
+          this.props.app.setState({
+            page: 2,
+            users: users
+          });
+        });
+      }
     };
 
     return (
       <FormControl fullWidth>
-        <InputLabel>{"<GENRE>"}</InputLabel>
+        <InputLabel>{label}</InputLabel>
         <Select
-          value={this.state.genre}
-          label="<GENRE>"
+          value={this.state.selected}
+          label={label}
           onChange={handleChange}
         >
           {" "}

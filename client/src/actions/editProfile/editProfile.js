@@ -47,7 +47,7 @@ export const changeName = (app, page) => {
             return;
           }
           else {
-            window.alert(result);
+            errorToast(result);
             return;
           }
     })
@@ -60,7 +60,7 @@ export const changePassword = (app) => {
     const newPass = document.getElementById('change-password').value;
     const currUser = app.state.currUser;
 
-    log(currUser)
+    // log(currUser)
 
     if (newPass === "") {
         errorToast("password can't be blank!");
@@ -99,7 +99,7 @@ export const changePassword = (app) => {
             return;
           }
           else {
-            window.alert(result);
+            errorToast(result);
             return;
           }
     })
@@ -149,7 +149,7 @@ export const changeAvatar = (users, app, page, avatar) => {
             return;
           }
           else {
-            window.alert(result);
+            errorToast(result);
             return;
           }
     })

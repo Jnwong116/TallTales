@@ -19,6 +19,7 @@ class Dashboard extends React.Component {
     getUser(this, this.props.app);
   }
   render() {
+    // console.log(this.props.app.state)
     return (
       <div className="dashboard">
         <span className="dashboardLeft">
