@@ -15,23 +15,22 @@ const { User } = require("../models/user.model");
         "icon": <String>
     }
 */
-router.route("/register").post(async (req, res) => {
-  // Checks if user exists already
-  let curUser = await User.findOne({ username: req.body.username });
+router.route('/register').post(async (req, res) => {
+    // Checks if user exists already
+    let curUser = await User.findOne({username: req.body.username});
 
-  if (curUser !== null) {
-    res.status(400).json("Username taken already");
-    return;
-  }
+    if (curUser !== null) {
+        res.status(400).send('Username taken already');
+        return;
+    }
 
-  const newUser = new User(req.body);
+    const newUser = new User(req.body)
 
-  newUser
-    .save()
-    .then(() => res.send(newUser))
-    .catch(err => {
-      res.status(400).json("Error: " + err);
-    });
+    newUser.save()
+        .then(() => res.send(newUser))
+        .catch(err => {
+            res.status(400).json('Error: ' + err);
+        });
 });
 
 // Login User

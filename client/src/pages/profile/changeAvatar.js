@@ -9,15 +9,10 @@ import { changeAvatar, prevAvatar, nextAvatar } from "../../actions/editProfile/
 
 class ChangeAvatar extends React.Component {
   state = {
-    avatar: this.props.app.state.currUser.icon
+    avatar: this.props.parent.state.user.icon
   }
 
   render() {
-    // Import mock data
-    // Requires server call to get list of stories and users from server
-    this.stories = this.props.app.state.stories;
-    this.users = this.props.app.state.users;
-
     return (
       <div className="changeAvatarInterface">
         <div className="changeAvatarBrowser">

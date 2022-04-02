@@ -18,13 +18,20 @@ const contributionSchema = new Schema({
     sentence: {type: String, required: true}
 })
 
-const currStorySchema = new Schema({
+const storySchema = new Schema({
     start: {type: String, required: true},
     story: {type: String, default: ""},
     contributions: {type: [contributionSchema], default: []}
 })
 
-const Genre = mongoose.model('Genre', genreSchema);
-const currStory = mongoose.model('currStory', currStorySchema);
+const roomSchema = new Schema({
+    code: {type: String, unique: true},
+    socket: {type: String, required: true},
+    story: {type: storySchema}
+})
 
-module.exports = { Genre, currStory }
+const Genre = mongoose.model('Genre', genreSchema);
+const Story = mongoose.model('Story', storySchema);
+const Room = mongoose.model('Room', roomSchema);
+
+module.exports = { Genre, Story, Room }
