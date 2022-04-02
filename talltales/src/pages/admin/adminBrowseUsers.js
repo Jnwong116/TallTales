@@ -30,7 +30,7 @@ function AdminBrowseUsers(props) {
   const columns: GridColDef[] = [
     { field: 'username',      editable: true,  type: 'string',   headerName: 'Username',       width: 150, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
     { field: 'isAdmin',       editable: true,  type: 'boolean',  headerName: 'Admin',          width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
-    { field: 'gamesPlayed',   editable: false,  type: 'number',   headerName: 'Games',          width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
+    { field: 'gamesPlayed',   editable: false, type: 'number',   headerName: 'Games',          width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
     { field: 'highScore',     editable: true,  type: 'number',   headerName: 'High Score',     width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
     { field: 'divider',       editable: false, type: 'number',   headerName: '',                flex:   1, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
     { field: 'resetPassword', editable: false, type: 'actions',  headerName: 'Reset Pass',     width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator',
