@@ -22,6 +22,7 @@ class UserLoginInput extends React.Component {
                    <TextField
                         id="password"
                         label="<password>"
+                        type="password"
                         variant="filled"
                         margin="normal"
                         maxRows="1"

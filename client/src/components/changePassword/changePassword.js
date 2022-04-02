@@ -15,6 +15,7 @@ class ChangePassword extends React.Component {
           <TextField
                 id="change-password"
                 label="<NEW-PASSWORD>"
+                type="password"
                 variant="filled"
                 margin="normal"
                 maxRows="1"
