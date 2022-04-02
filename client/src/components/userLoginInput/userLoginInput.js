@@ -6,8 +6,13 @@ import "./userLoginInput.css";
 
 class UserLoginInput extends React.Component {
     render() {
-        const { text } = this.props;
+        const { text, enterFunction } = this.props;
 
+        const onKeyUp = (enterFunction) ? ((event) => {
+                if (event.key === 'Enter') {
+                    enterFunction();
+                }
+            }) : undefined;
         return (
             <div className="user-login-input">
                 <div className="user-login-text">{text}</div>
@@ -18,6 +23,7 @@ class UserLoginInput extends React.Component {
                         variant="filled"
                         margin="normal"
                         maxRows="1"
+                        onKeyUp={onKeyUp}
                     />
                    <TextField
                         id="password"
@@ -26,6 +32,7 @@ class UserLoginInput extends React.Component {
                         variant="filled"
                         margin="normal"
                         maxRows="1"
+                        onKeyUp={onKeyUp}
                     />
                 </div>
             </div> 
