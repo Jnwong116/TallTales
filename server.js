@@ -107,7 +107,6 @@ io.on("connection", socket => {
   // Runs when client disconnects
   socket.on("disconnect", () => {
     const currUser = userLeave(socket.id);
-
     if (currUser) {
       io.to(currUser.room).emit("room-users", {
         room: currUser.room,

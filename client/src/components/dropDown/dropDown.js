@@ -47,10 +47,8 @@ class DropDown extends React.Component {
           room: event.target.value
         });
         socket.on("room-users", ({ room, users, rooms }) => {
-          if (rooms[room].length === 1) {
-            users[0].host = true;
-            socket.emit("change-host", users);
-          }
+          users[0].host = true;
+          socket.emit("change-host", users);
           this.props.app.setState({
             page: 2,
             users: users
