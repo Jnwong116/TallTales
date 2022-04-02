@@ -8,6 +8,10 @@ import { changeName } from "../../actions/editProfile/editProfile";
 
 class ChangeName extends React.Component {
   render() {
+    const handleClick = () => {
+        changeName(this.props.app, this.props.parent);
+    }
+
     return (
       <div className="changeUserDetailsInterface">
         <div className="profileInputSection">
@@ -17,13 +21,18 @@ class ChangeName extends React.Component {
                 variant="filled"
                 margin="normal"
                 maxRows="1"
+                onKeyUp={
+                    (event) => {
+                        if (event.key === 'Enter') {
+                            handleClick();
+                        }
+                    }
+                }
             />
         </div>
-
         <div className="profileInputButton">
           <Button text="CHANGE USERNAME"
-                  handleClick={() => {
-                  changeName(this.props.app, this.props.parent)}} />
+                  handleClick={handleClick} />
         </div>
       </div>
     )

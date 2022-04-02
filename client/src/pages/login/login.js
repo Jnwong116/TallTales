@@ -10,18 +10,20 @@ import "./login.css";
 class Login extends React.Component {
   render() {
     // console.log(this.props.app.state)
+    const handleClick = () => {
+        login(this.props.app, this.props.app.state.users);
+    }
+
     return (
       <div className="login-page">
         <div className="login-header">
           <AppName showTagline></AppName>
         </div>
-        <UserLoginInput text="LOGIN"></UserLoginInput>
+        <UserLoginInput text="LOGIN" enterFunction={handleClick}></UserLoginInput>
 
         <TextButton
           text="<ENTER TO PLAY>"
-          handleClick={() => {
-            login(this.props.app, this.props.app.state.users);
-          }}
+          handleClick={handleClick}
         ></TextButton>
         <div className="signup-message">
           NEW? SIGN UP

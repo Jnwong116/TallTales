@@ -9,6 +9,10 @@ import { changePassword } from "../../actions/editProfile/editProfile";
 class ChangePassword extends React.Component {
 
   render() {
+    const handleClick = () => {
+        changePassword(this.props.app);
+    }
+
     return (
       <div className="changeUserDetailsInterface">
         <div className="profileInputSection">
@@ -19,13 +23,19 @@ class ChangePassword extends React.Component {
                 variant="filled"
                 margin="normal"
                 maxRows="1"
+                onKeyUp={
+                    (event) => {
+                        if (event.key === 'Enter') {
+                            handleClick();
+                        }
+                    }
+                }
             />
         </div>
 
         <div className="profileInputButton">
           <Button text="CHANGE PASSWORD"
-                  handleClick={() => {
-                  changePassword(this.props.app)}} />
+                  handleClick={handleClick} />
         </div>
       </div>
     )

@@ -12,6 +12,10 @@ import "./inputStage.css";
 
 class InputStage extends React.Component {
   render() {
+    const handleClick = () => {
+        saveInput(this.props.app.state.currUser, this.props.app);
+    }
+
     // Import mock data
     // Requires server call to get list of stories and users from server
     this.stories = this.props.app.state.stories; // Change to match the actual genre
@@ -37,12 +41,10 @@ class InputStage extends React.Component {
           <Score user={this.props.app.state.currUser}></Score>
         </div>
         <Story story={this.stories.currStory.story}></Story>
-        <UserInput prompt={this.prompt} user={this.props.app.state.currUser}></UserInput>
+        <UserInput prompt={this.prompt} user={this.props.app.state.currUser} enterFunction={handleClick}></UserInput>
         <Button
           text="SUBMIT"
-          handleClick={() => {
-            saveInput(this.props.app.state.currUser, this.props.app);
-          }}
+          handleClick={handleClick}
         ></Button>
       </div>
     );

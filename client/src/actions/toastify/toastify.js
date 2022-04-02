@@ -14,6 +14,20 @@ export const errorToast = (input) => {
     toast.clearWaitingQueue();
 }
 
+export const successToast = (input) => {
+    const message = input ? input : "success!"; 
+
+    toast.success(message, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        pauseOnHover: false,
+        closeOnClick: true,
+        draggable: true,
+    });
+    toast.clearWaitingQueue();
+}
+
 export const infoToast = (input) => {
     const message = input ? input : "info!"; 
 
