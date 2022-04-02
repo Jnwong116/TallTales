@@ -4,3 +4,7 @@
   text-align: center;
   height: 100vh;
 }
+
+.Toastify__toast {
+    font-family: "IBM Plex Sans" !important;
+}

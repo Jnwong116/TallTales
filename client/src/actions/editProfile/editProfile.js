@@ -1,17 +1,17 @@
 import ENV from './../../config.js';
 import { getUser } from '../global/users.js';
+import { errorToast } from "../../actions/toastify/toastify.js";
 
 const API_HOST = ENV.api_host;
 const log = console.log
 
 export const changeName = (app, page) => {
-    // Gets passed in array of users from database
     const newName = document.getElementById('change-username').value;
     const currUser = app.state.currUser;
 
     if (newName === "") {
-        window.alert("Username can't be blank :O");
-        return;
+        errorToast("username can't be blank!");
+        return;    
     }
 
     const newUser = {
@@ -63,7 +63,7 @@ export const changePassword = (app) => {
     log(currUser)
 
     if (newPass === "") {
-        window.alert("Password can't be blank :O");
+        errorToast("password can't be blank!");
         return;    
     }
 
