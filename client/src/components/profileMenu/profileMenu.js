@@ -1,15 +1,11 @@
 import React from "react";
 import Button from "../button/button.js";
-import "./dashboardMenu.css";
+import "./profileMenu.css";
 
 import { menuRedirect } from "../../actions/dashboard/menu.js";
 
 class ProfileMenu extends React.Component {
   render() {
-    // Import mock data
-    this.stories = this.props.app.state.stories;
-    this.users = this.props.app.state.users;
-
     return (
       <span className="dashboardMenu">
         

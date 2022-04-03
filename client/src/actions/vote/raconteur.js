@@ -9,14 +9,14 @@ export const findRaconteur = (users) => {
             return i
         }
     }
-    return false;
+    return -1;
 }
 
 export const chooseRaconteur = (users) => {
     // log(users);
     let prev = findRaconteur(users);
 
-    if (!prev) {
+    if (prev === -1) {
         users[0].raconteur = true;
     }
     

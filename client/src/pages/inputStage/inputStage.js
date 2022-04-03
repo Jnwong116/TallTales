@@ -8,7 +8,6 @@ import UserInput from "../../components/userInput/userInput.js";
 import { displayPrompt, isRaconteur, storyComplete } from "../../actions/prompt/displayPrompt.js";
 import { saveInput } from "../../actions/input/input.js";
 import { getCurrentUser } from "../../actions/global/users.js";
-import { chooseRaconteur } from "../../actions/vote/raconteur.js";
 
 import "./inputStage.css";
 
@@ -16,20 +15,16 @@ class InputStage extends React.Component {
   state = {
     user: {
       username: "",
-      icon: "avatar01.png",
-      stories: []
+      icon: "avatar01.png"
     }
   }
 
-  componentDidMount() {
-    // Chooses raconteur
-    chooseRaconteur(this.props.app.state.users);
-    
-    // Checks if user is raconteur
-    isRaconteur(this.props.app, this.props.app.state.currUser, this.props.app.state.users);
-
+  componentDidMount() {    
     // Checks if story is complete
     storyComplete(this.props.app);
+
+    // Checks if user is raconteur
+    isRaconteur(this.props.app, this.props.app.state.currUser, this.props.app.state.users);
 
     this.setState({
       user: getCurrentUser(this.props.app)
@@ -37,7 +32,6 @@ class InputStage extends React.Component {
   }
 
   render() {
-    // console.log(this.props.app.state)
     this.prompt = displayPrompt(this.props.app);
     return (
       <div className="input-stage">

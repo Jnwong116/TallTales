@@ -5,24 +5,26 @@ export const updatePrompt = (app) => {
     const state = app.state;
 
     if (state.prompt === 2 && state.stage === 0) {
-        app.setState({
+        return {
           stage: 1,
           prompt: 0
-        });
+        };
       } else if (state.prompt === 3 && state.stage === 1) {
-        app.setState({
+        return {
           stage: 2,
           prompt: 0
-        });
+        };
       } else if (state.prompt === 2 && state.stage === 2) {
-        app.setState({
+        return {
           stage: 3,
           prompt: 0
-        });
-      } else {
-        app.setState({
-          prompt: state.prompt + 1
-        });
+        };
+      } 
+      else {
+        return {
+          prompt: state.prompt + 1,
+          stage: state.stage
+        };
       }
 }
 

@@ -121,7 +121,7 @@ io.on("connection", socket => {
     );
     socket.join(currUser.room);
     io.emit("message", `${currUser.username} has joined ${currUser.room}`);
-    io.to(currUser.room).emit("room-users", {
+    io.to(currUser.room).emit("update-users", {
       room: currUser.room,
       users: getRoomUsers(currUser.room),
       rooms: rooms
@@ -132,17 +132,18 @@ io.on("connection", socket => {
     users = changedUsers;
   });
 
-  socket.on("start-game", ({ room, storyStart, storyPrompts }) => {
+  socket.on("start-game", ({ room, storyStart, storyPrompts, users }) => {
     // console.log(room);
     io.to(room).emit("game-started", {
       storyStart: storyStart,
-      storyPrompts: storyPrompts
+      storyPrompts: storyPrompts,
+      users: users
     });
   });
 
   socket.on("update-raconteur", ({ room, users }) => {
     // log(users);
-    io.to(room).emit("room-users", {
+    io.to(room).emit("update-users", {
       users: users
     });
   });
@@ -157,10 +158,25 @@ io.on("connection", socket => {
     }
 
     else {
-      io.to(room).emit("room-users", {
+      io.to(room).emit("update-users", {
         users: users
       });
     }
+  });
+
+  socket.on("raconteur-vote", ({ room, users, story }) => {
+    io.to(room).emit("receive-vote", {
+      users: users,
+      story: story
+    });
+  });
+
+  socket.on("update-story", ({ room, story, prompt, stage }) => {
+    io.to(room).emit("story-updated", {
+      story: story,
+      prompt: prompt,
+      stage: stage
+    });
   });
 
   // Runs when client disconnects
@@ -168,7 +184,7 @@ io.on("connection", socket => {
     log(`${socket.id} disconnected`);
     const currUser = userLeave(socket.id);
     if (currUser) {
-      io.to(currUser.room).emit("room-users", {
+      io.to(currUser.room).emit("update-users", {
         room: currUser.room,
         users: getRoomUsers(currUser.room),
         rooms: rooms

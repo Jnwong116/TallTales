@@ -2,15 +2,19 @@ import { socket } from "./socket";
 // const log = console.log;
 
 export const startGame = (app, start, prompts) => {
-    socket.emit("start-game", {
-      room: app.state.users[0].room,
-      storyStart: start,
-      storyPrompts: prompts
-    });
-  };
+  const users = app.state.users;
+  users[0].raconteur = true;
+
+  socket.emit("start-game", {
+    room: users[0].room,
+    storyStart: start,
+    storyPrompts: prompts,
+    users: users
+  });
+};
   
   export const gameStarted = (app) => {
-    socket.on("game-started", ({ storyStart, storyPrompts }) => {
+    socket.on("game-started", ({ storyStart, storyPrompts, users }) => {
       app.setState({
         story: {
           start: storyStart,
@@ -18,6 +22,7 @@ export const startGame = (app, start, prompts) => {
           contributions: [],
           prompt: storyPrompts
         },
+        users: users,
         page: 0,
         prompt: 0,
         stage: 0

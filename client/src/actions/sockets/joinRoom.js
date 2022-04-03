@@ -16,9 +16,9 @@ export const joinRoom = (user, room) => {
 };
 
 export const updateRoom = (app) => {
-    socket.on("room-users", ({ room, users, rooms }) => {
-        if (app.state.page === 4 || app.state.page === 2) {
-            // User is on lobby page or dashboard
+    socket.on("update-users", ({ room, users, rooms }) => {
+        if (app.state.page === 4) {
+            // User is on dashboard
             users[0].host = true;
             socket.emit("change-host", users);
             app.setState({
@@ -26,8 +26,15 @@ export const updateRoom = (app) => {
                 users: users
             });
         } 
+        else if (app.state.page === 2) {
+            // User is on lobby page
+            users[0].host = true;
+            socket.emit("change-host", users);
+            app.setState({
+                users: users
+            });
+        }
         else {
-            // log(users);
             app.setState({
                 // Updates current state of users
                 users: users

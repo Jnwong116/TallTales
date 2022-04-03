@@ -55,7 +55,6 @@ class Lobby extends React.Component {
 
     return (
       <div className="lobby">
-        {/* TODO: Make this header into a component so it's reusable in every page */}
         <div className="header">
           <AppName></AppName>
         </div>
