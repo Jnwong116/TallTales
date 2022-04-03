@@ -90,12 +90,9 @@ function getRoomUsers(room) {
   return users.filter(user => user.room === room);
 }
 
-function userLeave(id, room) {
+function userLeave(id) {
   const usersIndex = users.findIndex(user => user.id === id);
-  const roomIndex = rooms[room].findIndex(user => user.id === id);
-
-  if (index !== -1) {
-    rooms[room].splice(roomIndex, 1);
+  if (usersIndex !== -1) {
     return users.splice(usersIndex, 1)[0];
   }
 }
@@ -127,15 +124,21 @@ io.on("connection", socket => {
   });
 
   socket.on("start-game", ({ room, storyStart, storyPrompts }) => {
+    // console.log(room);
     io.emit("game-started", {
       storyStart: storyStart,
       storyPrompts: storyPrompts
     });
   });
 
+  socket.on("updateRaconteur", ({ room, users }) => {
+    
+  })
+
   // Runs when client disconnects
   socket.on("disconnect", () => {
-    const currUser = userLeave(socket.id, currUser.room);
+    log(`${socket.id} disconnected`);
+    const currUser = userLeave(socket.id);
     if (currUser) {
       io.to(currUser.room).emit("room-users", {
         room: currUser.room,

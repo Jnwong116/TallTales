@@ -3,12 +3,10 @@ import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
 import DropDown from "../../components/dropDown/dropDown.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
-import ENV from "./../../config.js";
 import "./lobby.css";
 
-import { io } from "socket.io-client";
-
 import { redirect, getGenres } from "../../actions/lobby/lobby.js";
+import { gameStarted } from "../../actions/sockets/startGame.js";
 
 class Lobby extends React.Component {
   state = {
@@ -33,25 +31,11 @@ class Lobby extends React.Component {
   }
 
   render() {
-    const socket = io(ENV.api_host);
+    // socket.on("current-rooms", rooms => {
+    //   console.log(rooms);
+    // });
 
-    socket.on("current-rooms", rooms => {
-      console.log(rooms);
-    });
-
-    socket.on("game-started", ({ storyStart, storyPrompts }) => {
-      this.props.app.setState({
-          story: {
-              start: storyStart,
-              story: storyStart,
-              contributions: [],
-              prompt: storyPrompts
-          },
-          page: 0,
-          prompt: 0,
-          stage: 0
-      })
-    })
+    gameStarted(this.props.app);
 
     const genres = this.state.genres.map(
       object => object.genre

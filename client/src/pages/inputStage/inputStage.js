@@ -13,18 +13,19 @@ import { chooseRaconteur } from "../../actions/vote/raconteur.js";
 import "./inputStage.css";
 
 class InputStage extends React.Component {
-  render() {
-    // console.log(this.props.app.state)
-
-    // Checks if story is complete
-    storyComplete(this.props.app);
-
+  componentDidMount() {
     // Chooses raconteur
-    chooseRaconteur(this.props.app.users);
-
+    chooseRaconteur(this.props.app.state.users);
+    
     // Checks if user is raconteur
     isRaconteur(this.props.app, this.props.app.state.currUser, this.props.app.state.users);
 
+    // Checks if story is complete
+    storyComplete(this.props.app);
+  }
+
+  render() {
+    console.log(this.props.app.state)
     this.prompt = displayPrompt(this.props.app);
     this.user = getCurrentUser(this.props.app);
 

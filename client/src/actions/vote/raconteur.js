@@ -5,6 +5,7 @@ const socket = io(ENV.api_host);
 const log = console.log
 
 export const findRaconteur = (users) => {
+    log(users);
     for (let i = 0; i < users.length; i++) {
         if (users[i].raconteur === true) {
             return i
@@ -14,6 +15,7 @@ export const findRaconteur = (users) => {
 }
 
 export const chooseRaconteur = (users) => {
+    log(users);
     let prev = findRaconteur(users);
 
     if (!prev) {
@@ -34,8 +36,8 @@ export const chooseRaconteur = (users) => {
         }
     }
 
-    socket.emit("updateRaconteur", {
+    socket.emit("update-raconteur", {
         room: users[0].room,
         users: users
-    })
+    });
 }

@@ -1,18 +1,12 @@
-import { io } from "socket.io-client"
-import ENV from "../../config.js";
 import { errorToast } from "../toastify/toastify.js";
+import { startGame } from "../sockets/startGame.js";
+import ENV from "../../config.js";
 
 const API_HOST = ENV.api_host;
-const socket = io(ENV.api_host);
 const log = console.log
 
-
 export const redirect = (app, start, prompts) => {
-    socket.emit("start-game", {
-        room: app.state.users[0].room,
-        storyStart: start,
-        storyPrompts: prompts
-    });
+    startGame(app, start, prompts);
 }
 
 export const getGenres = (page) => {
