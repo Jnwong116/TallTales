@@ -7,6 +7,8 @@ import { nextStory, prevStory } from "../../actions/dashboard/stories.js";
 
 import { getUser } from "../../actions/global/users.js";
 
+import Button from "../button/button.js";
+
 import "./completedStories.css";
 
 class CompletedStories extends React.Component {
@@ -45,6 +47,8 @@ class CompletedStories extends React.Component {
                 <ArrowRight />
                 </span>
             </div>
+            <Button text="SHARE STORY"
+                handleClick={() => {window.alert('share')}} />
             <div className="storiesDisplay">
                 {
                 this.state.user.stories.length === 0 ? 
