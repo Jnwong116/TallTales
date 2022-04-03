@@ -7,6 +7,12 @@ import "./userInput.css";
 
 class UserInput extends React.Component {
   render() {
+    const onKeyUp = (this.props.enterFunction) ? ((event) => {
+            if (event.key === 'Enter') {
+                this.props.enterFunction();
+            }
+        }) : undefined;
+
     return (
       <div className="user-input">
         <div className="user-input-header">TYPE YOUR SENTENCE</div>
@@ -30,6 +36,7 @@ class UserInput extends React.Component {
               multiline="true"
               maxRows="5"
               color="secondary"
+              onKeyUp={onKeyUp}
             />
           </div>
         </div>

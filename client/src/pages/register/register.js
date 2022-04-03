@@ -8,15 +8,19 @@ import { addUser } from "../../actions/register/addUser.js";
 import "./register.css";
 
 class Register extends React.Component {
-    render() {
-        // console.log(this.props)
+
+    render() {    
+        const handleClick = () => {
+            addUser(this.props.app, this.props.app.state.users);
+        }
+
         return (
             <div className="register-page">
                 <div className="register-header">
                     <AppName showTagline></AppName>
                 </div>
-                <UserLoginInput text="REGISTER"></UserLoginInput>
-                <TextButton text="<CONFIRM REGISTRATION>" handleClick={() => {addUser(this.props.app, this.props.app.state.users)}}/>
+                <UserLoginInput text="REGISTER" enterFunction={handleClick}></UserLoginInput>
+                <TextButton text="<CONFIRM REGISTRATION>" handleClick={handleClick}/>
                 
             </div>
         );

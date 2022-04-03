@@ -1,6 +1,6 @@
 import ENV from './../../config.js';
 import { getUser } from '../global/users.js';
-import { errorToast } from "../../actions/toastify/toastify.js";
+import { errorToast, successToast } from "../../actions/toastify/toastify.js";
 
 const API_HOST = ENV.api_host;
 const log = console.log
@@ -44,6 +44,7 @@ export const changeName = (app, page) => {
               currUser: result.username
             });
             getUser(page, app);
+            successToast('Username updated');
             return;
           }
           else {
@@ -96,6 +97,7 @@ export const changePassword = (app) => {
             app.setState({
               currUser: result.username
             });
+            successToast('Password updated');
             return;
           }
           else {
@@ -143,6 +145,7 @@ export const changeAvatar = (users, app, page, avatar) => {
               currUser: result.username
             });
             getUser(page, app);
+            successToast('Avatar updated')
             // page.setState({
             //     user: result
             // })

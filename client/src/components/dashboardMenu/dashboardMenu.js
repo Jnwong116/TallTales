@@ -30,12 +30,6 @@ class DashboardMenu extends React.Component {
           }}
         />
         <Button
-          text="HOW TO PLAY"
-          handleClick={() => {
-            menuRedirect(this.props.app, 5);
-          }}
-        />
-        <Button
           text="PROFILE"
           handleClick={() => {
             menuRedirect(this.props.app, 6);
@@ -58,6 +52,7 @@ class DashboardMenu extends React.Component {
       </span>
     );
   }
+
 }
 
 export default DashboardMenu;
