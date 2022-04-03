@@ -26,8 +26,7 @@ const storySchema = new Schema({
 
 const roomSchema = new Schema({
     code: {type: String, unique: true},
-    socket: {type: String, required: true},
-    story: {type: storySchema}
+    private: {type: Boolean, default: true},
 })
 
 const Genre = mongoose.model('Genre', genreSchema);
