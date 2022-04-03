@@ -43,12 +43,15 @@ export const receiveVote = (app, page) => {
 }
 
 export const updateStory = (story, users, app) => {
-    // Chooses new raconteur
-    chooseRaconteur(users);
-
     // Updates prompt
     const appStage = updatePrompt(app);
-    console.log(appStage);
+    // console.log(appStage);
+
+    // Checks if game is over
+    if (appStage.stage !== 3) {
+        // Chooses new raconteur
+        chooseRaconteur(users);
+    }
 
     socket.emit("update-story", {
         room: users[0].room,
