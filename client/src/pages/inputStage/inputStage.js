@@ -8,6 +8,7 @@ import UserInput from "../../components/userInput/userInput.js";
 import { displayPrompt, isRaconteur, storyComplete } from "../../actions/prompt/displayPrompt.js";
 import { saveInput } from "../../actions/input/input.js";
 import { getCurrentUser } from "../../actions/global/users.js";
+import { chooseRaconteur } from "../../actions/vote/raconteur.js";
 
 import "./inputStage.css";
 
@@ -17,6 +18,9 @@ class InputStage extends React.Component {
 
     // Checks if story is complete
     storyComplete(this.props.app);
+
+    // Chooses raconteur
+    chooseRaconteur(this.props.app.users);
 
     // Checks if user is raconteur
     isRaconteur(this.props.app, this.props.app.state.currUser, this.props.app.state.users);

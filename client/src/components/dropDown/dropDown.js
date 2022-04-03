@@ -36,7 +36,7 @@ class DropDown extends React.Component {
       this.setState({ selected: event.target.value });
 
       if (this.state.user) {
-        // User and room emit. Gazi is the best
+        // User and room emit
         socket.emit("join-room", {
           user: {
             username: this.state.user.username,
