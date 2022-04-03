@@ -1,7 +1,8 @@
 import React from "react";
 import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
-import UserIcon from "../../components/userIcon/userIcon.js";
+import Scoreboard from "../../components/scoreboard/scoreboard.js";
+
 import "./leaderboard.css"
 
 import { sortPlayers, saveStory } from "../../actions/leaderboard/displayScores.js";
@@ -17,17 +18,10 @@ class Leaderboard extends React.Component {
         // Sort the users from highest to lowest points
         this.users.users.sort(sortPlayers);
 
-        // Map number index user to className
-        const indexToClass = {
-            0: "leaderboard-player-0",
-            1: "leaderboard-player-1-2",
-            2: "leaderboard-player-1-2",
-            3: "leaderboard-player-3-4-5",
-            4: "leaderboard-player-3-4-5",
-            5: "leaderboard-player-3-4-5"
-        }
-
-        // console.log(this.props.app.state)
+        const footerMessages = [
+            "You have the highest score! Your effort paid off!",
+            "Good effort! One day they'll recognize your genius..."
+        ]
 
         return (
             <div className="leaderboard">
@@ -35,61 +29,42 @@ class Leaderboard extends React.Component {
                     <AppName></AppName>
                 </div>
                 <div className="leaderboard-content">
-                    <div className="leaderboard-story-recap">
-                        <div className="leaderboard-title">
-                            {"<THE STORY>"}
+                    <div className="leaderboard-story">
+                        <div className="leaderboard-story-title">
+                            {"The completed story..."}
                         </div>
                         <div className="leaderboard-story-start">
                             {this.stories.currStory.start}
                         </div>
-                        {this.stories.currStory.contributions.map((obj, i) => {
-                            return (
-                                <div key={i} className="leaderboard-story-contribution">
-                                    {obj.sentence}
-                                </div>
-                            )
-                            })
-                        }
+                        <div className="leaderboard-story-contribution">
+                            {this.stories.currStory.contributions.map((obj, i) => {
+                                return (
+                                    <span key={i} className={obj.username}>
+                                        {obj.sentence}
+                                    </span>
+                                )
+                                })
+                            }
+                        </div> 
                     </div>
-                    <div className="leaderboard-total-points">
-                        <div className="leaderboard-title">
-                            {"<LEADERBOARD>"}   
-                        </div>
-                        <div className="leaderboard-players-winner">
-                            <div key={0} className={indexToClass[0]}>
-                                <UserIcon username={this.users.users[0].username} icon={this.users.users[0].icon}></UserIcon>
-                                <div className="leaderboard-player-score">
-                                    {this.users.users[0].score}
-                                </div>
-                             </div>
-                        </div>
-                        
-                        <div className="leaderboard-players">
-                            {this.users.users.map((e, i) => {
-                                if(i > 0) {
-                                    return (
-                                        <div key={i} className={indexToClass[i]}>
-                                            <UserIcon username={e.username} icon={e.icon}></UserIcon>
-                                            <div className="leaderboard-player-score">
-                                                {e.score}
-                                            </div>
-                                        </div>
-                                    );
-                                }
-                                return null;
-                            
-                            })}
-                        </div>                       
+                    <div className="leaderboard-scoreboard">
+                        <Scoreboard users={this.users.users} />
                     </div>   
                 </div>
-                <div className="your-score">
-                    YOUR SCORE: <strong>{this.props.app.state.currUser.score}</strong>
-                </div>
-                <Button text="DONE" 
-                    handleClick={() => {
-                        saveStory(this.users, this.stories, this.props.app)
-                    }}
-                />               
+                <div className="footer">
+                    <div className="footer-message">
+                        {(this.props.app.state.currUser.score === this.users.users[0].score) ? 
+                        footerMessages[0] : footerMessages[1]}
+                    </div>
+                    <div className="footer-button">
+                        <Button text="HOME" 
+                            handleClick={() => {
+                                window.alert('home');
+                                // saveStory(this.users, this.stories, this.props.app)
+                            }}
+                        /> 
+                    </div>
+                </div>       
             </div>    
         )
     }
