@@ -1,7 +1,4 @@
-import { io } from "socket.io-client"
-import ENV from "../../config.js";
-
-const socket = io(ENV.api_host);
+import { socket } from "./socket";
 // const log = console.log;
 
 export const makeRaconteur = (users) => {
@@ -9,4 +6,11 @@ export const makeRaconteur = (users) => {
         room: users[0].room,
         users: users
     });
+}
+
+export const updateSentence = (users) => {
+    socket.emit("update-sentence", {
+        room: users[0].room,
+        users: users
+    })
 }

@@ -1,4 +1,7 @@
-export const saveInput = (user, app) => {
+import { getCurrentUser } from "../global/users";
+import { updateSentence } from "../sockets/updateUser";
+
+export const saveInput = (app) => {
     let input = document.getElementById("user-input").value;
     input = input.trim();
         // Adds period to end of sentence if user hasn't.
@@ -8,8 +11,11 @@ export const saveInput = (user, app) => {
         
         document.getElementById("user-input").value = "";
     
-    // Requires server call to add input to user object
-    user.currentSentence = input;
+    const user = getCurrentUser(app, true);
+    const users = app.state.users;
+    users[user].currentSentence = input;
+
+    updateSentence(users);
 
     app.setState({
       page: 1

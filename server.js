@@ -97,6 +97,15 @@ function userLeave(id) {
   }
 }
 
+function allUsersInput(users) {
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].currentSentence === ". . .") {
+      return false;
+    }
+  }
+  return true;
+}
+
 io.on("connection", socket => {
   // Join user to room
   socket.on("join-room", ({ user, room }) => {
@@ -131,7 +140,28 @@ io.on("connection", socket => {
     });
   });
 
-  socket.on("updateRaconteur", ({ room, users }) => {});
+  socket.on("update-raconteur", ({ room, users }) => {
+    // log(users);
+    io.to(room).emit("room-users", {
+      users: users
+    });
+  });
+
+  socket.on("update-sentence", ({ room, users }) => {
+    // Checks if all users have updated their sentence
+    if (allUsersInput(users)) {
+      // log('all-users')
+      io.to(room).emit("all-users-input", {
+        users: users
+      });
+    }
+
+    else {
+      io.to(room).emit("room-users", {
+        users: users
+      });
+    }
+  });
 
   // Runs when client disconnects
   socket.on("disconnect", () => {

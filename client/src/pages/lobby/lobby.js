@@ -6,7 +6,7 @@ import UserIcon from "../../components/userIcon/userIcon.js";
 import "./lobby.css";
 
 import { redirect, getGenres } from "../../actions/lobby/lobby.js";
-import { gameStarted } from "../../actions/sockets/joinRoom.js";
+import { gameStarted } from "../../actions/sockets/startGame.js";
 
 class Lobby extends React.Component {
   state = {

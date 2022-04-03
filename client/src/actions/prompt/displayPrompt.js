@@ -1,4 +1,5 @@
 // const log = console.log
+import { updateSentence } from "../sockets/updateUser";
 
 export const updatePrompt = (app) => {
     const state = app.state;
@@ -40,17 +41,25 @@ export const displayPrompt = (app) => {
 }
 
 export const isRaconteur = (app, currUser, users) => {
-   for (let i = 0; i < users.length; i++) {
-     // Resets users sentence
-     users[i].currentSentence = ". . ."
-     if (users[i].username === currUser) {
-       if (users[i].raconteur) { // Sends user to vote stage
-        app.setState({
-          page: 1
-        })
-       }
-     }
-   }
+  let raconteur = false;
+  for (let i = 0; i < users.length; i++) {
+    // Resets users sentence
+    users[i].currentSentence = ". . ."
+    if (users[i].raconteur) { 
+      users[i].currentSentence = "Raconteur";
+      if (users[i].username === currUser) { // Sends user to vote stage
+        raconteur = true;
+      }
+    }
+  }
+
+  updateSentence(users);
+
+  if (raconteur) {
+    app.setState({
+      page: 1
+    })
+  }
 }
 
 export const storyComplete = (app) => {

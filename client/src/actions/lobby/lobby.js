@@ -1,5 +1,5 @@
 import { errorToast } from "../toastify/toastify.js";
-import { startGame } from "../sockets/joinRoom.js";
+import { startGame } from "../sockets/startGame.js";
 import ENV from "../../config.js";
 
 const API_HOST = ENV.api_host;

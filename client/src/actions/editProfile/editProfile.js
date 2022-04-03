@@ -117,7 +117,7 @@ export const changeAvatar = (users, app, page, avatar) => {
 
     const url = `${API_HOST}/users/edit/avatar/${currUser}`;
 
-    log(currUser);
+    // log(currUser);
 
     const request = new Request(url, {
         method: "post",

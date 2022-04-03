@@ -13,6 +13,14 @@ import { chooseRaconteur } from "../../actions/vote/raconteur.js";
 import "./inputStage.css";
 
 class InputStage extends React.Component {
+  state = {
+    user: {
+      username: "",
+      icon: "avatar01.png",
+      stories: []
+    }
+  }
+
   componentDidMount() {
     // Chooses raconteur
     chooseRaconteur(this.props.app.state.users);
@@ -22,25 +30,27 @@ class InputStage extends React.Component {
 
     // Checks if story is complete
     storyComplete(this.props.app);
+
+    this.setState({
+      user: getCurrentUser(this.props.app)
+    });
   }
 
   render() {
-    console.log(this.props.app.state)
+    // console.log(this.props.app.state)
     this.prompt = displayPrompt(this.props.app);
-    this.user = getCurrentUser(this.props.app);
-
     return (
       <div className="input-stage">
         <div className="input-stage-header">
           <AppName></AppName>
-          <Score user={this.user}></Score>
+          <Score user={this.state.user}></Score>
         </div>
         <Story story={this.props.app.state.story.story}></Story>
-        <UserInput prompt={this.prompt} user={this.user}></UserInput>
+        <UserInput prompt={this.prompt} user={this.state.user}></UserInput>
         <Button
           text="SUBMIT"
           handleClick={() => {
-            saveInput(this.props.app.state.currUser, this.props.app);
+            saveInput(this.props.app);
           }}
         ></Button>
       </div>
