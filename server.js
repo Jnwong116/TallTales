@@ -56,8 +56,26 @@ let rooms = {
 };
 
 // Join user to chat
-function userJoin(id, username, icon, score, raconteur, currentSentence, host, room) {
-  const user = { id, username, icon, score, raconteur, currentSentence, host, room };
+function userJoin(
+  id,
+  username,
+  icon,
+  score,
+  raconteur,
+  currentSentence,
+  host,
+  room
+) {
+  const user = {
+    id,
+    username,
+    icon,
+    score,
+    raconteur,
+    currentSentence,
+    host,
+    room
+  };
 
   users.push(user);
   rooms[room].push(username);
@@ -72,11 +90,13 @@ function getRoomUsers(room) {
   return users.filter(user => user.room === room);
 }
 
-function userLeave(id) {
-  const index = users.findIndex(user => user.id === id);
+function userLeave(id, room) {
+  const usersIndex = users.findIndex(user => user.id === id);
+  const roomIndex = rooms[room].findIndex(user => user.id === id);
 
   if (index !== -1) {
-    return users.splice(index, 1)[0];
+    rooms[room].splice(roomIndex, 1);
+    return users.splice(usersIndex, 1)[0];
   }
 }
 
@@ -119,7 +139,7 @@ io.on("connection", socket => {
 
   // Runs when client disconnects
   socket.on("disconnect", () => {
-    const currUser = userLeave(socket.id);
+    const currUser = userLeave(socket.id, currUser.room);
     if (currUser) {
       io.to(currUser.room).emit("room-users", {
         room: currUser.room,
