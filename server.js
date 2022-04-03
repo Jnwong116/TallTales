@@ -125,15 +125,13 @@ io.on("connection", socket => {
 
   socket.on("start-game", ({ room, storyStart, storyPrompts }) => {
     // console.log(room);
-    io.emit("game-started", {
+    io.to(room).emit("game-started", {
       storyStart: storyStart,
       storyPrompts: storyPrompts
     });
   });
 
-  socket.on("updateRaconteur", ({ room, users }) => {
-    
-  })
+  socket.on("updateRaconteur", ({ room, users }) => {});
 
   // Runs when client disconnects
   socket.on("disconnect", () => {
