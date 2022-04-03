@@ -128,9 +128,6 @@ io.on("connection", socket => {
 
   socket.on("start-game", ({ room, storyStart, storyPrompts }) => {
     // console.log('bye');
-    console.log(room);
-    console.log(storyStart);
-    console.log(storyPrompts);
     io.emit("game-started", {
       storyStart: storyStart,
       storyPrompts: storyPrompts

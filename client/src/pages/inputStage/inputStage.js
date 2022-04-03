@@ -13,7 +13,7 @@ import "./inputStage.css";
 
 class InputStage extends React.Component {
   render() {
-    console.log(this.props.app.state)
+    // console.log(this.props.app.state)
 
     // Checks if story is complete
     storyComplete(this.props.app);
