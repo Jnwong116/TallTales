@@ -56,8 +56,8 @@ let rooms = {
 };
 
 // Join user to chat
-function userJoin(id, username, icon, score, host, room) {
-  const user = { id, username, icon, score, host, room };
+function userJoin(id, username, icon, score, raconteur, currentSentence, host, room) {
+  const user = { id, username, icon, score, raconteur, currentSentence, host, room };
 
   users.push(user);
   rooms[room].push(username);
@@ -88,6 +88,8 @@ io.on("connection", socket => {
       user.username,
       user.icon,
       user.score,
+      user.raconteur,
+      user.currentSentence,
       user.host,
       room
     );
@@ -102,6 +104,17 @@ io.on("connection", socket => {
 
   socket.on("change-host", changedUsers => {
     users = changedUsers;
+  });
+
+  socket.on("start-game", ({ room, storyStart, storyPrompts }) => {
+    // console.log('bye');
+    console.log(room);
+    console.log(storyStart);
+    console.log(storyPrompts);
+    io.emit("game-started", {
+      storyStart: storyStart,
+      storyPrompts: storyPrompts
+    });
   });
 
   // Runs when client disconnects

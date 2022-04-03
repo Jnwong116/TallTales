@@ -23,6 +23,7 @@ class Dashboard extends React.Component {
   componentDidMount() {
     getUser(this, this.props.app);
   }
+  
   render() {
     // console.log(this.props.app.state)
     return (

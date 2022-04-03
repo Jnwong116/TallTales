@@ -1,6 +1,6 @@
 export const saveInput = (user, app) => {
-  // Gets passed in array of users from database
     let input = document.getElementById("user-input").value;
+    input = input.trim();
         // Adds period to end of sentence if user hasn't.
         if (input.charAt(input.length - 1) !== ".") {
           input = input + ".";

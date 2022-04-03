@@ -6,11 +6,11 @@ import Select from "@mui/material/Select";
 import { io } from "socket.io-client";
 import ENV from "./../../config.js";
 import "./dropDown.css";
-import {
-  menuRedirect,
-  logout,
-  startGame
-} from "../../actions/dashboard/menu.js";
+// import {
+//   menuRedirect,
+//   logout,
+//   startGame
+// } from "../../actions/dashboard/menu.js";
 import { getUser } from "../../actions/global/users.js";
 
 class DropDown extends React.Component {
@@ -42,6 +42,8 @@ class DropDown extends React.Component {
             username: this.state.user.username,
             icon: this.state.user.icon,
             score: 0,
+            raconteur: false,
+            currentSentence: ". . .",
             host: false
           },
           room: event.target.value

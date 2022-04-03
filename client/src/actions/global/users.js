@@ -36,3 +36,14 @@ export const getUser = (page, app) => {
         log(err);
     })
 }
+
+export const getCurrentUser = (app) => {
+    const currUser = app.state.currUser;
+    const users = app.state.users;
+
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].username === currUser) {
+            return users[i];
+        }
+    }
+}
