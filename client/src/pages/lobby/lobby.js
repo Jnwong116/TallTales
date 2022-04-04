@@ -72,10 +72,9 @@ class Lobby extends React.Component {
             <div className="lobby-header">LOBBY</div>
             <div className="lobby-players">
               {this.props.app.state.users.map((e, i) => {
-                const username = e.host ? e.username + " (h)" : e.username;
                 return (
                   <div key={i} className="lobby-player">
-                    <UserIcon username={username} icon={e.icon}></UserIcon>
+                    <UserIcon username={e.username} icon={e.icon} host={e.host}></UserIcon>
                   </div>
                 );
               })}
