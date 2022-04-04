@@ -8,6 +8,7 @@ import VoteStage from "./pages/voteStage/voteStage";
 import Dashboard from "./pages/dashboard/dashboard";
 import Profile from "./pages/profile/profile";
 import Leaderboard from "./pages/leaderboard/leaderboard";
+import IndivStory from "./pages/indivStory/indivStory";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -20,47 +21,26 @@ import {
 // import { css } from "@emotion/react";
 
 class App extends React.Component {
-  state = {
-    users: [],
-    story: {
-      title: "A Temp Title",
-      start: "chris and jordan are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means.",
-      story: "",
-      contributions: [
-          {
-              username: "jordan",
-              sentence: "And then Jordan ended the story."
-          },
-          {
-            username: "jasper",
-            sentence: "And then Jasper ended the story."
+    state = {
+        users: [],
+        story: {
+            title: "",
+            start: "",
+            story: "",
+            contributions: [],
+            prompt: {},
+            userScores: []
         },
-        {
-            username: "gazi",
-            sentence: "And then Gazi ended the story."
+        rooms: { 
+            room1: [], 
+            room2: [], 
+            room3: []
         },
-        {
-            username: "jasper",
-            sentence: "And then Jasper ended the story."
-        },
-        {
-            username: "gazi",
-            sentence: "And then Gazi ended the story."
-        }
-      ],
-      prompt: {},
-      userScores: []
-    },
-    rooms: { 
-      room1: [], 
-      room2: [], 
-      room3: []
-    },
-    currUser: null,
-    page: 0,
-    stage: 0,
-    prompt: 0
-  };
+        currUser: null,
+        page: 0,
+        stage: 0,
+        prompt: 0
+    };
 
   render() {
     return (
@@ -100,7 +80,8 @@ class App extends React.Component {
             {/* <Route path="/howToPlay" element={<HowToPlay app={this} />} />
                 <Route path="/profile" element={<Profile app={this} />} /> */}
 
-            <Route path="/leader" element={<Leaderboard app={this} />}></Route>
+            {/* <Route path="/leader" element={<Leaderboard app={this} />}></Route> */}
+            <Route path="/past-stories" element={<IndivStory />}></Route>
           </Switch>
           <ToastContainer limit={1}/>
         </Router>

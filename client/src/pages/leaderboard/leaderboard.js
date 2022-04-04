@@ -8,6 +8,7 @@ import "./leaderboard.css"
 
 import { sortPlayers, saveStory } from "../../actions/leaderboard/displayScores.js";
 import { getCurrentUser } from "../../actions/global/users.js";
+import { storySaved } from "../../actions/sockets/story.js";
 
 class Leaderboard extends React.Component {
     state = {
@@ -37,16 +38,19 @@ class Leaderboard extends React.Component {
                 score: 70,
                 icon: "avatar04.png"
             }
-        ]
+        ],
+        story: null
     }
 
-    // componentDidMount() {
-    //     // Sort the users from highest to lowest points
-    //     this.setState({
-    //         users: this.props.app.state.users.sort(sortPlayers),
-    //         user: getCurrentUser(this.props.app)
-    //     })
-    // }
+    componentDidMount() {
+        // Sort the users from highest to lowest points
+        this.setState({
+            users: this.props.app.state.users.sort(sortPlayers),
+            user: getCurrentUser(this.props.app)
+        });
+
+        storySaved(this);
+    }
 
     render() {
         const footerMessages = [
@@ -75,8 +79,7 @@ class Leaderboard extends React.Component {
                     <div className="footer-button">
                         <Button text="HOME" 
                             handleClick={() => {
-                                window.alert('home');
-                                // saveStory(this.users, this.stories, this.props.app)
+                                saveStory(this.state.user, this.props.app.state.story, this.props.app, this)
                             }}
                         /> 
                     </div>

@@ -1,13 +1,11 @@
 import React from "react";
 // import UserIconMedium from "../userIcon/userIconMedium.js";
-
 import ArrowLeft from "../cssArrows/arrowLeft.js";
 import ArrowRight from "../cssArrows/arrowRight.js";
-import { nextStory, prevStory } from "../../actions/dashboard/stories.js";
-
-import { getUser } from "../../actions/global/users.js";
-
 import Button from "../button/button.js";
+import { nextStory, prevStory } from "../../actions/dashboard/stories.js";
+import { getUser } from "../../actions/global/users.js";
+import { shareStory } from "../../actions/profile/shareStory.js";
 
 import "./completedStories.css";
 
@@ -48,12 +46,12 @@ class CompletedStories extends React.Component {
                 </span>
             </div>
             <Button text="SHARE STORY"
-                handleClick={() => {window.alert('share')}} />
+                handleClick={() => {shareStory(this.state.user.stories[this.state.story])}} />
             <div className="storiesDisplay">
                 {
                 this.state.user.stories.length === 0 ? 
                 "You have not completed any stories yet! Go play a game and come back to see your completed stories!" :
-                this.state.user.stories[this.state.story]
+                this.state.user.stories[this.state.story].story
                 }
             </div>
         </div>
