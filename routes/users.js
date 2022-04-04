@@ -27,7 +27,18 @@ router.route('/register').post(async (req, res) => {
     const newUser = new User(req.body)
 
     newUser.save()
-        .then(() => res.send(newUser))
+        .then((user) => {
+          const ret = {
+            username: user.username,
+            icon: user.icon,
+            stories: user.stories,
+            prompts: user.prompts,
+            admin: user.admin,
+            _id: user._id,
+            __v: user.__v
+          }
+          res.send(ret)
+        })
         .catch(err => {
             res.status(400).json('Error: ' + err);
         });
@@ -89,7 +100,16 @@ router.route("/user/:username").delete((req, res) => {
         res.status(404).send("User not found");
         return;
       }
-      res.send(result);
+      const ret = {
+        username: result.username,
+        icon: result.icon,
+        stories: result.stories,
+        prompts: result.prompts,
+        admin: result.admin,
+        _id: result._id,
+        __v: result.__v
+      }
+      res.send(ret);
     })
     .catch(err => {
       res.status(400).json("Error: " + err);
@@ -211,7 +231,22 @@ router.route("/prompts/:username").delete(async (req, res) => {
 // Saves a story to User
 /*
     {
-        "story": <String>
+        "title": <String>,
+        "start": <String>,
+        "story": <String>,
+        "contributions": [
+          {
+            "username": <String>,
+            "sentence": <String>,
+          }
+        ],
+        "userScores": [
+          {
+            "username": <String>,
+            "score": <Number>,
+            "icon", <String>
+          }
+        ]
     }
 */
 router.route("/stories/:username").post(async (req, res) => {
@@ -225,7 +260,7 @@ router.route("/stories/:username").post(async (req, res) => {
     return;
   }
 
-  curUser.stories.push(req.body.story);
+  curUser.stories.push(req.body);
 
   curUser
     .save()
@@ -295,8 +330,17 @@ router.route("/edit/password/:username").post(async (req, res) => {
 
   curUser
     .save()
-    .then(result => {
-      res.send(result);
+    .then(user => {
+      const ret = {
+        username: user.username,
+        icon: user.icon,
+        stories: user.stories,
+        prompts: user.prompts,
+        admin: user.admin,
+        _id: user._id,
+        __v: user.__v
+      }
+      res.send(ret);
     })
     .catch(err => {
       res.status(400).json("Error: " + err);

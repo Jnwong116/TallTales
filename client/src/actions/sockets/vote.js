@@ -50,7 +50,7 @@ export const updateStory = (story, users, app) => {
     // Checks if game is over
     if (appStage.stage !== 3) {
         // Chooses new raconteur
-        chooseRaconteur(users);
+        users = chooseRaconteur(users);
     }
 
     if (appStage.stage === 3) {
@@ -59,22 +59,22 @@ export const updateStory = (story, users, app) => {
         }
     }
 
-    console.log(users);
-
     socket.emit("update-story", {
         room: users[0].room,
         story: story,
         prompt: appStage.prompt,
-        stage: appStage.stage
+        stage: appStage.stage,
+        users: users
     });
 }
 
 export const storyUpdated = (app) => {
-    socket.on("story-updated", ({ story, prompt, stage }) => {
+    socket.on("story-updated", ({ story, prompt, stage, users }) => {
         app.setState({
             story: story,
             prompt: prompt,
             stage: stage,
+            users: users,
             page: 0
         });
     });

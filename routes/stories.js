@@ -69,6 +69,21 @@ router.route('/genre/:genre').get((req, res) => {
 });
 
 
+// Gets all starts for a Genre
+router.route('/genre/:genre/starts').get(async (req, res) => {
+    const genre = req.params.genre;
+
+    let curGenre = await Genre.findOne({genre: genre});
+
+    // Checks to make sure it exists
+    if (curGenre === null) {
+        res.status(404).send('Genre not found');
+        return;
+    }
+
+    res.send(curGenre.starts);
+})
+
 // Deletes a Genre
 router.route('/genre/:genre/').delete((req, res) => {
     const genre = req.params.genre;
@@ -236,7 +251,22 @@ router.route('/story/:story').get((req, res) => {
 // Starts a new Story
 /*
     {
-        "start": <String>
+        "title": <String>,
+        "start": <String>,
+        "story": <String>,
+        "contributions": [
+            {
+                "username": <String>,
+                "sentence": <String>,
+            }
+        ],
+        "userScores": [
+            {   
+                "username": <String>,
+                "score": <Number>,
+                "icon", <String>
+            }
+        ]
     }
 */
 router.route('/start').post(async (req, res) => {

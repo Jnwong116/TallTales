@@ -1,5 +1,3 @@
-import { makeRaconteur } from "../sockets/updateUser.js";
-
 // const log = console.log
 
 export const findRaconteur = (users) => {
@@ -34,5 +32,5 @@ export const chooseRaconteur = (users) => {
         }
     }
 
-    makeRaconteur(users);
+    return users;
 }
