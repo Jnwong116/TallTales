@@ -31,3 +31,7 @@
   width: 26px;
   padding-right: 10px;
 }
+
+.user-input-text-field .MuiTextField-root {
+    min-width: 400px !important;
+}
