@@ -21,6 +21,7 @@ const users = require("../../data/users.json");
 
 let count = 0;
 
+/* maps users to data DataGrid rows */
 const initialRows = (users.users.map((user) => ({
   id: count++,
   username: user.username,
@@ -39,9 +40,9 @@ function AdminBrowseUsers(props) {
         setTimeout(() => {
           setRows((prevRows) => prevRows.filter((row) => row.id !== id));
         });
-        alert("User deleted!");
+        console.log("Deleted user id: " + id);
       } else {
-        alert("Can't delete privileged user!");
+        console.log("Can't delete user id: " + id);
       }
     },
     [],
@@ -50,12 +51,9 @@ function AdminBrowseUsers(props) {
   const resetPassword = React.useCallback(
     (id) => () => {
       if (id > 1) {
-        setTimeout(() => {
-          setRows((prevRows) => prevRows.filter((row) => row.id !== id));
-        });
-        alert("Password reset!");
+        console.log("Password reset for user id: " + id);
       } else {
-        alert("Can't reset password of privileged user!");
+        console.log("Can't reset for user id: " + id);
       }
     },
     [],
@@ -63,13 +61,13 @@ function AdminBrowseUsers(props) {
 
   const columns: GridColDef[] = [
     { field: 'username',      editable: true,  type: 'string',   headerName: 'Username',       width: 150, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator',
-      preProcessEditCellProps: (params: GridPreProcessEditCellProps) => {
+      preProcessEditCellProps: (params: GridPreProcessEditCellProps) => { /* validates username change */
         let hasError;
         if (hasError = params.props.value.length < 1) {           /*  Ensures that username can't be less than 1 character
                                                                       Not really needed anymore, leaving in for levity. */
-          alert("Username can't be 0 characters!");               /* This needs to be a snack */
+          console.log("Username can't be 0 characters!");               /* This needs to be a snack */
         } else if (hasError = params.row.username === 'admin' ) { /* Ensures admin can't be renamed */
-          alert("Admin can't be renamed!");                       /* This needs to be a snack */
+          console.log("Admin can't be renamed!");                       /* This needs to be a snack */
         }
         return {
           ...params.props, error: hasError
@@ -77,11 +75,11 @@ function AdminBrowseUsers(props) {
       },
     },
     { field: 'isAdmin',       editable: true,  type: 'boolean',  headerName: 'Admin',          width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator',
-      preProcessEditCellProps: (params: GridPreProcessEditCellProps) => {
+      preProcessEditCellProps: (params: GridPreProcessEditCellProps) => { /* validates isAdmin change */
         const hasError = params.row.username === 'admin';         /*  Ensures that 'admin' user can't be demoted to regular user
                                                                       Not really needed anymore, leaving in for levity. */
         if(hasError) {
-          alert("Admin can't be demoted!");                       /* This needs to be a snack */
+          console.log("Admin can't be demoted!");                       /* This needs to be a snack */
         }
         return {
           ...params.props, error: hasError
@@ -89,7 +87,7 @@ function AdminBrowseUsers(props) {
       },
     },
     { field: 'gamesPlayed',   editable: false, type: 'number',   headerName: 'Games',          width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
-    { field: 'highScore',     editable: false,  type: 'number',   headerName: 'High Score',     width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
+    { field: 'highScore',     editable: false, type: 'number',   headerName: 'High Score',     width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
     { field: 'divider',       editable: false, type: 'number',   headerName: '',                flex:   1, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
     { field: 'resetPassword', editable: false, type: 'actions',  headerName: 'Reset Pass',     width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator',
       getActions: (params) =>
@@ -120,12 +118,21 @@ function AdminBrowseUsers(props) {
       <div className="adminContent">
         <div style={{ display: 'flex', height: '100%',  width: '100%' }}>
           <div style={{ height: '526px', width:'100%' }}>  {/* used to be: 371px */}
+
             <DataGrid
-              componentsProps={{
-                columnMenu: { background: 'yellow', counter: rows.length },
+
+              onCellEditStop={(params, event) => {            /* more events: https://mui.com/components/data-grid/events/ */
+                  const oldName = "temp";
+                  const newName = "temp";
+                  console.log("Changed cell from " + oldName + " to " + newName);
+                  console.log("Finished editing cell.");        /* This function will return the current table row once cell editing has concluded. */
+                  console.log(params.row);
               }}
+              {...initialRows}
+
               rows={rows}
-              columns={columns}
+              columns={[...columns, {field: 'divider', sortable: false}]}            /* disables sorting on the divider column */
+              disableColumnMenu={true}                        /*  disables additional column options (sorting, filtering, etc) */
               experimentalFeatures={{ newEditingApi: true }}  /*  required for certain props*/
               isCellEditable={(params) => params.row.id > 1}  /*  admin and user rows (ids 0, 1) are not editable.
                                                                   NOTE: This makes the alerts in delete user and
