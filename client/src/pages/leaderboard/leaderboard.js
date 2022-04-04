@@ -12,26 +12,41 @@ import { getCurrentUser } from "../../actions/global/users.js";
 class Leaderboard extends React.Component {
     state = {
         user: {
-            username: "",
-            icon: "avatar01.png",
-            score: 0
+            username: "jasper",
+            score: 110,
+            icon: "avatar01.png"
         },
         users: [
             {
-                username: "",
-                score: 0,
+                username: "jasper",
+                score: 110,
                 icon: "avatar01.png"
+            },
+            {
+                username: "chris",
+                score: 110,
+                icon: "avatar02.png"
+            },
+            {
+                username: "gazi",
+                score: 50,
+                icon: "avatar03.png"
+            },
+            {
+                username: "jordan",
+                score: 70,
+                icon: "avatar04.png"
             }
         ]
     }
 
-    componentDidMount() {
-        // Sort the users from highest to lowest points
-        this.setState({
-            users: this.props.app.state.users.sort(sortPlayers),
-            user: getCurrentUser(this.props.app)
-        })
-    }
+    // componentDidMount() {
+    //     // Sort the users from highest to lowest points
+    //     this.setState({
+    //         users: this.props.app.state.users.sort(sortPlayers),
+    //         user: getCurrentUser(this.props.app)
+    //     })
+    // }
 
     render() {
         const footerMessages = [

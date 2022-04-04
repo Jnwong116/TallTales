@@ -23,10 +23,31 @@ class App extends React.Component {
   state = {
     users: [],
     story: {
-      title: "",
-      start: "",
+      title: "A Temp Title",
+      start: "chris and jordan are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means.",
       story: "",
-      contributions: [],
+      contributions: [
+          {
+              username: "jordan",
+              sentence: "And then Jordan ended the story."
+          },
+          {
+            username: "jasper",
+            sentence: "And then Jasper ended the story."
+        },
+        {
+            username: "gazi",
+            sentence: "And then Gazi ended the story."
+        },
+        {
+            username: "jasper",
+            sentence: "And then Jasper ended the story."
+        },
+        {
+            username: "gazi",
+            sentence: "And then Gazi ended the story."
+        }
+      ],
       prompt: {},
       userScores: []
     },
@@ -79,7 +100,7 @@ class App extends React.Component {
             {/* <Route path="/howToPlay" element={<HowToPlay app={this} />} />
                 <Route path="/profile" element={<Profile app={this} />} /> */}
 
-            {/* <Route path="/leader" element={<Leaderboard app={this} />}></Route> */}
+            <Route path="/leader" element={<Leaderboard app={this} />}></Route>
           </Switch>
           <ToastContainer limit={1}/>
         </Router>
