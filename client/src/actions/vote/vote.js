@@ -1,6 +1,7 @@
 import { updatePrompt } from "../prompt/displayPrompt";
 import { findRaconteur } from "./raconteur";
-import { raconteurVoted, updateStory } from "../sockets/vote";
+import { raconteurVoted } from "../sockets/vote";
+import { updateStory } from "../sockets/story";
 
 export const AIinput = (users, app, page) => {
     // Gets passed in array of users from database

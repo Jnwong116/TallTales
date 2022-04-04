@@ -6,8 +6,9 @@ import UserIcon from "../../components/userIcon/userIcon.js";
 import "./voteStage.css";
 
 import { select, confirmVote, checkRaconteur } from "../../actions/vote/vote.js";
-import { loadUserInput, receiveVote, storyUpdated } from "../../actions/sockets/vote.js";
+import { loadUserInput, receiveVote } from "../../actions/sockets/vote.js";
 import { getCurrentUser } from "../../actions/global/users.js";
+import { storyUpdated } from "../../actions/sockets/story.js";
 
 class VoteStage extends React.Component {
   state = {
