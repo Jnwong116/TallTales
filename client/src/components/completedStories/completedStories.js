@@ -24,6 +24,11 @@ class CompletedStories extends React.Component {
       }
 
   render() {
+
+    const handleClick = () => {
+        window.alert('edit');
+    }
+
     return (
     //   <div className="profileHomeInterface">
     //     <UserIconMedium username={this.props.parent.state.user.username} icon={this.props.parent.state.user.icon} />
@@ -39,7 +44,7 @@ class CompletedStories extends React.Component {
                         "Completed Stories" :
                         this.state.user.stories[this.state.story].title + " (" + (this.state.story + 1) + "/" + this.state.user.stories.length + ")"
                     }
-                    <img src={require("../../assets/images/pencil.png")} alt="edit"></img>
+                    <img src={require("../../assets/images/pencil.png")} alt="edit" onClick={() => handleClick()}></img>
                 </div>
                 <span className="browseStoriesRightArrow" onClick={() => {nextStory(this.state.story, this.state.user, this)}}>
                     <ArrowRight />
