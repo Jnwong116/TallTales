@@ -33,6 +33,11 @@ class InputStage extends React.Component {
 
   render() {
     this.prompt = displayPrompt(this.props.app);
+
+    const handleClick = () => {
+        saveInput(this.props.app);
+    }
+
     return (
       <div className="input-stage">
         <div className="input-stage-header">
@@ -40,12 +45,10 @@ class InputStage extends React.Component {
           <Score user={this.state.user}></Score>
         </div>
         <Story story={this.props.app.state.story.story}></Story>
-        <UserInput prompt={this.prompt} user={this.state.user}></UserInput>
+        <UserInput prompt={this.prompt} user={this.state.user} enterFunction={handleClick}></UserInput>
         <Button
           text="SUBMIT"
-          handleClick={() => {
-            saveInput(this.props.app);
-          }}
+          handleClick={handleClick}
         ></Button>
       </div>
     );

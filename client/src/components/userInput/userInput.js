@@ -33,8 +33,6 @@ class UserInput extends React.Component {
               label="OKAY AND THEN..."
               variant="filled"
               margin="normal"
-              multiline="true"
-              maxRows="5"
               color="secondary"
               onKeyUp={onKeyUp}
             />
