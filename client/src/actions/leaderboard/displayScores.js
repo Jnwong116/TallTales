@@ -67,6 +67,8 @@ export const saveStory = (user, story, app, page) => {
         // Saves the story to the DB
         const url = `${API_HOST}/stories/start`;
 
+        story.userScores = page.state.users;
+
         const request = new Request(url, {
             method: "post",
             body: JSON.stringify(story),
