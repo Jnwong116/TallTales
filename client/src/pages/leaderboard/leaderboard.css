@@ -11,32 +11,6 @@
 
 .leaderboard-story {
     margin-left: 10%;
-    text-align: left;
-}
-
-.leaderboard-story-title {
-    font-family: "Inter";
-    font-size: 40px;
-    padding-bottom: 20px;
-    color: #808080;
-}
-
-.leaderboard-story-start {
-    font-family: "Inter";
-    font-size: 20px;
-    font-style: italic;
-    max-width: 800px;
-    color: #808080;
-    padding-bottom: 25px;
-}
-
-.leaderboard-story-contribution {
-    font-family: "Inter";
-    font-size: 20px;
-    max-width: 800px;
-    line-height: 1.5;
-    color: #808080;
-    padding-bottom: 25px;
 }
 
 .leaderboard-scoreboard {
@@ -53,7 +27,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
     margin-left: 10%;
 
     font-family: "Inter";

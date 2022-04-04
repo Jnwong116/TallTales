@@ -1,6 +1,7 @@
 import React from "react";
 import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
+import CompletedStory from "../../components/completedStory/completedStory.js";
 import Scoreboard from "../../components/scoreboard/scoreboard.js";
 
 import "./leaderboard.css"
@@ -30,22 +31,7 @@ class Leaderboard extends React.Component {
                 </div>
                 <div className="leaderboard-content">
                     <div className="leaderboard-story">
-                        <div className="leaderboard-story-title">
-                            {"The completed story..."}
-                        </div>
-                        <div className="leaderboard-story-start">
-                            {this.stories.currStory.start}
-                        </div>
-                        <div className="leaderboard-story-contribution">
-                            {this.stories.currStory.contributions.map((obj, i) => {
-                                return (
-                                    <span key={i} className={obj.username}>
-                                        {obj.sentence}
-                                    </span>
-                                )
-                                })
-                            }
-                        </div> 
+                        <CompletedStory stories={this.stories} title="The completed story..."/>
                     </div>
                     <div className="leaderboard-scoreboard">
                         <Scoreboard users={this.users.users} />

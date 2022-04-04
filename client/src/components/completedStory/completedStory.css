@@ -1,0 +1,28 @@
+.completed-story {
+    text-align: left;
+}
+
+.completed-story-title {
+    font-family: "Inter";
+    font-size: 40px;
+    padding-bottom: 20px;
+    color: #808080;
+}
+
+.completed-story-start {
+    font-family: "Inter";
+    font-size: 20px;
+    font-style: italic;
+    max-width: 800px;
+    color: #808080;
+    padding-bottom: 25px;
+}
+
+.completed-story-contribution {
+    font-family: "Inter";
+    font-size: 20px;
+    max-width: 800px;
+    line-height: 1.5;
+    color: #808080;
+    padding-bottom: 25px;
+}
