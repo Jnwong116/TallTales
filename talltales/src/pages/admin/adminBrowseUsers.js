@@ -121,19 +121,10 @@ function AdminBrowseUsers(props) {
 
             <DataGrid
 
-              onCellEditStop={(params, event) => {            /* more events: https://mui.com/components/data-grid/events/ */
-                  const oldName = "temp";
-                  const newName = "temp";
-                  console.log("Changed cell from " + oldName + " to " + newName);
-                  console.log("Finished editing cell.");        /* This function will return the current table row once cell editing has concluded. */
-                  console.log(params.row);
-              }}
-              {...initialRows}
-
+              experimentalFeatures={{ newEditingApi: true }}  /*  required for certain props*/
               rows={rows}
               columns={[...columns, {field: 'divider', sortable: false}]}            /* disables sorting on the divider column */
               disableColumnMenu={true}                        /*  disables additional column options (sorting, filtering, etc) */
-              experimentalFeatures={{ newEditingApi: true }}  /*  required for certain props*/
               isCellEditable={(params) => params.row.id > 1}  /*  admin and user rows (ids 0, 1) are not editable.
                                                                   NOTE: This makes the alerts in delete user and
                                                                   reset password unnecessary but left them there for
@@ -145,6 +136,10 @@ function AdminBrowseUsers(props) {
                 },
               }}
               hideFooterSelectedRowCount= {true}              /*  self-explanatory */
+              onCellEditStop={(params: GridCellEditStopParams, event: MuiEvent) => {
+                console.log("Edited cell:")
+                console.log(params);
+              }}
             /* processRowUpdate={processRowUpdate} */         /*  api call for processing updates to rows */
             />
           </div>
