@@ -17,11 +17,11 @@
   font-size: 26px;
   font-style: italic;
   color: rgb(83, 83, 83);
-  max-width: 500px;
+  max-width: 600px;
 }
 
 .vote-stage-turns {
-  margin-right: 10%;
+  margin-right: 5%;
 }
 .vote-stage-raconteur {
   font-size: 36px;
