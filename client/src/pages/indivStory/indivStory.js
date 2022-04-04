@@ -3,7 +3,7 @@ import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
 import CompletedStory from "../../components/completedStory/completedStory.js";
 import Scoreboard from "../../components/scoreboard/scoreboard.js";
-import { loadStory } from "../../actions/indivStory/loadStory.js";
+import { loadStory, copyToClipboard } from "../../actions/indivStory/loadStory.js";
 
 import "./indivStory.css"
 
@@ -41,7 +41,7 @@ class IndivStory extends React.Component {
                     <div className="indiv-story-footer-button">
                         <Button text="COPY TO CLIPBOARD" 
                             handleClick={() => {
-                                navigator.clipboard.writeText(window.location.href);
+                                copyToClipboard(window.location.href);
                             }}
                         /> 
                     </div>
