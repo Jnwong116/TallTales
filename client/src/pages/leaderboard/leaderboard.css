@@ -6,94 +6,40 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding-bottom: 30px;
 }
 
-.leaderboard-story-recap {
+.leaderboard-story {
     margin-left: 10%;
-    text-align: left;
 }
 
-.leaderboard-total-points {
+.leaderboard-scoreboard {
     margin-right: 10%;
 }
 
-.leaderboard-title {
-    font-family: "Inter";
-    font-size: 40px;
-    font-weight: bolder;
-    padding-bottom: 20px;
-    color: #e6e5dc;
-}
-
-.leaderboard-story-start {
-    font-family: "Inter";
-    font-size: 20px;
-    font-style: italic;
-    max-width: 600px;
-    color: #808080;
-    padding-bottom: 25px;
-}
-
-.leaderboard-story-contribution {
-    font-family: "Inter";
-    font-size: 23px;
-    font-style: italic;
-    font-weight: bold;
-    max-width: 600px;
-    color: #808080;
-    /* Indent if multiple lines for one contribution */
-    text-indent: 40px;
-}
-
-.leaderboard-players {
+.footer {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    width: 400px;
-    height: 300px;
-    margin-top: -30px;
-    justify-content: center;
-  }
-
-.leaderboard-player-score {
-    font-family: "Inter";
-    font-size: 25px;
-    font-weight: bolder;
-    color: #e6e5dc;
-    margin-top: -25px;
+    justify-content: space-between;
 }
 
-.leaderboard-players-winner {
+.footer-message {
     display: flex;
     justify-content: center;
-    margin-top: -30px;
-  }
+    align-items: center;
+    margin-left: 10%;
 
-.leaderboard-player-0 img{
-    height: 150px;
-    width: 150px;
-    justify-content: center;
+    font-family: "Inter";
+    font-size: 23px;
+    width: 700px;
+    color: #808080;
+
+    background-color: #d6d6d6;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
-.leaderboard-player-1-2 img{
-    height: 100px;
-    width: 100px;
-}
-
-.leaderboard-player-3-4-5 img{
-    height: 50px;
-    width: 50px;
-}
-
-.your-score {
-    font-size: 36px;
-    font-style: "Inter";
-    font-weight: bolder;
-    color: #e6e5dc;
-    margin-bottom: 30px;
-}
-
-strong {
-    color: black;
+.footer-button {
+    margin-right: 10%;
 }
   
