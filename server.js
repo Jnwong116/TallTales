@@ -49,10 +49,10 @@ app.get("*", (req, res) => {
 
 let users = [];
 let rooms = {
-  room1: [],
-  room2: [],
-  room3: [],
-  room4: []
+  room1: false,
+  room2: false,
+  room3: false,
+  room4: false
 };
 
 // Join user to chat
@@ -78,7 +78,6 @@ function userJoin(
   };
 
   users.push(user);
-  rooms[room].push(username);
 
   return user;
 }
@@ -109,35 +108,42 @@ function allUsersInput(users) {
 io.on("connection", socket => {
   // Join user to room
   socket.on("join-room", ({ user, room }) => {
-    const currUser = userJoin(
-      socket.id,
-      user.username,
-      user.icon,
-      user.score,
-      user.raconteur,
-      user.currentSentence,
-      user.host,
-      room
-    );
-    socket.join(currUser.room);
-    io.emit("message", `${currUser.username} has joined ${currUser.room}`);
-    io.to(currUser.room).emit("update-users", {
-      room: currUser.room,
-      users: getRoomUsers(currUser.room),
-      rooms: rooms
-    });
+    if (!rooms[room]) {
+      const currUser = userJoin(
+        socket.id,
+        user.username,
+        user.icon,
+        user.score,
+        user.raconteur,
+        user.currentSentence,
+        user.host,
+        room
+      );
+      socket.join(currUser.room);
+      io.emit("message", `${currUser.username} has joined ${currUser.room}`);
+      io.to(currUser.room).emit("update-users", {
+        users: getRoomUsers(currUser.room)
+      });
+    } else {
+      socket.emit("deny-room-access", "Room in Progress!");
+    }
   });
 
   socket.on("change-host", changedUsers => {
     users = changedUsers;
   });
 
+  socket.on("update-rooms", changedRooms => {
+    rooms = changedRooms;
+  });
+
   socket.on("start-game", ({ room, storyStart, storyPrompts, users }) => {
-    // console.log(room);
     io.to(room).emit("game-started", {
       storyStart: storyStart,
       storyPrompts: storyPrompts,
-      users: users
+      users: users,
+      rooms: rooms,
+      room: room
     });
   });
 
@@ -148,9 +154,7 @@ io.on("connection", socket => {
       io.to(room).emit("all-users-input", {
         users: users
       });
-    }
-
-    else {
+    } else {
       io.to(room).emit("update-users", {
         users: users
       });

@@ -12,9 +12,13 @@ export const startGame = (app, start, prompts) => {
     users: users
   });
 };
-  
-  export const gameStarted = (app) => {
-    socket.on("game-started", ({ storyStart, storyPrompts, users }) => {
+
+export const gameStarted = app => {
+  socket.on(
+    "game-started",
+    ({ storyStart, storyPrompts, users, rooms, room }) => {
+      rooms[room] = true;
+      socket.emit("update-rooms", rooms);
       app.setState({
         story: {
           start: storyStart,
@@ -27,6 +31,6 @@ export const startGame = (app, start, prompts) => {
         prompt: 0,
         stage: 0
       });
-    });
-  };
-  
+    }
+  );
+};

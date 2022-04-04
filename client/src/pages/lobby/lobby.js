@@ -45,10 +45,6 @@ class Lobby extends React.Component {
   }
 
   render() {
-    // socket.on("current-rooms", rooms => {
-    //   console.log(rooms);
-    // });
-
     gameStarted(this.props.app);
 
     const genres = this.state.genres.map(object => object.genre);
