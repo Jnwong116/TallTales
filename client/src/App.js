@@ -8,6 +8,7 @@ import VoteStage from "./pages/voteStage/voteStage";
 import Dashboard from "./pages/dashboard/dashboard";
 import Profile from "./pages/profile/profile";
 import Leaderboard from "./pages/leaderboard/leaderboard";
+import IndivStory from "./pages/indivStory/indivStory";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -77,7 +78,8 @@ class App extends React.Component {
             {/* <Route path="/howToPlay" element={<HowToPlay app={this} />} />
                 <Route path="/profile" element={<Profile app={this} />} /> */}
 
-            {/* <Route path="/leader" element={<Leaderboard app={this} />}></Route> */}
+            <Route path="/leader" element={<Leaderboard app={this} />}></Route>
+            <Route path="/indiv" element={<IndivStory story={this.state.story} />}></Route>
           </Switch>
           <ToastContainer limit={1}/>
         </Router>
