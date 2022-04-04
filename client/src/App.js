@@ -143,7 +143,7 @@ class App extends React.Component {
                 <Route path="/profile" element={<Profile app={this} />} /> */}
 
             {/* <Route path="/leader" element={<Leaderboard app={this} />}></Route> */}
-            <Route path="/past-stories" element={<IndivStory story={this.state.story} />}></Route>
+            <Route path="/past-stories" element={<IndivStory />}></Route>
           </Switch>
           <ToastContainer limit={1}/>
         </Router>

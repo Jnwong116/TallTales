@@ -3,33 +3,45 @@ import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
 import CompletedStory from "../../components/completedStory/completedStory.js";
 import Scoreboard from "../../components/scoreboard/scoreboard.js";
+import { loadStory } from "../../actions/indivStory/loadStory.js";
 
 import "./indivStory.css"
 
 class IndivStory extends React.Component {
+    state = {
+        story: {
+            title: "",
+            start: "",
+            story: "",
+            contributions: [],
+            prompt: {},
+            userScores: []
+        }
+    }
+
+    componentDidMount() {
+        loadStory(this, window.location.href)
+    }
+
     render() {
-        const story = this.props.story;
-
-        const COPY_PLACEHOLDER = "SAMPLE TEXT";
-
         return (
             <div className="indiv-story">
                 <div className="header">
-                    <AppName text={story.title}></AppName>
+                    <AppName text={this.state.story.title}></AppName>
                 </div>
                 <div className="indiv-story-content">
                     <div className="indiv-story-story">
-                        <CompletedStory story={story} title="The completed story..."/>
+                        <CompletedStory story={this.state.story} title="The completed story..."/>
                     </div>
                     <div className="indiv-story-scoreboard">
-                        <Scoreboard users={story.userScores} />
+                        <Scoreboard users={this.state.story.userScores} />
                     </div>  
                 </div>
                 <div className="indiv-story-footer">
                     <div className="indiv-story-footer-button">
                         <Button text="COPY TO CLIPBOARD" 
                             handleClick={() => {
-                                navigator.clipboard.writeText(COPY_PLACEHOLDER);
+                                navigator.clipboard.writeText(window.location.href);
                             }}
                         /> 
                     </div>
