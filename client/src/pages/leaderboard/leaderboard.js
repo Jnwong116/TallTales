@@ -7,18 +7,33 @@ import Scoreboard from "../../components/scoreboard/scoreboard.js";
 import "./leaderboard.css"
 
 import { sortPlayers, saveStory } from "../../actions/leaderboard/displayScores.js";
+import { getCurrentUser } from "../../actions/global/users.js";
 
 class Leaderboard extends React.Component {
+    state = {
+        user: {
+            username: "",
+            icon: "avatar01.png",
+            score: 0
+        },
+        users: [
+            {
+                username: "",
+                score: 0,
+                icon: "avatar01.png"
+            }
+        ]
+    }
+
+    componentDidMount() {
+        // Sort the users from highest to lowest points
+        this.setState({
+            users: this.props.app.state.users.sort(sortPlayers),
+            user: getCurrentUser(this.props.app)
+        })
+    }
 
     render() {
-        // Import mock data
-        // Requires server call to get list of stories and users from server
-        this.stories = this.props.app.state.stories;
-        this.users = this.props.app.state.users;
-
-        // Sort the users from highest to lowest points
-        this.users.users.sort(sortPlayers);
-
         const footerMessages = [
             "You have the highest score! Your effort paid off!",
             "Good effort! One day they'll recognize your genius..."
@@ -31,15 +46,15 @@ class Leaderboard extends React.Component {
                 </div>
                 <div className="leaderboard-content">
                     <div className="leaderboard-story">
-                        <CompletedStory stories={this.stories} title="The completed story..."/>
+                        <CompletedStory story={this.props.app.state.story} title="The completed story..."/>
                     </div>
                     <div className="leaderboard-scoreboard">
-                        <Scoreboard users={this.users.users} />
+                        <Scoreboard users={this.state.users} />
                     </div>   
                 </div>
                 <div className="footer">
                     <div className="footer-message">
-                        {(this.props.app.state.currUser.score === this.users.users[0].score) ? 
+                        {(this.state.user.score === this.state.users[0].score) ? 
                         footerMessages[0] : footerMessages[1]}
                     </div>
                     <div className="footer-button">
