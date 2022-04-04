@@ -6,6 +6,7 @@ import AdminMenu from "../../components/dashboardMenu/adminMenu.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
 import "./dashboard.css";
 
+import Stack from '@mui/material/Stack';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -26,9 +27,11 @@ const users = require("../../data/users.json");
 class AdminBrowsePrompts extends React.Component {
   render() {
 
-    const genres = this.props.app.state.stories.stories.map(
+    var genres = this.props.app.state.stories.stories.map(
       object => object.genre
     );
+
+    genres.push("Create New Genre");
 
     const theme = {
       spacing: 20,
@@ -71,55 +74,61 @@ class AdminBrowsePrompts extends React.Component {
           </div>
 
           <div className="promptsMenuRow" style={{ display: 'flex', 'flex-direction': 'column', width: '100%', 'justify-content': 'flex-end', 'align-items':'flex-end' }}>
-            <Card sx={{ width: 638 }} variant="outlined">
-              <CardHeader style={{ textAlign: 'left' }}
-                avatar={
-                  <Avatar sx={{ bgcolor: '#292929' }} aria-label="recipe">
-                    C
-                  </Avatar>
-                }
-                action={
-                  <IconButton aria-label="settings">
-                    <MoreVertIcon />
-                  </IconButton>
-                }
-                title="Canned Food"
-                subheader="Submitted by gazi"
+            <Stack spacing={2}>
+
+              <Card sx={{ width: 638 }} variant="outlined">
+                <CardHeader style={{ textAlign: 'left' }}
+                  avatar={
+                    <Avatar sx={{ bgcolor: '#292929' }} aria-label="recipe">
+                      C
+                    </Avatar>
+                  }
+                  action={
+                    <IconButton aria-label="settings">
+                      <MoreVertIcon />
+                    </IconButton>
+                  }
+                  title="Canned Food"
+                  subheader="Submitted by gazi"
+                />
+
+                <CardContent>
+                  <Typography style={{ textAlign: 'left' }} variant="body2" color="text.secondary">
+                    User 1 and User 2 are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means.
+                  </Typography>
+                </CardContent>
+              </Card>
+
+  {/*
+              <Box
+                sx={{ m: 1.4 }}
               />
+  */}
 
-              <CardContent>
-                <Typography style={{ textAlign: 'left' }} variant="body2" color="text.secondary">
-                  User 1 and User 2 are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means.
-                </Typography>
-              </CardContent>
-            </Card>
+              <Card sx={{ width: 638 }} variant="outlined">
+                <CardHeader style={{ textAlign: 'left' }}
+                  avatar={
+                    <Avatar sx={{ bgcolor: '#292929' }} aria-label="recipe">
+                      B
+                    </Avatar>
+                  }
+                  action={
+                    <IconButton aria-label="settings">
+                      <MoreVertIcon />
+                    </IconButton>
+                  }
+                  title="Bakery Break-In"
+                  subheader="Submitted by jasper"
+                />
 
-            <Box
-              sx={{ m: 1.4 }}
-            />
+                <CardContent>
+                  <Typography style={{ textAlign: 'left' }} variant="body2" color="text.secondary">
+                    Detectives User 1, User 2, and User 3 are investigating a break-in at a bakery. The only thing missing? A very secret ingredient.
+                  </Typography>
+                </CardContent>
+              </Card>
 
-            <Card sx={{ width: 638 }} variant="outlined">
-              <CardHeader style={{ textAlign: 'left' }}
-                avatar={
-                  <Avatar sx={{ bgcolor: '#292929' }} aria-label="recipe">
-                    B
-                  </Avatar>
-                }
-                action={
-                  <IconButton aria-label="settings">
-                    <MoreVertIcon />
-                  </IconButton>
-                }
-                title="Bakery Break-In"
-                subheader="Submitted by jasper"
-              />
-
-              <CardContent>
-                <Typography style={{ textAlign: 'left' }} variant="body2" color="text.secondary">
-                  Detectives User 1, User 2, and User 3 are investigating a break-in at a bakery. The only thing missing? A very secret ingredient.
-                </Typography>
-              </CardContent>
-            </Card>
+            </Stack>
 
           </div>
 
