@@ -133,6 +133,11 @@ io.on("connection", socket => {
     users = changedUsers;
   });
 
+  socket.on("create-room", newRoom => {
+    console.log(newRoom);
+    io.emit("created-room", newRoom);
+  });
+
   socket.on("update-rooms", changedRooms => {
     rooms = changedRooms;
   });

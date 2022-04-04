@@ -8,8 +8,8 @@ import VoteStage from "./pages/voteStage/voteStage";
 import Dashboard from "./pages/dashboard/dashboard";
 import Profile from "./pages/profile/profile";
 import Leaderboard from "./pages/leaderboard/leaderboard";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import React from "react";
 import {
@@ -30,11 +30,7 @@ class App extends React.Component {
       prompt: {},
       userScores: []
     },
-    rooms: { 
-      room1: [], 
-      room2: [], 
-      room3: []
-    },
+    rooms: ["main"],
     currUser: null,
     page: 0,
     stage: 0,
@@ -81,9 +77,8 @@ class App extends React.Component {
 
             {/* <Route path="/leader" element={<Leaderboard app={this} />}></Route> */}
           </Switch>
-          <ToastContainer limit={1}/>
+          <ToastContainer limit={1} />
         </Router>
-
       </div>
     );
   }

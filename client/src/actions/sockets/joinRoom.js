@@ -43,3 +43,21 @@ export const updateRoom = app => {
     }
   });
 };
+
+export const createNewRoom = rooms => {
+  socket.emit("create-room", rooms);
+};
+
+export const createdNewRoom = app => {
+  socket.on("created-room", newRoom => {
+    app.setState({
+      rooms: newRoom
+    });
+  });
+};
+
+export const denyRoomAccess = errorToast => {
+  socket.on("deny-room-access", s => {
+    errorToast(s);
+  });
+};

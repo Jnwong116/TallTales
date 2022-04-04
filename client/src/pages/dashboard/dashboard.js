@@ -7,7 +7,7 @@ import "./dashboard.css";
 import { getUser } from "../../actions/global/users.js";
 import { socket } from "../../actions/sockets/socket.js";
 import { errorToast } from "../../actions/toastify/toastify.js";
-
+import { denyRoomAccess } from "../../actions/sockets/joinRoom.js";
 class Dashboard extends React.Component {
   state = {
     user: {
@@ -22,9 +22,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    socket.on("deny-room-access", s => {
-      errorToast(s);
-    });
+    denyRoomAccess(errorToast);
     return (
       <div className="dashboard">
         <span className="dashboardLeft">

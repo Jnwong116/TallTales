@@ -2,15 +2,18 @@ import React from "react";
 import Button from "../button/button.js";
 import "./dashboardMenu.css";
 import DropDown from "../../components/dropDown/dropDown.js";
-
+import RoomCreateInput from "../../components/roomCreateInput/roomCreateInput.js";
+import { socket } from "../../actions/sockets/socket.js";
 import {
   menuRedirect,
   logout,
   startGame
 } from "../../actions/dashboard/menu.js";
+import { createdNewRoom } from "../../actions/sockets/joinRoom.js";
 
 class DashboardMenu extends React.Component {
   render() {
+    createdNewRoom(this.props.app);
     return (
       <span className="dashboardMenu">
         <Button
@@ -37,10 +40,12 @@ class DashboardMenu extends React.Component {
             logout(this.props.app);
           }}
         />
+        <RoomCreateInput app={this.props.app}></RoomCreateInput>
+        {console.log(this.props.app)}
         <div className="lobby-genre">
           <DropDown
             label={"<ROOMS>"}
-            items={["room1", "room2", "room3"]}
+            items={this.props.app.state.rooms}
             user={this.props.app.state.currUser}
             app={this.props.app}
           ></DropDown>
@@ -48,7 +53,6 @@ class DashboardMenu extends React.Component {
       </span>
     );
   }
-
 }
 
 export default DashboardMenu;
