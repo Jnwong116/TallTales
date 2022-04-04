@@ -11,10 +11,6 @@ import {
 
 class DashboardMenu extends React.Component {
   render() {
-    // Import mock data
-    this.stories = this.props.app.state.stories;
-    this.users = this.props.app.state.users;
-
     return (
       <span className="dashboardMenu">
         <Button

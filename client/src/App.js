@@ -19,15 +19,20 @@ import {
 } from "react-router-dom";
 // import { css } from "@emotion/react";
 
-// import data
-const users = require("./data/users.json");
-const stories = require("./data/stories.json");
-
 class App extends React.Component {
   state = {
-    users: users,
-    stories: stories,
-    rooms: { room1: [], room2: [], room2: [] },
+    users: [],
+    story: {
+      start: "",
+      story: "",
+      contributions: [],
+      prompt: {}
+    },
+    rooms: { 
+      room1: [], 
+      room2: [], 
+      room3: []
+    },
     currUser: null,
     page: 0,
     stage: 0,

@@ -1,5 +1,6 @@
 import { updatePrompt } from "../prompt/displayPrompt";
-import { chooseRaconteur } from "./raconteur";
+import { findRaconteur } from "./raconteur";
+import { raconteurVoted, updateStory } from "../sockets/vote";
 
 export const AIinput = (users, app, page) => {
     // Gets passed in array of users from database
@@ -60,7 +61,6 @@ export const AIVote = (users, stories, raconteur, app, page) => {
             // Requires server call to add contribution to story
             stories.currStory.story = stories.currStory.story + " " + input;
             updatePrompt(app);
-            chooseRaconteur(users.users);
             app.setState({
                 page: 0
             });
@@ -69,66 +69,74 @@ export const AIVote = (users, stories, raconteur, app, page) => {
     }, 3000);
 }
 
-export const confirmVote = (users, stories, app, page) => {
-    // Gets passed in array of users and stories from database
+export const confirmVote = (app, page) => {
+    const users = app.state.users;
+    const story = app.state.story;
     const input = page.state.choice;
 
-    for (let i = 0; i < users.users.length; i++) {
-        if (users.users[i].currentSentence === input) {
-            const selectUser = users.users[i];
-
-            document.getElementById('last-sentence').childNodes[0].nodeValue = " " + input;
-            // Requires server call to update user's score
-            selectUser.score = selectUser.score + 100;
-            
-
-            // Adds contributions
-            // Requires server call to add contribution to story
-            stories.currStory.contributions.push({
-                username: selectUser.username,
-                sentence: input
-            })
-
-            page.setState({
-                loading: false
-            })
-
-            setTimeout(() => {
-                // Requires server call to add contribution to story
-                stories.currStory.story = stories.currStory.story + " " + input;
-                updatePrompt(app);
-                chooseRaconteur(users.users);
-                app.setState({
-                    page: 0
-                });
-            }, 5000)
+    // Checks if user has already voted and 
+    if (!page.state.confirmedVote) {
+        for (let i = 0; i < users.length; i++) {
+            if (users[i].currentSentence === input) {
+                const selectUser = users[i];
     
-
+                selectUser.score = selectUser.score + 100;
+                
+                // Adds contributions
+                story.contributions.push({
+                    username: selectUser.username,
+                    sentence: input
+                });
+    
+                raconteurVoted(story, users);
+    
+                page.setState({
+                    confirmedVote: true
+                });
+    
+                setTimeout(() => {
+                    story.story = story.story + " " + input;
+                    updateStory(story, users, app);
+                }, 5000);
+            }
         }
     }
 }
 
-export const select = (users, user, raconteur, app, page) => {
-    // Gets passed in array of users and stories from database
-    if (app.state.currUser.username === raconteur) {
-        for (let i = 0; i < users.users.length; i++) {
-            if (users.users[i].username === user) {
-                const selectUser = users.users[i];
-                const input = selectUser.currentSentence;
+export const select = (user, raconteur, app, page) => {
+    // console.log(app);
+    const users = app.state.users;
 
-                const sentences = document.getElementsByClassName('vote-option-text-selected');
+    // Checks if user has already confirmed vote and inputs have been loaded in
+    if (!page.state.confirmedVote && page.state.loadInputs) {
+        // Checks if currUser is raconteur
+        if (app.state.currUser === raconteur) {
+            for (let i = 0; i < users.length; i++) {
+                if (users[i].username === user) {
+                    const selectUser = users[i];
+                    const input = selectUser.currentSentence;
 
-                if (sentences.length !== 0) {
-                    sentences[0].classList.remove('vote-option-text-selected');
+                    const sentences = document.getElementsByClassName('vote-option-text-selected');
+
+                    if (sentences.length !== 0) {
+                        sentences[0].classList.remove('vote-option-text-selected');
+                    }
+
+                    document.getElementById(user).classList.add("vote-option-text-selected");
+
+                    page.setState({
+                        choice: input
+                    })
                 }
-
-                document.getElementById(user).classList.add("vote-option-text-selected");
-
-                page.setState({
-                    loading: false,
-                    choice: input
-                })
             }
         }
     }
+}
+
+export const checkRaconteur = (app, page) => {
+    const raconteur = findRaconteur(app.state.users);
+
+    page.setState({
+        raconteur: app.state.users[raconteur].username
+    })
 }

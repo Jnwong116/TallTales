@@ -3,15 +3,14 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import { io } from "socket.io-client";
-import ENV from './../../config.js';
 import "./dropDown.css";
-import {
-  menuRedirect,
-  logout,
-  startGame
-} from "../../actions/dashboard/menu.js";
+// import {
+//   menuRedirect,
+//   logout,
+//   startGame
+// } from "../../actions/dashboard/menu.js";
 import { getUser } from "../../actions/global/users.js";
+import { joinRoom, updateRoom } from "../../actions/sockets/joinRoom";
 
 class DropDown extends React.Component {
   state = {
@@ -21,42 +20,25 @@ class DropDown extends React.Component {
       icon: "avatar01.png",
       stories: []
     }
-  }
+  };
 
   componentDidMount() {
     getUser(this, this.props.app);
+    updateRoom(this.props.app);
   }
 
   render() {
-    const socket = io(ENV.api_host);
     const items = this.props.items;
     const label = this.props.label ? this.props.label : "<GENRE>";
-    const user = this.props.user ? this.props.user : {};
-    // console.log(this.state.user);
 
     const handleChange = event => {
       this.setState({ selected: event.target.value });
 
-      if (user) {
+      // console.log(this.props.app.state.page)
+
+      if (this.state.user) {
         // User and room emit
-        socket.emit("join-room", {
-          user: {
-            username: this.state.user.username,
-            icon: this.state.user.icon,
-            score: 0,
-            host: false
-          },
-          room: event.target.value
-        });
-        socket.on("room-users", ({ room, users, rooms }) => {
-          if (rooms[room].length === 1) {
-            users[0].host = true;
-          }
-          this.props.app.setState({
-            page: 2,
-            users: users
-          });
-        });
+        joinRoom(this.state.user, event.target.value)
       }
     };
 

@@ -10,7 +10,7 @@ const { mongoose } = require("./db/mongoose");
 const MongoStore = require("connect-mongo");
 const { ObjectID } = require("mongodb");
 
-require('dotenv').config({ path: path.resolve(__dirname, '../config.env') });
+require("dotenv").config({ path: path.resolve(__dirname, "../config.env") });
 
 const env = process.env.NODE_ENV;
 const port = process.env.PORT;
@@ -47,8 +47,8 @@ app.get("*", (req, res) => {
 // HELPERS
 // TODO: Move to utils
 
-const users = [];
-const rooms = {
+let users = [];
+let rooms = {
   room1: [],
   room2: [],
   room3: [],
@@ -56,8 +56,26 @@ const rooms = {
 };
 
 // Join user to chat
-function userJoin(id, username, icon, score, host, room) {
-  const user = { id, username, icon, score, host, room };
+function userJoin(
+  id,
+  username,
+  icon,
+  score,
+  raconteur,
+  currentSentence,
+  host,
+  room
+) {
+  const user = {
+    id,
+    username,
+    icon,
+    score,
+    raconteur,
+    currentSentence,
+    host,
+    room
+  };
 
   users.push(user);
   rooms[room].push(username);
@@ -73,20 +91,22 @@ function getRoomUsers(room) {
 }
 
 function userLeave(id) {
-  const index = users.findIndex(user => user.id === id);
-
-  if (index !== -1) {
-    return users.splice(index, 1)[0];
+  const usersIndex = users.findIndex(user => user.id === id);
+  if (usersIndex !== -1) {
+    return users.splice(usersIndex, 1)[0];
   }
 }
 
-io.on("connection", socket => {
-  // User has joined
-  socket.broadcast.emit("message", "User has joined");
-  socket.on("disconnect", () => {
-    io.emit("message", "User has exited");
-  });
+function allUsersInput(users) {
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].currentSentence === ". . .") {
+      return false;
+    }
+  }
+  return true;
+}
 
+io.on("connection", socket => {
   // Join user to room
   socket.on("join-room", ({ user, room }) => {
     const currUser = userJoin(
@@ -94,24 +114,77 @@ io.on("connection", socket => {
       user.username,
       user.icon,
       user.score,
+      user.raconteur,
+      user.currentSentence,
       user.host,
       room
     );
     socket.join(currUser.room);
     io.emit("message", `${currUser.username} has joined ${currUser.room}`);
-    io.to(currUser.room).emit("room-users", {
+    io.to(currUser.room).emit("update-users", {
       room: currUser.room,
       users: getRoomUsers(currUser.room),
       rooms: rooms
     });
   });
 
+  socket.on("change-host", changedUsers => {
+    users = changedUsers;
+  });
+
+  socket.on("start-game", ({ room, storyStart, storyPrompts, users }) => {
+    // console.log(room);
+    io.to(room).emit("game-started", {
+      storyStart: storyStart,
+      storyPrompts: storyPrompts,
+      users: users
+    });
+  });
+
+  socket.on("update-raconteur", ({ room, users }) => {
+    // log(users);
+    io.to(room).emit("update-users", {
+      users: users
+    });
+  });
+
+  socket.on("update-sentence", ({ room, users }) => {
+    // Checks if all users have updated their sentence
+    if (allUsersInput(users)) {
+      // log('all-users')
+      io.to(room).emit("all-users-input", {
+        users: users
+      });
+    }
+
+    else {
+      io.to(room).emit("update-users", {
+        users: users
+      });
+    }
+  });
+
+  socket.on("raconteur-vote", ({ room, users, story }) => {
+    io.to(room).emit("receive-vote", {
+      users: users,
+      story: story
+    });
+  });
+
+  socket.on("update-story", ({ room, story, prompt, stage }) => {
+    io.to(room).emit("story-updated", {
+      story: story,
+      prompt: prompt,
+      stage: stage
+    });
+  });
+
   // Runs when client disconnects
   socket.on("disconnect", () => {
+    log(`${socket.id} disconnected`);
     const currUser = userLeave(socket.id);
-
     if (currUser) {
-      io.to(currUser.room).emit("room-users", {
+      io.to(currUser.room).emit("update-users", {
         room: currUser.room,
         users: getRoomUsers(currUser.room),
         rooms: rooms
