@@ -31,25 +31,24 @@ class CompletedStories extends React.Component {
         <div className="profileHomeInterface">
             <div className="storiesNavigation">
                 <span className="browseStoriesLeftArrow" onClick={() => {prevStory(this.state.story, this.state.user, this)}}>
-                <ArrowLeft />
+                    <ArrowLeft />
                 </span>
-                <span className="browseStoriesHeader">
-                {
-                    this.state.user.stories.length === 0 ? 
-                    "Completed Stories" :
-                    "Completed Stories (" + (this.state.story + 1) + "/" + this.state.user.stories.length + ")"
-                }
-                
-                </span>
+                <div className="browseStoriesHeader">
+                    {
+                        this.state.user.stories.length === 0 ? 
+                        "Completed Stories" :
+                        this.state.user.stories[this.state.story].title + " (" + (this.state.story + 1) + "/" + this.state.user.stories.length + ")"
+                    }
+                    <img src={require("../../assets/images/pencil.png")} alt="edit"></img>
+                </div>
                 <span className="browseStoriesRightArrow" onClick={() => {nextStory(this.state.story, this.state.user, this)}}>
-                <ArrowRight />
+                    <ArrowRight />
                 </span>
             </div>
             <Button text="SHARE STORY"
                 handleClick={() => {shareStory(this.state.user.stories[this.state.story])}} />
             <div className="storiesDisplay">
-                {
-                this.state.user.stories.length === 0 ? 
+                {(this.state.user.stories.length === 0) ? 
                 "You have not completed any stories yet! Go play a game and come back to see your completed stories!" :
                 this.state.user.stories[this.state.story].story
                 }
