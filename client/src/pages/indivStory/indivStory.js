@@ -10,6 +10,7 @@ class IndivStory extends React.Component {
     render() {
         const story = this.props.story;
 
+        const COPY_PLACEHOLDER = "SAMPLE TEXT";
 
         return (
             <div className="indiv-story">
@@ -18,8 +19,20 @@ class IndivStory extends React.Component {
                 </div>
                 <div className="indiv-story-content">
                     <div className="indiv-story-story">
-                        <CompletedStory stories={story} title="The completed story..."/>
-                    </div> 
+                        <CompletedStory story={story} title="The completed story..."/>
+                    </div>
+                    <div className="indiv-story-scoreboard">
+                        <Scoreboard users={story.userScores} />
+                    </div>  
+                </div>
+                <div className="indiv-story-footer">
+                    <div className="indiv-story-footer-button">
+                        <Button text="COPY TO CLIPBOARD" 
+                            handleClick={() => {
+                                navigator.clipboard.writeText(COPY_PLACEHOLDER);
+                            }}
+                        /> 
+                    </div>
                 </div>
             </div>
         )
