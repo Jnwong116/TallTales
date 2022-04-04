@@ -21,68 +21,6 @@ import {
 // import { css } from "@emotion/react";
 
 class App extends React.Component {
-  // state = {
-  //   users: [],
-  //   story: {
-  //     title: "Cannibal Can Conundrum",
-  //     start: "chris and jordan are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means.",
-  //     story: "The snow continues falling, piling around the the cabin that Chris and Jordan find themselves trapped in.",
-  //     contributions: [
-  //       {
-  //           "username": "jordan",
-  //           "sentence": "The snow continues falling, piling around the the cabin that Chris and Jordan find themselves trapped in."
-  //       },
-  //       {
-  //           "username": "user",
-  //           "sentence": "The snow continues falling, piling around the the cabin that Chris and Jordan find themselves trapped in."
-  //       },
-  //       {
-  //           "username": "admin",
-  //           "sentence": "The snow continues falling, piling around the the cabin that Chris and Jordan find themselves trapped in."
-  //       },
-  //       {
-  //           "username": "chris",
-  //           "sentence": "The snow continues falling, piling around the the cabin that Chris and Jordan find themselves trapped in."
-  //       },
-  //       {
-  //           "username": "user",
-  //           "sentence": "The snow continues falling, piling around the the cabin that Chris and Jordan find themselves trapped in."
-  //       }
-  //   ],
-  //     prompt: {},
-  //     userScores: [
-  //           {
-  //               "username": "jordan",
-  //               "score": 210,
-  //               "icon": "avatar03.png"
-  //           },
-  //           {
-  //               "username": "user",
-  //               "score": 210,
-  //               "icon": "avatar02.png"
-  //           },
-  //           {
-  //               "username": "admin",
-  //               "score": 120,
-  //               "icon": "avatar01.png"
-  //           },
-  //           {
-  //               "username": "chris",
-  //               "score": 150,
-  //               "icon": "avatar04.png"
-  //           }
-  //       ]
-  //   },
-  //   rooms: { 
-  //     room1: [], 
-  //     room2: [], 
-  //     room3: []
-  //   },
-  //   currUser: null,
-  //   page: 0,
-  //   stage: 0,
-  //   prompt: 0
-  // };
     state = {
         users: [],
         story: {

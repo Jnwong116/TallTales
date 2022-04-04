@@ -13,15 +13,30 @@ import { storySaved } from "../../actions/sockets/story.js";
 class Leaderboard extends React.Component {
     state = {
         user: {
-            username: "",
-            icon: "avatar01.png",
-            score: 0
+            username: "jasper",
+            score: 110,
+            icon: "avatar01.png"
         },
         users: [
             {
-                username: "",
-                score: 0,
+                username: "jasper",
+                score: 110,
                 icon: "avatar01.png"
+            },
+            {
+                username: "chris",
+                score: 110,
+                icon: "avatar02.png"
+            },
+            {
+                username: "gazi",
+                score: 50,
+                icon: "avatar03.png"
+            },
+            {
+                username: "jordan",
+                score: 70,
+                icon: "avatar04.png"
             }
         ],
         story: null
