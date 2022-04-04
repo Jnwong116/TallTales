@@ -3,6 +3,7 @@ import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
 import DropDown from "../../components/dropDown/dropDown.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
+import ReactAudioPlayer from 'react-audio-player';
 import "./lobby.css";
 
 import { redirect, getGenres } from "../../actions/lobby/lobby.js";
@@ -39,7 +40,6 @@ class Lobby extends React.Component {
       ]
     }
   };
-
   componentDidMount() {
     getGenres(this);
   }
@@ -53,8 +53,15 @@ class Lobby extends React.Component {
 
     const genres = this.state.genres.map(object => object.genre);
 
+    const audioSrc = require("../../assets/music/lobby.wav");
+
     return (
       <div className="lobby">
+        <ReactAudioPlayer
+            src={audioSrc}
+            autoPlay
+            loop
+        />
         <div className="header">
           <AppName></AppName>
         </div>
