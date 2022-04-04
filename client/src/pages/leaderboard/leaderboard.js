@@ -6,7 +6,7 @@ import Scoreboard from "../../components/scoreboard/scoreboard.js";
 
 import "./leaderboard.css"
 
-import { sortPlayers, saveStory } from "../../actions/leaderboard/displayScores.js";
+import { sortPlayers, saveStory, saveStoryUser } from "../../actions/leaderboard/displayScores.js";
 import { getCurrentUser } from "../../actions/global/users.js";
 
 class Leaderboard extends React.Component {
@@ -22,7 +22,8 @@ class Leaderboard extends React.Component {
                 score: 0,
                 icon: "avatar01.png"
             }
-        ]
+        ],
+        story: {}
     }
 
     componentDidMount() {
@@ -31,6 +32,8 @@ class Leaderboard extends React.Component {
             users: this.props.app.state.users.sort(sortPlayers),
             user: getCurrentUser(this.props.app)
         })
+
+        saveStory(this.props.app.state.story, this);
     }
 
     render() {
@@ -60,7 +63,7 @@ class Leaderboard extends React.Component {
                     <div className="footer-button">
                         <Button text="HOME" 
                             handleClick={() => {
-                                saveStory(this.state.user, this.props.app.state.story, this.props.app)
+                                saveStoryUser(this.state.user, this.state.story, this.props.app)
                             }}
                         /> 
                     </div>

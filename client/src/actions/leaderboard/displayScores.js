@@ -17,13 +17,11 @@ export const sortPlayers = (a, b) => {
     return 0;
 }
 
-export const saveStory = (user, story, app) => {
-    let savedStory = "";
-
+export const saveStory = (story, page) => {
     // Saves the story to the DB
-    let url = `${API_HOST}/stories/start`;
+    const url = `${API_HOST}/stories/start`;
 
-    let request = new Request(url, {
+    const request = new Request(url, {
         method: "post",
         body: JSON.stringify(story),
         headers: {
@@ -43,7 +41,9 @@ export const saveStory = (user, story, app) => {
     })
     .then((result) => {
         if (typeof(result) === 'object') {
-            savedStory = result;
+            page.setState({
+                story: result
+            });
             return;
         }
         else {
@@ -51,44 +51,43 @@ export const saveStory = (user, story, app) => {
             return;
         }
     })
-    .then(() => { // Saves the story to user
-        if (savedStory !== "") {
-            url = `${API_HOST}/users/stories/${user.username}`;
+    .catch(err => {
+        log(err);
+    })
+}
 
-            request = new Request(url, {
-                method: "post",
-                body: JSON.stringify(savedStory),
-                headers: {
-                    Accept: "application/json, text/plain, */*",
-                    "Content-Type": "application/json"
-                }
+export const saveStoryUser = (user, story, app) => {
+    // Saves the story to user
+    const url = `${API_HOST}/users/stories/${user.username}`;
+
+    const request = new Request(url, {
+        method: "post",
+        body: JSON.stringify(story),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    });
+
+    fetch(request)
+    .then((res) => {
+        if (res.status === 200) {
+            return res.json();
+        }
+        else {
+            return res.text();
+        }
+    })
+    .then((result) => {
+        if (typeof(result) === 'object') {
+            app.setState({
+                page: 4
             });
-
-            fetch(request)
-            .then((res) => {
-                if (res.status === 200) {
-                    return res.json();
-                }
-                else {
-                    return res.text();
-                }
-            })
-            .then((result) => {
-                if (typeof(result) === 'object') {
-                    return true;
-                }
-                else {
-                    errorToast(result);
-                    return false;
-                }
-            })
-            .then((changePage) => {
-                if (changePage) {
-                    app.setState({
-                        page: 4
-                    })
-                }
-            })
+            return;
+        }
+        else {
+            errorToast(result);
+            return false;
         }
     })
     .catch(err => {
