@@ -121,7 +121,7 @@ function AdminBrowseUsers(props) {
 
             <DataGrid
 
-              experimentalFeatures={{ newEditingApi: true }}  /*  required for certain props*/
+              experimentalFeatures={{ newEditingApi: true }}  /*  required for certain props such as editable cells */
               rows={rows}
               columns={[...columns, {field: 'divider', sortable: false}]}            /* disables sorting on the divider column */
               disableColumnMenu={true}                        /*  disables additional column options (sorting, filtering, etc) */
@@ -129,12 +129,32 @@ function AdminBrowseUsers(props) {
                                                                   NOTE: This makes the alerts in delete user and
                                                                   reset password unnecessary but left them there for
                                                                   educational purposes */
-              rowsPerPageOptions={[8]}                        /*  loads 8 rows per page */
-              initialState={{                                 /*  sets page size to 8 rows */
-                pagination: {
-                  pageSize: 8,
-                },
-              }}
+
+              /* NOTE: There seems to be a pagination bug that makes editing very hard and error/warning-prone.
+                        Modelling from the code provided at https://mui.com/components/data-grid/pagination/
+                        the error never fails to manifest. Because of this, we have disabled pagination. */
+
+              rowsPerPageOptions={[0]}
+              /* Side-effect: a console warning about 100 not being included in the options. */
+
+              // {...initialRows}
+              // initialState={{
+              //   ...initialRows.initialState,
+              //   pagination: {
+              //     page: 1,
+              //   },
+              // }}
+              // pageSize={8}
+              // rowsPerPageOptions={[8]}                        /*  loads 8 rows per page */
+              // pagination
+
+
+              // initialState={{                                 /*  sets page size to 8 rows */
+              //   pagination: {
+              //     pageSize: 8,
+              //   },
+              // }}
+
               hideFooterSelectedRowCount= {true}              /*  self-explanatory */
               onCellEditStop={(params: GridCellEditStopParams, event: MuiEvent) => {
                 console.log("Edited cell:")
