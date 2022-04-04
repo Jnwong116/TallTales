@@ -53,7 +53,7 @@ class CompletedStories extends React.Component {
                 {
                 this.state.user.stories.length === 0 ? 
                 "You have not completed any stories yet! Go play a game and come back to see your completed stories!" :
-                this.state.user.stories[this.state.story]
+                this.state.user.stories[this.state.story].story
                 }
             </div>
         </div>

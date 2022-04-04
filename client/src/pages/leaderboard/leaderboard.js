@@ -60,8 +60,7 @@ class Leaderboard extends React.Component {
                     <div className="footer-button">
                         <Button text="HOME" 
                             handleClick={() => {
-                                window.alert('home');
-                                // saveStory(this.users, this.stories, this.props.app)
+                                saveStory(this.state.user, this.props.app.state.story, this.props.app)
                             }}
                         /> 
                     </div>
