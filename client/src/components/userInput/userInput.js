@@ -33,6 +33,7 @@ class UserInput extends React.Component {
               label="OKAY AND THEN..."
               variant="filled"
               margin="normal"
+              autoComplete="off"
               color="secondary"
               onKeyUp={onKeyUp}
             />

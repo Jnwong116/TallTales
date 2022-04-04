@@ -74,28 +74,31 @@ export const confirmVote = (app, page) => {
     const story = app.state.story;
     const input = page.state.choice;
 
-    for (let i = 0; i < users.length; i++) {
-        if (users[i].currentSentence === input) {
-            const selectUser = users[i];
-
-            selectUser.score = selectUser.score + 100;
-            
-            // Adds contributions
-            story.contributions.push({
-                username: selectUser.username,
-                sentence: input
-            });
-
-            raconteurVoted(story, users);
-
-            page.setState({
-                confirmedVote: true
-            });
-
-            setTimeout(() => {
-                story.story = story.story + " " + input;
-                updateStory(story, users, app);
-            }, 5000);
+    // Checks if user has already voted and 
+    if (!page.state.confirmedVote) {
+        for (let i = 0; i < users.length; i++) {
+            if (users[i].currentSentence === input) {
+                const selectUser = users[i];
+    
+                selectUser.score = selectUser.score + 100;
+                
+                // Adds contributions
+                story.contributions.push({
+                    username: selectUser.username,
+                    sentence: input
+                });
+    
+                raconteurVoted(story, users);
+    
+                page.setState({
+                    confirmedVote: true
+                });
+    
+                setTimeout(() => {
+                    story.story = story.story + " " + input;
+                    updateStory(story, users, app);
+                }, 5000);
+            }
         }
     }
 }
@@ -104,8 +107,8 @@ export const select = (user, raconteur, app, page) => {
     // console.log(app);
     const users = app.state.users;
 
-    // Checks if user has already confirmed vote
-    if (!page.state.confirmedVote) {
+    // Checks if user has already confirmed vote and inputs have been loaded in
+    if (!page.state.confirmedVote && page.state.loadInputs) {
         // Checks if currUser is raconteur
         if (app.state.currUser === raconteur) {
             for (let i = 0; i < users.length; i++) {
