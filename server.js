@@ -141,13 +141,6 @@ io.on("connection", socket => {
     });
   });
 
-  socket.on("update-raconteur", ({ room, users }) => {
-    // log(users);
-    io.to(room).emit("update-users", {
-      users: users
-    });
-  });
-
   socket.on("update-sentence", ({ room, users }) => {
     // Checks if all users have updated their sentence
     if (allUsersInput(users)) {
@@ -171,11 +164,12 @@ io.on("connection", socket => {
     });
   });
 
-  socket.on("update-story", ({ room, story, prompt, stage }) => {
+  socket.on("update-story", ({ room, story, prompt, stage, users }) => {
     io.to(room).emit("story-updated", {
       story: story,
       prompt: prompt,
-      stage: stage
+      stage: stage,
+      users: users
     });
   });
 
