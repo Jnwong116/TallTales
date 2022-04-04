@@ -48,7 +48,6 @@ class DashboardMenu extends React.Component {
       </span>
     );
   }
-
 }
 
 export default DashboardMenu;

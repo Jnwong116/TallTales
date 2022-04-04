@@ -5,7 +5,11 @@ import Score from "../../components/score/score.js";
 import Story from "../../components/story/story.js";
 import UserInput from "../../components/userInput/userInput.js";
 
-import { displayPrompt, isRaconteur, storyComplete } from "../../actions/prompt/displayPrompt.js";
+import {
+  displayPrompt,
+  isRaconteur,
+  storyComplete
+} from "../../actions/prompt/displayPrompt.js";
 import { saveInput } from "../../actions/input/input.js";
 import { getCurrentUser } from "../../actions/global/users.js";
 
@@ -17,14 +21,18 @@ class InputStage extends React.Component {
       username: "",
       icon: "avatar01.png"
     }
-  }
+  };
 
-  componentDidMount() {    
+  componentDidMount() {
     // Checks if story is complete
     storyComplete(this.props.app);
 
     // Checks if user is raconteur
-    isRaconteur(this.props.app, this.props.app.state.currUser, this.props.app.state.users);
+    isRaconteur(
+      this.props.app,
+      this.props.app.state.currUser,
+      this.props.app.state.users
+    );
 
     this.setState({
       user: getCurrentUser(this.props.app)
@@ -35,8 +43,8 @@ class InputStage extends React.Component {
     this.prompt = displayPrompt(this.props.app);
 
     const handleClick = () => {
-        saveInput(this.props.app);
-    }
+      saveInput(this.props.app);
+    };
 
     return (
       <div className="input-stage">
@@ -45,11 +53,12 @@ class InputStage extends React.Component {
           <Score user={this.state.user}></Score>
         </div>
         <Story story={this.props.app.state.story.story}></Story>
-        <UserInput prompt={this.prompt} user={this.state.user} enterFunction={handleClick}></UserInput>
-        <Button
-          text="SUBMIT"
-          handleClick={handleClick}
-        ></Button>
+        <UserInput
+          prompt={this.prompt}
+          user={this.state.user}
+          enterFunction={handleClick}
+        ></UserInput>
+        <Button text="SUBMIT" handleClick={handleClick}></Button>
       </div>
     );
   }
