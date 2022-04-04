@@ -2,7 +2,7 @@ import React from "react";
 
 import "./scoreboard.css";
 
-class Storyboard extends React.Component {
+class Scoreboard extends React.Component {
 
     render() {
 
@@ -53,4 +53,4 @@ class Storyboard extends React.Component {
     }
 }
 
-export default Storyboard;
+export default Scoreboard;

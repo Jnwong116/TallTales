@@ -24,10 +24,12 @@ class App extends React.Component {
   state = {
     users: [],
     story: {
+      title: "",
       start: "",
       story: "",
       contributions: [],
-      prompt: {}
+      prompt: {},
+      userScores: []
     },
     rooms: { 
       room1: [], 

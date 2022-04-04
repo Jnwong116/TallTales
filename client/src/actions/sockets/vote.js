@@ -53,6 +53,14 @@ export const updateStory = (story, users, app) => {
         chooseRaconteur(users);
     }
 
+    if (appStage.stage === 3) {
+        for (let i = 0; i < users.length; i++) {
+            users[i].raconteur = false;
+        }
+    }
+
+    console.log(users);
+
     socket.emit("update-story", {
         room: users[0].room,
         story: story,

@@ -4,7 +4,7 @@ import "./completedStory.css"
 
 class CompletedStory extends React.Component {
     render() {
-        const { stories, title } = this.props;
+        const { story, title } = this.props;
 
         return (
             <div className="completed-story">
@@ -12,10 +12,10 @@ class CompletedStory extends React.Component {
                     {title}
                 </div>
                 <div className="completed-story-start">
-                    {stories.currStory.start}
+                    {story.start}
                 </div>
                 <div className="completed-story-contribution">
-                    {stories.currStory.contributions.map((obj, i) => {
+                    {story.contributions.map((obj, i) => {
                         return (
                             <span key={i} className={obj.username}>
                                 {obj.sentence + " "}

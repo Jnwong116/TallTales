@@ -18,10 +18,18 @@ const contributionSchema = new Schema({
     sentence: {type: String, required: true}
 })
 
+const userScoreSchema = new Schema({
+    username: {type: String, required: true},
+    score: {type: Number, required: true},
+    icon: {type: String, required: true}
+})
+
 const storySchema = new Schema({
+    title: {type: String, default: "untitled_story"},
     start: {type: String, required: true},
     story: {type: String, default: ""},
-    contributions: {type: [contributionSchema], default: []}
+    contributions: {type: [contributionSchema], default: []},
+    userScores: {type: [userScoreSchema], default: []}
 })
 
 const roomSchema = new Schema({
