@@ -4,10 +4,16 @@ import UserLoginInput from "../../components/userLoginInput/userLoginInput.js";
 import TextButton from "../../components/textButton/textButton.js";
 
 import { addUser } from "../../actions/register/addUser.js";
+import { backButtonHandler } from "../../actions/router/render.js";
 
 import "./register.css";
 
 class Register extends React.Component {
+    constructor(props) {
+        super(props);
+        this.props.history.push("/register");
+        backButtonHandler(this.props.app, this.props.history);
+    }
 
     render() {    
         const handleClick = () => {

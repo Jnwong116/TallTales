@@ -9,11 +9,16 @@ import MuteButton from "../../components/muteButton/muteButton.js";
 import { displayPrompt, isRaconteur, storyComplete } from "../../actions/prompt/displayPrompt.js";
 import { saveInput } from "../../actions/input/input.js";
 import { getCurrentUser } from "../../actions/global/users.js";
-import { userLeft, raconteurLeft, forfeitGame } from "../../actions/sockets/room.js";
+import { backButtonHandler } from "../../actions/router/render.js";
 
 import "./inputStage.css";
 
 class InputStage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props.history.push("/inputStage");
+  }
+
   state = {
     user: {
       username: "",
@@ -22,10 +27,7 @@ class InputStage extends React.Component {
   }
 
   componentDidMount() {    
-    // Sets up listeners if someone leaves the game
-    userLeft(this.props.app);
-    raconteurLeft(this.props.app);
-    forfeitGame(this.props.app);
+    backButtonHandler(this.props.app, this.props.history);
 
     // Checks if story is complete
     storyComplete(this.props.app);

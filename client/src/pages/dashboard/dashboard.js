@@ -4,8 +4,17 @@ import UserIcon from "../../components/userIcon/userIcon.js";
 import DashboardMenu from "../../components/dashboardMenu/dashboardMenu.js";
 import "./dashboard.css";
 import { getUser } from "../../actions/global/users.js";
+import { backButtonHandler } from "../../actions/router/render.js";
 import { denyRoomAccess } from "../../actions/sockets/room.js";
+import { stop } from "../../actions/audio/stopAudio.js";
+
 class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props.history.push("/dashboard");
+    backButtonHandler(this.props.app, this.props.history);
+  }
+
   state = {
     user: {
       username: "",
@@ -17,6 +26,7 @@ class Dashboard extends React.Component {
   componentDidMount() {
     getUser(this, this.props.app);
     denyRoomAccess();
+    stop(this.props.gameAudioRef);
   }
 
   render() {

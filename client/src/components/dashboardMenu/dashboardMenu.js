@@ -28,7 +28,7 @@ class DashboardMenu extends React.Component {
         <Button
           text="PROFILE"
           handleClick={() => {
-            menuRedirect(this.props.app, 6);
+            menuRedirect(this.props.app, "profile");
           }}
         />
         <Button

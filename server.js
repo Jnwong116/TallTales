@@ -239,6 +239,7 @@ io.on("connection", socket => {
             users: getRoomUsers(currUser.room),
             str: "The game has ended since all players left"
           });
+          io.to(socket.id).emit("stop-audio");
         }
 
         // Checks if user was raconteur
