@@ -62,7 +62,7 @@ export const timerToast = (seconds, input) => {
     toast.info(message, {
         position: "bottom-left",
         autoClose: seconds * 1000,
-        hidProgressBar: false,
+        hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: false,
         draggable: false,

@@ -10,18 +10,34 @@ import Timecode from "react-timecode";
 class UserInput extends React.Component {
   state = {
     time: 0,
-    duration: 60 * 1000
+    duration: 60 * 1000,
+    audio60: false,
+    audio30: false,
+    audio10: false
   };
 
   onTimerUpdate = ({ time, duration }) => {
     if (time >= 60 * 1000) {
       this.props.enterFunction();
     }
+    if(time > 0 * 1000 && !this.state.audio60) {
+        this.props.audio60Ref.audioEl.current.play();
+        this.setState({ audio60: true })
+    }
+    if(time > 29 * 1000 && !this.state.audio30) {
+        this.props.audio30Ref.audioEl.current.play();
+        this.setState({ audio30: true })
+    }
+    if(time > 49 * 1000 && !this.state.audio10) {
+        this.props.audio10Ref.audioEl.current.play();
+        this.setState({ audio10: true })
+    }
     this.setState({
       time,
       duration
     });
   };
+
   render() {
     const { time, duration } = this.state;
 
