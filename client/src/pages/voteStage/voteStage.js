@@ -11,8 +11,14 @@ import { select, confirmVote, checkRaconteur } from "../../actions/vote/vote.js"
 import { loadUserInput, receiveVote } from "../../actions/sockets/vote.js";
 import { getCurrentUser } from "../../actions/global/users.js";
 import { storyUpdated } from "../../actions/sockets/story.js";
+import { backButtonHandler } from "../../actions/router/render.js";
 
 class VoteStage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props.history.push("/voteStage");
+  }
+
   state = {
     choice: "Choose a sentence",
     loadInputs: false,
@@ -25,6 +31,8 @@ class VoteStage extends React.Component {
   }
 
   componentDidMount() {
+    backButtonHandler(this.props.app, this.props.history);
+    
     // Sets up socket to receive vote
     receiveVote(this.props.app, this);
     storyUpdated(this.props.app);

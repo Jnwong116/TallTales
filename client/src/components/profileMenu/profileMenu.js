@@ -11,19 +11,19 @@ class ProfileMenu extends React.Component {
         
         <Button text="COMPLETED STORIES"
                 handleClick={() => {
-                  menuRedirect(this.props.app, 6)}} />
+                  menuRedirect(this.props.app, "completedStories")}} />
         <Button text="CHANGE USERNAME"
                 handleClick={() => {
-                  menuRedirect(this.props.app, 7)}} />
+                  menuRedirect(this.props.app, "editUsername")}} />
         <Button text="CHANGE PASSWORD"
                 handleClick={() => {
-                 menuRedirect(this.props.app, 8)}} />
+                 menuRedirect(this.props.app, "editPassword")}} />
         <Button text="CHANGE AVATAR"
                 handleClick={() => {
-                 menuRedirect(this.props.app, 9)}} />
+                 menuRedirect(this.props.app, "editAvatar")}} />
         <Button text="BACK"
                 handleClick={() => {
-                  menuRedirect(this.props.app, 4)}} />
+                  menuRedirect(this.props.app, "dashboard")}} />
       </span>
     )
   }

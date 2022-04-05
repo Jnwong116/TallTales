@@ -2,21 +2,21 @@ import React from "react";
 import Button from "../button/button.js";
 import "./dashboardMenu.css";
 import DropDown from "../../components/dropDown/dropDown.js";
-
-import {
-  menuRedirect,
-  logout,
-  startGame
-} from "../../actions/dashboard/menu.js";
+import { menuRedirect, logout, startGame, hostGame } from "../../actions/dashboard/menu.js";
+import { createdNewRoom } from "../../actions/sockets/room.js";
 
 class DashboardMenu extends React.Component {
+  componentDidMount() {
+    createdNewRoom(this.props.app);
+  }
+
   render() {
     return (
       <span className="dashboardMenu">
         <Button
           text="HOST NEW GAME"
           handleClick={() => {
-            startGame(true, this.users, this.props.app, 2);
+            hostGame(this.props.app, this.props.parent);
           }}
         />
         <Button
@@ -28,7 +28,7 @@ class DashboardMenu extends React.Component {
         <Button
           text="PROFILE"
           handleClick={() => {
-            menuRedirect(this.props.app, 6);
+            menuRedirect(this.props.app, "profile");
           }}
         />
         <Button
@@ -40,7 +40,7 @@ class DashboardMenu extends React.Component {
         <div className="lobby-genre">
           <DropDown
             label={"<ROOMS>"}
-            items={["room1", "room2", "room3"]}
+            items={this.props.app.state.rooms}
             user={this.props.app.state.currUser}
             app={this.props.app}
           ></DropDown>
@@ -48,7 +48,6 @@ class DashboardMenu extends React.Component {
       </span>
     );
   }
-
 }
 
 export default DashboardMenu;

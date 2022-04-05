@@ -51,7 +51,7 @@ class CompletedStories extends React.Component {
                 </span>
             </div>
             <Button text="SHARE STORY"
-                handleClick={() => {shareStory(this.state.user.stories[this.state.story])}} />
+                handleClick={() => {shareStory(this.state.user.stories[this.state.story], this.state.user.username)}} />
             <div className="storiesDisplay">
                 {(this.state.user.stories.length === 0) ? 
                 "You have not completed any stories yet! Go play a game and come back to see your completed stories!" :

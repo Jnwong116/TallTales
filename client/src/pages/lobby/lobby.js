@@ -8,10 +8,16 @@ import MuteButton from "../../components/muteButton/muteButton.js";
 
 import "./lobby.css";
 
-import { getGenres } from "../../actions/lobby/lobby.js";
-import { gameStarted, startGame } from "../../actions/sockets/startGame.js";
+import { getGenres, redirect } from "../../actions/lobby/lobby.js";
+import { gameStarted } from "../../actions/sockets/startGame.js";
+import { backButtonHandler } from "../../actions/router/render.js";
 
 class Lobby extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props.history.push("/lobby");
+  }
+
   state = {
     user: {
       username: "",
@@ -44,6 +50,7 @@ class Lobby extends React.Component {
     muted: false,
   };
   componentDidMount() {
+    backButtonHandler(this.props.app, this.props.history);
     getGenres(this);
     gameStarted(this.props.app, this.props.gameAudioRef);
   }
@@ -91,7 +98,7 @@ class Lobby extends React.Component {
           <Button
             text="START GAME"
             handleClick={() => {
-                startGame(this.props.app, this.state.start, this.state.prompt);
+                redirect(this.props.app, this.state.start, this.state.prompt);
             }}
           ></Button>
         ) : (

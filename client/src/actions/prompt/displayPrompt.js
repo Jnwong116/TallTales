@@ -59,7 +59,7 @@ export const isRaconteur = (app, currUser, users) => {
 
   if (raconteur) {
     app.setState({
-      page: 1
+      page: "voteStage"
     })
   }
 }
@@ -67,7 +67,7 @@ export const isRaconteur = (app, currUser, users) => {
 export const storyComplete = (app) => {
   if (app.state.stage === 3) {
     app.setState({
-      page: 3
+      page: "leaderboard"
     })
   }
 }

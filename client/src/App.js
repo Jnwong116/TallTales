@@ -12,40 +12,37 @@ import IndivStory from "./pages/indivStory/indivStory";
 import { ToastContainer } from 'react-toastify';
 import ReactAudioPlayer from 'react-audio-player';
 import 'react-toastify/dist/ReactToastify.css';
+import { route } from "./actions/router/render";
 
 import React from "react";
 import {
   BrowserRouter as Router,
-  Routes as Switch,
+  Switch,
   Route
 } from "react-router-dom";
 // import { css } from "@emotion/react";
 
 class App extends React.Component {
-    state = {
-        users: [],
-        story: {
-            title: "",
-            start: "",
-            story: "",
-            contributions: [],
-            prompt: {},
-            userScores: []
-        },
-        rooms: { 
-            room1: [], 
-            room2: [], 
-            room3: []
-        },
-        currUser: null,
-        page: 0,
-        stage: 0,
-        prompt: 0,
-        muted: false,
-    };
+  state = {
+    users: [],
+    story: {
+      title: "",
+      start: "",
+      story: "",
+      contributions: [],
+      prompt: {},
+      userScores: []
+    },
+    rooms: ["main"],
+    currUser: null,
+    page: "login",
+    stage: 0,
+    prompt: 0,
+    muted: false
+  };
 
   render() {
-
+    this.page = route(this);
     return (
       <div className="App">
         <ReactAudioPlayer
@@ -59,7 +56,33 @@ class App extends React.Component {
         />
         <Router>
           <Switch>
-            <Route path="/">
+            <Route 
+              exact path={["/", "/login", "/register", "/dashboard", "/profile", "/lobby", "/leaderboard", "/inputStage", "/voteStage"]}
+              render={ props => (
+                !this.state.currUser ? (
+                  this.page === "login" ? (
+                    <Login {...props} app={this} /> 
+                  ) : (
+                    <Register {...props} app={this} />
+                  )
+                ) : this.page === "lobby" ? (
+                  <Lobby {...props} app={this} gameAudioRef={this.audioRef}/>
+                ) : this.page === "inputStage" ? (
+                  <InputStage {...props} app={this} gameAudioRef={this.audioRef}/>
+                ) : this.page === "voteStage" ? (
+                  <VoteStage {...props} app={this} gameAudioRef={this.audioRef}/>
+                ) : this.page === "dashboard" ? (
+                  <Dashboard {...props} app={this} gameAudioRef={this.audioRef}/>
+                ) : this.page === "leaderboard" ? (
+                  <Leaderboard {...props} app={this} gameAudioRef={this.audioRef}/>
+                ) : (
+                  <Profile {...props} app={this} />
+                )
+              )}
+            />
+
+
+            {/* <Route path="/">
               {!this.state.currUser ? (
                 this.state.page === 0 ? (
                   <Route path="/" element={<Login app={this} />} />
@@ -79,7 +102,9 @@ class App extends React.Component {
               ) : (
                 <Route path="/" element={<Profile app={this} />} />
               )}
-            </Route>
+            </Route> */}
+
+
             {/* <Route path="/game">
               {this.state.page === 0 ? <Route path="/game" element={<InputStage app={this} />} /> : (this.state.page === 1 ? <Route path="/game" element={<VoteStage app={this} />} /> : <Route path="/game" element={<Leaderboard app={this} />} /> )}
             </Route> */}
@@ -91,13 +116,13 @@ class App extends React.Component {
             {/* <Route path="/dashboard" element={<Dashboard app={this} />} /> */}
             {/* <Route path="/howToPlay" element={<HowToPlay app={this} />} />
                 <Route path="/profile" element={<Profile app={this} />} /> */}
-
             {/* <Route path="/leader" element={<Leaderboard app={this} />}></Route> */}
-            <Route path="/past-stories" element={<IndivStory />}></Route>
-          </Switch>
-          <ToastContainer limit={1}/>
-        </Router>
 
+            <Route path="/past-stories" render={() => (<IndivStory />)}></Route>
+            <Route render={() => <div>404 Not found</div>} />
+          </Switch>
+          <ToastContainer limit={1} />
+        </Router>
       </div>
     );
   }

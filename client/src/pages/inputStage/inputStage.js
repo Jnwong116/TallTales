@@ -11,10 +11,16 @@ import { displayPrompt, isRaconteur, storyComplete } from "../../actions/prompt/
 import { saveInput } from "../../actions/input/input.js";
 import { getCurrentUser } from "../../actions/global/users.js";
 import { timerToast, closeToasts } from "../../actions/toastify/toastify.js";
+import { backButtonHandler } from "../../actions/router/render.js";
 
 import "./inputStage.css";
 
 class InputStage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props.history.push("/inputStage");
+  }
+
   state = {
     user: {
       username: "",
@@ -22,7 +28,9 @@ class InputStage extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount() {    
+    backButtonHandler(this.props.app, this.props.history);
+
     // Checks if story is complete
     storyComplete(this.props.app);
 
@@ -44,11 +52,6 @@ class InputStage extends React.Component {
   render() {
     this.prompt = displayPrompt(this.props.app);
 
-    const handleClick = () => {
-        closeToasts();
-        saveInput(this.props.app);
-    }
-
     return (
       <div className="input-stage">
         <ReactAudioPlayer
@@ -62,10 +65,13 @@ class InputStage extends React.Component {
           <Score user={this.state.user}></Score>
         </div>
         <Story story={this.props.app.state.story.story}></Story>
-        <UserInput prompt={this.prompt} user={this.state.user} enterFunction={handleClick}></UserInput>
+        <UserInput prompt={this.prompt} user={this.state.user} enterFunction={() => {saveInput(this.props.app);}}></UserInput>
         <Button
           text="SUBMIT"
-          handleClick={handleClick}
+          handleClick={() => {
+            closeToasts();
+            saveInput(this.props.app);
+          }}
         ></Button>
         <div className="mute-footer">
             <MuteButton app={this.props.app} audioRef={this.props.gameAudioRef}/>

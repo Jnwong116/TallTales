@@ -42,7 +42,7 @@ function saveStoryToUser(user, story, app) {
     .then((result) => {
         if (typeof(result) === 'object') {
             app.setState({
-                page: 4
+                page: "dashboard"
             });
             return;
         }

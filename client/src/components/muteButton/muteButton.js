@@ -1,5 +1,5 @@
 import React from "react";
-import { handleMute } from "../../actions/mute/muteGame";
+import { handleMute } from "../../actions/audio/muteGame";
 
 import "./muteButton.css";
 

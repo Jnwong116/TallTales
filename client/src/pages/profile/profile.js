@@ -9,8 +9,15 @@ import ChangeAvatar from "../../components/changeAvatar/changeAvatar.js";
 import "./profile.css";
 
 import { getUser } from "../../actions/global/users.js";
+import { backButtonHandler } from "../../actions/router/render.js";
 
 class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props.history.push("/profile");
+    backButtonHandler(this.props.app, this.props.history);
+  }
+
   state = {
     story: 0,
     user: {
@@ -44,12 +51,12 @@ class Profile extends React.Component {
             </div>
             <div className="profileInterfaceDivider" />
               {
-                this.props.app.state.page === 6 ? <CompletedStories app={this.props.app} parent={this} /> :
+                this.props.app.state.page === "editAvatar" ? <ChangeAvatar app={this.props.app} parent={this} /> :
                 (
-                  this.props.app.state.page === 7 ? <ChangeName app={this.props.app} parent={this} /> :
+                  this.props.app.state.page === "editUsername" ? <ChangeName app={this.props.app} parent={this} /> :
                   (
-                    this.props.app.state.page === 8 ? <ChangePassword app={this.props.app} parent={this} /> :
-                    <ChangeAvatar app={this.props.app} parent={this} />
+                    this.props.app.state.page === "editPassword" ? <ChangePassword app={this.props.app} parent={this} /> :
+                    <CompletedStories app={this.props.app} parent={this} />
                   )
                 )
               }

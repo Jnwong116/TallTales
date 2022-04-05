@@ -1,9 +1,15 @@
 import { socket } from "./socket";
+import { userLeft, raconteurLeft, forfeitGame } from "./room";
 // const log = console.log;
 
 export const startGame = (app, start, prompts) => {
   const users = app.state.users;
   users[0].raconteur = true;
+
+  socket.emit("update-raconteur", {
+    raconteur: users[0].username,
+    prev: null
+  })
 
   socket.emit("start-game", {
     room: users[0].room,
@@ -12,13 +18,19 @@ export const startGame = (app, start, prompts) => {
     users: users
   });
 };
-  
-  export const gameStarted = (app, gameAudioRef) => {
-    socket.on("game-started", ({ storyStart, storyPrompts, users }) => {
+
+export const gameStarted = (app, gameAudioRef) => {
+  socket.on("game-started", ({ storyStart, storyPrompts, users, rooms, room }) => {
+      // Sets up listeners if someone leaves the game
+      userLeft(app);
+      raconteurLeft(app);
+      forfeitGame(app);
       gameAudioRef.audioEl.current.play();
       if(app.state.muted) {
         gameAudioRef.audioEl.current.muted = true;
       }
+      rooms[room] = true;
+      socket.emit("update-rooms", rooms);
       app.setState({
         story: {
           start: storyStart,
@@ -27,10 +39,10 @@ export const startGame = (app, start, prompts) => {
           prompt: storyPrompts
         },
         users: users,
-        page: 0,
+        page: "inputStage",
         prompt: 0,
         stage: 0
       });
-    });
-  };
-  
+    }
+  );
+};
