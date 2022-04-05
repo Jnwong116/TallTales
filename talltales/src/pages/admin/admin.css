@@ -1,3 +1,11 @@
+/* div {
+    border: 1px solid blue;
+}
+
+span {
+    border: 1px solid red;
+} */
+
 /*
 div {
     border: 1px solid blue;
@@ -8,9 +16,9 @@ span {
 }
 */
 
-.browseStoriesHeader {
+/* .browseStoriesHeader {
   font-weight: bold;
-}
+} */
 
 .adminDashboardHeader {
   display: flex;
@@ -42,7 +50,7 @@ span {
   text-transform: uppercase;
 } */
 
-.dashboardMenu {
+.adminDashboardMenu {
   display: flex;
   flex-direction: column;
   margin-left: auto;
@@ -54,13 +62,13 @@ span {
   justify-content: center;
 }
 
-.storiesNavigation {
+/* .storiesNavigation {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   height: 60px;
-}
+} */
 
 .profileAvatarContainer {
   margin-top: 30px;
