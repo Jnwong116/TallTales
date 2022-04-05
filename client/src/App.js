@@ -9,6 +9,9 @@ import Dashboard from "./pages/dashboard/dashboard";
 import Profile from "./pages/profile/profile";
 import Leaderboard from "./pages/leaderboard/leaderboard";
 import IndivStory from "./pages/indivStory/indivStory";
+import AdminBrowseUsers from "./pages/admin/adminBrowseUsers";
+import AdminBrowsePrompts from "./pages/admin/adminBrowsePrompts";
+import GamesList from "./pages/gamesList/gamesList";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -31,9 +34,9 @@ class App extends React.Component {
             prompt: {},
             userScores: []
         },
-        rooms: { 
-            room1: [], 
-            room2: [], 
+        rooms: {
+            room1: [],
+            room2: [],
             room3: []
         },
         currUser: null,
@@ -61,7 +64,7 @@ class App extends React.Component {
               ) : this.state.page === 1 ? (
                 <Route path="/" element={<VoteStage app={this} />} />
               ) : this.state.page === 4 ? (
-                <Route path="/" element={<Dashboard app={this} />} />
+                <Route path="/" element={<GamesList app={this} />} />
               ) : this.state.page === 3 ? (
                 <Route path="/" element={<Leaderboard app={this} />} />
               ) : (
