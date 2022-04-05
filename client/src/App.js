@@ -8,6 +8,7 @@ import VoteStage from "./pages/voteStage/voteStage";
 import Dashboard from "./pages/dashboard/dashboard";
 import Profile from "./pages/profile/profile";
 import Leaderboard from "./pages/leaderboard/leaderboard";
+import { checkSession } from "./actions/checkSession/checkSession";
 import IndivStory from "./pages/indivStory/indivStory";
 import { ToastContainer } from 'react-toastify';
 import ReactAudioPlayer from 'react-audio-player';
@@ -23,6 +24,11 @@ import {
 // import { css } from "@emotion/react";
 
 class App extends React.Component {
+    // Using session, check if user is logged in
+    componentDidMount() {
+        checkSession(this);
+    }
+
   state = {
     users: [],
     story: {
