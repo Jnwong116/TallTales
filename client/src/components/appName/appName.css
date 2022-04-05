@@ -6,7 +6,7 @@
 
 .app-name-name {
   color: black;
-  font-size: 70px;
+  font-size: 100px;
   font-family: "IBM Plex Sans";
   font-weight: 1000;
   margin-bottom: 0px;
@@ -16,7 +16,7 @@
 
 .app-name-tag {
   color: #808080;
-  font-size: 26px;
+  font-size: 36px;
   font-family: "IBM Plex Mono";
   font-weight: 600;
 }
