@@ -1,10 +1,11 @@
 import React from "react";
+import ReactAudioPlayer from 'react-audio-player';
 import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
 import DropDown from "../../components/dropDown/dropDown.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
 import MuteButton from "../../components/muteButton/muteButton.js";
-import ReactAudioPlayer from 'react-audio-player';
+
 import "./lobby.css";
 
 import { redirect, getGenres } from "../../actions/lobby/lobby.js";
@@ -44,15 +45,10 @@ class Lobby extends React.Component {
   };
   componentDidMount() {
     getGenres(this);
+    gameStarted(this.props.app, this.props.gameAudioRef);
   }
 
   render() {
-    // socket.on("current-rooms", rooms => {
-    //   console.log(rooms);
-    // });
-
-    gameStarted(this.props.app);
-
     const genres = this.state.genres.map(object => object.genre);
 
     return (
@@ -66,9 +62,6 @@ class Lobby extends React.Component {
         />
         <div className="header">
           <AppName></AppName>
-          <div className="header-volume">
-            <MuteButton audioRef={this.audioRef}/>
-          </div>
         </div>
         <div className="lobby-content">
           {this.props.app.state.users[0].username ===
@@ -98,12 +91,15 @@ class Lobby extends React.Component {
           <Button
             text="START GAME"
             handleClick={() => {
-              redirect(this.props.app, this.state.start, this.state.prompt);
+                redirect(this.props.app, this.state.start, this.state.prompt);
             }}
           ></Button>
         ) : (
           <></>
         )}
+        <div className="mute-footer">
+            <MuteButton app={this.props.app} audioRef={this.audioRef}/>
+        </div>
       </div>
     );
   }

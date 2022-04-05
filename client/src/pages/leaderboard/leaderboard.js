@@ -3,6 +3,7 @@ import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
 import CompletedStory from "../../components/completedStory/completedStory.js";
 import Scoreboard from "../../components/scoreboard/scoreboard.js";
+import MuteButton from "../../components/muteButton/muteButton.js";
 
 import "./leaderboard.css"
 
@@ -79,11 +80,16 @@ class Leaderboard extends React.Component {
                     <div className="footer-button">
                         <Button text="HOME" 
                             handleClick={() => {
+                                this.props.gameAudioRef.audioEl.current.pause();
+                                this.props.gameAudioRef.audioEl.current.currentTime = 0;
                                 saveStory(this.state.user, this.props.app.state.story, this.props.app, this)
                             }}
                         /> 
                     </div>
-                </div>       
+                </div>   
+                <div className="mute-footer">
+                    <MuteButton app={this.props.app} audioRef={this.props.gameAudioRef}/>
+                </div>    
             </div>    
         )
     }

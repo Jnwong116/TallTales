@@ -3,6 +3,8 @@ import AppName from "../../components/appName/appName.js";
 import Score from "../../components/score/score.js";
 import Story from "../../components/story/story.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
+import MuteButton from "../../components/muteButton/muteButton.js";
+
 import "./voteStage.css";
 
 import { select, confirmVote, checkRaconteur } from "../../actions/vote/vote.js";
@@ -116,6 +118,9 @@ class VoteStage extends React.Component {
             </div>
           </div> 
         }
+        <div className="mute-footer">
+            <MuteButton app={this.props.app} audioRef={this.props.gameAudioRef}/>
+        </div>
         
       </div>
     );
