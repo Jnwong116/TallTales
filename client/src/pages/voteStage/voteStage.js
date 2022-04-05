@@ -17,7 +17,6 @@ class VoteStage extends React.Component {
   constructor(props) {
     super(props);
     this.props.history.push("/voteStage");
-    backButtonHandler(this.props.app, this.props.history);
   }
 
   state = {
@@ -32,6 +31,8 @@ class VoteStage extends React.Component {
   }
 
   componentDidMount() {
+    backButtonHandler(this.props.app, this.props.history);
+    
     // Sets up socket to receive vote
     receiveVote(this.props.app, this);
     storyUpdated(this.props.app);

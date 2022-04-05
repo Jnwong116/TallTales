@@ -11,12 +11,12 @@ import { sortPlayers, saveStory } from "../../actions/leaderboard/displayScores.
 import { getCurrentUser } from "../../actions/global/users.js";
 import { storySaved } from "../../actions/sockets/story.js";
 import { backButtonHandler } from "../../actions/router/render.js";
+import { stop } from "../../actions/audio/stopAudio.js";
 
 class Leaderboard extends React.Component {
     constructor(props) {
         super(props);
         this.props.history.push("/leaderboard");
-        backButtonHandler(this.props.app, this.props.history);
     }
 
     state = {
@@ -51,6 +51,8 @@ class Leaderboard extends React.Component {
     }
 
     componentDidMount() {
+        backButtonHandler(this.props.app, this.props.history);
+
         // Sort the users from highest to lowest points
         this.setState({
             users: this.props.app.state.users.sort(sortPlayers),
@@ -87,8 +89,7 @@ class Leaderboard extends React.Component {
                     <div className="footer-button">
                         <Button text="HOME" 
                             handleClick={() => {
-                                this.props.gameAudioRef.audioEl.current.pause();
-                                this.props.gameAudioRef.audioEl.current.currentTime = 0;
+                                stop(this.props.gameAudioRef);
                                 saveStory(this.state.user, this.props.app.state.story, this.props.app, this)
                             }}
                         /> 

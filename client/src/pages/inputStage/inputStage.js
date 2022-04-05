@@ -10,7 +10,6 @@ import { displayPrompt, isRaconteur, storyComplete } from "../../actions/prompt/
 import { saveInput } from "../../actions/input/input.js";
 import { getCurrentUser } from "../../actions/global/users.js";
 import { backButtonHandler } from "../../actions/router/render.js";
-import { userLeft, raconteurLeft, forfeitGame } from "../../actions/sockets/room.js";
 
 import "./inputStage.css";
 
@@ -18,7 +17,6 @@ class InputStage extends React.Component {
   constructor(props) {
     super(props);
     this.props.history.push("/inputStage");
-    backButtonHandler(this.props.app, this.props.history);
   }
 
   state = {
@@ -29,10 +27,7 @@ class InputStage extends React.Component {
   }
 
   componentDidMount() {    
-    // Sets up listeners if someone leaves the game
-    userLeft(this.props.app);
-    raconteurLeft(this.props.app);
-    forfeitGame(this.props.app);
+    backButtonHandler(this.props.app, this.props.history);
 
     // Checks if story is complete
     storyComplete(this.props.app);

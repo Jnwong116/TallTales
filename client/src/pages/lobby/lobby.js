@@ -16,7 +16,6 @@ class Lobby extends React.Component {
   constructor(props) {
     super(props);
     this.props.history.push("/lobby");
-    backButtonHandler(this.props.app, this.props.history);
   }
 
   state = {
@@ -51,6 +50,7 @@ class Lobby extends React.Component {
     muted: false,
   };
   componentDidMount() {
+    backButtonHandler(this.props.app, this.props.history);
     getGenres(this);
     gameStarted(this.props.app, this.props.gameAudioRef);
   }

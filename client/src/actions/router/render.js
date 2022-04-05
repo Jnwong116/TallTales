@@ -11,9 +11,11 @@ export const backButtonHandler = (app, history) => {
             // Checks if user is currently in a game page
             if (app.state.page === "inputStage" || app.state.page === "voteStage" || app.state.page === "leaderboard" || app.state.page === "lobby") {
                 socket.disconnect(); // Disconnects user from game and sends them back to dashboard
+
                 app.setState({
                     page: "dashboard"
                 });
+                socket.connect(); // Reconnects user to socket once in dashboard so they can join more games
             }
 
             // Checks if user currently in dashboard

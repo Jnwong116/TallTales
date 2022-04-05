@@ -72,7 +72,7 @@ class App extends React.Component {
                 ) : this.page === "voteStage" ? (
                   <VoteStage {...props} app={this} gameAudioRef={this.audioRef}/>
                 ) : this.page === "dashboard" ? (
-                  <Dashboard {...props} app={this}/>
+                  <Dashboard {...props} app={this} gameAudioRef={this.audioRef}/>
                 ) : this.page === "leaderboard" ? (
                   <Leaderboard {...props} app={this} gameAudioRef={this.audioRef}/>
                 ) : (
