@@ -35,7 +35,13 @@ class UserInput extends React.Component {
               margin="normal"
               autoComplete="off"
               color="secondary"
+              multiline
               onKeyUp={onKeyUp}
+              onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                    }
+                }}
             />
           </div>
         </div>

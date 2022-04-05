@@ -8,8 +8,9 @@ import VoteStage from "./pages/voteStage/voteStage";
 import Dashboard from "./pages/dashboard/dashboard";
 import Profile from "./pages/profile/profile";
 import Leaderboard from "./pages/leaderboard/leaderboard";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import IndivStory from "./pages/indivStory/indivStory";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import React from "react";
 import {
@@ -76,6 +77,7 @@ class App extends React.Component {
                 <Route path="/profile" element={<Profile app={this} />} /> */}
 
             {/* <Route path="/leader" element={<Leaderboard app={this} />}></Route> */}
+            <Route path="/past-stories" element={<IndivStory />}></Route>
           </Switch>
           <ToastContainer limit={1} />
         </Router>

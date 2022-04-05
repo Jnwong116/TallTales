@@ -184,6 +184,12 @@ io.on("connection", socket => {
     });
   });
 
+  socket.on("saved-story", ({ room, story }) => {
+    io.to(room).emit("story-saved", {
+      story: story
+    });
+  });
+
   // Runs when client disconnects
   socket.on("disconnect", () => {
     log(`${socket.id} disconnected`);
