@@ -56,4 +56,23 @@ export const warningToast = (input) => {
     toast.clearWaitingQueue();
 }
 
+export const timerToast = (seconds, input) => {
+    const message = input ? input : "Send in your sentence!";
+
+    toast.info(message, {
+        position: "bottom-left",
+        autoClose: seconds * 1000,
+        hidProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: false,
+        pauseOnFocusLoss: false,
+    });
+    toast.clearWaitingQueue();
+}
+
+export const closeToasts = () => {
+    toast.dismiss();
+}
+
 // other options include 'success' and 'warning'
