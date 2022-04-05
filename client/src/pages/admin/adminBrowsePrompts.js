@@ -28,9 +28,7 @@ const stories = require("../../data/stories.json");
 class AdminBrowsePrompts extends React.Component {
   render() {
 
-    var genres = stories.stories.map(
-      object => object.genre
-    );
+    var genres = stories.stories.map(object => object.genre);
 
     genres.splice(0, 0, "<New Genre>");
 

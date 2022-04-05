@@ -29,7 +29,7 @@ class DropDown extends React.Component {
 
   render() {
     const items = this.props.items;
-    const label = this.props.label ? this.props.label : "<GENRE>";
+    const label = this.props.label ? this.props.label : "<SELECT GENRE>";
 
     const handleChange = event => {
       this.setState({ selected: event.target.value });
