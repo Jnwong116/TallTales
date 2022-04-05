@@ -60,6 +60,12 @@ class Lobby extends React.Component {
             volume={0.3}
             ref={(element) => { this.audioRef = element}}
         />
+        <ReactAudioPlayer
+            src={require("../../assets/audio/lobby_intro.mp3")}
+            autoPlay
+            volume={1}
+            ref={(element) => { this.introRef = element}}
+        />
         <div className="header">
           <AppName></AppName>
         </div>
@@ -98,7 +104,7 @@ class Lobby extends React.Component {
           <></>
         )}
         <div className="mute-footer">
-            <MuteButton app={this.props.app} audioRef={this.audioRef}/>
+            <MuteButton app={this.props.app} audioRefs={[this.audioRef, this.introRef]}/>
         </div>
       </div>
     );

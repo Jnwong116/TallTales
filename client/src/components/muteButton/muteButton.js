@@ -5,16 +5,21 @@ import "./muteButton.css";
 class MuteButton extends React.Component {
     render() {
 
-        const audioRef = this.props.audioRef;
+        const audioRefs = this.props.audioRefs;
 
         const handleMute = () => {
             if(this.props.app.state.muted) {
                 this.props.app.setState( { muted: false });
-                audioRef.audioEl.current.muted = false;
+                audioRefs.forEach((audioRef) => {
+                    audioRef.audioEl.current.muted = false;
+                })
+                
             }
             else {
                 this.props.app.setState( { muted: true });
-                audioRef.audioEl.current.muted = true;
+                audioRefs.forEach((audioRef) => {
+                    audioRef.audioEl.current.muted = true;
+                })
             }
         }
 
