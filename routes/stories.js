@@ -248,7 +248,7 @@ router.route('/story/:story').get((req, res) => {
 });
 
 
-// Starts a new Story
+// Creates a new Story
 /*
     {
         "title": <String>,

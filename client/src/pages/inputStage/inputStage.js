@@ -4,6 +4,7 @@ import Button from "../../components/button/button.js";
 import Score from "../../components/score/score.js";
 import Story from "../../components/story/story.js";
 import UserInput from "../../components/userInput/userInput.js";
+import MuteButton from "../../components/muteButton/muteButton.js";
 
 import {
   displayPrompt,
@@ -53,12 +54,14 @@ class InputStage extends React.Component {
           <Score user={this.state.user}></Score>
         </div>
         <Story story={this.props.app.state.story.story}></Story>
-        <UserInput
-          prompt={this.prompt}
-          user={this.state.user}
-          enterFunction={handleClick}
-        ></UserInput>
-        <Button text="SUBMIT" handleClick={handleClick}></Button>
+        <UserInput prompt={this.prompt} user={this.state.user} enterFunction={handleClick}></UserInput>
+        <Button
+          text="SUBMIT"
+          handleClick={handleClick}
+        ></Button>
+        <div className="mute-footer">
+            <MuteButton app={this.props.app} audioRef={this.props.gameAudioRef}/>
+        </div>
       </div>
     );
   }

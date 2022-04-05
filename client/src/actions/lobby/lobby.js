@@ -1,13 +1,8 @@
 import { errorToast } from "../toastify/toastify.js";
-import { startGame } from "../sockets/startGame.js";
 import ENV from "../../config.js";
 
 const API_HOST = ENV.api_host;
 const log = console.log;
-
-export const redirect = (app, start, prompts) => {
-  startGame(app, start, prompts);
-};
 
 export const getGenres = page => {
   const url = `${API_HOST}/stories`;
