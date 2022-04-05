@@ -56,7 +56,7 @@ class AdminBrowsePrompts extends React.Component {
           <UserIcon icon={"avatar01.png"} username={"name01"} />
         </div>
 
-        <div className="adminContent" style={{ height: '526px', display: 'flex', 'flex-direction': 'column', 'justify-content': 'flex-start', width: '100%' }}>
+        <div className="adminContent" style={{ height: '600px', display: 'flex', 'flex-direction': 'column', 'justify-content': 'flex-start', width: '100%' }}>
 
           <div className="promptsMenuRow" style={{ display: 'flex', width: '100%', 'justify-content': 'flex-end' }}>
             <div className="promptsDropDown" style={{ width:'310px', 'margin-right':"10px" }}>
@@ -72,8 +72,8 @@ class AdminBrowsePrompts extends React.Component {
             </div>
           </div>
 
-          <div className="promptsMenuRow" style={{ display: 'flex', 'flex-direction': 'column', 'justify-content': 'flex-start', 'align-items':'flex-end', width: '100%', height: "500px", 'overflow-y': 'scroll' }}>
-            <Box sx={{ width: 638, "margin-right": 10 }}>
+          <div className="promptsMenuRow" style={{ display: 'flex', 'flex-direction': 'column', 'justify-content': 'flex-start', 'align-items':'flex-end', width: '100%', 'overflow-y': 'scroll' }}>
+            <Box sx={{ width: 638, "margin-right": 0, "padding": "0px 10px 10px 0px " }}>
               <Stack spacing={2}>
 
                 <Card sx={{ width: 638 }} variant="outlined">
@@ -175,7 +175,20 @@ class AdminBrowsePrompts extends React.Component {
 
           </Stack>
         </Box>
+      </div>
 
+      <div className="promptsMenuRow" style={{ display: 'flex', width: '100%', 'justify-content': 'flex-end', 'margin-top':'20px' }}>
+        <div className="promptsDropDown" style={{ width:'310px', 'margin-right':'10px' }}>
+          <DropDown items={genres} app={this.props.app}></DropDown>
+        </div>
+
+        <div className="promptsDelete" style={{ width:'310px', 'margin-left':"10px", 'margin-right':'24px' }}>
+          <span className="adminDashboardMenu">
+            <Button text="DELETE GENRE"
+                    handleClick={() => {
+                    this.handleClick(this.state);}} />
+          </span>
+        </div>
       </div>
 
     </div>
