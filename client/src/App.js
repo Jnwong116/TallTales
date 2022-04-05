@@ -23,27 +23,23 @@ import {
 // import { css } from "@emotion/react";
 
 class App extends React.Component {
-    state = {
-        users: [],
-        story: {
-            title: "",
-            start: "",
-            story: "",
-            contributions: [],
-            prompt: {},
-            userScores: []
-        },
-        rooms: { 
-            room1: [], 
-            room2: [], 
-            room3: []
-        },
-        currUser: null,
-        page: "login",
-        stage: 0,
-        prompt: 0,
-        muted: false,
-    };
+  state = {
+    users: [],
+    story: {
+      title: "",
+      start: "",
+      story: "",
+      contributions: [],
+      prompt: {},
+      userScores: []
+    },
+    rooms: ["main"],
+    currUser: null,
+    page: "login",
+    stage: 0,
+    prompt: 0,
+    muted: false
+  };
 
   render() {
     this.page = route(this);
@@ -125,9 +121,8 @@ class App extends React.Component {
             <Route path="/past-stories" render={() => (<IndivStory />)}></Route>
             <Route render={() => <div>404 Not found</div>} />
           </Switch>
-          <ToastContainer limit={1}/>
+          <ToastContainer limit={1} />
         </Router>
-
       </div>
     );
   }
