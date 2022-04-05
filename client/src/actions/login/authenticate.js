@@ -40,7 +40,7 @@ export const login = (app, users) => {
       // log(result);
       app.setState({
         currUser: result.currentUser,
-        page: 4
+        page: "dashboard"
       });
       // log(app.state)
       return;
@@ -57,6 +57,6 @@ export const login = (app, users) => {
 
 export const register = app => {
   app.setState({
-    page: 1
+    page: "register"
   });
 };

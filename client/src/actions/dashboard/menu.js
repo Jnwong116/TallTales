@@ -7,7 +7,7 @@ export const menuRedirect = (app, page) => {
 export const logout = app => {
   app.setState({
     currUser: null,
-    page: 0
+    page: "login"
   });
 };
 

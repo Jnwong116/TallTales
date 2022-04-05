@@ -27,7 +27,7 @@ export const startGame = (app, start, prompts) => {
           prompt: storyPrompts
         },
         users: users,
-        page: 0,
+        page: "inputStage",
         prompt: 0,
         stage: 0
       });

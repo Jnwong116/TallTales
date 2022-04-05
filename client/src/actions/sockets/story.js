@@ -37,7 +37,7 @@ export const storyUpdated = (app) => {
             prompt: prompt,
             stage: stage,
             users: users,
-            page: 0
+            page: "inputStage"
         });
     });
 }

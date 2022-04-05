@@ -17,16 +17,16 @@ export const joinRoom = (user, room) => {
 
 export const updateRoom = (app) => {
     socket.on("update-users", ({ room, users, rooms }) => {
-        if (app.state.page === 4) {
+        if (app.state.page === "dashboard") {
             // User is on dashboard
             users[0].host = true;
             socket.emit("change-host", users);
             app.setState({
-                page: 2,
+                page: "lobby",
                 users: users
             });
         } 
-        else if (app.state.page === 2) {
+        else if (app.state.page === "lobby") {
             // User is on lobby page
             users[0].host = true;
             socket.emit("change-host", users);

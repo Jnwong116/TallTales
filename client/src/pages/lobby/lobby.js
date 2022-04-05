@@ -10,8 +10,15 @@ import "./lobby.css";
 
 import { getGenres } from "../../actions/lobby/lobby.js";
 import { gameStarted, startGame } from "../../actions/sockets/startGame.js";
+import { backButtonHandler } from "../../actions/router/render.js";
 
 class Lobby extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props.history.push("/lobby");
+    backButtonHandler(this.props.app, this.props.history);
+  }
+
   state = {
     user: {
       username: "",

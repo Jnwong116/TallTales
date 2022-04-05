@@ -11,8 +11,15 @@ import { select, confirmVote, checkRaconteur } from "../../actions/vote/vote.js"
 import { loadUserInput, receiveVote } from "../../actions/sockets/vote.js";
 import { getCurrentUser } from "../../actions/global/users.js";
 import { storyUpdated } from "../../actions/sockets/story.js";
+import { backButtonHandler } from "../../actions/router/render.js";
 
 class VoteStage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props.history.push("/voteStage");
+    backButtonHandler(this.props.app, this.props.history);
+  }
+
   state = {
     choice: "Choose a sentence",
     loadInputs: false,

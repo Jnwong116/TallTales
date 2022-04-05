@@ -22,6 +22,6 @@ export const saveInput = (app) => {
     updateSentence(users);
 
     app.setState({
-      page: 1
+      page: "voteStage"
     });
 }

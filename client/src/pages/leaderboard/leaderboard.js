@@ -10,8 +10,15 @@ import "./leaderboard.css"
 import { sortPlayers, saveStory } from "../../actions/leaderboard/displayScores.js";
 import { getCurrentUser } from "../../actions/global/users.js";
 import { storySaved } from "../../actions/sockets/story.js";
+import { backButtonHandler } from "../../actions/router/render.js";
 
 class Leaderboard extends React.Component {
+    constructor(props) {
+        super(props);
+        this.props.history.push("/leaderboard");
+        backButtonHandler(this.props.app, this.props.history);
+    }
+
     state = {
         user: {
             username: "jasper",

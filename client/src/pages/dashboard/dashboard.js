@@ -5,8 +5,15 @@ import DashboardMenu from "../../components/dashboardMenu/dashboardMenu.js";
 import "./dashboard.css";
 
 import { getUser } from "../../actions/global/users.js";
+import { backButtonHandler } from "../../actions/router/render.js";
 
 class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props.history.push("/dashboard");
+    backButtonHandler(this.props.app, this.props.history);
+  }
+
   state = {
     user: {
       username: "",

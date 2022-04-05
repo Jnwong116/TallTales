@@ -9,10 +9,17 @@ import MuteButton from "../../components/muteButton/muteButton.js";
 import { displayPrompt, isRaconteur, storyComplete } from "../../actions/prompt/displayPrompt.js";
 import { saveInput } from "../../actions/input/input.js";
 import { getCurrentUser } from "../../actions/global/users.js";
+import { backButtonHandler } from "../../actions/router/render.js";
 
 import "./inputStage.css";
 
 class InputStage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props.history.push("/inputStage");
+    backButtonHandler(this.props.app, this.props.history);
+  }
+
   state = {
     user: {
       username: "",
