@@ -6,7 +6,11 @@ import Story from "../../components/story/story.js";
 import UserInput from "../../components/userInput/userInput.js";
 import MuteButton from "../../components/muteButton/muteButton.js";
 
-import { displayPrompt, isRaconteur, storyComplete } from "../../actions/prompt/displayPrompt.js";
+import {
+  displayPrompt,
+  isRaconteur,
+  storyComplete
+} from "../../actions/prompt/displayPrompt.js";
 import { saveInput } from "../../actions/input/input.js";
 import { getCurrentUser } from "../../actions/global/users.js";
 import { backButtonHandler } from "../../actions/router/render.js";
@@ -24,7 +28,7 @@ class InputStage extends React.Component {
       username: "",
       icon: "avatar01.png"
     }
-  }
+  };
 
   componentDidMount() {    
     backButtonHandler(this.props.app, this.props.history);
@@ -33,7 +37,11 @@ class InputStage extends React.Component {
     storyComplete(this.props.app);
 
     // Checks if user is raconteur
-    isRaconteur(this.props.app, this.props.app.state.currUser, this.props.app.state.users);
+    isRaconteur(
+      this.props.app,
+      this.props.app.state.currUser,
+      this.props.app.state.users
+    );
 
     this.setState({
       user: getCurrentUser(this.props.app)
