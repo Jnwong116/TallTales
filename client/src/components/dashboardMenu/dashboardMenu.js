@@ -2,24 +2,21 @@ import React from "react";
 import Button from "../button/button.js";
 import "./dashboardMenu.css";
 import DropDown from "../../components/dropDown/dropDown.js";
-import RoomCreateInput from "../../components/roomCreateInput/roomCreateInput.js";
-import { socket } from "../../actions/sockets/socket.js";
-import {
-  menuRedirect,
-  logout,
-  startGame
-} from "../../actions/dashboard/menu.js";
+import { menuRedirect, logout, startGame, hostGame } from "../../actions/dashboard/menu.js";
 import { createdNewRoom } from "../../actions/sockets/joinRoom.js";
 
 class DashboardMenu extends React.Component {
-  render() {
+  componentDidMount() {
     createdNewRoom(this.props.app);
+  }
+
+  render() {
     return (
       <span className="dashboardMenu">
         <Button
           text="HOST NEW GAME"
           handleClick={() => {
-            startGame(true, this.users, this.props.app, 2);
+            hostGame(this.props.app, this.props.parent);
           }}
         />
         <Button
@@ -40,8 +37,6 @@ class DashboardMenu extends React.Component {
             logout(this.props.app);
           }}
         />
-        <RoomCreateInput app={this.props.app}></RoomCreateInput>
-        {console.log(this.props.app)}
         <div className="lobby-genre">
           <DropDown
             label={"<ROOMS>"}

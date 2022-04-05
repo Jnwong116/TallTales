@@ -1,4 +1,5 @@
 import { socket } from "./socket";
+import { errorToast } from "../toastify/toastify";
 // const log = console.log;
 
 export const joinRoom = (user, room) => {
@@ -56,7 +57,7 @@ export const createdNewRoom = app => {
   });
 };
 
-export const denyRoomAccess = errorToast => {
+export const denyRoomAccess = () => {
   socket.on("deny-room-access", s => {
     errorToast(s);
   });

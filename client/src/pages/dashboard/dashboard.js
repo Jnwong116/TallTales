@@ -3,10 +3,7 @@ import AppName from "../../components/appName/appName.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
 import DashboardMenu from "../../components/dashboardMenu/dashboardMenu.js";
 import "./dashboard.css";
-
 import { getUser } from "../../actions/global/users.js";
-import { socket } from "../../actions/sockets/socket.js";
-import { errorToast } from "../../actions/toastify/toastify.js";
 import { denyRoomAccess } from "../../actions/sockets/joinRoom.js";
 class Dashboard extends React.Component {
   state = {
@@ -19,17 +16,17 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     getUser(this, this.props.app);
+    denyRoomAccess();
   }
 
   render() {
-    denyRoomAccess(errorToast);
     return (
       <div className="dashboard">
         <span className="dashboardLeft">
           <div className="header">
             <AppName></AppName>
           </div>
-          <DashboardMenu app={this.props.app}></DashboardMenu>
+          <DashboardMenu app={this.props.app} parent={this}></DashboardMenu>
         </span>
 
         <span className="dashboardDivider"></span>

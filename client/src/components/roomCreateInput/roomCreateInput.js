@@ -2,7 +2,6 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import TextButton from "../textButton/textButton.js";
 import { joinRoom, createNewRoom } from "../../actions/sockets/joinRoom";
-import { socket } from "../../actions/sockets/socket.js";
 import { getUser } from "../../actions/global/users.js";
 import { errorToast, successToast } from "../../actions/toastify/toastify.js";
 

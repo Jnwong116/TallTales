@@ -31,9 +31,11 @@ app.use(express.static(path.join(__dirname, "/client/build")));
 
 const userRouter = require("./routes/users");
 const storyRouter = require("./routes/stories");
+const roomRouter = require("./routes/rooms");
 
 app.use("/users", userRouter);
 app.use("/stories", storyRouter);
+app.use("/rooms", roomRouter);
 
 app.get("*", (req, res) => {
   const pageRoutes = ["/"];

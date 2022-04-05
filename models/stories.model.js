@@ -36,8 +36,9 @@ const roomSchema = new Schema({
     code: {type: String, unique: true},
     private: {type: Boolean, default: true},
     host: {type: String},
-    genre: {type: String},
-    users: {type: Array, required: true}
+    genre: {type: String, default: "Adventure"},
+    users: {type: Number, required: true},
+    inProgress: {type: Boolean, default: false}
 })
 
 const Genre = mongoose.model('Genre', genreSchema);
