@@ -22,15 +22,15 @@ class UserInput extends React.Component {
       this.props.enterFunction();
     }
     if(time > 0 * 1000 && !this.state.audio60) {
-        this.audio60Ref.audioEl.current.play();
+        this.props.audio60Ref.audioEl.current.play();
         this.setState({ audio60: true })
     }
     if(time > 29 * 1000 && !this.state.audio30) {
-        this.audio30Ref.audioEl.current.play();
+        this.props.audio30Ref.audioEl.current.play();
         this.setState({ audio30: true })
     }
     if(time > 49 * 1000 && !this.state.audio10) {
-        this.audio10Ref.audioEl.current.play();
+        this.props.audio10Ref.audioEl.current.play();
         this.setState({ audio10: true })
     }
     this.setState({
@@ -38,6 +38,7 @@ class UserInput extends React.Component {
       duration
     });
   };
+  
   render() {
     const { time, duration } = this.state;
 
@@ -51,24 +52,6 @@ class UserInput extends React.Component {
 
     return (
       <div className="user-input">
-         <ReactAudioPlayer
-            src={require("../../assets/audio/game_60.mp3")}
-            autoPlay={false}
-            volume={1}
-            ref={(element) => { this.audio60Ref = element}}
-        />
-         <ReactAudioPlayer
-            src={require("../../assets/audio/game_30.mp3")}
-            autoPlay={false}
-            volume={1}
-            ref={(element) => { this.audio30Ref = element}}
-        />
-         <ReactAudioPlayer
-            src={require("../../assets/audio/game_10.mp3")}
-            autoPlay={false}
-            volume={1}
-            ref={(element) => { this.audio10Ref = element}}
-        />
         <div className="user-input-header">TYPE YOUR SENTENCE</div>
         <div className="stage-indicator">
           <img src={rightArrow} className="stage-arrow" alt="Right Arrow" />
