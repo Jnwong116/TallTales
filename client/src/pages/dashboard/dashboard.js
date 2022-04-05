@@ -4,7 +4,7 @@ import UserIcon from "../../components/userIcon/userIcon.js";
 import DashboardMenu from "../../components/dashboardMenu/dashboardMenu.js";
 import "./dashboard.css";
 import { getUser } from "../../actions/global/users.js";
-import { denyRoomAccess } from "../../actions/sockets/joinRoom.js";
+import { denyRoomAccess } from "../../actions/sockets/room.js";
 class Dashboard extends React.Component {
   state = {
     user: {

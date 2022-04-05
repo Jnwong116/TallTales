@@ -3,7 +3,7 @@ import Button from "../button/button.js";
 import "./dashboardMenu.css";
 import DropDown from "../../components/dropDown/dropDown.js";
 import { menuRedirect, logout, startGame, hostGame } from "../../actions/dashboard/menu.js";
-import { createdNewRoom } from "../../actions/sockets/joinRoom.js";
+import { createdNewRoom } from "../../actions/sockets/room.js";
 
 class DashboardMenu extends React.Component {
   componentDidMount() {

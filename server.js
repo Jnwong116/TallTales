@@ -51,10 +51,7 @@ app.get("*", (req, res) => {
 
 let users = [];
 let rooms = {
-  room1: false,
-  room2: false,
-  room3: false,
-  room4: false
+  main: false
 };
 
 // Join user to chat
@@ -91,6 +88,20 @@ function getRoomUsers(room) {
   return users.filter(user => user.room === room);
 }
 
+function updateRaconteur(raconteur, prevRaconteur) {
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].username === raconteur) { // Found the raconteur
+      users[i].raconteur = true;
+      users[i].currentSentence = "Raconteur";
+    }
+
+    if (users[i].username === prevRaconteur) { // Found the previous raconteur
+      users[i].raconteur = false;
+      users[i].currentSentence = ". . .";
+    }
+  }
+}
+
 function userLeave(id) {
   const usersIndex = users.findIndex(user => user.id === id);
   if (usersIndex !== -1) {
@@ -107,10 +118,20 @@ function allUsersInput(users) {
   return true;
 }
 
+function saveInput(newUsers, room) {
+  for (let i = 0; i < newUsers.length; i++) {
+    for (let j = 0; j < users.length; j++) {
+      if (users[j].username === newUsers[i].username) {
+        users[j].currentSentence = newUsers[i].currentSentence;
+      }
+    }
+  }
+}
+
 io.on("connection", socket => {
   // Join user to room
   socket.on("join-room", ({ user, room }) => {
-    if (!rooms[room]) {
+    if (!rooms[room] && getRoomUsers(room).length < 5) { // Checks if game is in progress or if game lobby already has 5 players
       const currUser = userJoin(
         socket.id,
         user.username,
@@ -127,7 +148,12 @@ io.on("connection", socket => {
         users: getRoomUsers(currUser.room)
       });
     } else {
-      socket.emit("deny-room-access", "Room in Progress!");
+      if (rooms[room]) { // If game is in progress
+        socket.emit("deny-room-access", "Room in Progress!");
+      }
+      else { // If room is full
+        socket.emit("deny-room-access", "Room is full!");
+      }
     }
   });
 
@@ -144,6 +170,10 @@ io.on("connection", socket => {
     rooms = changedRooms;
   });
 
+  socket.on("update-raconteur", ({ raconteur, prev }) => {
+    updateRaconteur(raconteur, prev);
+  })
+
   socket.on("start-game", ({ room, storyStart, storyPrompts, users }) => {
     io.to(room).emit("game-started", {
       storyStart: storyStart,
@@ -155,6 +185,7 @@ io.on("connection", socket => {
   });
 
   socket.on("update-sentence", ({ room, users }) => {
+    saveInput(users, room);
     // Checks if all users have updated their sentence
     if (allUsersInput(users)) {
       // log('all-users')
@@ -176,6 +207,7 @@ io.on("connection", socket => {
   });
 
   socket.on("update-story", ({ room, story, prompt, stage, users }) => {
+    // Updates serverside list of users
     io.to(room).emit("story-updated", {
       story: story,
       prompt: prompt,
@@ -185,6 +217,8 @@ io.on("connection", socket => {
   });
 
   socket.on("saved-story", ({ room, story }) => {
+    rooms[room] = false;
+    log(rooms);
     io.to(room).emit("story-saved", {
       story: story
     });
@@ -193,13 +227,49 @@ io.on("connection", socket => {
   // Runs when client disconnects
   socket.on("disconnect", () => {
     log(`${socket.id} disconnected`);
-    const currUser = userLeave(socket.id);
-    if (currUser) {
-      io.to(currUser.room).emit("update-users", {
-        room: currUser.room,
-        users: getRoomUsers(currUser.room),
-        rooms: rooms
-      });
+    const currUser = getCurrentUser(socket.id);
+
+    if (currUser) { // User exists
+      userLeave(socket.id); 
+      // Checks if user was part of in progress game
+      if (rooms[currUser.room]) { // Game was in progress
+        if (getRoomUsers(currUser.room).length === 1) { // If they are last person left in the room
+          rooms[currUser.room] = false;
+          io.to(currUser.room).emit("game-forfeit", {
+            users: getRoomUsers(currUser.room),
+            str: "The game has ended since all players left"
+          });
+        }
+
+        // Checks if user was raconteur
+        else if (currUser.raconteur) { // User was raconteur
+          io.to(currUser.room).emit("raconteur-left", {
+            users: getRoomUsers(currUser.room),
+            str: `${currUser.username} was the raconteur and they left`
+          });
+        }
+
+        else { // User was not raconteur
+          io.to(currUser.room).emit("user-left", {
+            users: getRoomUsers(currUser.room),
+            str: `${currUser.username} has left the game`
+          });
+
+          if (allUsersInput(getRoomUsers(currUser.room))) {
+            io.to(currUser.room).emit("all-users-input", {
+              users: getRoomUsers(currUser.room)
+            });
+          }
+        }
+      }
+
+      else { // User was not in game
+        io.to(currUser.room).emit("update-users", {
+          room: currUser.room,
+          users: getRoomUsers(currUser.room),
+          rooms: rooms
+        });
+      }
     }
   });
 });

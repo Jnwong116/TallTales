@@ -5,6 +5,11 @@ export const startGame = (app, start, prompts) => {
   const users = app.state.users;
   users[0].raconteur = true;
 
+  socket.emit("update-raconteur", {
+    raconteur: users[0].username,
+    prev: null
+  })
+
   socket.emit("start-game", {
     room: users[0].room,
     storyStart: start,

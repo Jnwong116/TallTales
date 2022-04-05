@@ -1,5 +1,5 @@
 import ENV from './../../config.js';
-import { joinRoom, createNewRoom } from '../sockets/joinRoom.js';
+import { joinRoom, createNewRoom } from '../sockets/room.js';
 
 const API_HOST = ENV.api_host;
 const log = console.log

@@ -5,7 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import "./dropDown.css";
 import { getUser } from "../../actions/global/users.js";
-import { joinRoom, updateRoom } from "../../actions/sockets/joinRoom";
+import { joinRoom, updateRoom } from "../../actions/sockets/room";
 
 class DropDown extends React.Component {
   state = {
