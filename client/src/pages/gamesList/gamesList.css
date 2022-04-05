@@ -58,7 +58,7 @@
   text-align: justify;
 }
 
-.buttonStyle {
+/* .buttonStyle {
   width: 310px;
   height: 60px;
   color: #ededed;
@@ -73,15 +73,15 @@
   border: none;
   font-weight: bolder;
   font-size: 14px;
-}
+} */
 
 .buttonStyle:hover {
   cursor: pointer;
 }
 
-.app-name {
+/* .app-name {
   padding-left: 0px;
-}
+} */
 
 .user-icon {
   padding-left: 125px;
@@ -108,7 +108,7 @@
   color: red;
 }
 
-.MuiInputBase-root {
+/* .MuiInputBase-root {
   color: rgb(178, 178, 178) !important;
   background-color: rgb(57, 56, 55) !important;
 }
@@ -135,4 +135,4 @@
   font-size: 40px;
   font-weight: bold;
   padding-bottom: 0px !important;
-}
+} */

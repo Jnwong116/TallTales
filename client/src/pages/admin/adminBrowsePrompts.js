@@ -22,11 +22,12 @@ import Avatar from '@mui/material/Avatar';
 import DropDown from "../../components/dropDown/dropDown.js";
 
 const users = require("../../data/users.json");
+const stories = require("../../data/stories.json");
 
 class AdminBrowsePrompts extends React.Component {
   render() {
 
-    const genres = this.props.app.state.stories.stories.map(
+    const genres = stories.stories.map(
       object => object.genre
     );
 
@@ -51,14 +52,14 @@ class AdminBrowsePrompts extends React.Component {
         <span className="dashboardRight">
 
         <div className="profileAvatarContainer">
-          <UserIcon icon={this.props.app.state.currUser.icon} username={this.props.app.state.currUser.username} />
+          <UserIcon icon={"avatar01.png"} username={"name01"} />
         </div>
 
         <div className="adminContent" style={{ height: '526px', display: 'flex', 'flex-direction': 'column', 'justify-content': 'flex-start', width: '100%' }}>
 
           <div className="promptsMenuRow" style={{ display: 'flex', width: '100%', 'justify-content': 'flex-end' }}>
             <div className="promptsDropDown" style={{ width:'310px', 'margin-right':"10px" }}>  {/* used to be: 371px */}
-              <DropDown items={genres}></DropDown>
+              <DropDown items={genres} app={this.props.app}></DropDown>
             </div>
 
             <div className="promptsDelete" style={{ width:'310px', 'margin-left':"10px" }}>  {/* used to be: 371px */}
