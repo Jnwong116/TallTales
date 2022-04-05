@@ -18,10 +18,12 @@ export const startGame = (app, start, prompts) => {
   });
 };
 
-export const gameStarted = app => {
-  socket.on(
-    "game-started",
-    ({ storyStart, storyPrompts, users, rooms, room }) => {
+export const gameStarted = (app, gameAudioRef) => {
+  socket.on("game-started", ({ storyStart, storyPrompts, users, rooms, room }) => {
+      gameAudioRef.audioEl.current.play();
+      if(app.state.muted) {
+        gameAudioRef.audioEl.current.muted = true;
+      }
       rooms[room] = true;
       socket.emit("update-rooms", rooms);
       app.setState({

@@ -4,6 +4,7 @@ import Button from "../../components/button/button.js";
 import Score from "../../components/score/score.js";
 import Story from "../../components/story/story.js";
 import UserInput from "../../components/userInput/userInput.js";
+import MuteButton from "../../components/muteButton/muteButton.js";
 
 import { displayPrompt, isRaconteur, storyComplete } from "../../actions/prompt/displayPrompt.js";
 import { saveInput } from "../../actions/input/input.js";
@@ -54,6 +55,9 @@ class InputStage extends React.Component {
             saveInput(this.props.app);
           }}
         ></Button>
+        <div className="mute-footer">
+            <MuteButton app={this.props.app} audioRef={this.props.gameAudioRef}/>
+        </div>
       </div>
     );
   }
