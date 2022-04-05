@@ -8,16 +8,21 @@ export const loadStory = (page, url) => {
     const paramString = url.split('?')[1];
     const queryString = new URLSearchParams(paramString);
     let story = "";
+    let user = "";
 
     for (let pair of queryString.entries()) {
         if (pair[0] === 'story') {
             story = pair[1];
         }
+
+        if (pair[0] === 'user') {
+            user = pair[1];
+        }
     }
 
-    // Checks there is a story param
-    if (story !== "") {
-        const route = `${API_HOST}/stories/story/${story}`
+    // Checks there is a story and user param
+    if (story !== "" && user !== "") {
+        const route = `${API_HOST}/users/stories/${user}/${story}`
 
         fetch(route)
         .then((res) => {

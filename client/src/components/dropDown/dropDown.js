@@ -4,13 +4,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import "./dropDown.css";
-// import {
-//   menuRedirect,
-//   logout,
-//   startGame
-// } from "../../actions/dashboard/menu.js";
 import { getUser } from "../../actions/global/users.js";
-import { joinRoom, updateRoom } from "../../actions/sockets/joinRoom";
+import { joinRoom, updateRoom } from "../../actions/sockets/room";
 
 class DropDown extends React.Component {
   state = {
@@ -38,7 +33,7 @@ class DropDown extends React.Component {
 
       if (this.state.user) {
         // User and room emit
-        joinRoom(this.state.user, event.target.value)
+        joinRoom(this.state.user, event.target.value);
       }
     };
 
