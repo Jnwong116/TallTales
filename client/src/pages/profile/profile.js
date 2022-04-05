@@ -25,7 +25,7 @@ class Profile extends React.Component {
       icon: "avatar01.png",
       stories: []
     }
-  }
+  };
 
   componentDidMount() {
     getUser(this, this.props.app);
@@ -34,32 +34,33 @@ class Profile extends React.Component {
   render() {
     return (
       <div className="profile">
-          <div className="profile-header">
-            <AppName />
+        <div className="profile-header">
+          <AppName />
+          <div className="profileAvatarContainer">
+            <UserIcon
+              icon={this.state.user.icon}
+              username={this.state.user.username}
+            />
           </div>
-          <div className="profileLeft">
-            <ProfileMenu app={this.props.app}/>
+        </div>
+        <div className="profileLeft">
+          <ProfileMenu app={this.props.app} />
         </div>
 
-        <span className="profileDivider">
-        </span>
+        <span className="profileDivider"></span>
 
         <div className="profileRight">
           <div className="profileInterface">
-            <div className="profileAvatarContainer">
-              <UserIcon icon={this.state.user.icon} username={this.state.user.username} />
-            </div>
             <div className="profileInterfaceDivider" />
-              {
-                this.props.app.state.page === "editAvatar" ? <ChangeAvatar app={this.props.app} parent={this} /> :
-                (
-                  this.props.app.state.page === "editUsername" ? <ChangeName app={this.props.app} parent={this} /> :
-                  (
-                    this.props.app.state.page === "editPassword" ? <ChangePassword app={this.props.app} parent={this} /> :
-                    <CompletedStories app={this.props.app} parent={this} />
-                  )
-                )
-              }
+            {this.props.app.state.page === "editAvatar" ? (
+              <ChangeAvatar app={this.props.app} parent={this} />
+            ) : this.props.app.state.page === "editUsername" ? (
+              <ChangeName app={this.props.app} parent={this} />
+            ) : this.props.app.state.page === "editPassword" ? (
+              <ChangePassword app={this.props.app} parent={this} />
+            ) : (
+              <CompletedStories app={this.props.app} parent={this} />
+            )}
           </div>
         </div>
       </div>
