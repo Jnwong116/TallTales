@@ -36,7 +36,7 @@ span {
 }
 
 .adminDashboardRight {
-  width: 800px;
+  width: 638px;
   display: flex;
   flex-direction: column;
 }
@@ -81,7 +81,7 @@ span {
 
 .buttonStyle {
   width: 310px;
-  height: 60px;
+  height: 56px;
   color: #ededed;
   background-color: #292929;
   padding-left: 0px;
@@ -93,7 +93,6 @@ span {
   border: none;
   font-weight: bolder;
   font-size: 14px;
-  height: 56px;
   border-radius: 5px; /* TODO: needs to be moved to appropriate CSS location */
 }
 
@@ -130,4 +129,20 @@ span {
 }
 
 .promptsMenuRow {
+}
+
+ .promptAddIconButtonContainer {
+   width: 310px;
+   margin-right: 10px;
+ }
+
+.promptAddIconButton {
+  font-size: 14px;
+  font-weight: bolder;
+  width: 310px;
+  height: 56px;
+  border: 2px;
+  border-radius: 5px;
+  align-content: center;
+  margin-left: 0px;
 }

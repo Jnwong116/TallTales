@@ -3,6 +3,7 @@ import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
 import AdminMenu from "../../components/profileMenu/adminMenu.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
+import TextButton from "../../components/textButton/textButton.js";
 import PromptItemMenu from "../../components/promptItemMenu/promptItemMenu.js";
 import "./admin.css";
 
@@ -13,12 +14,14 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
+import MUIButton from '@mui/material/Button';
 
 import Box from '@mui/material/Box';
 
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Avatar from '@mui/material/Avatar';
+import AddIcon from '@mui/icons-material/Add';
 
 import DropDown from "../../components/dropDown/dropDown.js";
 
@@ -52,141 +55,140 @@ class AdminBrowsePrompts extends React.Component {
 
         <span className="adminDashboardRight">
 
-        <div className="profileAvatarContainer">
-          <UserIcon icon={"avatar01.png"} username={"name01"} />
-        </div>
-
-        <div className="adminContent" style={{ height: '600px', display: 'flex', 'flex-direction': 'column', 'justify-content': 'flex-start', width: '100%' }}>
-
-          <div className="promptsMenuRow" style={{ display: 'flex', width: '100%', 'justify-content': 'flex-end' }}>
-            <div className="promptsDropDown" style={{ width:'310px', 'margin-right':"10px" }}>
-              <DropDown items={genres} app={this.props.app}></DropDown>
-            </div>
-
-            <div className="promptsDelete" style={{ width:'310px', 'margin-left':"10px", 'margin-right':'24px' }}>
-              <span className="adminDashboardMenu">
-                <Button text="DELETE GENRE"
-                        handleClick={() => {
-                        this.handleClick(this.state);}} />
-              </span>
-            </div>
+          <div className="profileAvatarContainer">
+            <UserIcon icon={"avatar01.png"} username={"name01"} />
           </div>
 
-          <div className="promptsMenuRow promptsMenuRowTop">
-            <Box className="promptsContainerBox">
-              <Stack spacing={2}>
+          <div className="adminContent" style={{ height: '600px', display: 'flex', 'flex-direction': 'column', 'justify-content': 'flex-end', width: '100%' }}>
 
-                <Card sx={{ width: 638 }} variant="outlined">
-                  <CardHeader style={{ textAlign: 'left' }}
-                    avatar={
-                      <Avatar sx={{ bgcolor: '#292929' }} aria-label="recipe">
-                        C {/* TODO: dynamically pick first letter of the title or something */}
-                      </Avatar>
-                    }
-                    action={ <PromptItemMenu /> }
-                    title="Canned Food"
-                    subheader="Submitted by gazi"
-                  />
+            <div className="promptsMenuRow" style={{ display: 'flex', width: '100%', 'justify-content': 'flex-end' }}>
+              <div className="promptsDropDown" style={{ width:'310px', 'margin-right':"10px" }}>
+                <DropDown items={genres} app={this.props.app}></DropDown>
+              </div>
+
+              <div className="promptsDelete" style={{ width:'310px', 'margin-left':"10px", 'margin-right':'24px' }}>
+                <span className="adminDashboardMenu">
+                  <Button text="DELETE GENRE"
+                          handleClick={() => {
+                          this.handleClick(this.state);}} />
+                </span>
+              </div>
+            </div>
+
+            <div className="promptsMenuRowTop">
+              <Box className="promptsContainerBox">
+                <Stack spacing={2}>
+
+                  <Card sx={{ width: 638 }} variant="outlined">
+                    <CardHeader style={{ textAlign: 'left' }}
+                      avatar={
+                        <Avatar sx={{ bgcolor: '#292929' }} aria-label="recipe">
+                          C {/* TODO: dynamically pick first letter of the title or something */}
+                        </Avatar>
+                      }
+                      action={ <PromptItemMenu /> }
+                      title="Canned Food"
+                      subheader="Submitted by gazi"
+                    />
+
+                  <CardContent>
+                    <Typography style={{ textAlign: 'left' }} variant="body2" color="text.secondary">
+                      User 1 and User 2 are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means.
+                    </Typography>
+                  </CardContent>
+                </Card>
+
+              <Card sx={{ width: 638 }} variant="outlined">
+                <CardHeader style={{ textAlign: 'left' }}
+                  avatar={
+                    <Avatar sx={{ bgcolor: '#292929' }} aria-label="recipe">
+                      B
+                    </Avatar>
+                  }
+                  action={ <PromptItemMenu /> }
+                  title="Bakery Break-In"
+                  subheader="Submitted by jasper"
+                />
 
                 <CardContent>
                   <Typography style={{ textAlign: 'left' }} variant="body2" color="text.secondary">
-                    User 1 and User 2 are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means.
+                    Detectives User 1, User 2, and User 3 are investigating a break-in at a bakery. The only thing missing? A very secret ingredient.
                   </Typography>
                 </CardContent>
               </Card>
 
-            <Card sx={{ width: 638 }} variant="outlined">
-              <CardHeader style={{ textAlign: 'left' }}
-                avatar={
-                  <Avatar sx={{ bgcolor: '#292929' }} aria-label="recipe">
-                    B
-                  </Avatar>
-                }
-                action={ <PromptItemMenu /> }
-                title="Bakery Break-In"
-                subheader="Submitted by jasper"
-              />
+              <Card sx={{ width: 638 }} variant="outlined">
+                <CardHeader style={{ textAlign: 'left' }}
+                  avatar={
+                    <Avatar sx={{ bgcolor: '#292929' }} aria-label="recipe">
+                      B
+                    </Avatar>
+                  }
+                  action={ <PromptItemMenu /> }
+                  title="Bakery Break-In"
+                  subheader="Submitted by jasper"
+                />
 
-              <CardContent>
-                <Typography style={{ textAlign: 'left' }} variant="body2" color="text.secondary">
-                  Detectives User 1, User 2, and User 3 are investigating a break-in at a bakery. The only thing missing? A very secret ingredient.
-                </Typography>
-              </CardContent>
-            </Card>
+                <CardContent>
+                  <Typography style={{ textAlign: 'left' }} variant="body2" color="text.secondary">
+                    Detectives User 1, User 2, and User 3 are investigating a break-in at a bakery. The only thing missing? A very secret ingredient.
+                  </Typography>
+                </CardContent>
+              </Card>
 
-            <Card sx={{ width: 638 }} variant="outlined">
-              <CardHeader style={{ textAlign: 'left' }}
-                avatar={
-                  <Avatar sx={{ bgcolor: '#292929' }} aria-label="recipe">
-                    B
-                  </Avatar>
-                }
-                action={ <PromptItemMenu /> }
-                title="Bakery Break-In"
-                subheader="Submitted by jasper"
-              />
+              <Card sx={{ width: 638 }} variant="outlined">
+                <CardHeader style={{ textAlign: 'left' }}
+                  avatar={
+                    <Avatar sx={{ bgcolor: '#292929' }} aria-label="recipe">
+                      B
+                    </Avatar>
+                  }
+                  action={ <PromptItemMenu /> }
+                  title="Bakery Break-In"
+                  subheader="Submitted by jasper"
+                />
 
-              <CardContent>
-                <Typography style={{ textAlign: 'left' }} variant="body2" color="text.secondary">
-                  Detectives User 1, User 2, and User 3 are investigating a break-in at a bakery. The only thing missing? A very secret ingredient.
-                </Typography>
-              </CardContent>
-            </Card>
+                <CardContent>
+                  <Typography style={{ textAlign: 'left' }} variant="body2" color="text.secondary">
+                    Detectives User 1, User 2, and User 3 are investigating a break-in at a bakery. The only thing missing? A very secret ingredient.
+                  </Typography>
+                </CardContent>
+              </Card>
 
-            <Card sx={{ width: 638 }} variant="outlined">
-              <CardHeader style={{ textAlign: 'left' }}
-                avatar={
-                  <Avatar sx={{ bgcolor: '#292929' }} aria-label="recipe">
-                    B
-                  </Avatar>
-                }
-                action={ <PromptItemMenu /> }
-                title="Bakery Break-In"
-                subheader="Submitted by jasper"
-              />
+              <Card sx={{ width: 638 }} variant="outlined">
+                <CardHeader style={{ textAlign: 'left' }}
+                  avatar={
+                    <Avatar sx={{ bgcolor: '#292929' }} aria-label="recipe">
+                      B
+                    </Avatar>
+                  }
+                  action={ <PromptItemMenu /> }
+                  title="Bakery Break-In"
+                  subheader="Submitted by jasper"
+                />
 
-              <CardContent>
-                <Typography style={{ textAlign: 'left' }} variant="body2" color="text.secondary">
-                  Detectives User 1, User 2, and User 3 are investigating a break-in at a bakery. The only thing missing? A very secret ingredient.
-                </Typography>
-              </CardContent>
-            </Card>
+                <CardContent>
+                  <Typography style={{ textAlign: 'left' }} variant="body2" color="text.secondary">
+                    Detectives User 1, User 2, and User 3 are investigating a break-in at a bakery. The only thing missing? A very secret ingredient.
+                  </Typography>
+                </CardContent>
+              </Card>
 
-            <Card sx={{ width: 638 }} variant="outlined">
-              <CardHeader style={{ textAlign: 'left' }}
-                avatar={
-                  <Avatar sx={{ bgcolor: '#292929' }} aria-label="recipe">
-                    B
-                  </Avatar>
-                }
-                action={ <PromptItemMenu /> }
-                title="Bakery Break-In"
-                subheader="Submitted by jasper"
-              />
-
-              <CardContent>
-                <Typography style={{ textAlign: 'left' }} variant="body2" color="text.secondary">
-                  Detectives User 1, User 2, and User 3 are investigating a break-in at a bakery. The only thing missing? A very secret ingredient.
-                </Typography>
-              </CardContent>
-            </Card>
-
-          </Stack>
-        </Box>
-      </div>
-
-      <div className="promptsMenuRow" style={{ display: 'flex', width: '100%', 'justify-content': 'flex-end', 'margin-top':'20px' }}>
-        <div className="promptsDropDown" style={{ width:'310px', 'margin-right':'10px' }}>
-          <DropDown items={genres} app={this.props.app}></DropDown>
+            </Stack>
+          </Box>
         </div>
 
-        <div className="promptsDelete" style={{ width:'310px', 'margin-left':"10px", 'margin-right':'24px' }}>
-          <span className="adminDashboardMenu">
-            <Button text="DELETE GENRE"
-                    handleClick={() => {
-                    this.handleClick(this.state);}} />
-          </span>
+      <div className="promptsMenuRow" style={{ display: 'flex', width: '638px', 'justify-content': 'flex-start', 'margin-top':'20px' }}>
+        <div className="promptAddIconButtonContainer">
+          <MUIButton
+            class="promptAddIconButton"
+            startIcon={<IconButton aria-label="add icon" size="inherit"><AddIcon /></IconButton>}
+            handleClick={() => {
+            this.handleClick(this.state);}}
+          > Add New Prompt </MUIButton>
+
         </div>
+
       </div>
 
     </div>
