@@ -22,27 +22,23 @@ import {
 // import { css } from "@emotion/react";
 
 class App extends React.Component {
-    state = {
-        users: [],
-        story: {
-            title: "",
-            start: "",
-            story: "",
-            contributions: [],
-            prompt: {},
-            userScores: []
-        },
-        rooms: { 
-            room1: [], 
-            room2: [], 
-            room3: []
-        },
-        currUser: null,
-        page: 0,
-        stage: 0,
-        prompt: 0,
-        muted: false,
-    };
+  state = {
+    users: [],
+    story: {
+      title: "",
+      start: "",
+      story: "",
+      contributions: [],
+      prompt: {},
+      userScores: []
+    },
+    rooms: ["main"],
+    currUser: null,
+    page: 0,
+    stage: 0,
+    prompt: 0,
+    muted: false
+  };
 
   render() {
 
@@ -95,9 +91,8 @@ class App extends React.Component {
             {/* <Route path="/leader" element={<Leaderboard app={this} />}></Route> */}
             <Route path="/past-stories" element={<IndivStory />}></Route>
           </Switch>
-          <ToastContainer limit={1}/>
+          <ToastContainer limit={1} />
         </Router>
-
       </div>
     );
   }
