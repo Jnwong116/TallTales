@@ -3,14 +3,22 @@ import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
 import CompletedStory from "../../components/completedStory/completedStory.js";
 import Scoreboard from "../../components/scoreboard/scoreboard.js";
+import MuteButton from "../../components/muteButton/muteButton.js";
 
 import "./leaderboard.css"
 
 import { sortPlayers, saveStory } from "../../actions/leaderboard/displayScores.js";
 import { getCurrentUser } from "../../actions/global/users.js";
 import { storySaved } from "../../actions/sockets/story.js";
+import { backButtonHandler } from "../../actions/router/render.js";
+import { stop } from "../../actions/audio/stopAudio.js";
 
 class Leaderboard extends React.Component {
+    constructor(props) {
+        super(props);
+        this.props.history.push("/leaderboard");
+    }
+
     state = {
         user: {
             username: "jasper",
@@ -43,6 +51,8 @@ class Leaderboard extends React.Component {
     }
 
     componentDidMount() {
+        backButtonHandler(this.props.app, this.props.history);
+
         // Sort the users from highest to lowest points
         this.setState({
             users: this.props.app.state.users.sort(sortPlayers),
@@ -79,11 +89,15 @@ class Leaderboard extends React.Component {
                     <div className="footer-button">
                         <Button text="HOME" 
                             handleClick={() => {
+                                stop(this.props.gameAudioRef);
                                 saveStory(this.state.user, this.props.app.state.story, this.props.app, this)
                             }}
                         /> 
                     </div>
-                </div>       
+                </div>   
+                <div className="mute-footer">
+                    <MuteButton app={this.props.app} audioRef={this.props.gameAudioRef}/>
+                </div>    
             </div>    
         )
     }

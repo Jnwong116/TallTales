@@ -63,7 +63,7 @@ export const AIVote = (users, stories, raconteur, app, page) => {
             stories.currStory.story = stories.currStory.story + " " + input;
             updatePrompt(app);
             app.setState({
-                page: 0
+                page: "inputStage"
             });
         }, 5000)
 

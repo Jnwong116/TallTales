@@ -43,7 +43,7 @@ export const addUser = (app, users) => {
         if (res.status === 200) {
             // Go back to login page
             app.setState({
-                page: 0
+                page: "login"
             });
             successToast('User added!');
             return;

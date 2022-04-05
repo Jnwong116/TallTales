@@ -44,23 +44,50 @@ router.route('/register').post(async (req, res) => {
         });
 });
 
-// Login User
-/*
-    {
-        "username": <String>,
-        "password": <String>
-    }
-*/
-router.route("/login").post((req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
+// // Login User
+// /*
+//     {
+//         "username": <String>,
+//         "password": <String>
+//     }
+// */
+// router.route('/login').post((req, res) => {
+//     const username = req.body.username;
+//     const password = req.body.password;
 
-  User.findByUsernamePassword(username, password)
-    .then(() => res.send({ currentUser: username }))
-    .catch(error => {
-      res.status(400).send(error);
-    });
-});
+//     User.findByUsernamePassword(username, password)
+//         .then(user => {
+//             // Add the user's id to the session
+//             req.session.userid = user._id;
+//             req.session.username = user.username;
+//             res.send({ currentUser: user.username });
+//         })
+//         .catch(error => {
+//             res.status(400).send(error);
+//         })
+// })
+
+// router.route('/logout').get((req, res) => {
+//     // Remove the session
+//     req.session.destroy(error => {
+//         if (error) {
+//             res.status(500).send(error);
+//         } else {
+//             res.send();
+//         }
+//     });
+// })
+
+
+// // A route to check if a user is logged in on the session
+// router.route("/check-session").get((req, res) => {
+//     if (req.session.userid) {
+//         res.send({ currentUser: req.session.username });
+//     } else {
+//         res.status(401).send();
+//     }
+// });
+
 
 // Gets all users
 router.route("/").get((req, res) => {
@@ -157,110 +184,6 @@ router.route("/admin/:username").delete(async (req, res) => {
   }
 
   curUser.admin = false;
-
-  curUser
-    .save()
-    .then(result => {
-      res.send(result);
-    })
-    .catch(err => {
-      res.status(400).json("Error: " + err);
-    });
-});
-
-// Adds prompt to User
-/*
-    {
-        "start": <String>
-    }
-    
-*/
-router.route("/prompts/:username").post(async (req, res) => {
-  const user = req.params.username;
-
-  let curUser = await User.findOne({ username: user });
-
-  // Checks to make sure it exists
-  if (curUser === null) {
-    res.status(404).send("User not found");
-    return;
-  }
-
-  curUser.prompts.push(req.body.start);
-
-  curUser
-    .save()
-    .then(result => {
-      res.send(result);
-    })
-    .catch(err => {
-      res.status(400).json("Error: " + err);
-    });
-});
-
-// Deletes a start from User
-/*
-    {
-        "index": <Number>
-    }
-*/
-router.route("/prompts/:username").delete(async (req, res) => {
-  const user = req.params.username;
-
-  let curUser = await User.findOne({ username: user });
-
-  // Checks to make sure it exists
-  if (curUser === null) {
-    res.status(404).send("User not found");
-    return;
-  }
-
-  const start = curUser.prompts[req.body.index];
-
-  curUser.prompts.splice(req.body.index, 1);
-  curUser
-    .save()
-    .then(result => {
-      res.send({ start, result });
-    })
-    .catch(err => {
-      res.status(400).json("Error: " + err);
-    });
-});
-
-// Saves a story to User
-/*
-    {
-        "title": <String>,
-        "start": <String>,
-        "story": <String>,
-        "contributions": [
-          {
-            "username": <String>,
-            "sentence": <String>,
-          }
-        ],
-        "userScores": [
-          {
-            "username": <String>,
-            "score": <Number>,
-            "icon", <String>
-          }
-        ]
-    }
-*/
-router.route("/stories/:username").post(async (req, res) => {
-  const user = req.params.username;
-
-  let curUser = await User.findOne({ username: user });
-
-  // Checks to make sure it exists
-  if (curUser === null) {
-    res.status(404).send("User not found");
-    return;
-  }
-
-  curUser.stories.push(req.body);
 
   curUser
     .save()
@@ -374,6 +297,200 @@ router.route("/edit/avatar/:username").post(async (req, res) => {
     .catch(err => {
       res.status(400).json("Error: " + err);
     });
+});
+
+/*
+--------------------------------------------- Prompts
+*/
+
+// Adds start to User
+/*
+    {
+        "start": <String>
+    }
+    
+*/
+router.route("/prompts/:username").post(async (req, res) => {
+  const user = req.params.username;
+
+  let curUser = await User.findOne({ username: user });
+
+  // Checks to make sure it exists
+  if (curUser === null) {
+    res.status(404).send("User not found");
+    return;
+  }
+
+  curUser.prompts.push(req.body.start);
+
+  curUser
+    .save()
+    .then(result => {
+      res.send(result);
+    })
+    .catch(err => {
+      res.status(400).json("Error: " + err);
+    });
+});
+
+// Deletes a start from User
+/*
+    {
+        "index": <Number>
+    }
+*/
+router.route("/prompts/:username").delete(async (req, res) => {
+  const user = req.params.username;
+
+  let curUser = await User.findOne({ username: user });
+
+  // Checks to make sure it exists
+  if (curUser === null) {
+    res.status(404).send("User not found");
+    return;
+  }
+
+  const start = curUser.prompts[req.body.index];
+
+  curUser.prompts.splice(req.body.index, 1);
+  curUser
+    .save()
+    .then(result => {
+      res.send({ start, result });
+    })
+    .catch(err => {
+      res.status(400).json("Error: " + err);
+    });
+});
+
+/*
+--------------------------------------- Stories
+*/
+
+// Saves a story to User
+/*
+    {
+        "title": <String>,
+        "start": <String>,
+        "story": <String>,
+        "contributions": [
+          {
+            "username": <String>,
+            "sentence": <String>,
+          }
+        ],
+        "userScores": [
+          {
+            "username": <String>,
+            "score": <Number>,
+            "icon", <String>
+          }
+        ]
+    }
+*/
+router.route("/stories/:username").post(async (req, res) => {
+  const user = req.params.username;
+
+  let curUser = await User.findOne({ username: user });
+
+  // Checks to make sure it exists
+  if (curUser === null) {
+    res.status(404).send("User not found");
+    return;
+  }
+
+  curUser.stories.push(req.body);
+
+  curUser
+    .save()
+    .then(result => {
+      res.send(result);
+    })
+    .catch(err => {
+      res.status(400).json("Error: " + err);
+    });
+});
+
+
+// Edits title of story for user
+/*
+  "title": <String>
+*/
+router.route("/stories/:username/:story").post(async (req, res) => {
+  const user = req.params.username;
+  const story = req.params.story;
+
+  let curUser = await User.findOne({ username: user });
+  let curStory = null;
+
+  // Checks to make sure it exists
+  if (curUser === null) {
+    res.status(404).send("User not found");
+    return;
+  }
+
+  // Finds story
+  for (let i = 0; i < curUser.stories.length; i++) {
+    if (curUser.stories[i]._id === story) {
+      curStory = i;
+      break;
+    }
+  }
+
+  // Checks to make sure story exists
+  if (curStory === null) {
+    res.status(404).send("Story not found");
+    return;
+  }
+
+  // Edits title of story
+  const newStory = curUser.stories[curStory];
+  newStory.title = req.body.title;
+  curUser.stories.splice(curStory, 1);
+  curUser.stories.push(newStory);
+
+  curUser
+    .save()
+    .then(result => {
+      res.send(result);
+    })
+    .catch(err => {
+      res.status(400).json("Error: " + err);
+    });
+});
+
+
+// Gets story from User
+router.route("/stories/:username/:story").get(async (req, res) => {
+  const user = req.params.username;
+  const story = req.params.story;
+
+  let curUser = await User.findOne({ username: user });
+  let curStory = null;
+
+  // Checks to make sure it exists
+  if (curUser === null) {
+    res.status(404).send("User not found");
+    return;
+  }
+
+  // Finds story
+  for (let i = 0; i < curUser.stories.length; i++) {
+    if (curUser.stories[i]._id === story) {
+      curStory = curUser.stories[i];
+      break;
+    }
+  }
+
+  // Checks to make sure story exists
+  if (curStory === null) {
+    res.status(404).send("Story not found");
+    return;
+  }
+
+  res.send(curStory);
+
+
 });
 
 module.exports = router;

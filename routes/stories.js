@@ -27,7 +27,7 @@ router.route('/genre/:genre').post(async (req, res) => {
         });
     }
 
-    curGenre.starts.push(req.body.start);
+    curGenre.starts.push(req.body);
 
     curGenre.save()
         .then((result) => {
@@ -37,6 +37,55 @@ router.route('/genre/:genre').post(async (req, res) => {
             res.status(400).json('Error: ' + err);
         });
 });
+
+
+// Edits title of start for Genre
+/*
+  "title": <String>
+*/
+router.route("/genre/:genre/:start").post(async (req, res) => {
+    const genre = req.params.genre;
+    const start = req.params.start;
+  
+    let curGenre = await Genre.findOne({ genre: genre });
+    let curStart = null;
+  
+    // Checks to make sure it exists
+    if (curGenre === null) {
+      res.status(404).send("Genre not found");
+      return;
+    }
+  
+    // Finds start
+    for (let i = 0; i < curGenre.starts.length; i++) {
+      if (curGenre.starts[i].id === start) {
+        
+        curStart = i;
+        break;
+      }
+    }
+  
+    // Checks to make sure start exists
+    if (curStart === null) {
+      res.status(404).send("Start not found");
+      return;
+    }
+  
+    // Edits title of start
+    const newStart = curGenre.starts[curStart];
+    newStart.title = req.body.title;
+    curGenre.starts.splice(curStart, 1);
+    curGenre.starts.push(newStart);
+  
+    curGenre
+      .save()
+      .then(result => {
+        res.send(result);
+      })
+      .catch(err => {
+        res.status(400).json("Error: " + err);
+      });
+  });
 
 
 // Gets all Genres

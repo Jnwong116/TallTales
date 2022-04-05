@@ -1,6 +1,9 @@
 .header {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
+
 .lobby-header {
   font-size: 56px;
   font-style: "IBM Plex Sans";
@@ -41,7 +44,14 @@
   color: rgb(225, 225, 225) !important;
 }
 
-.buttonStyle {
+.mute-footer {
+  margin-right: 50px;
+  margin-bottom: 50px;
+  justify-content: right;
+  display: flex;
+}
+
+.lobby.buttonStyle {
   color: #ededed;
   background-color: rgb(57, 56, 55);
   padding-left: 100px;

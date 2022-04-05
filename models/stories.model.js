@@ -7,9 +7,14 @@ const promptSchema = new Schema({
     resolution: {type: Array, required: true}
 })
 
+const startSchema = new Schema({
+    title: {type: String, default: "Untitled Prompt"},
+    start: {type: String, required: true}
+})
+
 const genreSchema = new Schema({
     genre: {type: String, required: true},
-    starts: {type: Array, required: true, default: []},
+    starts: {type: [startSchema], required: true, default: []},
     prompts: {type: [promptSchema], required: true, default: []}
 })
 
@@ -36,8 +41,9 @@ const roomSchema = new Schema({
     code: {type: String, unique: true},
     private: {type: Boolean, default: true},
     host: {type: String},
-    genre: {type: String},
-    users: {type: Array, required: true}
+    genre: {type: String, default: "Adventure"},
+    users: {type: Number, required: true},
+    inProgress: {type: Boolean, default: false}
 })
 
 const Genre = mongoose.model('Genre', genreSchema);
