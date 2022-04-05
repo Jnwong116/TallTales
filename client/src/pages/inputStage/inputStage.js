@@ -1,4 +1,5 @@
 import React from "react";
+import ReactAudioPlayer from 'react-audio-player';
 import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
 import Score from "../../components/score/score.js";
@@ -13,6 +14,7 @@ import {
 } from "../../actions/prompt/displayPrompt.js";
 import { saveInput } from "../../actions/input/input.js";
 import { getCurrentUser } from "../../actions/global/users.js";
+import { timerToast, closeToasts } from "../../actions/toastify/toastify.js";
 import { backButtonHandler } from "../../actions/router/render.js";
 
 import "./inputStage.css";
@@ -46,6 +48,13 @@ class InputStage extends React.Component {
     this.setState({
       user: getCurrentUser(this.props.app)
     });
+    
+    // If user is not the Racounteur, give them a playing timer
+    const userObject = this.props.app.state.users.filter((user) => (user.username === this.props.app.state.currUser))[0];
+    if(!userObject.raconteur) {
+        this.dingRef.audioEl.current.play();
+        timerToast(60);
+    }
   }
 
   render() {
@@ -53,6 +62,12 @@ class InputStage extends React.Component {
 
     return (
       <div className="input-stage">
+        <ReactAudioPlayer
+            src={require("../../assets/audio/ding.mp3")}
+            autoPlay={false}
+            volume={0.1}
+            ref={(element) => { this.dingRef = element }}
+        />
         <div className="input-stage-header">
           <AppName></AppName>
           <Score user={this.state.user}></Score>
@@ -62,6 +77,7 @@ class InputStage extends React.Component {
         <Button
           text="SUBMIT"
           handleClick={() => {
+            closeToasts();
             saveInput(this.props.app);
           }}
         ></Button>
