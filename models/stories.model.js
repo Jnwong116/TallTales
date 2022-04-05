@@ -7,9 +7,14 @@ const promptSchema = new Schema({
     resolution: {type: Array, required: true}
 })
 
+const startSchema = new Schema({
+    title: {type: String, default: "Untitled Prompt"},
+    start: {type: String, required: true}
+})
+
 const genreSchema = new Schema({
     genre: {type: String, required: true},
-    starts: {type: Array, required: true, default: []},
+    starts: {type: [startSchema], required: true, default: []},
     prompts: {type: [promptSchema], required: true, default: []}
 })
 
