@@ -114,3 +114,20 @@ span {
 .MuiMenu-list {
   background-color: #cacaca;
 }
+
+.promptsContainerBox {
+  width: 638px;
+  margin-right: 0;
+  padding: 0px 10px 10px 0px;
+}
+
+.promptsMenuRowTop {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  overflow-y: scroll;
+}
+
+.promptsMenuRow {
+}

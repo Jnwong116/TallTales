@@ -72,8 +72,8 @@ class AdminBrowsePrompts extends React.Component {
             </div>
           </div>
 
-          <div className="promptsMenuRow" style={{ display: 'flex', 'flex-direction': 'column', 'justify-content': 'flex-start', 'align-items':'flex-end', width: '100%', 'overflow-y': 'scroll' }}>
-            <Box sx={{ width: 638, "margin-right": 0, "padding": "0px 10px 10px 0px " }}>
+          <div className="promptsMenuRow promptsMenuRowTop">
+            <Box className="promptsContainerBox">
               <Stack spacing={2}>
 
                 <Card sx={{ width: 638 }} variant="outlined">
@@ -94,8 +94,6 @@ class AdminBrowsePrompts extends React.Component {
                   </Typography>
                 </CardContent>
               </Card>
-
-            <Box sx={{ m: 1.4 }} />
 
             <Card sx={{ width: 638 }} variant="outlined">
               <CardHeader style={{ textAlign: 'left' }}
