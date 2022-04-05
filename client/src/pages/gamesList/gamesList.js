@@ -20,25 +20,41 @@ let count = 0;
 const { text } = "ROOM CODE";
 
 /* maps users to data DataGrid rows */
-var initialRows = Array(20).fill(
+var initialRows = [
   { id: 0,
     host: "Random Name",
     players: "4/5",
     genre: "Adventure",
     roomcode: 231292
-  }
-);
+  },
+  { id: 1,
+    host: "Random Name",
+    players: "4/5",
+    genre: "Adventure",
+    roomcode: 231292
+  },
+  { id: 2,
+    host: "Random Name",
+    players: "4/5",
+    genre: "Adventure",
+    roomcode: 231292
+  },
+  { id: 3,
+    host: "Random Name",
+    players: "4/5",
+    genre: "Adventure",
+    roomcode: 231292
+  },
+  { id: 4,
+    host: "Random Name",
+    players: "4/5",
+    genre: "Adventure",
+    roomcode: 231292
+  },
+];
 
-function editRows() {
-  for (let i = 0; i < 20; i++) {
-    initialRows[i].id = i;
-    initialRows[i].roomcode += i;
-  }
-}
 
 function GamesList(props) {
-  editRows();
-
   const [rows] = React.useState(initialRows);
 
   const columns: GridColDef[] = [
