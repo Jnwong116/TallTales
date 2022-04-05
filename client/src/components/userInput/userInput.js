@@ -18,7 +18,6 @@ class UserInput extends React.Component {
   };
 
   onTimerUpdate = ({ time, duration }) => {
-      console.log(time);
     if (time >= 60 * 1000) {
       this.props.enterFunction();
     }
