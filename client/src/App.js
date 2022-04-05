@@ -10,6 +10,7 @@ import Profile from "./pages/profile/profile";
 import Leaderboard from "./pages/leaderboard/leaderboard";
 import IndivStory from "./pages/indivStory/indivStory";
 import { ToastContainer } from 'react-toastify';
+import ReactAudioPlayer from 'react-audio-player';
 import 'react-toastify/dist/ReactToastify.css';
 
 import React from "react";
@@ -39,12 +40,23 @@ class App extends React.Component {
         currUser: null,
         page: 0,
         stage: 0,
-        prompt: 0
+        prompt: 0,
+        muted: false,
     };
 
   render() {
+
     return (
       <div className="App">
+        <ReactAudioPlayer
+            src={require("./assets/music/game.wav")}
+            autoPlay={false}
+            loop
+            volume={0.3}
+            ref={(element) => {
+                this.audioRef = element;
+            }}
+        />
         <Router>
           <Switch>
             <Route path="/">
@@ -55,15 +67,15 @@ class App extends React.Component {
                   <Route path="/" element={<Register app={this} />} />
                 )
               ) : this.state.page === 2 ? (
-                <Route path="/" element={<Lobby app={this} />} />
+                <Route path="/" element={<Lobby app={this} gameAudioRef={this.audioRef}/>} />
               ) : this.state.page === 0 ? (
-                <Route path="/" element={<InputStage app={this} />} />
+                <Route path="/" element={<InputStage app={this} gameAudioRef={this.audioRef}/>} />
               ) : this.state.page === 1 ? (
-                <Route path="/" element={<VoteStage app={this} />} />
+                <Route path="/" element={<VoteStage app={this} gameAudioRef={this.audioRef}/>} />
               ) : this.state.page === 4 ? (
-                <Route path="/" element={<Dashboard app={this} />} />
+                <Route path="/" element={<Dashboard app={this}/>} />
               ) : this.state.page === 3 ? (
-                <Route path="/" element={<Leaderboard app={this} />} />
+                <Route path="/" element={<Leaderboard app={this} gameAudioRef={this.audioRef}/>} />
               ) : (
                 <Route path="/" element={<Profile app={this} />} />
               )}

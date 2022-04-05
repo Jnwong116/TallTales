@@ -4,11 +4,6 @@
   justify-content: space-between;
 }
 
-.header-volume {
-    margin-right: 30px;
-    margin-top: 30px;
-}
-
 .lobby-header {
   font-size: 56px;
   font-style: "IBM Plex Sans";
@@ -47,6 +42,13 @@
 
 .lobby-genre .Mui-focused {
   color: rgb(225, 225, 225) !important;
+}
+
+.mute-footer {
+    margin-right: 50px;
+    margin-bottom: 50px;
+    justify-content: right;
+    display: flex;
 }
 
 .buttonStyle {
