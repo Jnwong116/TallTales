@@ -46,13 +46,14 @@ class Dashboard extends React.Component {
             <div className="userIconContainer">
               <UserIcon
                 icon={this.state.user.icon}
-                username={"Welcome back, " + this.state.user.username + "!"}
+                username={this.state.user.username}
+                isDashboard={true}
               />
             </div>
           </div>
           <div className="storiesNavigation">
             <span className="browseStoriesLeftArrow"></span>
-            <span className="browseStoriesHeader">How to Play</span>
+            <span className="browseStoriesHeader">{"<HOW TO PLAY>"}</span>
             <span className="browseStoriesRightArrow"></span>
           </div>
           <div className="storiesDisplay">

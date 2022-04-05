@@ -45,13 +45,13 @@
 }
 
 .mute-footer {
-    margin-right: 50px;
-    margin-bottom: 50px;
-    justify-content: right;
-    display: flex;
+  margin-right: 50px;
+  margin-bottom: 50px;
+  justify-content: right;
+  display: flex;
 }
 
-.buttonStyle {
+.lobby.buttonStyle {
   color: #ededed;
   background-color: rgb(57, 56, 55);
   padding-left: 100px;
