@@ -38,7 +38,8 @@ class Lobby extends React.Component {
         "Resolution 2/3: Any loose ends left?",
         "Resolution 3/3: Final chance to wrap things up!"
       ]
-    }
+    },
+    muted: false,
   };
   componentDidMount() {
     getGenres(this);
@@ -53,17 +54,34 @@ class Lobby extends React.Component {
 
     const genres = this.state.genres.map(object => object.genre);
 
-    const audioSrc = require("../../assets/music/lobby.wav");
+    const handleMute = () => {
+        if(this.state.muted) {
+            this.setState( { muted: false });
+            this.audioRef.audioEl.current.muted = false;
+        }
+        else {
+            this.setState( { muted: true });
+            this.audioRef.audioEl.current.muted = true;
+        }
+    }
 
     return (
       <div className="lobby">
         <ReactAudioPlayer
-            src={audioSrc}
+            src={require("../../assets/music/lobby.wav")}
             autoPlay
             loop
+            volume={0.3}
+            ref={(element) => { this.audioRef = element}}
         />
         <div className="header">
           <AppName></AppName>
+          <div className="header-volume">
+            {(this.state.muted) ? 
+              <img src={require("../../assets/images/volume_off.png")} alt="volume" onClick={() => handleMute()}></img> :
+              <img src={require("../../assets/images/volume_on.png")} alt="volume" onClick={() => handleMute()}></img>
+            } 
+          </div>
         </div>
         <div className="lobby-content">
           {this.props.app.state.users[0].username ===
