@@ -3,6 +3,7 @@ import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
 import DropDown from "../../components/dropDown/dropDown.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
+import MuteButton from "../../components/muteButton/muteButton.js";
 import ReactAudioPlayer from 'react-audio-player';
 import "./lobby.css";
 
@@ -54,17 +55,6 @@ class Lobby extends React.Component {
 
     const genres = this.state.genres.map(object => object.genre);
 
-    const handleMute = () => {
-        if(this.state.muted) {
-            this.setState( { muted: false });
-            this.audioRef.audioEl.current.muted = false;
-        }
-        else {
-            this.setState( { muted: true });
-            this.audioRef.audioEl.current.muted = true;
-        }
-    }
-
     return (
       <div className="lobby">
         <ReactAudioPlayer
@@ -77,10 +67,7 @@ class Lobby extends React.Component {
         <div className="header">
           <AppName></AppName>
           <div className="header-volume">
-            {(this.state.muted) ? 
-              <img src={require("../../assets/images/volume_off.png")} alt="volume" onClick={() => handleMute()}></img> :
-              <img src={require("../../assets/images/volume_on.png")} alt="volume" onClick={() => handleMute()}></img>
-            } 
+            <MuteButton audioRef={this.audioRef}/>
           </div>
         </div>
         <div className="lobby-content">

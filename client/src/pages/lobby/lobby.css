@@ -4,16 +4,9 @@
   justify-content: space-between;
 }
 
-.header-volume img {
-    width: 40px;
-    height: 40px;
+.header-volume {
     margin-right: 30px;
     margin-top: 30px;
-}
-
-.header-volume img:hover {
-    opacity: 50%;
-    cursor: pointer;
 }
 
 .lobby-header {

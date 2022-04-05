@@ -1,0 +1,11 @@
+.mute-button img {
+    width: 40px;
+    height: 40px;
+}
+
+.mute-button img:hover {
+    width: 45px;
+    height: 45px;
+    opacity: 50%;
+    cursor: pointer;
+}
