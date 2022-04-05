@@ -3,30 +3,46 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-
 import "./dropDown.css";
+import { getUser } from "../../actions/global/users.js";
+import { joinRoom, updateRoom } from "../../actions/sockets/room";
 
 class DropDown extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      genre: ""
-    };
+  state = {
+    selected: "",
+    user: {
+      username: "",
+      icon: "avatar01.png",
+      stories: []
+    }
+  };
+
+  componentDidMount() {
+    getUser(this, this.props.app);
+    updateRoom(this.props.app);
   }
 
   render() {
-    const { items } = this.props;
+    const items = this.props.items;
+    const label = this.props.label ? this.props.label : "<GENRE>";
 
     const handleChange = event => {
-      this.setState({ genre: event.target.value });
+      this.setState({ selected: event.target.value });
+
+      // console.log(this.props.app.state.page)
+
+      if (this.state.user) {
+        // User and room emit
+        joinRoom(this.state.user, event.target.value);
+      }
     };
 
     return (
       <FormControl fullWidth>
-        <InputLabel>{"<GENRE>"}</InputLabel>
+        <InputLabel>{label}</InputLabel>
         <Select
-          value={this.state.genre}
-          label="<GENRE>"
+          value={this.state.selected}
+          label={label}
           onChange={handleChange}
         >
           {" "}

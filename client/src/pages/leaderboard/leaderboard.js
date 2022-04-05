@@ -1,33 +1,72 @@
 import React from "react";
 import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
-import UserIcon from "../../components/userIcon/userIcon.js";
+import CompletedStory from "../../components/completedStory/completedStory.js";
+import Scoreboard from "../../components/scoreboard/scoreboard.js";
+import MuteButton from "../../components/muteButton/muteButton.js";
+
 import "./leaderboard.css"
 
 import { sortPlayers, saveStory } from "../../actions/leaderboard/displayScores.js";
+import { getCurrentUser } from "../../actions/global/users.js";
+import { storySaved } from "../../actions/sockets/story.js";
+import { backButtonHandler } from "../../actions/router/render.js";
+import { stop } from "../../actions/audio/stopAudio.js";
 
 class Leaderboard extends React.Component {
+    constructor(props) {
+        super(props);
+        this.props.history.push("/leaderboard");
+    }
 
-    render() {
-        // Import mock data
-        // Requires server call to get list of stories and users from server
-        this.stories = this.props.app.state.stories;
-        this.users = this.props.app.state.users;
+    state = {
+        user: {
+            username: "jasper",
+            score: 110,
+            icon: "avatar01.png"
+        },
+        users: [
+            {
+                username: "jasper",
+                score: 110,
+                icon: "avatar01.png"
+            },
+            {
+                username: "chris",
+                score: 110,
+                icon: "avatar02.png"
+            },
+            {
+                username: "gazi",
+                score: 50,
+                icon: "avatar03.png"
+            },
+            {
+                username: "jordan",
+                score: 70,
+                icon: "avatar04.png"
+            }
+        ],
+        story: null
+    }
+
+    componentDidMount() {
+        backButtonHandler(this.props.app, this.props.history);
 
         // Sort the users from highest to lowest points
-        this.users.users.sort(sortPlayers);
+        this.setState({
+            users: this.props.app.state.users.sort(sortPlayers),
+            user: getCurrentUser(this.props.app)
+        });
 
-        // Map number index user to className
-        const indexToClass = {
-            0: "leaderboard-player-0",
-            1: "leaderboard-player-1-2",
-            2: "leaderboard-player-1-2",
-            3: "leaderboard-player-3-4-5",
-            4: "leaderboard-player-3-4-5",
-            5: "leaderboard-player-3-4-5"
-        }
+        storySaved(this);
+    }
 
-        // console.log(this.props.app.state)
+    render() {
+        const footerMessages = [
+            "You have the highest score! Your effort paid off!",
+            "Good effort! One day they'll recognize your genius..."
+        ]
 
         return (
             <div className="leaderboard">
@@ -35,61 +74,30 @@ class Leaderboard extends React.Component {
                     <AppName></AppName>
                 </div>
                 <div className="leaderboard-content">
-                    <div className="leaderboard-story-recap">
-                        <div className="leaderboard-title">
-                            {"<THE STORY>"}
-                        </div>
-                        <div className="leaderboard-story-start">
-                            {this.stories.currStory.start}
-                        </div>
-                        {this.stories.currStory.contributions.map((obj, i) => {
-                            return (
-                                <div key={i} className="leaderboard-story-contribution">
-                                    {obj.sentence}
-                                </div>
-                            )
-                            })
-                        }
+                    <div className="leaderboard-story">
+                        <CompletedStory story={this.props.app.state.story} title="The completed story..."/>
                     </div>
-                    <div className="leaderboard-total-points">
-                        <div className="leaderboard-title">
-                            {"<LEADERBOARD>"}   
-                        </div>
-                        <div className="leaderboard-players-winner">
-                            <div key={0} className={indexToClass[0]}>
-                                <UserIcon username={this.users.users[0].username} icon={this.users.users[0].icon}></UserIcon>
-                                <div className="leaderboard-player-score">
-                                    {this.users.users[0].score}
-                                </div>
-                             </div>
-                        </div>
-                        
-                        <div className="leaderboard-players">
-                            {this.users.users.map((e, i) => {
-                                if(i > 0) {
-                                    return (
-                                        <div key={i} className={indexToClass[i]}>
-                                            <UserIcon username={e.username} icon={e.icon}></UserIcon>
-                                            <div className="leaderboard-player-score">
-                                                {e.score}
-                                            </div>
-                                        </div>
-                                    );
-                                }
-                                return null;
-                            
-                            })}
-                        </div>                       
+                    <div className="leaderboard-scoreboard">
+                        <Scoreboard users={this.state.users} />
                     </div>   
                 </div>
-                <div className="your-score">
-                    YOUR SCORE: <strong>{this.props.app.state.currUser.score}</strong>
-                </div>
-                <Button text="DONE" 
-                    handleClick={() => {
-                        saveStory(this.users, this.stories, this.props.app)
-                    }}
-                />               
+                <div className="footer">
+                    <div className="footer-message">
+                        {(this.state.user.score === this.state.users[0].score) ? 
+                        footerMessages[0] : footerMessages[1]}
+                    </div>
+                    <div className="footer-button">
+                        <Button text="HOME" 
+                            handleClick={() => {
+                                stop(this.props.gameAudioRef);
+                                saveStory(this.state.user, this.props.app.state.story, this.props.app, this)
+                            }}
+                        /> 
+                    </div>
+                </div>   
+                <div className="mute-footer">
+                    <MuteButton app={this.props.app} audioRef={this.props.gameAudioRef}/>
+                </div>    
             </div>    
         )
     }

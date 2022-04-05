@@ -18,13 +18,31 @@ const contributionSchema = new Schema({
     sentence: {type: String, required: true}
 })
 
-const currStorySchema = new Schema({
+const userScoreSchema = new Schema({
+    username: {type: String, required: true},
+    score: {type: Number, required: true},
+    icon: {type: String, required: true}
+})
+
+const storySchema = new Schema({
+    title: {type: String, default: "untitled_story"},
     start: {type: String, required: true},
     story: {type: String, default: ""},
-    contributions: {type: [contributionSchema], default: []}
+    contributions: {type: [contributionSchema], default: []},
+    userScores: {type: [userScoreSchema], default: []}
+})
+
+const roomSchema = new Schema({
+    code: {type: String, unique: true},
+    private: {type: Boolean, default: true},
+    host: {type: String},
+    genre: {type: String, default: "Adventure"},
+    users: {type: Number, required: true},
+    inProgress: {type: Boolean, default: false}
 })
 
 const Genre = mongoose.model('Genre', genreSchema);
-const currStory = mongoose.model('currStory', currStorySchema);
+const Story = mongoose.model('Story', storySchema);
+const Room = mongoose.model('Room', roomSchema);
 
-module.exports = { Genre, currStory }
+module.exports = { Genre, Story, Room }

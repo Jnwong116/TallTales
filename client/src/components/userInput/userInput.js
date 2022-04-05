@@ -4,9 +4,35 @@ import rightArrow from "../../assets/images/rightArrow.png";
 import UserIcon from "../userIcon/userIcon.js";
 import Prompt from "../prompt/prompt";
 import "./userInput.css";
+import Timer from "react-timer-wrapper";
+import Timecode from "react-timecode";
 
 class UserInput extends React.Component {
+  state = {
+    time: 0,
+    duration: 60 * 1000
+  };
+
+  onTimerUpdate = ({ time, duration }) => {
+    if (time >= 60 * 1000) {
+      this.props.enterFunction();
+    }
+    this.setState({
+      time,
+      duration
+    });
+  };
   render() {
+    const { time, duration } = this.state;
+
+    const onKeyUp = this.props.enterFunction
+      ? event => {
+          if (event.key === "Enter") {
+            this.props.enterFunction();
+          }
+        }
+      : undefined;
+
     return (
       <div className="user-input">
         <div className="user-input-header">TYPE YOUR SENTENCE</div>
@@ -27,10 +53,24 @@ class UserInput extends React.Component {
               label="OKAY AND THEN..."
               variant="filled"
               margin="normal"
-              multiline="true"
-              maxRows="5"
+              autoComplete="off"
               color="secondary"
+              multiline
+              onKeyUp={onKeyUp}
+              onKeyDown={e => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                }
+              }}
             />
+          </div>
+          <div className="timer-container">
+            <Timer
+              active
+              duration={60 * 1000}
+              onTimeUpdate={this.onTimerUpdate}
+            />
+            <Timecode time={duration - time} />
           </div>
         </div>
       </div>

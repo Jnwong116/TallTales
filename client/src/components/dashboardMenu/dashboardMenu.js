@@ -1,35 +1,53 @@
 import React from "react";
 import Button from "../button/button.js";
 import "./dashboardMenu.css";
-
-import { menuRedirect, logout, startGame } from "../../actions/dashboard/menu.js";
+import DropDown from "../../components/dropDown/dropDown.js";
+import { menuRedirect, logout, startGame, hostGame } from "../../actions/dashboard/menu.js";
+import { createdNewRoom } from "../../actions/sockets/room.js";
 
 class DashboardMenu extends React.Component {
-  render() {
-    // Import mock data
-    this.stories = this.props.app.state.stories;
-    this.users = this.props.app.state.users;
+  componentDidMount() {
+    createdNewRoom(this.props.app);
+  }
 
-        return (
-        <span className="dashboardMenu">
-                <Button text="HOST NEW GAME"
-                        handleClick={() => {
-                        startGame(true, this.users, this.props.app, 2)}} />
-                <Button text="JOIN GAME"
-                        handleClick={() => {
-                        startGame(false, this.users, this.props.app, 2)}} />
-                <Button text="HOW TO PLAY"
-                        handleClick={() => {
-                        menuRedirect(this.props.app, 5)}} />
-                <Button text="PROFILE"
-                        handleClick={() => {
-                        menuRedirect(this.props.app, 6);}} />
-                <Button text="LOG OUT"
-                        handleClick={() => {
-                        logout(this.props.app)}} />
-        </span>
-        )
-        }
+  render() {
+    return (
+      <span className="dashboardMenu">
+        <Button
+          text="HOST NEW GAME"
+          handleClick={() => {
+            hostGame(this.props.app, this.props.parent);
+          }}
+        />
+        <Button
+          text="JOIN GAME"
+          handleClick={() => {
+            startGame(false, this.users, this.props.app, 2);
+          }}
+        />
+        <Button
+          text="PROFILE"
+          handleClick={() => {
+            menuRedirect(this.props.app, "profile");
+          }}
+        />
+        <Button
+          text="LOG OUT"
+          handleClick={() => {
+            logout(this.props.app);
+          }}
+        />
+        <div className="lobby-genre">
+          <DropDown
+            label={"<ROOMS>"}
+            items={this.props.app.state.rooms}
+            user={this.props.app.state.currUser}
+            app={this.props.app}
+          ></DropDown>
+        </div>
+      </span>
+    );
+  }
 }
 
-export default DashboardMenu
+export default DashboardMenu;

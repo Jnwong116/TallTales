@@ -5,7 +5,7 @@ const log = console.log
 const router = express.Router();
 const { ObjectID } = require('mongodb');
 
-const { Genre, currStory } = require('../models/stories.model');
+const { Genre, Story } = require('../models/stories.model');
 
 // Adds a Genre/Start
 /*
@@ -68,6 +68,21 @@ router.route('/genre/:genre').get((req, res) => {
         });
 });
 
+
+// Gets all starts for a Genre
+router.route('/genre/:genre/starts').get(async (req, res) => {
+    const genre = req.params.genre;
+
+    let curGenre = await Genre.findOne({genre: genre});
+
+    // Checks to make sure it exists
+    if (curGenre === null) {
+        res.status(404).send('Genre not found');
+        return;
+    }
+
+    res.send(curGenre.starts);
+})
 
 // Deletes a Genre
 router.route('/genre/:genre/').delete((req, res) => {
@@ -211,16 +226,18 @@ router.route('/prompt/:genre/').delete(async (req, res) => {
 
 
 /*
----------------------------------------------- CurrStory
+---------------------------------------------- Story
 */
 
 
-// Gets currStory
-router.route('/story').get((req, res) => {
-    currStory.find()
+// Gets Story
+router.route('/story/:story').get((req, res) => {
+    const story = req.params.story;
+
+    Story.findById(story)
         .then((story) => {
             if (!story) {
-                res.status(404).send('currStory not found');
+                res.status(404).send('Story not found');
                 return;
             }
             res.json(story);
@@ -231,28 +248,31 @@ router.route('/story').get((req, res) => {
 });
 
 
-// Starts the currStory
+// Creates a new Story
 /*
-    Expects a start to the story
     {
-        "start": <String>
+        "title": <String>,
+        "start": <String>,
+        "story": <String>,
+        "contributions": [
+            {
+                "username": <String>,
+                "sentence": <String>,
+            }
+        ],
+        "userScores": [
+            {   
+                "username": <String>,
+                "score": <Number>,
+                "icon", <String>
+            }
+        ]
     }
 */
 router.route('/start').post(async (req, res) => {
-    // Checks if theres a currStory in the DB already
+    const story = new Story(req.body);
 
-    let curStory = await currStory.findOne();
-    if (curStory === null) { // None exists
-        curStory = new currStory(req.body);
-    }
-
-    else { // Resets currStory
-        curStory.start = req.body.start;
-        curStory.story = req.body.start;
-        curStory.contributions = [];
-    }
-
-    curStory.save()
+    story.save()
         .then((result) => {
             res.send(result);
         })
@@ -269,12 +289,13 @@ router.route('/start').post(async (req, res) => {
         "sentence": <String>
     }
 */
-router.route('/contribute').post(async (req, res) => {
-    const curStory = await currStory.findOne();
+router.route('/contribute/:story').post(async (req, res) => {
+    const story = req.params.story;
+    const curStory = await Story.findById(story);
 
     // Checks to make sure it exists
     if (curStory === null) {
-        res.status(404).send('curStory not found');
+        res.status(404).send('Story not found');
         return;
     }
     

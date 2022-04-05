@@ -1,4 +1,5 @@
 import ENV from './../../config.js';
+import { errorToast, successToast } from "../../actions/toastify/toastify.js";
 
 const API_HOST = ENV.api_host;
 const log = console.log
@@ -10,12 +11,12 @@ export const addUser = (app, users) => {
     const numAvatars = 4;
 
     if(currUserName === "") {
-        window.alert("Username is blank :O");
+        errorToast("username is blank!");
         return;    
     }
 
     if(currPassword === "") {
-        window.alert("Password is blank :O");
+        errorToast("password is blank!");
         return;
     }
     
@@ -42,14 +43,18 @@ export const addUser = (app, users) => {
         if (res.status === 200) {
             // Go back to login page
             app.setState({
-                page: 0
+                page: "login"
             });
+            successToast('User added!');
             return;
         }
 
         else {
-            window.alert('Username was taken already');
+            return res.text();
         }
+    })
+    .then((errMessage) => {
+        errorToast(errMessage);
     })
     .catch(err => {
         log(err);
