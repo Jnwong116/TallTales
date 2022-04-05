@@ -6,5 +6,12 @@
 }
 
 .Toastify__toast {
-    font-family: "IBM Plex Sans" !important;
+  font-family: "IBM Plex Sans" !important;
+}
+
+.timer-container {
+  margin: auto 0;
+  font-size: 60px;
+  padding-left: 40px;
+  width: 100px;
 }

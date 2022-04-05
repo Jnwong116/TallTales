@@ -10,12 +10,12 @@ import Timecode from "react-timecode";
 class UserInput extends React.Component {
   state = {
     time: 0,
-    duration: 20 * 1000
+    duration: 60 * 1000
   };
 
   onTimerUpdate = ({ time, duration }) => {
-    if (time === duration) {
-      console.log("bye");
+    if (time >= 60 * 1000) {
+      this.props.enterFunction();
     }
     this.setState({
       time,
@@ -64,10 +64,10 @@ class UserInput extends React.Component {
               }}
             />
           </div>
-          <div>
+          <div className="timer-container">
             <Timer
               active
-              duration={20 * 1000}
+              duration={60 * 1000}
               onTimeUpdate={this.onTimerUpdate}
             />
             <Timecode time={duration - time} />
