@@ -11,8 +11,11 @@ export default function PromptItemMenu() {
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+    console.log(event.currentTarget);
+    console.log(event.currentTarget.name);
   };
-  const handleClose = () => {
+  const handleClose = (event) => {
+    console.log(event.currentTarget);
     setAnchorEl(null);
   };
 
@@ -20,11 +23,12 @@ export default function PromptItemMenu() {
     <div>
 
       <IconButton
-        aria-label="settings"
+        aria-label="options"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
+        name="promptItemMenu"
       >
         <MoreVertIcon />
       </IconButton>
@@ -38,9 +42,9 @@ export default function PromptItemMenu() {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Edit Title</MenuItem>
-        <MenuItem onClick={handleClose}>Edit Content</MenuItem>
-        <MenuItem onClick={handleClose}>Delete</MenuItem>
+        <MenuItem name="editTitle" onClick={handleClose}>Edit Title</MenuItem>
+        <MenuItem name="editContent" onClick={handleClose}>Edit Content</MenuItem>
+        <MenuItem name="delete" onClick={handleClose}>Delete</MenuItem>
       </Menu>
     </div>
   );
