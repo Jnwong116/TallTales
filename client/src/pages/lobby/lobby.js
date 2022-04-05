@@ -70,7 +70,7 @@ class Lobby extends React.Component {
         <ReactAudioPlayer
             src={require("../../assets/audio/lobby_intro.mp3")}
             autoPlay
-            volume={1}
+            volume={0.7}
             ref={(element) => { this.introRef = element}}
         />
         <div className="header">
