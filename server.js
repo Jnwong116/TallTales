@@ -45,6 +45,52 @@ app.use(
     })
 )
 
+const { User } = require("./models/user.model");
+
+// Login User
+/*
+    {
+        "username": <String>,
+        "password": <String>
+    }
+*/
+app.post('/users/login', (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  User.findByUsernamePassword(username, password)
+      .then(user => {
+          // Add the user's id to the session
+          req.session.userid = user._id;
+          req.session.username = user.username;
+          res.send({ currentUser: user.username });
+      })
+      .catch(error => {
+          res.status(400).send(error);
+      })
+})
+
+app.get('/users/logout', (req, res) => {
+  // Remove the session
+  req.session.destroy(error => {
+      if (error) {
+          res.status(500).send(error);
+      } else {
+          res.send();
+      }
+  });
+})
+
+
+// A route to check if a user is logged in on the session
+app.get("/users/check-session", (req, res) => {
+  if (req.session.userid) {
+      res.send({ currentUser: req.session.username });
+  } else {
+      res.status(401).send();
+  }
+});
+
 app.get("*", (req, res) => {
   const pageRoutes = ["/"];
   if (!pageRoutes.includes(req.url)) {
