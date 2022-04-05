@@ -3,6 +3,8 @@ import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
 import DropDown from "../../components/dropDown/dropDown.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
+import MuteButton from "../../components/muteButton/muteButton.js";
+import ReactAudioPlayer from 'react-audio-player';
 import "./lobby.css";
 
 import { redirect, getGenres } from "../../actions/lobby/lobby.js";
@@ -37,9 +39,9 @@ class Lobby extends React.Component {
         "Resolution 2/3: Any loose ends left?",
         "Resolution 3/3: Final chance to wrap things up!"
       ]
-    }
+    },
+    muted: false,
   };
-
   componentDidMount() {
     getGenres(this);
   }
@@ -55,8 +57,18 @@ class Lobby extends React.Component {
 
     return (
       <div className="lobby">
+        <ReactAudioPlayer
+            src={require("../../assets/music/lobby.wav")}
+            autoPlay
+            loop
+            volume={0.3}
+            ref={(element) => { this.audioRef = element}}
+        />
         <div className="header">
           <AppName></AppName>
+          <div className="header-volume">
+            <MuteButton audioRef={this.audioRef}/>
+          </div>
         </div>
         <div className="lobby-content">
           {this.props.app.state.users[0].username ===
