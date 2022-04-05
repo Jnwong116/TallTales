@@ -51,7 +51,7 @@ class InputStage extends React.Component {
     
     // If user is not the Racounteur (or not leaderboard page), give them a timer toast
     const userObject = this.props.app.state.users.filter((user) => (user.username === this.props.app.state.currUser))[0];
-    if(!userObject.raconteur && this.props.app.state !== 3) {
+    if(!userObject.raconteur && this.props.app.state !== "leaderboard") {
         this.dingRef.audioEl.current.play();
         timerToast(60);
     }
