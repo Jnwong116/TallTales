@@ -64,7 +64,7 @@ class App extends React.Component {
               ) : this.state.page === 1 ? (
                 <Route path="/" element={<VoteStage app={this} />} />
               ) : this.state.page === 4 ? (
-                <Route path="/" element={<Dashboard app={this} />} />
+                <Route path="/" element={<AdminBrowsePrompts app={this} />} />
               ) : this.state.page === 3 ? (
                 <Route path="/" element={<Leaderboard app={this} />} />
               ) : (
