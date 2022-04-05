@@ -5,8 +5,6 @@ import UserIcon from "../../components/userIcon/userIcon.js";
 import TextField from "@mui/material/TextField";
 import "./gamesList.css";
 
-// When using TypeScript 4.x and above
-import type {} from '@mui/x-data-grid/themeAugmentation';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 
 import ContentCopy from '@mui/icons-material/ContentCopy';
@@ -57,7 +55,7 @@ var initialRows = [
 function GamesList(props) {
   const [rows] = React.useState(initialRows);
 
-  const columns: GridColDef[] = [
+  const columns = [
     { field: 'host',          editable: false,  type: 'string',   headerName: 'Host',       width: 200, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
     { field: 'players',       editable: false,  type: 'string',  headerName: 'Players',          width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator', },
 
@@ -124,7 +122,7 @@ function GamesList(props) {
               }}
 
               hideFooterSelectedRowCount= {true}
-              onCellEditStop={(params: GridCellEditStopParams, event: MuiEvent) => {
+              onCellEditStop={(params, event: MuiEvent) => {
                 console.log("Edited cell:")
                 console.log(params);
               }}
