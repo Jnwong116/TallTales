@@ -13,8 +13,12 @@ export const startGame = (app, start, prompts) => {
   });
 };
   
-  export const gameStarted = (app) => {
+  export const gameStarted = (app, gameAudioRef) => {
     socket.on("game-started", ({ storyStart, storyPrompts, users }) => {
+      gameAudioRef.audioEl.current.play();
+      if(app.state.muted) {
+        gameAudioRef.audioEl.current.muted = true;
+      }
       app.setState({
         story: {
           start: storyStart,

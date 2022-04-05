@@ -45,15 +45,10 @@ class Lobby extends React.Component {
   };
   componentDidMount() {
     getGenres(this);
+    gameStarted(this.props.app, this.props.gameAudioRef);
   }
 
   render() {
-    // socket.on("current-rooms", rooms => {
-    //   console.log(rooms);
-    // });
-
-    gameStarted(this.props.app);
-
     const genres = this.state.genres.map(object => object.genre);
 
     return (
@@ -96,8 +91,6 @@ class Lobby extends React.Component {
           <Button
             text="START GAME"
             handleClick={() => {
-                this.props.gameAudioRef.audioEl.current.play();
-                if(this.props.app.state.muted) this.props.gameAudioRef.audioEl.current.muted = true;
                 redirect(this.props.app, this.state.start, this.state.prompt);
             }}
           ></Button>
