@@ -49,9 +49,9 @@ class InputStage extends React.Component {
       user: getCurrentUser(this.props.app)
     });
     
-    // If user is not the Racounteur, give them a timer toast
+    // If user is not the Racounteur (or not leaderboard page), give them a timer toast
     const userObject = this.props.app.state.users.filter((user) => (user.username === this.props.app.state.currUser))[0];
-    if(!userObject.raconteur) {
+    if(!userObject.raconteur && this.props.app.state !== 3) {
         this.dingRef.audioEl.current.play();
         timerToast(60);
     }
@@ -86,7 +86,12 @@ class InputStage extends React.Component {
           handleClick={handleClick}
         ></Button>
         <div className="mute-footer">
-            <MuteButton app={this.props.app} audioRefs={[this.props.gameAudioRef]}/>
+            <MuteButton app={this.props.app} 
+                audioRefs={[this.props.gameAudioRef, 
+                    this.props.audio60Ref, 
+                    this.props.audio30Ref, 
+                    this.props.audio10Ref]}
+            />
         </div>
       </div>
     );

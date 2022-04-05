@@ -1,5 +1,4 @@
 import React from "react";
-import ReactAudioPlayer from 'react-audio-player';
 import TextField from "@mui/material/TextField";
 import rightArrow from "../../assets/images/rightArrow.png";
 import UserIcon from "../userIcon/userIcon.js";
@@ -38,7 +37,7 @@ class UserInput extends React.Component {
       duration
     });
   };
-  
+
   render() {
     const { time, duration } = this.state;
 

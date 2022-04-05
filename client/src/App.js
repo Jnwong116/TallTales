@@ -84,7 +84,8 @@ class App extends React.Component {
                     <Register {...props} app={this} />
                   )
                 ) : this.page === "lobby" ? (
-                  <Lobby {...props} app={this} gameAudioRef={this.audioRef}/>
+                  <Lobby {...props} app={this} gameAudioRef={this.audioRef}
+                  audio60Ref={this.audio60Ref} audio30Ref={this.audio30Ref} audio10Ref={this.audio10Ref}/>
                 ) : this.page === "inputStage" ? (
                   <InputStage {...props} app={this} gameAudioRef={this.audioRef}
                     audio60Ref={this.audio60Ref} audio30Ref={this.audio30Ref} audio10Ref={this.audio10Ref}/>

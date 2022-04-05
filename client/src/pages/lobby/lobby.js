@@ -52,7 +52,7 @@ class Lobby extends React.Component {
   componentDidMount() {
     backButtonHandler(this.props.app, this.props.history);
     getGenres(this);
-    gameStarted(this.props.app, this.props.gameAudioRef);
+    gameStarted(this.props.app, this.props.gameAudioRef, this.props.audio60Ref, this.props.audio30Ref, this.props.audio10Ref);
   }
 
   render() {
