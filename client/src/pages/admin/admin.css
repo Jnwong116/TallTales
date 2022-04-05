@@ -36,7 +36,7 @@ span {
 }
 
 .adminDashboardRight {
-  width: 638px;
+  width: 800px;
   display: flex;
   flex-direction: column;
 }
@@ -77,6 +77,8 @@ span {
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
+  align-content: flex-end;
 }
 
 .buttonStyle {
@@ -121,6 +123,7 @@ span {
 }
 
 .promptsMenuRowTop {
+  margin-right: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -129,20 +132,20 @@ span {
 }
 
 .promptsMenuRow {
+  margin-right: 0;
+  margin-left: auto;
 }
 
- .promptAddIconButtonContainer {
+.addPromptButtonContainer {
    width: 310px;
+   margin-left: 134px;
    margin-right: 10px;
+   padding-right: 13px;
  }
 
-.promptAddIconButton {
-  font-size: 14px;
-  font-weight: bolder;
-  width: 310px;
-  height: 56px;
-  border: 2px;
-  border-radius: 5px;
-  align-content: center;
-  margin-left: 0px;
-}
+ .MuiButton-root {
+   font-family: "IBM Plex Mono" !important;
+   font-weight: 1000 !important;
+   font-size: 24px !important;
+   color: rgb(117, 117, 117) !important;
+ }
