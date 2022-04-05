@@ -1,10 +1,10 @@
 import React from "react";
 import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
-import DashboardMenu from "../../components/dashboardMenu/dashboardMenu.js";
 import AdminMenu from "../../components/dashboardMenu/adminMenu.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
-import "./dashboard.css";
+import PromptItemMenu from "../../components/promptItemMenu/promptItemMenu.js";
+import "./admin.css";
 
 import Stack from '@mui/material/Stack';
 import Card from '@mui/material/Card';
@@ -31,16 +31,16 @@ class AdminBrowsePrompts extends React.Component {
       object => object.genre
     );
 
-    genres.push("Create New Genre");
+    genres.splice(0, 0, "<New Genre>");
 
     const theme = {
       spacing: 20,
     }
 
     return (
-      <div className="dashboard">
-        <span className="dashboardLeft">
-          <div className="header">
+      <div className="adminDashboard">
+        <span className="adminDashboardLeft">
+          <div className="adminDashboardHeader">
             <AppName></AppName>
           </div>
 
@@ -48,10 +48,10 @@ class AdminBrowsePrompts extends React.Component {
 
         </span>
 
-        <span className="dashboardDivider">
+        <span className="adminDashboardDivider">
         </span>
 
-        <span className="dashboardRight">
+        <span className="adminDashboardRight">
 
         <div className="profileAvatarContainer">
           <UserIcon icon={this.props.app.state.currUser.icon} username={this.props.app.state.currUser.username} />
@@ -65,7 +65,7 @@ class AdminBrowsePrompts extends React.Component {
             </div>
 
             <div className="promptsDelete" style={{ width:'310px', 'margin-left':"10px" }}>  {/* used to be: 371px */}
-              <span className="dashboardMenu">
+              <span className="adminDashboardMenu">
                 <Button text="DELETE GENRE"
                         handleClick={() => {
                         this.handleClick(this.state);}} />
@@ -80,14 +80,10 @@ class AdminBrowsePrompts extends React.Component {
                 <CardHeader style={{ textAlign: 'left' }}
                   avatar={
                     <Avatar sx={{ bgcolor: '#292929' }} aria-label="recipe">
-                      C
+                      C {/* TODO: dynamically pick first letter of the title or something */}
                     </Avatar>
                   }
-                  action={
-                    <IconButton aria-label="settings">
-                      <MoreVertIcon />
-                    </IconButton>
-                  }
+                  action={ <PromptItemMenu /> }
                   title="Canned Food"
                   subheader="Submitted by gazi"
                 />
@@ -95,15 +91,10 @@ class AdminBrowsePrompts extends React.Component {
                 <CardContent>
                   <Typography style={{ textAlign: 'left' }} variant="body2" color="text.secondary">
                     User 1 and User 2 are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means.
+
                   </Typography>
                 </CardContent>
               </Card>
-
-  {/*
-              <Box
-                sx={{ m: 1.4 }}
-              />
-  */}
 
               <Card sx={{ width: 638 }} variant="outlined">
                 <CardHeader style={{ textAlign: 'left' }}
@@ -112,11 +103,7 @@ class AdminBrowsePrompts extends React.Component {
                       B
                     </Avatar>
                   }
-                  action={
-                    <IconButton aria-label="settings">
-                      <MoreVertIcon />
-                    </IconButton>
-                  }
+                  action={ <PromptItemMenu /> }
                   title="Bakery Break-In"
                   subheader="Submitted by jasper"
                 />

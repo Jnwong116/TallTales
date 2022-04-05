@@ -12,35 +12,35 @@ span {
   font-weight: bold;
 }
 
-.header {
+.adminDashboardHeader {
   display: flex;
 }
 
-.dashboard {
+.adminDashboard {
   display: flex;
 }
 
-.dashboardLeft {
+.adminDashboardLeft {
   display: flex;
   flex-direction: column;
 }
 
-.dashboardDivider {
+.adminDashboardDivider {
   width: 150px;
 }
 
-.dashboardRight {
+.adminDashboardRight {
   width: 800px;
   display: flex;
   flex-direction: column;
 }
 
-.userIconContainer {
+/* .userIconContainer {
   height: 233px;
   display: flex;
   justify-content: center;
   text-transform: uppercase;
-}
+} */
 
 .dashboardMenu {
   display: flex;

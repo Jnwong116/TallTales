@@ -1,10 +1,9 @@
 import React from "react";
 import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
-import DashboardMenu from "../../components/dashboardMenu/dashboardMenu.js";
 import AdminMenu from "../../components/dashboardMenu/adminMenu.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
-import "./dashboard.css";
+import "./admin.css";
 
 // When using TypeScript 4.x and above
 import type {} from '@mui/x-data-grid/themeAugmentation';
