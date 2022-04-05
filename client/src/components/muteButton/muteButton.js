@@ -1,10 +1,10 @@
 import React from "react";
+import { handleMute } from "../../actions/mute/muteGame";
 
 import "./muteButton.css";
 
 class MuteButton extends React.Component {
     render() {
-
         const audioRefs = this.props.audioRefs;
 
         const handleMute = () => {
@@ -22,12 +22,12 @@ class MuteButton extends React.Component {
                 })
             }
         }
-
+        
         return (
             <div className="mute-button">
                 {(this.props.app.state.muted) ? 
-                    <img src={require("../../assets/images/volume_off.png")} alt="volume" onClick={() => handleMute()}></img> :
-                    <img src={require("../../assets/images/volume_on.png")} alt="volume" onClick={() => handleMute()}></img>
+                    <img src={require("../../assets/images/volume_off.png")} alt="volume" onClick={() => handleMute(this.props.app, this.props.audioRef)}></img> :
+                    <img src={require("../../assets/images/volume_on.png")} alt="volume" onClick={() => handleMute(this.props.app, this.props.audioRef)}></img>
                 } 
             </div>
         )

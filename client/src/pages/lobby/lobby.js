@@ -8,8 +8,8 @@ import MuteButton from "../../components/muteButton/muteButton.js";
 
 import "./lobby.css";
 
-import { redirect, getGenres } from "../../actions/lobby/lobby.js";
-import { gameStarted } from "../../actions/sockets/startGame.js";
+import { getGenres } from "../../actions/lobby/lobby.js";
+import { gameStarted, startGame } from "../../actions/sockets/startGame.js";
 
 class Lobby extends React.Component {
   state = {
@@ -97,7 +97,7 @@ class Lobby extends React.Component {
           <Button
             text="START GAME"
             handleClick={() => {
-                redirect(this.props.app, this.state.start, this.state.prompt);
+                startGame(this.props.app, this.state.start, this.state.prompt);
             }}
           ></Button>
         ) : (
