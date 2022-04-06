@@ -1,5 +1,5 @@
 import { socket } from "./socket";
-import { errorToast } from "../toastify/toastify";
+import { warningToast } from "../toastify/toastify";
 import { chooseRaconteur } from "../vote/raconteur";
 // import { isRaconteur } from "../prompt/displayPrompt";
 import { updateSentence } from "./updateUser";
@@ -63,14 +63,14 @@ export const createdNewRoom = app => {
 
 export const denyRoomAccess = () => {
   socket.on("deny-room-access", s => {
-    errorToast(s);
+    warningToast(s);
   });
 };
 
 export const userLeft = (app) => {
   socket.on("user-left", ({ users, str }) => {
     if (app.state.page !== "leaderboard") { // User is not on leaderboard
-      errorToast(str);
+      warningToast(str);
       app.setState({
         users: users
       });
@@ -87,7 +87,7 @@ export const raconteurLeft = (app) => {
       updateSentence(users);
 
       if (app.state.currUser === users[0].username) { // You are new raconteur
-        errorToast(str + " making you Raconteur");
+        warningToast(str + " making you Raconteur");
         users[0].currentSentence = "Raconteur";
         app.setState({
           users: users,
@@ -97,7 +97,7 @@ export const raconteurLeft = (app) => {
       }
 
       else {
-        errorToast(str);
+        warningToast(str);
 
         if (app.state.page === "voteStage") { // Already on vote screen
           app.setState({
@@ -122,7 +122,7 @@ export const raconteurLeft = (app) => {
 export const forfeitGame = (app) => {
   socket.on("game-forfeit", ({ users, str }) => {
     if (app.state.page !== "leaderboard") {
-      errorToast(str);
+      warningToast(str);
 
       app.setState({
         page: "lobby",
