@@ -5,7 +5,7 @@ Deployed Heroku link: https://talltales.herokuapp.com/
 GENERAL GAME DESCRIPTION
 ========================
 
-Tall Tales is a multiplayer collaborative story-telling web app for 3-5 players, inspired by popular party-games such as the Jackbox Party Packs, Code Names, Gartic Phone, and Skribbl.io. The basic gameplay consists of providing the players with creative prompts for writing their own story sentences. Each round, one of the players serves as the Raconteur, who decides which sentence is the funniest or most appropriate to continue the story. There are a total of 10 rounds, divided into several basic story elements: backstory, conflict, resolution. After all rounds are completed, the player with the highest score is crowned as the most valuable contributor. In the leaderboard page, the collaborative story is displayed for all to see, as well as stored for later retrieval via their user profile. In their personal profile page, users have a plethora of customizable options such as sharing their past stories, editing their account information, and reviewing past games. 
+Tall Tales is a multiplayer collaborative story-telling web app for 3-5 players, inspired by popular party-games such as the Jackbox Party Packs, Code Names, Gartic Phone, and Skribbl.io. The basic gameplay consists of providing the players with creative prompts for writing their own story sentences. Each round, one of the players serves as the Raconteur, who decides which sentence is the funniest or most appropriate to continue the story. There are a total of 10 rounds, divided into several basic story elements: Backstory, Conflict, Resolution. After all rounds are completed, the player with the highest score is crowned as the most valuable contributor. In the leaderboard page, the collaborative story is displayed for all to see, as well as stored for later retrieval via their user profile. In their personal profile page, users have a plethora of customizable options such as sharing their past stories, editing their account information, and reviewing past games. 
 
 What separates Tall Tales from other JavaScript games is its usage of sockets to allow for multi-device gameplay, connecting friends across the internet. Come explore all of the cool features of Tall Tales, including gameplay soundtracks, a virtual game host, and various genres/prompts that spark unique stories with every new game!
 
@@ -79,12 +79,12 @@ USAGE NOTES & NEW FEATURES
 
 The general set-up and usage instructions are listed below in the **USAGE INSTRUCTIONS** section. In addition to the general instructions, there are a few special notes to keep in mind when running the TallTales game.
 - **Note: Keep Game Tabs in Focus** - TallTales is an interactive game, meaning that it requires your full attention at all times! To get the best experience of all audio cues, image cues, and flow of game, please keep the game tab in focus at all times. Switching to another tab during the game may cause delays of certain cues.
+- **Note: Do Not Sign-In to the Same Account** - Like with any game, you want to be on different accounts as those who you are playing with. We've given you many to choose from above, but feel free to create your own accounts.
 - **Mute Button** - There is a mute button in the lobby and game stages if you would like to mute the background music and certain audio cues, however, we recommend leaving it on! We worked very hard with our talented friends who composed the game music and voiced our spoken audio cues. All credits of the lobby music goes to Nom Tunes.
 - **Genres/Prompts** - There are existing story genres (ie. Mystery, Comedy, Adventure) and corresponding starting prompts (ie. The Last Heist, The Bar) that you can navigate through for each game. This helps keep each game exciting and fun for returning players! Feel free to create your own genres/prompts to spark a more personalized story.
-- **Leaderboard** - We believe it's important to celebrate your accomplishments. Try hovering your player scorecard and see all of the contributions that you made to the story! The scoreboard should be enough, but we've also attached a message at the bottom to help identify if you've won or not.
+- **Leaderboard** - We believe it's important to celebrate your accomplishments. Try hovering/clicking your player scorecard and see all of the contributions that you made to the story! The scoreboard should be enough, but we've also attached a message at the bottom to help identify if you've won or not.
 - **Share Story** - TallTales is a game all about community. Try sharing some of your past stories that you're proud of! Clicking the SHARE STORY button underneath your profile past stories will open up a properly formatted story page. Use the clipboard link to share some laughs or wows with your friends.
 - **Have Fun!** - This is simple, enjoy our game :)
-
 
 USAGE INSTRUCTIONS
 ==================
@@ -137,8 +137,12 @@ This should start a production build at the specified `$PORT` in `/team19/client
  	The completed stories screen shows us all of our past stories that we've played. You can browse through the collection of stories via the arrow keys in the header and view the story that is display. Furthermore, if you click on the SHARE STORY button it will bring you to a brand new formatted page to share with your friends. This page displays all of the stories properties, including title, contributions, scoreboard, and allows you to easily copy the link to your clipboard.
 
  6. Profile - Change Username (self-explanatory)
+
+	For testing: Try this out and logging back in!
  
  7. Profile - Change Password (self-explanatory)
+
+	For testing: Try this out and logging back in!
 
  8. Profile - Change Avatar
 
@@ -152,7 +156,7 @@ This should start a production build at the specified `$PORT` in `/team19/client
 	
     10.1. As a Normal Player
 
-	The gameplay view features a score in the top-right corner, which keeps track of the current player's score. In the middle of the screen we have our story thus far, which represents how our story is currently written. The player is given a prompt, starting with the backstory, and they are prompted to type in their sentence in the input field labeled `OKAY AND THEN...`. Once they've done so, they can click the `SUBMIT` button. After every player has submitted their sentence, the game will select a Raconteur, who will select their favorite submission to be chosen for formal addition to the story. The Raconteur will be identified by the text `USER's turn`, where USER is the current Raconteur. The current user will also see the chosen sentence via interface cues. The winning sentence is then added to the story and the winning player's score is increased. From there, a new round begins. To help move the game along, there is a 60 second time-limit for each input. There are audio cues and visual cues to facilitate this time-limit.
+	The gameplay view features a score in the top-right corner, which keeps track of the current player's score. In the middle of the screen we have our story thus far. The player is given a prompt, starting with the backstory, and they are prompted to type in their sentence in the input field labeled `OKAY AND THEN...`. Once they've done so, they can click the `SUBMIT` button. After every player has submitted their sentence, the game will select a Raconteur, who will select their favorite submission to be chosen for formal addition to the story. The Raconteur will be identified by the text `USER's turn`, where USER is the current Raconteur. The current user will also see the chosen sentence via interface cues. The winning sentence is then added to the story and the winning player's score is increased. From there, a new round begins. To help move the game along, there is a 60 second time-limit for each input. There are audio cues and visual cues to facilitate this time-limit.
 		
     For testing: Type out a sentence when the game prompts you to. Click submit, repeat, and play out the game!
 
@@ -166,5 +170,5 @@ This should start a production build at the specified `$PORT` in `/team19/client
 
 	Once the game has concluded, we have a final screen displaying each player's score and the finalized story from our game. If you hover over a user's score card, you can see all of their contributions highlighted on the left. If you click on a user's score card then that will lock their contributions as highlighted. We can click the HOME button to indicate that we've finished playing. This takes us back to the dashboard.
 
-THANK YOU FOR CHECKING OUT OUR GAME :-)
+THANK YOU FOR CHECKING OUT OUR GAME :)
 =======================================
