@@ -55,6 +55,16 @@ Our users.js file in our Express server provides the routes for all user-related
 - **router.route('/stories/:username/:story').post():** Edits the title of a story for user, expects a story object with {title}, upon success returns a user object and upon failure returns an error message.
 - **router.route('/stories/:username/:story').get():** Gets a story from user, upon success returns a story object and upon failure returns an error message.
 
+**_rooms.js_**
+
+Our rooms.js file in our Express server provides the routes for all rooms-related activities. Each of the routes underneath detail the function of a room route, the expected data they receive, and expected return value. Please note that each route will begin with '/rooms', for example, '/rooms/create'.
+- **router.route('/create').post():** Creates a room, expects a room object with {code, host, users}, upon success returns a room object and upon failure returns an error message.
+- **router.route('/delete/:room').delete():** Deletes a room, upon success returns the delete room object and upon failure returns an error message.
+- **router.route('/lock/:room').post():** Makes a room private or public, upon success returns the room object and upon failure returns an error message.
+- **router.route('/start/:room').post():** Makes a room have in progress status, upon sucess returns the room object and upon failure returns an error message.
+- **router.route('/join/:room').post():** Adds a new user to room, upon success returns the room object and upon failure returns an error message.
+- **router.route('/genre/:room').post():** Change genre for a room, expects a room object with {genre}, upon success returns the room object and upon failure returns an error message.
+- **router.route('/room/:room').get():** Get a room, upon success returns the room object and upon failure returns an error message.
 
 USAGE INSTRUCTIONS
 ==================
