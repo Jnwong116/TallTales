@@ -30,6 +30,15 @@ class DashboardMenu extends React.Component {
             menuRedirect(this.props.app, "profile");
           }}
         />
+        {this.props.parent.state.user.admin ? 
+          <Button
+            text="ADMIN MENU"
+            handleClick={() => {
+              menuRedirect(this.props.app, "adminMenu");
+            }}
+          /> : 
+          <></>
+        }
         <Button
           text="LOG OUT"
           handleClick={() => {

@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "../button/button.js";
 import "./profileMenu.css";
+import { menuRedirect } from "../../actions/dashboard/menu.js";
 
 class AdminMenu extends React.Component {
   render() {
@@ -12,9 +13,9 @@ class AdminMenu extends React.Component {
         <Button text="BROWSE USERS"
                 handleClick={() => {
                 this.handleClick(this.state);}} />
-        <Button text="BROWSE PROMPTS"
+        <Button text="BACK"
                 handleClick={() => {
-                this.handleClick(this.state);}} />
+                menuRedirect(this.props.app, "dashboard");}} />
         <Button text="LOG OUT"
                 handleClick={() => {
                 this.handleClick(this.state);}} />
