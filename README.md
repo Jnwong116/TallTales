@@ -73,7 +73,10 @@ USAGE INSTRUCTIONS
 - rewrite/ update with concurrency
 - "how to run your app locally after cloning your repo, including where to run npm install and commands to start the local web server**
 
-We've coded the app using React, so all that's needed to get it to run is to pull our code from the main branch and start up a development server with the usual `npm start`.
+- In the team19 directory, run: npm run setup
+- Then navigate to /team19/client/src/config.js and change the export default to dev
+- Then run: npm run start-dev
+- Go to localhost:5010 
 
  0. A Note on Concurrency
 
