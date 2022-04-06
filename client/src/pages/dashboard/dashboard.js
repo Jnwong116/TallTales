@@ -6,6 +6,7 @@ import "./dashboard.css";
 import { getUser } from "../../actions/global/users.js";
 import { backButtonHandler } from "../../actions/router/render.js";
 import { stop } from "../../actions/audio/stopAudio.js";
+import { updateRoom } from "../../actions/sockets/room.js";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -25,6 +26,7 @@ class Dashboard extends React.Component {
   componentDidMount() {
     getUser(this, this.props.app);
     stop(this.props.gameAudioRef);
+    updateRoom(this.props.app);
   }
 
   render() {

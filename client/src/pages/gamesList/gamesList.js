@@ -15,6 +15,7 @@ import { getGames, joinGame } from "../../actions/gamesList/rooms.js";
 import { copyToClipboard } from "../../actions/indivStory/loadStory.js";
 import { joinRoom, updateRoom, denyRoomAccess } from "../../actions/sockets/room.js";
 import { backButtonHandler } from "../../actions/router/render.js";
+import { menuRedirect } from "../../actions/dashboard/menu.js";
 
 class GamesList extends React.Component {
   constructor(props) {
@@ -69,7 +70,7 @@ class GamesList extends React.Component {
           <div className="gamesListBody">
             <div className="gamesListContainer" style={{ display: 'flex', "justify-content": "center", "align-items": "center", height: '100%', width: '100%' }}>
     
-              <ArrowBackIosNewIcon sx={{ fontSize: 80, "padding-right": '100px' }} />
+              <ArrowBackIosNewIcon sx={{ fontSize: 80, "padding-right": '100px' }} onClick={() => {menuRedirect(this.props.app, "dashboard")}} />
     
               <div className="gamesListGridDataContainer" style={{ display: "flex", height: '526px', width:'800px' }}>
     
