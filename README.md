@@ -74,7 +74,7 @@ Our stories.js file in our Express server provides the routes for all stories-re
 - **router.route('/start').post():** Creates a new story, expects a story object with {title, start, story, contributions \[{username, sentence}], userScores \[{username, score, icon}]}, upon success returns the story object and upon failure returns an error message.
 - **router.route('/contribute/:story').post():** Adds a contribution to the story, expects a contribution object with {username, sentence}, upon success returns the story object and upon failure returns an error message.
 
-USAGE NOTES
+USAGE NOTES & NEW FEATURES
 ==================
 
 The general set-up and usage instructions are listed below in the **USAGE INSTRUCTIONS** section. In addition to the general instructions, there are a few special notes to keep in mind when running the TallTales game.
