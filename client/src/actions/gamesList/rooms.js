@@ -135,7 +135,46 @@ export const deleteRoom = (room, page, app) => {
         if (app.state.page === "gamesList") {
             getGames(page);
         }
-    })
+    })    
+}
 
+export const updateHost = (room, host, page, app) => {
+    const url = `${API_HOST}/rooms/host/${room}`;
     
+    const newRoom = {
+        "host": host
+    }
+
+    const request = new Request(url, {
+        method: "post",
+        body: JSON.stringify(newRoom),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    });
+
+    fetch(request)
+    .then((res) => {
+        if (res.status === 200) {
+            return res.json();
+        }
+        else {
+            return res.text();
+        }
+    })
+    .then((result) => {
+        if (typeof(result) === 'object') {
+            if (app.state.page === "gamesList") {
+                getGames(page);
+            }
+          }
+          else {
+            errorToast(result);
+            return;
+          }
+    })
+    .catch(err => {
+        log(err);
+    })
 }

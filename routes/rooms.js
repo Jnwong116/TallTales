@@ -156,6 +156,35 @@ router.route('/genre/:room').post(async (req, res) => {
 })
 
 
+// Change host for a Room
+/*{
+    "host": <String>
+    }
+*/
+router.route('/host/:room').post(async (req, res) => {
+    const room = req.params.room;
+
+    let curRoom = await Room.findOne({ code: room });
+
+    // Checks to make sure it exists
+    if (curRoom === null) {
+        res.status(404).send('Room not found');
+        return;
+    }
+
+    // Sets host to new host
+    curRoom.host = req.body.host;
+
+    curRoom.save()
+        .then((result) => {
+            res.send(result);
+        })
+        .catch(err => {
+            res.status(400).json('Error: ' + err);
+        });
+})
+
+
 // Get Room
 router.route('/room/:room').get(async (req, res) => {
     const room = req.params.room;

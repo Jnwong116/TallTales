@@ -3,7 +3,7 @@ import { warningToast } from "../toastify/toastify";
 import { chooseRaconteur } from "../vote/raconteur";
 // import { isRaconteur } from "../prompt/displayPrompt";
 import { updateSentence } from "./updateUser";
-import { deleteRoom, getGames, updateRoomNum } from "../gamesList/rooms"
+import { deleteRoom, updateHost, updateRoomNum } from "../gamesList/rooms"
 
 // const log = console.log;
 
@@ -27,13 +27,14 @@ export const joinRoom = (app, user, room, lobbyMusic, introMusic) => {
   }
 };
 
-export const updateRoom = (app) => {
+export const updateRoom = (app, page) => {
   socket.on("update-users", ({ users, room, roomInProgress }) => {
     if (app.state.page === "dashboard" || app.state.page === "gamesList") {
-      updateRoomNum(room, users.length);
+      updateRoomNum(room, users.length, page, app);
       // User is on dashboard
       users[0].host = true;
       socket.emit("change-host", users);
+      updateHost(room, users[0].username, page, app);
       app.setState({
         page: "lobby",
         users: users,
@@ -43,6 +44,7 @@ export const updateRoom = (app) => {
       // User is on lobby page
       users[0].host = true;
       socket.emit("change-host", users);
+      updateHost(room, users[0].username, page, app);
       app.setState({
         users: users,
         roomInProgress

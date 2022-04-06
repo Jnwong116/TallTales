@@ -26,7 +26,7 @@ class Dashboard extends React.Component {
   componentDidMount() {
     getUser(this, this.props.app);
     stop(this.props.gameAudioRef, this.props.audioLobby, this.props.introRef);
-    updateRoom(this.props.app);
+    updateRoom(this.props.app, this);
     updateNumPlayers(this.props.app, this);
     destroyRoom(this.props.app, this);
   }
