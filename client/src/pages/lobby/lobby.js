@@ -92,12 +92,12 @@ class Lobby extends React.Component {
 
                   <PromptV2 title="Canned Food Adventure [conditional rendering prop: host = true]"
                             content="user1 and user2 are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means."
-                            host={true}
-                  / >
+                            admin={false}
+                  />
                   <PromptV2 title="Canned Food Adventure [conditional rendering prop: host = false]"
                             content="user1 and user2 are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means."
-                            host={false}
-                  / >
+                            admin={false}
+                  />
 
               </div>
               <div className="lobby-interface-bot-buttons">
