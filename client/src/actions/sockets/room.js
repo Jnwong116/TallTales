@@ -23,8 +23,6 @@ export const joinRoom = (user, room) => {
 
 export const updateRoom = (app, page) => {
   socket.on("update-users", ({ users, room, roomInProgress }) => {
-    console.log(page);
-    updateRoomNum(room, users.length, page);
     if (app.state.page === "dashboard" || app.state.page === "gamesList") {
       // User is on dashboard
       users[0].host = true;
