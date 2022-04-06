@@ -10,6 +10,7 @@ import { getGenres, redirect } from "../../actions/lobby/lobby.js";
 import { gameStarted } from "../../actions/sockets/startGame.js";
 import { backButtonHandler } from "../../actions/router/render.js";
 import { destroyRoom } from "../../actions/sockets/room.js";
+import { stop } from "../../actions/audio/stopAudio.js";
 
 class Lobby extends React.Component {
   constructor(props) {
@@ -51,7 +52,10 @@ class Lobby extends React.Component {
   componentDidMount() {
     backButtonHandler(this.props.app, this.props.history);
     getGenres(this);
-    gameStarted(this.props.app, this.props.gameAudioRef, this.props.audio60Ref, this.props.audio30Ref, this.props.audio10Ref);
+    gameStarted(this.props.app, this.props.gameAudioRef, this.props.audio60Ref, this.props.audio30Ref, this.props.audio10Ref, this.props.audioLobby, this.props.introRef);
+    stop([this.props.gameAudioRef]);
+    this.props.audioLobby.audioEl.current.play();
+    this.props.introRef.audioEl.current.play();
     destroyRoom(this.props.app, this);
   }
 

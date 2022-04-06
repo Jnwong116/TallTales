@@ -7,6 +7,7 @@ import { getUser } from "../../actions/global/users.js";
 import { backButtonHandler } from "../../actions/router/render.js";
 import { stop } from "../../actions/audio/stopAudio.js";
 import { destroyRoom, updateNumPlayers, updateRoom } from "../../actions/sockets/room.js";
+import { closeToasts } from "../../actions/toastify/toastify.js";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -25,10 +26,11 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     getUser(this, this.props.app);
-    stop(this.props.gameAudioRef, this.props.audioLobby, this.props.introRef);
+    stop([this.props.gameAudioRef, this.props.audioLobby, this.props.introRef]);
     updateRoom(this.props.app, this);
     updateNumPlayers(this.props.app, this);
     destroyRoom(this.props.app, this);
+    closeToasts();
   }
 
   render() {

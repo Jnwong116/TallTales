@@ -1,31 +1,56 @@
 import { socket } from "./socket";
-import { warningToast } from "../toastify/toastify";
+import { errorToast, warningToast } from "../toastify/toastify";
 import { chooseRaconteur } from "../vote/raconteur";
 // import { isRaconteur } from "../prompt/displayPrompt";
 import { updateSentence } from "./updateUser";
-import { deleteRoom, updateHost, updateRoomNum } from "../gamesList/rooms"
+import { deleteRoom, getGames, updateHost, updateRoomNum } from "../gamesList/rooms"
 
 // const log = console.log;
 
 export const joinRoom = (app, user, room, lobbyMusic, introMusic) => {
+  const rooms = {
+    games: [],
+    app: app,
+    user: user,
+    room: room,
+    lobbyMusic: lobbyMusic,
+    introMusic: introMusic
+  };
+  getGames(rooms);
+};
+
+export const socketJoinRoom = (roomsObj) => {
+  let roomExists = false;
+  for (let i = 0; i < roomsObj.games.length; i++) {
+    if (roomsObj.games[i].code === roomsObj.room) {
+      roomExists = true;
+      break;
+    }
+  }
+
+  if (!roomExists) {
+    errorToast("Room doesn't exist");
+    return;
+  } 
+
   socket.emit("join-room", {
     user: {
-      username: user.username,
-      icon: user.icon,
+      username: roomsObj.user.username,
+      icon: roomsObj.user.icon,
       score: 0,
       raconteur: false,
       currentSentence: ". . .",
       host: false
     },
-    room: room
+    room: roomsObj.room
   });
-  lobbyMusic.audioEl.current.play();
-  introMusic.audioEl.current.play();
-  if (app.state.muted) {
-    lobbyMusic.audioEl.current.muted = true;
-    introMusic.audioEl.current.muted = true;
+  roomsObj.lobbyMusic.audioEl.current.play();
+  roomsObj.introMusic.audioEl.current.play();
+  if (roomsObj.app.state.muted) {
+    roomsObj.lobbyMusic.audioEl.current.muted = true;
+    roomsObj.introMusic.audioEl.current.muted = true;
   }
-};
+}
 
 export const updateRoom = (app, page) => {
   socket.on("update-users", ({ users, room, roomInProgress }) => {
@@ -129,10 +154,11 @@ export const raconteurLeft = (app) => {
   })
 }
 
-export const forfeitGame = (app) => {
-  socket.on("game-forfeit", ({ users, str }) => {
+export const forfeitGame = (app, page) => {
+  socket.on("game-forfeit", ({ users, str, room }) => {
     if (app.state.page !== "leaderboard") {
       warningToast(str);
+      updateRoomNum(room, users.length, page, app);
 
       app.setState({
         page: "lobby",

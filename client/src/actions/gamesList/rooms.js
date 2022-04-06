@@ -1,6 +1,6 @@
 import ENV from './../../config.js';
 import { errorToast } from "../../actions/toastify/toastify.js";
-import { joinRoom } from '../sockets/room.js';
+import { joinRoom, socketJoinRoom } from '../sockets/room.js';
 
 const API_HOST = ENV.api_host;
 const log = console.log
@@ -8,6 +8,7 @@ const log = console.log
 function parseRooms(rooms) {
     const newRooms = [];
     for (let i = 0; i < rooms.length; i++) {
+        if (!rooms[i].private)
         newRooms.push({
             id: i,
             host: rooms[i].host,
@@ -34,12 +35,19 @@ export const getGames = (page) => {
     })
     .then((result) => {
         if (typeof(result) === 'object') {
-            if (result.length === 0) {
-                errorToast('No public games available.');
+            if (page.games !== undefined) {
+                page.games = result;
+                socketJoinRoom(page);
             }
-            page.setState({
-                rows: parseRooms(result)
-            });
+            else {
+                if (parseRooms(result).length === 0) {
+                    errorToast('No public games available.');
+                }
+                
+                page.setState({
+                    rows: parseRooms(result)
+                });
+            }
             return;
         }
         else {

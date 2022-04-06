@@ -294,9 +294,12 @@ io.on("connection", socket => {
       if (rooms[currUser.room]) { // Game was in progress
         if (getRoomUsers(currUser.room).length === 1) { // If they are last person left in the room
           rooms[currUser.room] = false;
+          const users = getRoomUsers(currUser.room);
+          users[0].host = true;
           io.to(currUser.room).emit("game-forfeit", {
-            users: getRoomUsers(currUser.room),
-            str: "The game has ended since all players left"
+            users: users,
+            str: "The game has ended since all players left",
+            room: currUser.room
           });
           io.to(socket.id).emit("stop-audio");
         }

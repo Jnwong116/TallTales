@@ -206,8 +206,7 @@ router.route('/').get(async (req, res) => {
     const room = req.params.room;
 
     Room.find({
-        'inProgress': false,
-        'private': false
+        'inProgress': false
     })
     .then((rooms) => {
         res.json(rooms);

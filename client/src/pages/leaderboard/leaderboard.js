@@ -89,7 +89,7 @@ class Leaderboard extends React.Component {
                     <div className="footer-button">
                         <Button text="HOME" 
                             handleClick={() => {
-                                stop(this.props.gameAudioRef);
+                                stop([this.props.gameAudioRef]);
                                 saveStory(this.state.user, this.props.app.state.story, this.props.app, this)
                             }}
                         /> 
