@@ -81,23 +81,6 @@ span {
   align-content: flex-end;
 }
 
-.buttonStyle {
-  width: 310px;
-  height: 56px;
-  color: #ededed;
-  background-color: #292929;
-  padding-left: 0px;
-  padding-right: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  margin-top: 0px;
-  margin-bottom: 20px;
-  border: none;
-  font-weight: bolder;
-  font-size: 14px;
-  border-radius: 5px; /* TODO: needs to be moved to appropriate CSS location */
-}
-
 .buttonStyle:hover {
   cursor: pointer;
 }
@@ -137,15 +120,15 @@ span {
 }
 
 .addPromptButtonContainer {
-   width: 310px;
-   margin-left: 134px;
-   margin-right: 10px;
-   padding-right: 13px;
- }
+  width: 310px;
+  margin-left: 134px;
+  margin-right: 10px;
+  padding-right: 13px;
+}
 
- .MuiButton-root {
-   font-family: "IBM Plex Mono" !important;
-   font-weight: 1000 !important;
-   font-size: 24px !important;
-   color: rgb(117, 117, 117) !important;
- }
+.MuiButton-root {
+  font-family: "IBM Plex Mono" !important;
+  font-weight: 1000 !important;
+  font-size: 24px !important;
+  color: rgb(117, 117, 117) !important;
+}

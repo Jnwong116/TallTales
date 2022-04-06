@@ -1,138 +1,63 @@
-.browseStoriesHeader {
-  font-weight: bold;
-}
-
-.header {
-  display: flex;
-}
-
-.dashboard {
-  display: flex;
-}
-
-.dashboardLeft {
-  display: flex;
-  flex-direction: column;
-}
-
-.dashboardDivider {
-  width: 150px;
-}
-
-.dashboardRight {
-  display: flex;
-  flex-direction: column;
-}
-
-.userIconContainer {
-  height: 233px;
-  display: flex;
-  justify-content: center;
-  text-transform: uppercase;
-}
-
-.dashboardMenu {
-  display: flex;
-  flex-direction: column;
-  margin-left: auto;
-  margin-right: 0;
-}
-
-.userIconContainer {
-  display: flex;
-  justify-content: center;
-}
-
-.storiesNavigation {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  height: 60px;
-}
-
-.storiesDisplay {
-  margin-top: 20px;
-  width: 800px;
-  display: flex;
-  text-align: justify;
-}
-
-/* .buttonStyle {
-  width: 310px;
-  height: 60px;
-  color: #ededed;
-  background-color: #292929;
-  padding-left: 0px;
-  padding-right: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  margin-top: 0px;
-  margin-left: 25px;
-  margin-bottom: 0px;
-  border: none;
-  font-weight: bolder;
-  font-size: 14px;
-} */
-
-.buttonStyle:hover {
-  cursor: pointer;
-}
-
-/* .app-name {
-  padding-left: 0px;
-} */
-
-.user-icon {
+.gamesList-new .user-icon {
   padding-left: 125px;
 }
 
-.user-input-fields {
+.gamesListMenu .user-login-input {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
-  text-align: right;
-  padding-top: 0px;
-  padding-bottom: 0px;
 }
 
-.user-login-text {
-  font-family: "IBM Plex Sans";
-  font-size: 44px;
-  font-weight: bolder;
-  padding-bottom: 0px;
+.gamesListMenu .user-input-fields {
+  padding: 0;
+  padding-right: 30px;
 }
 
-.text-button {
-  color: red;
-}
-
-/* .MuiInputBase-root {
+.gamesListMenu .MuiInputBase-root {
   color: rgb(178, 178, 178) !important;
-  background-color: rgb(57, 56, 55) !important;
+  background-color: #292929 !important;
 }
 
-.MuiInputLabel-root {
+.gamesListMenu .MuiInputLabel-root {
   font-family: "IBM Plex Mono" !important;
-  font-size: 16px !important;
+  font-size: 14px !important;
+  font-weight: bolder;
   color: white !important;
-  left: 46px !important;
+  left: 24% !important;
   transform-origin: top center !important;
-  margin-right: 25px;
 }
 
-.MuiFilledInput-input {
+.gamesListMenu .MuiFilledInput-input {
   font-family: "IBM Plex Mono" !important;
-  font-size: 16px !important;
+  font-size: 20px !important;
   color: rgb(156, 156, 156) !important;
   text-align: center !important;
   transform-origin: top center !important;
 }
 
-.user-input-header {
-  font-family: "IBM Plex Sans";
-  font-size: 40px;
-  font-weight: bold;
-  padding-bottom: 0px !important;
-} */
+.gamesListMenu .MuiFormControl-root {
+  margin: 0;
+}
+
+.gamesListMenu .buttonStyle {
+  width: 150px;
+  margin-top: 10px;
+  background-color: rgb(124, 124, 124);
+}
+
+.MuiDataGrid-columnHeaderTitle {
+  font-family: "IBM Plex Mono" !important;
+  font-weight: bolder !important;
+  color: black !important;
+}
+
+.MuiDataGrid-cellContent {
+  font-family: "IBM Plex Mono" !important;
+  font-weight: bolder !important;
+  color: #5c5c5c !important;
+}
+.MuiTablePagination-displayedRows {
+  font-family: "IBM Plex Mono" !important;
+  font-weight: bolder !important;
+  color: black !important;
+}
