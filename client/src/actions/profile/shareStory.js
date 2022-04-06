@@ -73,9 +73,4 @@ function saveTitle(page, title) {
             return;
           }
     })
-    .catch(err => {
-        log(err);
-    })
-
-
 }
