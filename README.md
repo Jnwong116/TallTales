@@ -3,10 +3,16 @@
 GENERAL GAME DESCRIPTION
 ========================
 
+**To-Do:
+- edit**
+
 Tall Tales is a multiplayer collaborative story-telling web app for 3-6 players, inspired by popular party-games such as the Jackbox Party Packs, Code Names, Gartic Phone, and Skribbl.io. The basic gameplay consists of providing the players with creative prompts for sentences. Each round, one of the players serves as the Raconteur, who decides which sentence is the funniest or most appropriate to continue the story. There are a total of 10 rounds, divided into several basic story elements: backstory, conflict, resolution. After all rounds are completed, the player with the highest score is crowned as the most valuable contributor. Additionally, the collaborative story is displayed for all to see, as well as stored for later retrieval via their user profile.
 
 REGISTERED USERS
 ================
+
+**To-Do:
+- update**
 
 We have set up a number of users to demo the app more convincingly. They are listed below in the username:password format. (Since the usernames play an important part in our game (representing characters in a story), we decided to go with example accounts titled after people, such as gazi, jasper, jordan, chris, etc. instead of the suggested user1, user2, convention.)
 
@@ -20,10 +26,21 @@ Of course, new users are also able to create their own accounts. More on that la
 DATA INFORMATION
 ================
 
+**To-Do:
+- rewrite with updated data**
+
 For the purposes of Phase 1, we hard-coded mock data into our json files so that we would not have to copy and paste the same mock data into every game page. With our implemention, we update the data used in our game by passing in modified data through the React app states. Note that we did not save or change the actual json files, as instructed in the Phase 1 handout.
+
+ROUTES OVERVIEW
+==================
+
 
 USAGE INSTRUCTIONS
 ==================
+
+**To-Do:
+- rewrite/ update with concurrency
+- "how to run your app locally after cloning your repo, including where to run npm install and commands to start the local web server**
 
 We've coded the app using React, so all that's needed to get it to run is to pull our code from the main branch and start up a development server with the usual `npm start`.
 
@@ -90,6 +107,8 @@ We've coded the app using React, so all that's needed to get it to run is to pul
 11. Leaderboard View
 
 	Once the game has concluded, we have a final screen displaying each player's score, where the user with the highest score is displayed most prominently. We are also displaying the story one more time for all to see. We can click the `DONE` button to indicate that we've finished playing. This takes us back to the dashboard.
+
+
 
 THANK YOU FOR CHECKING OUT OUR GAME :-)
 =======================================
