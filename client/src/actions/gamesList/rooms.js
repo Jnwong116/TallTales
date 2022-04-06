@@ -65,11 +65,9 @@ export const joinGame = (page) => {
     joinRoom(user, room);
 }
 
-export const updateRoomNum = (room, users, page) => {
-    console.log(page);
+export const updateRoomNum = (room, users) => {
     const url = `${API_HOST}/rooms/join/${room}`;
-
-    console.log(users);
+    
     const user = {
         "users": users
     }
@@ -104,6 +102,4 @@ export const updateRoomNum = (room, users, page) => {
     .catch(err => {
         log(err);
     })
-
-    getGames(page);
 }

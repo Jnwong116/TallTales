@@ -16,7 +16,8 @@ import { copyToClipboard } from "../../actions/indivStory/loadStory.js";
 import {
   joinRoom,
   updateRoom,
-  denyRoomAccess
+  denyRoomAccess,
+  updateNumPlayers
 } from "../../actions/sockets/room.js";
 import { backButtonHandler } from "../../actions/router/render.js";
 import { menuRedirect } from "../../actions/dashboard/menu.js";
@@ -139,7 +140,8 @@ class GamesList extends React.Component {
   componentDidMount() {
     getUser(this, this.props.app);
     getGames(this);
-    updateRoom(this.props.app, this);
+    updateRoom(this.props.app);
+    updateNumPlayers(this.props.app);
     denyRoomAccess();
   }
 
