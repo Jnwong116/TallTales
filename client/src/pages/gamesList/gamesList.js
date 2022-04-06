@@ -17,7 +17,8 @@ import {
   joinRoom,
   updateRoom,
   denyRoomAccess,
-  updateNumPlayers
+  updateNumPlayers,
+  destroyRoom
 } from "../../actions/sockets/room.js";
 import { backButtonHandler } from "../../actions/router/render.js";
 import { menuRedirect } from "../../actions/dashboard/menu.js";
@@ -142,6 +143,7 @@ class GamesList extends React.Component {
     getGames(this);
     updateRoom(this.props.app);
     updateNumPlayers(this.props.app, this);
+    destroyRoom(this.props.app, this);
     denyRoomAccess();
   }
 

@@ -3,7 +3,7 @@ import { warningToast } from "../toastify/toastify";
 import { chooseRaconteur } from "../vote/raconteur";
 // import { isRaconteur } from "../prompt/displayPrompt";
 import { updateSentence } from "./updateUser";
-import { getGames, updateRoomNum } from "../gamesList/rooms"
+import { deleteRoom, getGames, updateRoomNum } from "../gamesList/rooms"
 
 // const log = console.log;
 
@@ -142,8 +142,12 @@ export const forfeitGame = (app) => {
 
 export const updateNumPlayers = (app, page) => {
   socket.on("update-db", ({ users, room }) => {
-    if (app.state.page === "gamesList") {
-      updateRoomNum(room, users.length, page);
-    }
+    updateRoomNum(room, users.length, page, app);
+  })
+}
+
+export const destroyRoom = (app, page) => {
+  socket.on("destroy-room", ({ room }) => {
+    deleteRoom(room, page, app);
   })
 }

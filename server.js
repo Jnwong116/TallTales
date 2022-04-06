@@ -323,17 +323,24 @@ io.on("connection", socket => {
         }
       }
 
-      else { // User was not in game
-        io.to(currUser.room).emit("update-users", {
-          room: currUser.room,
-          users: getRoomUsers(currUser.room),
-          rooms: rooms
-        });
+      else { // Game was not in progress
+        if (getRoomUsers(currUser.room).length === 0) { // They were last person in the lobby
+          io.emit("destroy-room", {
+            room: currUser.room
+          });
+        }
 
-        io.emit("update-db", {
-          users: getRoomUsers(currUser.room),
-          room: currUser.room
-        })
+        else {
+          io.to(currUser.room).emit("update-users", { // Updates the lobby
+            room: currUser.room,
+            users: getRoomUsers(currUser.room),
+            rooms: rooms
+          });
+          io.emit("update-db", { // Updates the join rooms list
+            users: getRoomUsers(currUser.room),
+            room: currUser.room
+          })
+        }
       }
     }
   });

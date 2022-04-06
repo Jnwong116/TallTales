@@ -6,7 +6,7 @@ import "./dashboard.css";
 import { getUser } from "../../actions/global/users.js";
 import { backButtonHandler } from "../../actions/router/render.js";
 import { stop } from "../../actions/audio/stopAudio.js";
-import { updateRoom } from "../../actions/sockets/room.js";
+import { destroyRoom, updateNumPlayers, updateRoom } from "../../actions/sockets/room.js";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -27,6 +27,8 @@ class Dashboard extends React.Component {
     getUser(this, this.props.app);
     stop(this.props.gameAudioRef, this.props.audioLobby, this.props.introRef);
     updateRoom(this.props.app);
+    updateNumPlayers(this.props.app, this);
+    destroyRoom(this.props.app, this);
   }
 
   render() {
@@ -36,7 +38,7 @@ class Dashboard extends React.Component {
           <div className="header">
             <AppName></AppName>
           </div>
-          <DashboardMenu app={this.props.app} parent={this} audioLobby={this.props.audioLobby} audioIntroRef={this.props.introRef} ></DashboardMenu>
+          <DashboardMenu app={this.props.app} parent={this} audioLobby={this.props.audioLobby} introRef={this.props.introRef} ></DashboardMenu>
         </span>
 
         <span className="dashboardDivider"></span>

@@ -65,7 +65,7 @@ export const joinGame = (app, page, lobbyMusic, introMusic) => {
     joinRoom(app, user, room, lobbyMusic, introMusic);
 }
 
-export const updateRoomNum = (room, users, page) => {
+export const updateRoomNum = (room, users, page, app) => {
     const url = `${API_HOST}/rooms/join/${room}`;
     
     const user = {
@@ -92,7 +92,9 @@ export const updateRoomNum = (room, users, page) => {
     })
     .then((result) => {
         if (typeof(result) === 'object') {
-            getGames(page);
+            if (app.state.page === "gamesList") {
+                getGames(page);
+            }
           }
           else {
             errorToast(result);
@@ -102,4 +104,38 @@ export const updateRoomNum = (room, users, page) => {
     .catch(err => {
         log(err);
     })
+}
+
+export const deleteRoom = (room, page, app) => {
+    const url = `${API_HOST}/rooms/delete/${room}`;
+
+    const request = new Request(url, {
+        method: "delete",
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    });
+
+    fetch(request)
+    .then((res) => {
+        if (res.status === 200) {
+            return res.json();
+        }
+        else {
+            return res.text();
+        }
+    })
+    .then((result) => {
+        if (typeof(result) === 'object') {
+            return;
+        }
+    })
+    .then(() => {
+        if (app.state.page === "gamesList") {
+            getGames(page);
+        }
+    })
+
+    
 }
