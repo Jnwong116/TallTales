@@ -160,6 +160,11 @@ export const forfeitGame = (app, page) => {
       warningToast(str);
       updateRoomNum(room, users.length, page, app);
 
+      socket.emit("update-users", {
+        users: users,
+        room: room
+      });
+
       app.setState({
         page: "lobby",
         users: users
