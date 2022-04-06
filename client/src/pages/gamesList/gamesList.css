@@ -58,23 +58,6 @@
   text-align: justify;
 }
 
-/* .buttonStyle {
-  width: 310px;
-  height: 60px;
-  color: #ededed;
-  background-color: #292929;
-  padding-left: 0px;
-  padding-right: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  margin-top: 0px;
-  margin-left: 25px;
-  margin-bottom: 0px;
-  border: none;
-  font-weight: bolder;
-  font-size: 14px;
-} */
-
 .buttonStyle:hover {
   cursor: pointer;
 }
@@ -83,7 +66,7 @@
   padding-left: 0px;
 } */
 
-.user-icon {
+.gamesList-new .user-icon {
   padding-left: 125px;
 }
 
