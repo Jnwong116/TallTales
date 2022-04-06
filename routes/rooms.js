@@ -96,7 +96,12 @@ router.route('/start/:room').post(async (req, res) => {
 })
 
 
-// Add new user to Room
+// Edits number of users in room
+/*
+    {
+        "users": <Number>
+    }
+*/
 router.route('/join/:room').post(async (req, res) => {
     const room = req.params.room;
 
@@ -108,8 +113,8 @@ router.route('/join/:room').post(async (req, res) => {
         return;
     }
 
-    // Sets adds 1 person to room
-    curRoom.users += 1;
+    // Changes number of users by request body
+    curRoom.users = req.body.users;
 
     curRoom.save()
         .then((result) => {

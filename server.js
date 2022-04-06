@@ -199,7 +199,8 @@ io.on("connection", socket => {
       socket.join(currUser.room);
       io.emit("message", `${currUser.username} has joined ${currUser.room}`);
       io.to(currUser.room).emit("update-users", {
-        users: getRoomUsers(currUser.room)
+        users: getRoomUsers(currUser.room),
+        room: currUser.room
       });
     } else {
       if (rooms[room]) { // If game is in progress
@@ -318,12 +319,12 @@ io.on("connection", socket => {
         }
       }
 
-      else { // User was not in game
-        io.to(currUser.room).emit("update-users", {
+      else { // User was in lobby but not in game
+        io.emit("update-users", {
           room: currUser.room,
           users: getRoomUsers(currUser.room),
           rooms: rooms
-        });
+        })
       }
     }
   });

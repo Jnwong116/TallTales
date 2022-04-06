@@ -3,6 +3,7 @@ import { errorToast } from "../toastify/toastify";
 import { chooseRaconteur } from "../vote/raconteur";
 // import { isRaconteur } from "../prompt/displayPrompt";
 import { updateSentence } from "./updateUser";
+import { updateRoomNum } from "../gamesList/rooms"
 
 // const log = console.log;
 
@@ -20,8 +21,10 @@ export const joinRoom = (user, room) => {
   });
 };
 
-export const updateRoom = app => {
-  socket.on("update-users", ({ users, roomInProgress }) => {
+export const updateRoom = (app, page) => {
+  socket.on("update-users", ({ users, room, roomInProgress }) => {
+    console.log(page);
+    updateRoomNum(room, users.length, page);
     if (app.state.page === "dashboard" || app.state.page === "gamesList") {
       // User is on dashboard
       users[0].host = true;
