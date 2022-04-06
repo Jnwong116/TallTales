@@ -35,20 +35,25 @@ For the purposes of Phase 1, we hard-coded mock data into our json files so that
 
 ROUTES OVERVIEW
 ==================
-**users.js**
+**_users.js_**
 
 Our users.js file in our Express server provides the routes for all user-related activities. Each of the routes underneath detail the function of a user route, the expected data they receive, and expected return value. Please note that each route will begin with '/users', for example, '/users/register'.
-- router.route('/register').post(): Adds a user, expects a user object with {username, password, icon} attributes, returns a user object with {username, icon, stories, prompts, admin, \_id}.
-- router.route('/login').post(): Logs in a user and populates a session, expects a user object with {username, password} attributes, upon success returns a user object with {currentUser: username} and upon failure returns an error.
-- router.route('/logout').get(): Logs out a user and destroys the session, upon success returns nothing and upon failure returns an error.
-- router.route('/check-session').get(): Checks if a user is logged in on the session, upon success returns a user object with {currentUser: username} and upon failure changes the status to 401.
-- router.route('/user/:username').get(): Gets a specific user, upon sucess returns a user object and upon failure returns an error.
-- router.route('/user/:username').delete(): Deletes a user, upon success returns the deleted user object with {username, icon, stories, prompts, admin, \_id} and upon failure returns an error message.
-- router.route('/admin/:username').post(): Makes a user admin, upon success returns the user object and upon failure returns an error message.
-- router.route('/admin/:username').delete(): Revokes admin status from a user, upon success returns the user object and upon failure returns an error message.
-- router.route('/edit/username/:username').post(): Updates a user's username, expects a user object with {username}, upon success returns user object and upon failure reutrns an error message.
-- router.route('/edit/password/:username').post(): Updates a user's password, expects a user object with {password}, upon success returns user object with {username, icon, stories, prompts, admin, \_id} andupon failure returns an error message.
-- router.route('/edit/avatar/:username').post(): Updates a user's avatar, expects a user object with {icon}, upon success returns user object and upon failure returns an error message
+- **router.route('/register').post():** Adds a user, expects a user object with {username, password, icon} attributes, returns a user object with {username, icon, stories, prompts, admin, \_id}.
+- **router.route('/login').post():** Logs in a user and populates a session, expects a user object with {username, password} attributes, upon success returns a user object with {currentUser: username} and upon failure returns an error.
+- **router.route('/logout').get():** Logs out a user and destroys the session, upon success returns nothing and upon failure returns an error.
+- **router.route('/check-session').get():** Checks if a user is logged in on the session, upon success returns a user object with {currentUser: username} and upon failure changes the status to 401.
+- **router.route('/user/:username').get():** Gets a specific user, upon sucess returns a user object and upon failure returns an error.
+- **router.route('/user/:username').delete():** Deletes a user, upon success returns the deleted user object with {username, icon, stories, prompts, admin, \_id} and upon failure returns an error message.
+- **router.route('/admin/:username').post():** Makes a user admin, upon success returns the user object and upon failure returns an error message.
+- **router.route('/admin/:username').delete():** Revokes admin status from a user, upon success returns the user object and upon failure returns an error message.
+- **router.route('/edit/username/:username').post():** Updates a user's username, expects a user object with {username}, upon success returns user object and upon failure reutrns an error message.
+- **router.route('/edit/password/:username').post():** Updates a user's password, expects a user object with {password}, upon success returns user object with {username, icon, stories, prompts, admin, \_id} andupon failure returns an error message.
+- **router.route('/edit/avatar/:username').post():** Updates a user's avatar, expects a user object with {icon}, upon success returns user object and upon failure returns an error message.
+- **router.route('/prompts/:username').post():** Adds a story start to user, expects a story object with {start}, upon success returns user object and upon failure returns an error message.
+- **router.route('/prompts/:username').delete():** Deletes a story start to user, expects a {index} object that represents the index of user's start, upon success returns {start, user} and upon failure returns an error message.
+- **router.route('/stories/:username').post():** Saves a story to user, expects a story object with {title, start, story, contributions \[{username, sentence}], userScores \[{username, score, icon}]}, upon success returns user object and upon failure returns an error message.
+- **router.route('/stories/:username/:story').post():** Edits the title of a story for user, expects a story object with {title}, upon success returns a user object and upon failure returns an error message.
+- **router.route('/stories/:username/:story').get():** Gets a story from user, upon success returns a story object and upon failure returns an error message.
 
 
 USAGE INSTRUCTIONS
