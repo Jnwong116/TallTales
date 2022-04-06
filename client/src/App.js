@@ -63,6 +63,24 @@ class App extends React.Component {
                 this.audioRef = element;
             }}
         />
+        <ReactAudioPlayer
+            src={require("./assets/audio/game_60.mp3")}
+            autoPlay={false}
+            volume={1}
+            ref={(element) => { this.audio60Ref = element}}
+        />
+        <ReactAudioPlayer
+            src={require("./assets/audio/game_30.mp3")}
+            autoPlay={false}
+            volume={1}
+            ref={(element) => { this.audio30Ref = element}}
+        />
+        <ReactAudioPlayer
+            src={require("./assets/audio/game_10.mp3")}
+            autoPlay={false}
+            volume={1}
+            ref={(element) => { this.audio10Ref = element}}
+        />
         <Router>
           <Switch>
             <Route 
@@ -75,9 +93,11 @@ class App extends React.Component {
                     <Register {...props} app={this} />
                   )
                 ) : this.page === "lobby" ? (
-                  <Lobby {...props} app={this} gameAudioRef={this.audioRef}/>
+                  <Lobby {...props} app={this} gameAudioRef={this.audioRef}
+                  audio60Ref={this.audio60Ref} audio30Ref={this.audio30Ref} audio10Ref={this.audio10Ref}/>
                 ) : this.page === "inputStage" ? (
-                  <InputStage {...props} app={this} gameAudioRef={this.audioRef}/>
+                  <InputStage {...props} app={this} gameAudioRef={this.audioRef}
+                    audio60Ref={this.audio60Ref} audio30Ref={this.audio30Ref} audio10Ref={this.audio10Ref}/>
                 ) : this.page === "voteStage" ? (
                   <VoteStage {...props} app={this} gameAudioRef={this.audioRef}/>
                 ) : this.page === "dashboard" ? (

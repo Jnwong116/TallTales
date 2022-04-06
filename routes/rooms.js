@@ -9,10 +9,11 @@ const { Room } = require('../models/stories.model');
 
 
 // Creates a room
-/*
+/*{
     "code": <String>,
     "host": <String>,
     "users" <Number>
+}
 */
 router.route('/create').post(async (req, res) => {
     const newRoom = new Room(req.body);
@@ -127,8 +128,9 @@ router.route('/join/:room').post(async (req, res) => {
 
 
 // Change genre for a Room
-/*
+/*{
     "genre": <String>
+    }
 */
 router.route('/genre/:room').post(async (req, res) => {
     const room = req.params.room;
