@@ -26,7 +26,7 @@ function generateCode() {
   return result;
 }
 
-export const hostGame = (app, page) => {
+export const hostGame = (app, page, lobbyMusic, introMusic) => {
   const host = app.state.currUser;
 
   const url = `${API_HOST}/rooms/create`;
@@ -50,7 +50,7 @@ export const hostGame = (app, page) => {
     fetch(request)
     .then((res) => {
       if (res.status === 200) {
-        joinRoom(page.state.user, room.code);
+        joinRoom(app, page.state.user, room.code, lobbyMusic, introMusic);
         createNewRoom([...app.state.rooms, room.code]);
         return;
       }

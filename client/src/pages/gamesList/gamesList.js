@@ -124,7 +124,7 @@ class GamesList extends React.Component {
             icon={<DoubleArrow />}
             label="Join"
             onClick={() => {
-              joinRoom(this.state.user, params.row.roomcode);
+              joinRoom(this.props.app, this.state.user, params.row.roomcode, this.props.audioLobby, this.props.introRef);
             }}
           />
         ]
@@ -141,7 +141,7 @@ class GamesList extends React.Component {
     getUser(this, this.props.app);
     getGames(this);
     updateRoom(this.props.app);
-    updateNumPlayers(this.props.app);
+    updateNumPlayers(this.props.app, this);
     denyRoomAccess();
   }
 
@@ -244,7 +244,7 @@ class GamesList extends React.Component {
                 maxRows="1"
                 onKeyUp={event => {
                   if (event.key === "Enter") {
-                    joinGame(this);
+                    joinGame(this.props.app, this, this.props.audioLobby, this.props.introRef);
                   }
                 }}
               />
@@ -253,7 +253,7 @@ class GamesList extends React.Component {
             <Button
               text="JOIN ROOM"
               handleClick={() => {
-                joinGame(this);
+                joinGame(this.props.app, this, this.props.audioLobby, this.props.introRef);
               }}
             />
           </span>

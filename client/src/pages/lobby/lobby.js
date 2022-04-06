@@ -1,8 +1,6 @@
 import React from "react";
-import ReactAudioPlayer from 'react-audio-player';
 import AppName from "../../components/appName/appName.js";
 import Button from "../../components/button/button.js";
-import DropDown from "../../components/dropDown/dropDown.js";
 import UserIcon from "../../components/userIcon/userIcon.js";
 import MuteButton from "../../components/muteButton/muteButton.js";
 
@@ -57,22 +55,8 @@ class Lobby extends React.Component {
 
   render() {
     const genres = this.state.genres.map(object => object.genre);
-
     return (
       <div className="lobby">
-        <ReactAudioPlayer
-            src={require("../../assets/music/lobby.wav")}
-            autoPlay
-            loop
-            volume={0.3}
-            ref={(element) => { this.audioRef = element}}
-        />
-        <ReactAudioPlayer
-            src={require("../../assets/audio/lobby_intro.mp3")}
-            autoPlay
-            volume={0.7}
-            ref={(element) => { this.introRef = element}}
-        />
         <div className="header">
           <AppName></AppName>
         </div>
@@ -111,7 +95,7 @@ class Lobby extends React.Component {
           <></>
         )}
         <div className="mute-footer">
-            <MuteButton app={this.props.app} audioRefs={[this.audioRef, this.introRef]}/>
+            <MuteButton app={this.props.app} audioRefs={[this.props.audioLobby, this.props.introRef]}/>
         </div>
       </div>
     );

@@ -15,7 +15,7 @@ class DashboardMenu extends React.Component {
         <Button
           text="HOST NEW GAME"
           handleClick={() => {
-            hostGame(this.props.app, this.props.parent);
+            hostGame(this.props.app, this.props.parent, this.props.audioLobby, this.props.introRef);
           }}
         />
         <Button

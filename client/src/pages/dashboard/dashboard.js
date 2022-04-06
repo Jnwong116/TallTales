@@ -25,7 +25,7 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     getUser(this, this.props.app);
-    stop(this.props.gameAudioRef);
+    stop(this.props.gameAudioRef, this.props.audioLobby, this.props.introRef);
     updateRoom(this.props.app);
   }
 
@@ -36,7 +36,7 @@ class Dashboard extends React.Component {
           <div className="header">
             <AppName></AppName>
           </div>
-          <DashboardMenu app={this.props.app} parent={this}></DashboardMenu>
+          <DashboardMenu app={this.props.app} parent={this} audioLobby={this.props.audioLobby} audioIntroRef={this.props.introRef} ></DashboardMenu>
         </span>
 
         <span className="dashboardDivider"></span>

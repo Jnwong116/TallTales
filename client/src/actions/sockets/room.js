@@ -3,11 +3,11 @@ import { warningToast } from "../toastify/toastify";
 import { chooseRaconteur } from "../vote/raconteur";
 // import { isRaconteur } from "../prompt/displayPrompt";
 import { updateSentence } from "./updateUser";
-import { updateRoomNum } from "../gamesList/rooms"
+import { getGames, updateRoomNum } from "../gamesList/rooms"
 
 // const log = console.log;
 
-export const joinRoom = (user, room) => {
+export const joinRoom = (app, user, room, lobbyMusic, introMusic) => {
   socket.emit("join-room", {
     user: {
       username: user.username,
@@ -19,6 +19,12 @@ export const joinRoom = (user, room) => {
     },
     room: room
   });
+  lobbyMusic.audioEl.current.play();
+  introMusic.audioEl.current.play();
+  if (app.state.muted) {
+    lobbyMusic.audioEl.current.muted = true;
+    introMusic.audioEl.current.muted = true;
+  }
 };
 
 export const updateRoom = (app) => {
@@ -134,18 +140,10 @@ export const forfeitGame = (app) => {
   })
 }
 
-export const updateNumPlayers = (app) => {
+export const updateNumPlayers = (app, page) => {
   socket.on("update-db", ({ users, room }) => {
     if (app.state.page === "gamesList") {
-      updateRoomNum(room, users.length);
-      
-      // Rerender gamesList page
-      app.setState({
-        page: "dashboard"
-      });
-      app.setState({
-        page: "gamesList"
-      })
+      updateRoomNum(room, users.length, page);
     }
   })
 }

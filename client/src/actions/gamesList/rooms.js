@@ -1,5 +1,5 @@
 import ENV from './../../config.js';
-import { errorToast, successToast } from "../../actions/toastify/toastify.js";
+import { errorToast } from "../../actions/toastify/toastify.js";
 import { joinRoom } from '../sockets/room.js';
 
 const API_HOST = ENV.api_host;
@@ -52,7 +52,7 @@ export const getGames = (page) => {
     })
 }
 
-export const joinGame = (page) => {
+export const joinGame = (app, page, lobbyMusic, introMusic) => {
     const room = document.getElementById('room-code').value;
 
     if (room === "") {
@@ -62,10 +62,10 @@ export const joinGame = (page) => {
 
     const user = page.state.user;
 
-    joinRoom(user, room);
+    joinRoom(app, user, room, lobbyMusic, introMusic);
 }
 
-export const updateRoomNum = (room, users) => {
+export const updateRoomNum = (room, users, page) => {
     const url = `${API_HOST}/rooms/join/${room}`;
     
     const user = {
@@ -92,7 +92,7 @@ export const updateRoomNum = (room, users) => {
     })
     .then((result) => {
         if (typeof(result) === 'object') {
-            return;
+            getGames(page);
           }
           else {
             errorToast(result);
