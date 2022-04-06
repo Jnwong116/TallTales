@@ -45,7 +45,9 @@ export const infoToast = (input) => {
 export const warningToast = (input) => {
     const message = input ? input : "warning!"; 
 
-    toast.info(message, {
+    toast.dismiss();
+
+    toast.warning(message, {
         position: "top-center",
         autoClose: 2000,
         hideProgressBar: false,
