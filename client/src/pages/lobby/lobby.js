@@ -77,14 +77,14 @@ class Lobby extends React.Component {
           <AppName></AppName>
         </div>
         <div className="lobby-content">
-          {this.props.app.state.users[0].username ===
+          {/* {this.props.app.state.users[0].username ===
           this.props.app.state.currUser ? (
             <div className="lobby-genre">
               <DropDown app={this.props.app} items={genres}></DropDown>
             </div>
           ) : (
             <span></span>
-          )}
+          )} */}
 
           <div className="lobby-column">
             <div className="lobby-header">LOBBY</div>
