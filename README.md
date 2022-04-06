@@ -74,6 +74,15 @@ Our stories.js file in our Express server provides the routes for all stories-re
 - **router.route('/start').post():** Creates a new story, expects a story object with {title, start, story, contributions \[{username, sentence}], userScores \[{username, score, icon}]}, upon success returns the story object and upon failure returns an error message.
 - **router.route('/contribute/:story').post():** Adds a contribution to the story, expects a contribution object with {username, sentence}, upon success returns the story object and upon failure returns an error message.
 
+USAGE NOTES
+==================
+
+The general set-up and usage instructions are listed below in the **USAGE INSTRUCTIONS** section. In addition to the general instructions, there are a few special notes to keep in mind when running the TallTales game.
+- **Keep Game Tabs in Focus** - TallTales is an interactive game, meaning that it requires your full attention at all times! To get the best experience of all audio cues, image cues, and flow of game, please keep the game tab in focus at all times. Switching to another tab during the game may cause delays of certain cues.
+- **Mute Button** - There is a mute button in the lobby and game stages if you would like to mute the background music and certain audio cues, however, we recommend leaving it on! We worked very hard with our talented friends who composed the game music and voiced our spoken audio cues. All credits of the lobby music goes to Nom Tunes.
+- **Have Fun!** - This is simple, enjoy our game :)
+
+
 USAGE INSTRUCTIONS
 ==================
 
