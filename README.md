@@ -66,6 +66,23 @@ Our rooms.js file in our Express server provides the routes for all rooms-relate
 - **router.route('/genre/:room').post():** Change genre for a room, expects a room object with {genre}, upon success returns the room object and upon failure returns an error message.
 - **router.route('/room/:room').get():** Get a room, upon success returns the room object and upon failure returns an error message.
 
+**_stories.js_**
+
+Our stories.js file in our Express server provides the routes for all stories-related activities. Each of the routes underneath detail the function of a stories route, the expected data they receive, and expected return value. Please note that each route will begin with '/stories', for example, '/stories/genre/:genre'.
+- **router.route('/genre/:genre').post():** Adds a start prompt to the genre and creates the genre if it has yet to be created, expects a story object with {start}, upon success returns the genre object and upon failure returns an error message.
+- **router.route('/genre/:genre/start').post():** Edits the title of a start prompt for the genre, expects a start object with {title}, upon success returns the genre object and upon failure returns an error message.
+- **router.route('/').get():** Gets all genres, upon success returns a genres object with all genres and upon failure returns an error message.
+- **router.route('/genre/:genre').get():** Gets a specific genre, upon success returns the genre object and upon failure returns an error message.
+- **router.route('/genre/:genre/starts').get():** Gets all the start prompts for a genre, upon success returns an object of all the genre's starts and upon failure returns an error message.
+- **router.route('/genre/:genre/').delete():** Deletes a genre, upon success returns the deleted genre object and upon failure returns an error message.
+- **router.route('/genre/:genre/starts').delete():** Deletes a start prompt from the genre, upon success returns the genre object and upon failure returns an error message.
+- **router.route('/prompt/:genre').post():** Adds input prompt to the genre, expects an input prompt object with {backstory, conflict, resolution}, upon success returns the genre object and upon failure returns an error message.
+- **router.route('/prompt/:genre').get():** Gets all the input prompts for a genre, upon success returns the genre's input prompts and upon failure returns an error message.
+- **router.route('/prompt/:genre/').delete():** Deletes an input prompt for a genre, expects a prompt object with {prompt_id}, upon success returns an object containing {prompt, genre} and upon failure returns an error message.
+- **router.route('/story/:story').get():** Gets a story, upon success returns the story object and upon failure returns an error message.
+- **router.route('/start').post():** Creates a new story, expects a story object with {title, start, story, contributions \[{username, sentence}], userScores \[{username, score, icon}]}, upon success returns the story object and upon failure returns an error message.
+- **router.route('/contribute/:story').post():** Adds a contribution to the story, expects a contribution object with {username, sentence}, upon success returns the story object and upon failure returns an error message.
+
 USAGE INSTRUCTIONS
 ==================
 
