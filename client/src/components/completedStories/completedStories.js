@@ -5,7 +5,8 @@ import ArrowRight from "../cssArrows/arrowRight.js";
 import Button from "../button/button.js";
 import { nextStory, prevStory } from "../../actions/dashboard/stories.js";
 import { getUser } from "../../actions/global/users.js";
-import { shareStory } from "../../actions/profile/shareStory.js";
+import { shareStory, editTitle } from "../../actions/profile/shareStory.js";
+import EditIcon from '@mui/icons-material/Edit';
 
 import "./completedStories.css";
 
@@ -24,11 +25,6 @@ class CompletedStories extends React.Component {
       }
 
   render() {
-
-    const handleClick = () => {
-        window.alert('edit');
-    }
-
     return (
     //   <div className="profileHomeInterface">
     //     <UserIconMedium username={this.props.parent.state.user.username} icon={this.props.parent.state.user.icon} />
@@ -42,9 +38,17 @@ class CompletedStories extends React.Component {
                     {
                         this.state.user.stories.length === 0 ? 
                         "Completed Stories" :
-                        this.state.user.stories[this.state.story].title + " (" + (this.state.story + 1) + "/" + this.state.user.stories.length + ")"
+                        <span>
+                            <span id="storyTitle">{this.state.user.stories[this.state.story].title}</span>
+                            <span>{" (" + (this.state.story + 1) + "/" + this.state.user.stories.length + ")"}</span>
+                        </span>
+                        
                     }
-                    <img src={require("../../assets/images/pencil.png")} alt="edit" onClick={() => handleClick()}></img>
+                    {
+                        this.state.user.stories.length !== 0 ? 
+                        <EditIcon className="editIcon" onClick={() => editTitle(this)} /> :
+                        <></>
+                    }
                 </div>
                 <span className="browseStoriesRightArrow" onClick={() => {nextStory(this.state.story, this.state.user, this)}}>
                     <ArrowRight />

@@ -1,4 +1,4 @@
-const port = 5010;
+const port = 5000;
 
 const prod = {
   env: "production",
@@ -10,4 +10,4 @@ const dev = {
   api_host: `http://localhost:${port}`
 };
 
-export default prod; // Change to prod for final build
+export default dev; // Change to prod for final build

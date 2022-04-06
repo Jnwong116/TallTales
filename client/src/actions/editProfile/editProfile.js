@@ -10,7 +10,7 @@ export const changeName = (app, page) => {
     const currUser = app.state.currUser;
 
     if (newName === "") {
-        errorToast("username can't be blank!");
+        errorToast("Username can't be blank!");
         return;    
     }
 
@@ -64,7 +64,7 @@ export const changePassword = (app) => {
     // log(currUser)
 
     if (newPass === "") {
-        errorToast("password can't be blank!");
+        errorToast("Password can't be blank!");
         return;    
     }
 

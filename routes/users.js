@@ -446,8 +446,7 @@ router.route("/stories/:username/:story").post(async (req, res) => {
   // Edits title of story
   const newStory = curUser.stories[curStory];
   newStory.title = req.body.title;
-  curUser.stories.splice(curStory, 1);
-  curUser.stories.push(newStory);
+  curUser.stories.splice(curStory, 1, newStory);
 
   curUser
     .save()
