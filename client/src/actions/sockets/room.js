@@ -3,6 +3,7 @@ import { warningToast } from "../toastify/toastify";
 import { chooseRaconteur } from "../vote/raconteur";
 // import { isRaconteur } from "../prompt/displayPrompt";
 import { updateSentence } from "./updateUser";
+import { updateRoomNum } from "../gamesList/rooms"
 
 // const log = console.log;
 
@@ -20,9 +21,10 @@ export const joinRoom = (user, room) => {
   });
 };
 
-export const updateRoom = app => {
-  socket.on("update-users", ({ users, roomInProgress }) => {
-    if (app.state.page === "dashboard") {
+export const updateRoom = (app) => {
+  socket.on("update-users", ({ users, room, roomInProgress }) => {
+    if (app.state.page === "dashboard" || app.state.page === "gamesList") {
+      updateRoomNum(room, users.length);
       // User is on dashboard
       users[0].host = true;
       socket.emit("change-host", users);
@@ -128,6 +130,22 @@ export const forfeitGame = (app) => {
         page: "lobby",
         users: users
       });
+    }
+  })
+}
+
+export const updateNumPlayers = (app) => {
+  socket.on("update-db", ({ users, room }) => {
+    if (app.state.page === "gamesList") {
+      updateRoomNum(room, users.length);
+      
+      // Rerender gamesList page
+      app.setState({
+        page: "dashboard"
+      });
+      app.setState({
+        page: "gamesList"
+      })
     }
   })
 }

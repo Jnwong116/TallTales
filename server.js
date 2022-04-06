@@ -199,8 +199,13 @@ io.on("connection", socket => {
       socket.join(currUser.room);
       io.emit("message", `${currUser.username} has joined ${currUser.room}`);
       io.to(currUser.room).emit("update-users", {
-        users: getRoomUsers(currUser.room)
+        users: getRoomUsers(currUser.room),
+        room: currUser.room
       });
+      io.emit("update-db", {
+        users: getRoomUsers(currUser.room),
+        room: currUser.room
+      })
     } else {
       if (rooms[room]) { // If game is in progress
         socket.emit("deny-room-access", "Room in Progress!");
@@ -324,6 +329,11 @@ io.on("connection", socket => {
           users: getRoomUsers(currUser.room),
           rooms: rooms
         });
+
+        io.emit("update-db", {
+          users: getRoomUsers(currUser.room),
+          room: currUser.room
+        })
       }
     }
   });

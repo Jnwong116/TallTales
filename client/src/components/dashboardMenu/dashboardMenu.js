@@ -1,8 +1,7 @@
 import React from "react";
 import Button from "../button/button.js";
 import "./dashboardMenu.css";
-import DropDown from "../../components/dropDown/dropDown.js";
-import { menuRedirect, logout, startGame, hostGame } from "../../actions/dashboard/menu.js";
+import { menuRedirect, logout, hostGame } from "../../actions/dashboard/menu.js";
 import { createdNewRoom } from "../../actions/sockets/room.js";
 
 class DashboardMenu extends React.Component {
@@ -22,7 +21,7 @@ class DashboardMenu extends React.Component {
         <Button
           text="JOIN GAME"
           handleClick={() => {
-            startGame(false, this.users, this.props.app, 2);
+            menuRedirect(this.props.app, "gamesList");
           }}
         />
         <Button
@@ -31,20 +30,21 @@ class DashboardMenu extends React.Component {
             menuRedirect(this.props.app, "profile");
           }}
         />
+        {this.props.parent.state.user.admin ? 
+          <Button
+            text="ADMIN MENU"
+            handleClick={() => {
+              menuRedirect(this.props.app, "adminMenu");
+            }}
+          /> : 
+          <></>
+        }
         <Button
           text="LOG OUT"
           handleClick={() => {
             logout(this.props.app);
           }}
         />
-        <div className="lobby-genre">
-          <DropDown
-            label={"<ROOMS>"}
-            items={this.props.app.state.rooms}
-            user={this.props.app.state.currUser}
-            app={this.props.app}
-          ></DropDown>
-        </div>
       </span>
     );
   }

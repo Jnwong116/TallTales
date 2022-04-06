@@ -52,6 +52,9 @@
   font-size: 14px;
 }
 
+.profileHomeInterface {
+  padding-top: 10%;
+}
 .profileHomeInterface .buttonStyle {
   margin-top: 20px;
   width: 200px;
@@ -96,7 +99,7 @@
 .changeUserDetailsInterface {
   display: flex;
   flex-direction: column;
-  padding-top: 20%;
+  padding-top: 30%;
   width: 1500px;
 }
 

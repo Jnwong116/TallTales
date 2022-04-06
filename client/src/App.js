@@ -10,6 +10,9 @@ import Profile from "./pages/profile/profile";
 import Leaderboard from "./pages/leaderboard/leaderboard";
 import { checkSession } from "./actions/checkSession/checkSession";
 import IndivStory from "./pages/indivStory/indivStory";
+import AdminBrowseUsers from "./pages/admin/adminBrowseUsers";
+import AdminBrowsePrompts from "./pages/admin/adminBrowsePrompts";
+import GamesList from "./pages/gamesList/gamesList";
 import { ToastContainer } from 'react-toastify';
 import ReactAudioPlayer from 'react-audio-player';
 import 'react-toastify/dist/ReactToastify.css';
@@ -81,7 +84,7 @@ class App extends React.Component {
         <Router>
           <Switch>
             <Route 
-              exact path={["/", "/login", "/register", "/dashboard", "/profile", "/lobby", "/leaderboard", "/inputStage", "/voteStage"]}
+              exact path={["/", "/login", "/register", "/dashboard", "/profile", "/lobby", "/leaderboard", "/inputStage", "/voteStage", "/gamesList", "/adminMenu"]}
               render={ props => (
                 !this.state.currUser ? (
                   this.page === "login" ? (
@@ -101,6 +104,10 @@ class App extends React.Component {
                   <Dashboard {...props} app={this} gameAudioRef={this.audioRef}/>
                 ) : this.page === "leaderboard" ? (
                   <Leaderboard {...props} app={this} gameAudioRef={this.audioRef}/>
+                ) : this.page === "gamesList" ? (
+                  <GamesList {...props} app={this} />
+                ) : this.page === "adminMenu" ? (
+                  <AdminBrowseUsers {...props} app={this} />
                 ) : (
                   <Profile {...props} app={this} />
                 )
@@ -122,7 +129,7 @@ class App extends React.Component {
               ) : this.state.page === 1 ? (
                 <Route path="/" element={<VoteStage app={this} gameAudioRef={this.audioRef}/>} />
               ) : this.state.page === 4 ? (
-                <Route path="/" element={<Dashboard app={this}/>} />
+                <Route path="/" element={<GamesList app={this} />} />
               ) : this.state.page === 3 ? (
                 <Route path="/" element={<Leaderboard app={this} gameAudioRef={this.audioRef}/>} />
               ) : (

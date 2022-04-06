@@ -5,8 +5,8 @@ import DashboardMenu from "../../components/dashboardMenu/dashboardMenu.js";
 import "./dashboard.css";
 import { getUser } from "../../actions/global/users.js";
 import { backButtonHandler } from "../../actions/router/render.js";
-import { denyRoomAccess } from "../../actions/sockets/room.js";
 import { stop } from "../../actions/audio/stopAudio.js";
+import { updateRoom } from "../../actions/sockets/room.js";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -25,8 +25,8 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     getUser(this, this.props.app);
-    denyRoomAccess();
     stop(this.props.gameAudioRef);
+    updateRoom(this.props.app);
   }
 
   render() {
