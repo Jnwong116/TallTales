@@ -78,8 +78,11 @@ USAGE NOTES
 ==================
 
 The general set-up and usage instructions are listed below in the **USAGE INSTRUCTIONS** section. In addition to the general instructions, there are a few special notes to keep in mind when running the TallTales game.
-- **Keep Game Tabs in Focus** - TallTales is an interactive game, meaning that it requires your full attention at all times! To get the best experience of all audio cues, image cues, and flow of game, please keep the game tab in focus at all times. Switching to another tab during the game may cause delays of certain cues.
+- **Note: Keep Game Tabs in Focus** - TallTales is an interactive game, meaning that it requires your full attention at all times! To get the best experience of all audio cues, image cues, and flow of game, please keep the game tab in focus at all times. Switching to another tab during the game may cause delays of certain cues.
 - **Mute Button** - There is a mute button in the lobby and game stages if you would like to mute the background music and certain audio cues, however, we recommend leaving it on! We worked very hard with our talented friends who composed the game music and voiced our spoken audio cues. All credits of the lobby music goes to Nom Tunes.
+- **Genres/Prompts** - There are existing story genres (ie. Mystery, Comedy, Adventure) and corresponding starting prompts (ie. The Last Heist, The Bar) that you can navigate through for each game. This helps keep each game exciting and fun for returning players! Feel free to create your own genres/prompts to spark a more personalized story.
+- **Leaderboard** - We believe it's important to celebrate your accomplishments. Try hovering your player scorecard and see all of the contributions that you made to the story! The scoreboard should be enough, but we've also attached a message at the bottom to help identify if you've won or not.
+- **Share Story** - TallTales is a game all about community. Try sharing some of your past stories that you're proud of! Clicking the SHARE STORY button underneath your profile past stories will open up a properly formatted story page. Use the clipboard link to share some laughs or wows with your friends.
 - **Have Fun!** - This is simple, enjoy our game :)
 
 
