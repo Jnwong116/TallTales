@@ -159,6 +159,7 @@ export const forfeitGame = (app, page) => {
     if (app.state.page !== "leaderboard") {
       warningToast(str);
       updateRoomNum(room, users.length, page, app);
+      updateHost(room, users[0].username, page, app);
 
       socket.emit("update-users", {
         users: users,
