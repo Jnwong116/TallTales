@@ -1,5 +1,5 @@
 import ENV from './../../config.js';
-// import errorTioa
+import { errorToast } from '../toastify/toastify.js';
 
 const API_HOST = ENV.api_host;
 const log = console.log
@@ -28,7 +28,7 @@ export const getUser = (page, app) => {
             return;
         }
         else {
-            window.alert(result);
+            errorToast(result);
             return;
         }
     })

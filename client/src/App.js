@@ -66,7 +66,7 @@ class App extends React.Component {
         <Router>
           <Switch>
             <Route 
-              exact path={["/", "/login", "/register", "/dashboard", "/profile", "/lobby", "/leaderboard", "/inputStage", "/voteStage"]}
+              exact path={["/", "/login", "/register", "/dashboard", "/profile", "/lobby", "/leaderboard", "/inputStage", "/voteStage", "/gamesList"]}
               render={ props => (
                 !this.state.currUser ? (
                   this.page === "login" ? (
@@ -81,9 +81,11 @@ class App extends React.Component {
                 ) : this.page === "voteStage" ? (
                   <VoteStage {...props} app={this} gameAudioRef={this.audioRef}/>
                 ) : this.page === "dashboard" ? (
-                  <GamesList {...props} app={this} gameAudioRef={this.audioRef}/>
+                  <Dashboard {...props} app={this} gameAudioRef={this.audioRef}/>
                 ) : this.page === "leaderboard" ? (
                   <Leaderboard {...props} app={this} gameAudioRef={this.audioRef}/>
+                ) : this.page === "gamesList" ? (
+                  <GamesList {...props} app={this} />
                 ) : (
                   <Profile {...props} app={this} />
                 )

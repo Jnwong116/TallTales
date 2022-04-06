@@ -11,8 +11,18 @@ import ContentCopy from '@mui/icons-material/ContentCopy';
 import DoubleArrow from '@mui/icons-material/DoubleArrow';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { getUser } from "../../actions/global/users.js";
+import { getGames, joinGame } from "../../actions/gamesList/rooms.js";
+import { copyToClipboard } from "../../actions/indivStory/loadStory.js";
+import { joinRoom, updateRoom, denyRoomAccess } from "../../actions/sockets/room.js";
+import { backButtonHandler } from "../../actions/router/render.js";
 
 class GamesList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props.history.push("/gamesList");
+    backButtonHandler(this.props.app, this.props.history);
+  }
+
   state = {
     rows: [
       { id: 0,
@@ -20,31 +30,7 @@ class GamesList extends React.Component {
         players: "4/5",
         genre: "Adventure",
         roomcode: 231292
-      },
-      { id: 1,
-        host: "Random Name",
-        players: "4/5",
-        genre: "Adventure",
-        roomcode: 231292
-      },
-      { id: 2,
-        host: "Random Name",
-        players: "4/5",
-        genre: "Adventure",
-        roomcode: 231292
-      },
-      { id: 3,
-        host: "Random Name",
-        players: "4/5",
-        genre: "Adventure",
-        roomcode: 231292
-      },
-      { id: 4,
-        host: "Random Name",
-        players: "4/5",
-        genre: "Adventure",
-        roomcode: 231292
-      },
+      }
     ],
     columns: [
       { field: 'host',          editable: false,  type: 'string',   headerName: 'Host',       width: 200, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
@@ -55,10 +41,10 @@ class GamesList extends React.Component {
       { field: 'divider',       editable: false, type: 'number',   headerName: '',                flex: 1, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
       { field: 'copyID', editable: false, type: 'actions',  headerName: 'Copy ID',     width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator',
         getActions: (params) =>
-        [ <GridActionsCellItem icon={<ContentCopy />} label="Copy ID" onClick={console.log("copied link: " + params.id)} />, ], },
+        [ <GridActionsCellItem icon={<ContentCopy />} label="Copy ID" onClick={() => {copyToClipboard(params.row.roomcode)}} />, ], },
       { field: 'join',    editable: false, type: 'actions',  headerName: 'Join',    width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator',
         getActions: (params) =>
-        [ <GridActionsCellItem icon={<DoubleArrow />} label="Join" onClick={console.log("joined: " + params.id)} />, ], }
+        [ <GridActionsCellItem icon={<DoubleArrow />} label="Join" onClick={() => {joinRoom(this.state.user, params.row.roomcode)}} />, ], }
     ],
     user: { 
       username: "",
@@ -69,6 +55,9 @@ class GamesList extends React.Component {
 
   componentDidMount() {
     getUser(this, this.props.app);
+    getGames(this);
+    updateRoom(this.props.app);
+    denyRoomAccess();
   }
 
   render() {
@@ -143,11 +132,18 @@ class GamesList extends React.Component {
             <span className="user-login-input">
                 <div className="user-input-fields">
                     <TextField
-                        id="user-name"
-                        label="ROOM CODE"
+                        id="room-code"
+                        label="<ROOM-CODE>"
                         variant="filled"
                         margin="normal"
                         maxRows="1"
+                        onKeyUp={
+                          (event) => {
+                              if (event.key === 'Enter') {
+                                  joinGame(this);
+                              }
+                          }
+                      }
                     />
                 </div>
             </span>
@@ -155,7 +151,7 @@ class GamesList extends React.Component {
     
             <Button text="JOIN ROOM"
                     handleClick={() => {
-                    this.handleClick(this.state);}} />
+                      joinGame(this)}} />
           </span>
         </div>
       </div>
