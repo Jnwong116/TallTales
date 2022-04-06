@@ -1,0 +1,23 @@
+.promptContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #dddddd;
+}
+.promptLeft{
+  width: 50px;
+}
+.promptMiddle{
+
+}
+.promptRight{
+  width: 50px;
+}
+
+.promptTitle{
+  text-align: left;
+
+}
+.promptBody{
+  text-align: left;
+}

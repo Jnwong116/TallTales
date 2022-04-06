@@ -1,9 +1,6 @@
 .header {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }
-
 .lobby-header {
   font-size: 56px;
   font-style: "IBM Plex Sans";
@@ -14,7 +11,12 @@
 .lobby-content {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+}
+.lobby-genre {
+  padding: 0;
+  width: 310px;
+  height: 56px;
 }
 .lobby-players {
   display: flex;
@@ -24,13 +26,6 @@
   height: 400px;
   margin: 0 auto;
 }
-
-.lobby-genre {
-  margin-top: 70px;
-  padding: 0;
-  width: 200px;
-}
-
 .lobby-genre .MuiInputLabel-root {
   color: rgb(225, 225, 225) !important;
   left: 0px !important;
@@ -44,28 +39,44 @@
   color: rgb(225, 225, 225) !important;
 }
 
-.mute-footer {
-  margin-right: 50px;
-  margin-bottom: 50px;
-  justify-content: right;
-  display: flex;
-}
-
-.lobby.buttonStyle {
+.buttonStyle {
   color: #ededed;
   background-color: rgb(57, 56, 55);
-  padding-left: 100px;
+  /* padding-left: 100px;
   padding-right: 100px;
   padding-top: 20px;
   padding-bottom: 20px;
-  margin-top: 50px;
+  margin-top: 50px; */
   border: none;
   font-weight: bolder;
   font-size: 20px;
+  width: 310px;
+  height: 56px;
 }
 
 .buttonStyle:hover {
   background-color: #292929;
   color: #989494;
   cursor: pointer;
+}
+
+.lobby-interface-top-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.lobby-interface-bot-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.lobby-interface-button-spacer {
+  height: 10px;
+  width: 30px;
+}
+
+.lobby-interface-prompts-container > *:not(:last-child) {
+  margin-bottom: 20px;
 }
