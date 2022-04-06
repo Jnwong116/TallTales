@@ -20,7 +20,7 @@
 
 .user-icon-username {
   display: flex;
-  font-family: "IBM Plex Sans";
+  font-family: "IBM Plex Mono";
   color: #5c5c5c;
   flex-direction: row;
 }
