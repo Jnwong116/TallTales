@@ -86,14 +86,19 @@ The general set-up and usage instructions are listed below in the **USAGE INSTRU
 USAGE INSTRUCTIONS
 ==================
 
-**To-Do:
-- rewrite/ update with concurrency
-- "how to run your app locally after cloning your repo, including where to run npm install and commands to start the local web server**
+1. Go to the `team19` directory and run 
+	
+	```npm run setup```
+	
+2. After the dependencies are all installed after step 1, run 
+	
+	```npm run start-dev```
+	
+This should start a production build at the specified `$PORT` in `/team19/client/src/config.js` and `config.env`.
+	
+3. Navigate to `https://localhost:5010` to display the application. 
 
-- In the team19 directory, run: npm run setup
-- Then navigate to /team19/client/src/config.js and change the export default to dev
-- Then run: npm run start-dev
-- Go to localhost:5010 
+==================
 
  0. A Note on Concurrency
 
