@@ -139,7 +139,7 @@ class GamesList extends React.Component {
   componentDidMount() {
     getUser(this, this.props.app);
     getGames(this);
-    updateRoom(this.props.app);
+    updateRoom(this.props.app, this);
     denyRoomAccess();
   }
 

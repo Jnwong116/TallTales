@@ -19,7 +19,7 @@ export const startGame = (app, start, prompts) => {
   });
 };
 
-export const gameStarted = (app, gameAudioRef) => {
+export const gameStarted = (app, gameAudioRef, audio60Ref, audio30Ref, audio10Ref) => {
   socket.on("game-started", ({ storyStart, storyPrompts, users, rooms, room }) => {
       // Sets up listeners if someone leaves the game
       userLeft(app);
@@ -28,6 +28,9 @@ export const gameStarted = (app, gameAudioRef) => {
       gameAudioRef.audioEl.current.play();
       if(app.state.muted) {
         gameAudioRef.audioEl.current.muted = true;
+        audio60Ref.audioEl.current.muted = true;
+        audio30Ref.audioEl.current.muted = true;
+        audio10Ref.audioEl.current.muted = true;
       }
       rooms[room] = true;
       socket.emit("update-rooms", rooms);

@@ -49,9 +49,9 @@ class InputStage extends React.Component {
       user: getCurrentUser(this.props.app)
     });
     
-    // If user is not the Racounteur, give them a playing timer
+    // If user is not the Racounteur (or not leaderboard page), give them a timer toast
     const userObject = this.props.app.state.users.filter((user) => (user.username === this.props.app.state.currUser))[0];
-    if(!userObject.raconteur) {
+    if(!userObject.raconteur && this.props.app.state !== "leaderboard") {
         this.dingRef.audioEl.current.play();
         timerToast(60);
     }
@@ -59,6 +59,11 @@ class InputStage extends React.Component {
 
   render() {
     this.prompt = displayPrompt(this.props.app);
+
+    const handleClick = () => {
+        closeToasts();
+        saveInput(this.props.app);
+      }
 
     return (
       <div className="input-stage">
@@ -73,16 +78,20 @@ class InputStage extends React.Component {
           <Score user={this.state.user}></Score>
         </div>
         <Story story={this.props.app.state.story.story}></Story>
-        <UserInput prompt={this.prompt} user={this.state.user} enterFunction={() => {saveInput(this.props.app);}}></UserInput>
+        <UserInput prompt={this.prompt} user={this.state.user} enterFunction={handleClick}
+            audio60Ref={this.props.audio60Ref} audio30Ref={this.props.audio30Ref} audio10Ref={this.props.audio10Ref}>
+            </UserInput>
         <Button
           text="SUBMIT"
-          handleClick={() => {
-            closeToasts();
-            saveInput(this.props.app);
-          }}
+          handleClick={handleClick}
         ></Button>
         <div className="mute-footer">
-            <MuteButton app={this.props.app} audioRef={this.props.gameAudioRef}/>
+            <MuteButton app={this.props.app} 
+                audioRefs={[this.props.gameAudioRef, 
+                    this.props.audio60Ref, 
+                    this.props.audio30Ref, 
+                    this.props.audio10Ref]}
+            />
         </div>
       </div>
     );

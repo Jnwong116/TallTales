@@ -96,7 +96,7 @@ class Leaderboard extends React.Component {
                     </div>
                 </div>   
                 <div className="mute-footer">
-                    <MuteButton app={this.props.app} audioRef={this.props.gameAudioRef}/>
+                    <MuteButton app={this.props.app} audioRefs={[this.props.gameAudioRef]}/>
                 </div>    
             </div>    
         )

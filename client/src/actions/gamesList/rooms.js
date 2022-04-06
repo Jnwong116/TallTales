@@ -64,3 +64,46 @@ export const joinGame = (page) => {
 
     joinRoom(user, room);
 }
+
+export const updateRoomNum = (room, users, page) => {
+    console.log(page);
+    const url = `${API_HOST}/rooms/join/${room}`;
+
+    console.log(users);
+    const user = {
+        "users": users
+    }
+
+    const request = new Request(url, {
+        method: "post",
+        body: JSON.stringify(user),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    });
+
+    fetch(request)
+    .then((res) => {
+        if (res.status === 200) {
+            return res.json();
+        }
+        else {
+            return res.text();
+        }
+    })
+    .then((result) => {
+        if (typeof(result) === 'object') {
+            return;
+          }
+          else {
+            errorToast(result);
+            return;
+          }
+    })
+    .catch(err => {
+        log(err);
+    })
+
+    getGames(page);
+}
