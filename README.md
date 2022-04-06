@@ -1,5 +1,7 @@
 # team19 (Chris, Gazi, Jasper, Jordan)
 
+Deployed Heroku link: https://talltales.herokuapp.com/
+
 GENERAL GAME DESCRIPTION
 ========================
 
@@ -33,7 +35,9 @@ For the purposes of Phase 1, we hard-coded mock data into our json files so that
 
 ROUTES OVERVIEW
 ==================
-
+**users.js**
+Our users.js file in our Express server provides the routes for all user-related activities. Each of the routes underneath detail the function of a user route, the expected data they receive, and expected return value. Please note that each route will begin with '/users', for example, '/users/register'.
+- router.react('/register').post(): Adds a user, expects a user object with {username, password, icon} attributes, returns a user object with {username, icon, stories, prompts, admin, \_id, \_\_v)
 
 USAGE INSTRUCTIONS
 ==================
