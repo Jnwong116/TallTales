@@ -5,7 +5,9 @@ Deployed Heroku link: https://talltales.herokuapp.com/
 GENERAL GAME DESCRIPTION
 ========================
 
-Tall Tales is a multiplayer collaborative story-telling web app for 3-5 players, inspired by popular party-games such as the Jackbox Party Packs, Code Names, Gartic Phone, and Skribbl.io. The basic gameplay consists of providing the players with creative prompts for sentences. Each round, one of the players serves as the Raconteur, who decides which sentence is the funniest or most appropriate to continue the story. There are a total of 10 rounds, divided into several basic story elements: backstory, conflict, resolution. After all rounds are completed, the player with the highest score is crowned as the most valuable contributor. In the leaderboard page, the collaborative story is displayed for all to see, as well as stored for later retrieval via their user profile. Users have a plethora of customizable options in their personal profile page, such as sharing their past stories, editing their account information, and reviewing past games. What seperates Tall Tales from other JavaScript games is its usage of sockets to allow for multi-device gameplay, connecting friends across the internet. Come explore all of the cool features of Tall Tales, including gameplay soundtracks, a virtual game host, and various genres/prompts that spark unique stories with every game!
+Tall Tales is a multiplayer collaborative story-telling web app for 3-5 players, inspired by popular party-games such as the Jackbox Party Packs, Code Names, Gartic Phone, and Skribbl.io. The basic gameplay consists of providing the players with creative prompts for writing their own story sentences. Each round, one of the players serves as the Raconteur, who decides which sentence is the funniest or most appropriate to continue the story. There are a total of 10 rounds, divided into several basic story elements: backstory, conflict, resolution. After all rounds are completed, the player with the highest score is crowned as the most valuable contributor. In the leaderboard page, the collaborative story is displayed for all to see, as well as stored for later retrieval via their user profile. In their personal profile page, users have a plethora of customizable options such as sharing their past stories, editing their account information, and reviewing past games. 
+
+What separates Tall Tales from other JavaScript games is its usage of sockets to allow for multi-device gameplay, connecting friends across the internet. Come explore all of the cool features of Tall Tales, including gameplay soundtracks, a virtual game host, and various genres/prompts that spark unique stories with every new game!
 
 REGISTERED USERS
 ================
@@ -20,7 +22,7 @@ We have set up a number of users to demo the app more convincingly. They are lis
 	jasper:jasper
 	gazi:gazi
 
-These are only the pre-existing default accounts, as users are also able to create their own accounts! More on that later.
+These are only the pre-existing default accounts; users are also able to create their own accounts! More on that later.
 
 ROUTES OVERVIEW
 ==================
