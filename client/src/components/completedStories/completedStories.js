@@ -36,16 +36,16 @@ class CompletedStories extends React.Component {
                 </span>
                 <div className="browseStoriesHeader">
                     {
-                        this.state.user.stories.length === 0 ? 
+                        this.state.user.stories.length === 0 ?
                         "Completed Stories" :
                         <span>
                             <span id="storyTitle">{this.state.user.stories[this.state.story].title}</span>
                             <span>{" (" + (this.state.story + 1) + "/" + this.state.user.stories.length + ")"}</span>
                         </span>
-                        
+
                     }
                     {
-                        this.state.user.stories.length !== 0 ? 
+                        this.state.user.stories.length !== 0 ?
                         <EditIcon className="editIcon" onClick={() => editTitle(this)} /> :
                         <></>
                     }
@@ -57,7 +57,7 @@ class CompletedStories extends React.Component {
             <Button text="SHARE STORY"
                 handleClick={() => {shareStory(this.state.user.stories[this.state.story], this.state.user.username)}} />
             <div className="storiesDisplay">
-                {(this.state.user.stories.length === 0) ? 
+                {(this.state.user.stories.length === 0) ?
                 "You have not completed any stories yet! Go play a game and come back to see your completed stories!" :
                 this.state.user.stories[this.state.story].story
                 }
