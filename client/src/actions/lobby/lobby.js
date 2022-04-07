@@ -78,3 +78,7 @@ export const selectStart = (page, start) => {
     start: page.state.starts[start].start
   });
 }
+
+export const togglePrivacy = (page) => {
+  
+}
