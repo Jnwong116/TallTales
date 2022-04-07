@@ -3,10 +3,14 @@
   display: flex;
 }
 .lobby-header {
-  font-size: 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 56px;
+  font-size: 32px;
   font-style: "IBM Plex Sans";
   font-weight: bolder;
-  padding-bottom: 50px;
+  padding-bottom: 40px;
   color: #363636;
 }
 .lobby-content {
@@ -112,4 +116,21 @@
   font-size: 20px;
   font-style: "IBM Plex Sans";
   color: #808080;
+}
+
+.lobby-column {
+  margin-left: 100px;
+}
+
+.lobby-interface-start {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 40px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.mute-footer {
+  
 }
