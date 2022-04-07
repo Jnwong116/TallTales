@@ -34,6 +34,8 @@
   color: #757575;
 }
 
-[contenteditable] {
+[contenteditable=true] {
   outline: 0px solid transparent;
+  background-color: #808080;
+  color: #cacaca;
 }
