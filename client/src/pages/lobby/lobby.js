@@ -90,11 +90,27 @@ class Lobby extends React.Component {
               </div>
               <div className="lobby-interface-prompts-container">
 
-                  <PromptV2 title="Canned Food Adventure [conditional rendering prop: host = true]"
+                  <PromptV2 title="Canned Food Adventure"
                             content="user1 and user2 are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means."
                             host={true}
                   / >
-                  <PromptV2 title="Canned Food Adventure [conditional rendering prop: host = false]"
+                  <PromptV2 title="Canned Food Adventure"
+                            content="user1 and user2 are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means."
+                            host={true}
+                  / >
+                  <PromptV2 title="Canned Food Adventure"
+                            content="user1 and user2 are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means."
+                            host={false}
+                  / >
+                  <PromptV2 title="Canned Food Adventure"
+                            content="user1 and user2 are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means."
+                            host={false}
+                  / >
+                  <PromptV2 title="Canned Food Adventure"
+                            content="user1 and user2 are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means."
+                            host={false}
+                  / >
+                  <PromptV2 title="Canned Food Adventure"
                             content="user1 and user2 are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means."
                             host={false}
                   / >
@@ -102,11 +118,11 @@ class Lobby extends React.Component {
               </div>
               <div className="lobby-interface-bot-buttons">
                 <span className="lobby-interface-add-starter">
-                  <button type="submit" onClick={() => console.log("add starter prompt")}><AddIcon /> Add Starter Prompt</button>
+                  <button className="icon-button" type="submit" onClick={() => console.log("add starter prompt")}><AddIcon fontSize="medium" /> Add Starter Prompt</button>
                 </span>
                 <span className="lobby-interface-button-spacer" id="spacer-bot" />
                 <span className="lobby-interface-copy-roomcode">
-                  <button type="submit" onClick={() => console.log("copy room code")}><ContentCopyIcon />Room Code: XXXX </button>
+                  <button className="icon-button" type="submit" onClick={() => console.log("copy room code")}><ContentCopyIcon fontSize="medium" />Room Code: XXXX </button>
                 </span>
               </div>
             </div>
