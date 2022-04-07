@@ -15,6 +15,7 @@ import "./lobby.css";
 import { getGenres, redirect, selectStart } from "../../actions/lobby/lobby.js";
 import { gameStarted } from "../../actions/sockets/startGame.js";
 import { backButtonHandler } from "../../actions/router/render.js";
+import { copyToClipboard } from "../../actions/indivStory/loadStory.js";
 
 class Lobby extends React.Component {
   constructor(props) {
@@ -103,7 +104,7 @@ class Lobby extends React.Component {
                 </span>
                 <span className="lobby-interface-button-spacer" id="spacer-bot" />
                 <span className="lobby-interface-copy-roomcode">
-                  <button type="submit" onClick={() => console.log("copy room code")}><ContentCopyIcon />Room Code: XXXX </button>
+                  <button type="submit" onClick={() => copyToClipboard(this.props.app.state.room)}><ContentCopyIcon />Room Code: {this.props.app.state.room} </button>
                 </span>
               </div>
             </div>

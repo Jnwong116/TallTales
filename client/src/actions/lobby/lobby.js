@@ -32,8 +32,12 @@ export const getGenres = page => {
         page.setState({
           genres: result,
           starts: result[0].starts,
-          prompt: result[0].prompts[0],
-          start: result[0].starts[0]
+          prompt: {
+            backstory: result[0].prompts[0].backstory,
+            conflict: result[0].prompts[0].conflict,
+            resolution: result[0].prompts[0].resolution
+          },
+          start: result[0].starts[0].start
         });
       } else {
         errorToast(result);
@@ -55,7 +59,12 @@ export const selectGenre = (page, genre) => {
     }
   }
 
-  const prompt = prompts[(Math.floor(Math.random() * (prompts.length)))];
+  let prompt = prompts[(Math.floor(Math.random() * (prompts.length)))];
+  prompt = {
+    backstory: prompt.backstory,
+    conflict: prompt.conflict,
+    resolution: prompt.resolution
+  }
 
   page.setState({
     starts: starts,
@@ -66,6 +75,6 @@ export const selectGenre = (page, genre) => {
 
 export const selectStart = (page, start) => {
   page.setState({
-    start: page.state.starts[start]
+    start: page.state.starts[start].start
   });
 }

@@ -47,7 +47,8 @@ class App extends React.Component {
     page: "login",
     stage: 0,
     prompt: 0,
-    muted: false
+    muted: false,
+    room: 0
   };
 
   render() {
