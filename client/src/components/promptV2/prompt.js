@@ -5,11 +5,11 @@ import "./prompt.css";
 
 class PromptV2 extends React.Component {
   render() {
-    const { title, content, host } = this.props;
+    const { title, content, admin } = this.props;
     return (
       <div className="promptContainer">
         <span className="promptLeft">
-          {host ? (<button className="editButton" type="submit" onClick={() => console.log("edit prompt")}><EditIcon fontSize="small" /></button>) : (<span />) }
+          {admin ? (<button className="editButton" type="submit" onClick={() => console.log("edit prompt")}><EditIcon fontSize="small" /></button>) : (<span />) }
         </span>
         <span className="promptMiddle">
           <div className="promptTitle">
@@ -20,7 +20,7 @@ class PromptV2 extends React.Component {
           </div>
         </span>
         <span className="promptRight">
-          {host ? (<button className="editButton" type="submit" onClick={() => console.log("delete prompt")}><ClearIcon fontSize="small" /></button>) : (<span />) }
+          {admin ? (<button className="editButton" type="submit" onClick={() => console.log("delete prompt")}><ClearIcon fontSize="small" /></button>) : (<span />) }
         </span>
       </div>
     );

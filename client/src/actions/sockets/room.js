@@ -63,6 +63,7 @@ export const updateRoom = (app, page) => {
       app.setState({
         page: "lobby",
         users: users,
+        room: room,
         roomInProgress
       });
     } else if (app.state.page === "lobby") {
