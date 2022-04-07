@@ -30,7 +30,10 @@ export const getGenres = page => {
     .then(result => {
       if (typeof result === "object") {
         page.setState({
-          genres: result
+          genres: result,
+          starts: result[0].starts,
+          prompt: result[0].prompts[0],
+          start: result[0].starts[0]
         });
       } else {
         errorToast(result);
@@ -41,3 +44,28 @@ export const getGenres = page => {
       log(err);
     });
 };
+
+export const selectGenre = (page, genre) => {
+  let starts = null;
+  let prompts = null;
+  for (let i = 0; i < page.state.genres.length; i++) {
+    if (page.state.genres[i].genre === genre) {
+      starts = page.state.genres[i].starts;
+      prompts = page.state.genres[i].prompts;
+    }
+  }
+
+  const prompt = prompts[(Math.floor(Math.random() * (prompts.length)))];
+
+  page.setState({
+    starts: starts,
+    prompt: prompt,
+    start: starts[0]
+  })
+}
+
+export const selectStart = (page, start) => {
+  page.setState({
+    start: page.state.starts[start]
+  });
+}

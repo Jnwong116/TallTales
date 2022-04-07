@@ -12,7 +12,7 @@ import MuteButton from "../../components/muteButton/muteButton.js";
 
 import "./lobby.css";
 
-import { getGenres, redirect } from "../../actions/lobby/lobby.js";
+import { getGenres, redirect, selectStart } from "../../actions/lobby/lobby.js";
 import { gameStarted } from "../../actions/sockets/startGame.js";
 import { backButtonHandler } from "../../actions/router/render.js";
 
@@ -28,11 +28,9 @@ class Lobby extends React.Component {
       icon: "avatar01.png",
       stories: []
     },
-    genres: [],
+    genres: [{genre: "Something"}],
     starts: [],
-    start:
-      "chris and jordan are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means.",
-    prompts: [],
+    start: "",
     prompt: {
       backstory: [
         "Backstory 1/3: Where is this happening exactly?",
@@ -56,7 +54,7 @@ class Lobby extends React.Component {
   componentDidMount() {
     backButtonHandler(this.props.app, this.props.history);
     getGenres(this);
-    gameStarted(this.props.app, this.props.gameAudioRef, this.props.audio60Ref, this.props.audio30Ref, this.props.audio10Ref);
+    gameStarted(this.props.app, this.props.gameAudioRef, this.props.audio60Ref, this.props.audio30Ref, this.props.audio10Ref, this.props.audioLobby, this.props.introRef);
   }
 
   render() {
@@ -74,7 +72,7 @@ class Lobby extends React.Component {
                   {this.props.app.state.users[0].username ===
                   this.props.app.state.currUser ? (
                     <div className="lobby-genre">
-                      <DropDown app={this.props.app} items={genres}></DropDown>
+                      <DropDown app={this.props.app} items={genres} parent={this} ></DropDown>
                     </div>
                   ) : (
                     <span></span>
@@ -89,16 +87,15 @@ class Lobby extends React.Component {
                 </span>
               </div>
               <div className="lobby-interface-prompts-container">
-
-                  <PromptV2 title="Canned Food Adventure [conditional rendering prop: host = true]"
-                            content="user1 and user2 are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means."
-                            admin={false}
-                  />
-                  <PromptV2 title="Canned Food Adventure [conditional rendering prop: host = false]"
-                            content="user1 and user2 are trying to turn random cans of food into something remotely tasty. When most canned “food” is either pet food or well past its expiration date (or both), they’ve got to turn to other means."
-                            admin={false}
-                  />
-
+                {
+                  this.state.starts.map((e, i) => {
+                    return(
+                      <div id={i} onClick={() => {selectStart(this, i)}}>
+                        <PromptV2 title={e.title} content={e.start} admin={false} />
+                      </div>
+                    );
+                  })
+                }
               </div>
               <div className="lobby-interface-bot-buttons">
                 <span className="lobby-interface-add-starter">
