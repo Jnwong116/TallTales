@@ -1,9 +1,9 @@
-const express = require("express")
+const express = require("express");
+const { createRoom, deleteRoom, lockRoom, startRoom, joinRoom, updateGenre, updateHost, getRoom, getRooms } = require("../api_functions/rooms.functions");
 
 const log = console.log
 
 const router = express.Router();
-const { ObjectID } = require('mongodb');
 
 const { Room } = require('../models/stories.model');
 
@@ -16,9 +16,7 @@ const { Room } = require('../models/stories.model');
 }
 */
 router.route('/create').post(async (req, res) => {
-    const newRoom = new Room(req.body);
-
-    newRoom
+    createRoom(req.body)
     .save()
     .then((result) => {
         res.send(result)
@@ -33,7 +31,7 @@ router.route('/create').post(async (req, res) => {
 router.route('/delete/:room').delete(async (req, res) => {
     const room = req.params.room;
 
-    Room.findOneAndDelete({ code: room })
+    deleteRoom(room)
         .then((result) => {
             if (!result) {
                 res.status(404).send('Room not found');
@@ -59,10 +57,8 @@ router.route('/lock/:room').post(async (req, res) => {
         return;
     }
 
-    // Sets room to either public/private depending on what it was before
-    curRoom.private = !curRoom.private;
-
-    curRoom.save()
+    lockRoom(curRoom)
+    .save()
         .then((result) => {
             res.send(result);
         })
@@ -84,10 +80,8 @@ router.route('/start/:room').post(async (req, res) => {
         return;
     }
 
-    // Sets room to in progress
-    curRoom.inProgress = true;
-
-    curRoom.save()
+    startRoom(curRoom)
+    .save()
         .then((result) => {
             res.send(result);
         })
@@ -114,10 +108,8 @@ router.route('/join/:room').post(async (req, res) => {
         return;
     }
 
-    // Changes number of users by request body
-    curRoom.users = req.body.users;
-
-    curRoom.save()
+    joinRoom(curRoom, req.body.users)
+    .save()
         .then((result) => {
             res.send(result);
         })
@@ -143,10 +135,8 @@ router.route('/genre/:room').post(async (req, res) => {
         return;
     }
 
-    // Sets genre to new genre
-    curRoom.genre = req.body.genre;
-
-    curRoom.save()
+    updateGenre(curRoom, req.body.genre)
+    .save()
         .then((result) => {
             res.send(result);
         })
@@ -172,10 +162,8 @@ router.route('/host/:room').post(async (req, res) => {
         return;
     }
 
-    // Sets host to new host
-    curRoom.host = req.body.host;
-
-    curRoom.save()
+    updateHost(curRoom, req.body.host)
+    .save()
         .then((result) => {
             res.send(result);
         })
@@ -189,7 +177,7 @@ router.route('/host/:room').post(async (req, res) => {
 router.route('/room/:room').get(async (req, res) => {
     const room = req.params.room;
 
-    let curRoom = await Room.findOne({ code: room });
+    let curRoom = await getRoom(room);
 
     // Checks to make sure it exists
     if (curRoom === null) {
@@ -203,11 +191,7 @@ router.route('/room/:room').get(async (req, res) => {
 
 // Get All Rooms
 router.route('/').get(async (req, res) => {
-    const room = req.params.room;
-
-    Room.find({
-        'inProgress': false
-    })
+    getRooms()
     .then((rooms) => {
         res.json(rooms);
     })

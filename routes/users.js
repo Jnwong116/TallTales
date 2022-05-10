@@ -4,7 +4,6 @@ const session = require("express-session");
 const log = console.log;
 
 const router = express.Router();
-const { ObjectID, UnorderedBulkOperation } = require("mongodb");
 
 const { User } = require("../models/user.model");
 

@@ -2,9 +2,6 @@ const express = require("express");
 
 const log = console.log;
 
-const router = express.Router();
-const { ObjectID } = require("mongodb");
-
 const { User } = require("../models/user.model");
 
 const addUser = (user) => {
