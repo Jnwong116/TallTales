@@ -75,7 +75,7 @@ const getPrompts = async (genre) => {
     return Genre.findOne({genre: genre});
 }
 
-const deletePrompt = (genre, prompt_id) => {
+const deletePrompt = async (genre, prompt_id) => {
     const prompts = genre.prompts;
 
     for (let i = 0; i < prompts.length; i++) {
@@ -84,7 +84,26 @@ const deletePrompt = (genre, prompt_id) => {
             return genre;
         }
     }
+
+    throw 'Prompt not found';
+}
+
+const getStory = (story_id) => {
+    return Story.findById(story_id)
+}
+
+const createStory = (story) => {
+    const newStory = new Story(story);
+
+    return newStory;
+}
+
+const addContribution = (contribution, story) => {
+    story.contributions.push(contribution);
+    story.story = story.story + " " + contribution.sentence;
+
+    return story;
 }
 
 module.exports = { createGenre, editStartTitle, getGenres, getGenre, getStarts, deleteGenre, deleteStart, addPrompt, 
-    getPrompts }
+    getPrompts, deletePrompt, getStory, createStory, addContribution }

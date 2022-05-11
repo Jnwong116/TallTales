@@ -1,5 +1,5 @@
 const express = require("express");
-const { createGenre, editStartTitle, getGenres, getStarts, deleteGenre, addPrompt } = require("../api_functions/stories.functions");
+const { createGenre, editStartTitle, getGenres, getStarts, deleteGenre, addPrompt, getPrompts, deletePrompt, getStory, createStory, addContribution } = require("../api_functions/stories.functions");
 const { deleteStart } = require("../api_functions/users.function");
 
 const log = console.log
@@ -49,7 +49,7 @@ router.route("/genre/:genre/:start").post(async (req, res) => {
   
     const newGenre = await editStartTitle(curGenre, start, req.body.title)
         .catch(err => {
-            res.status(400).json("Error: " + err);
+            res.status(400).send(err);
         });
 
     if (newGenre === undefined) {
@@ -200,7 +200,7 @@ router.route('/prompt/:genre').post(async (req, res) => {
 router.route('/prompt/:genre').get(async (req, res) => {
     const genre = req.params.genre;
 
-    let curGenre = await Genre.findOne({genre: genre});
+    let curGenre = await getPrompts(curGenre);
 
     // Checks to make sure it exists
     if (curGenre === null) {
@@ -231,23 +231,24 @@ router.route('/prompt/:genre/').delete(async (req, res) => {
         return;
     }
 
-    const prompts = curGenre.prompts;
+    const newGenre = await deletePrompt(curGenre, prompt_id)
+        .catch(err => {
+            res.status(400).send(err);
+        });
 
-    for (let i = 0; i < prompts.length; i++) {
-        if (prompts[i].id === prompt_id) {
-            const prompt = prompts[i];
-            curGenre.prompts.splice(i, 1);
-            curGenre.save()
-                .then((result) => {
-                    res.send({prompt, result});
-                })
-                .catch(err => {
-                    res.status(400).json('Error: ' + err);
-                });
-            return;
-        }
+    
+    if (newGenre === undefined) {
+        return;
     }
-    res.status(404).send('Prompt not found');
+
+    newGenre
+        .save()
+        .then((result) => {
+            res.send(result);
+        })
+        .catch(err => {
+            res.status(400).json('Error: ' + err);
+        });
 });
 
 
@@ -261,7 +262,7 @@ router.route('/prompt/:genre/').delete(async (req, res) => {
 router.route('/story/:story').get((req, res) => {
     const story = req.params.story;
 
-    Story.findById(story)
+    getStory(story)
         .then((story) => {
             if (!story) {
                 res.status(404).send('Story not found');
@@ -297,9 +298,8 @@ router.route('/story/:story').get((req, res) => {
     }
 */
 router.route('/start').post(async (req, res) => {
-    const story = new Story(req.body);
-
-    story.save()
+    createStory(req.body)
+        .save()
         .then((result) => {
             res.send(result);
         })
@@ -331,11 +331,8 @@ router.route('/contribute/:story').post(async (req, res) => {
         sentence: req.body.sentence
     }
 
-    // Adds contribution
-    curStory.contributions.push(contribution);
-    curStory.story = curStory.story + " " + contribution.sentence;
-
-    curStory.save()
+    addContribution(contribution, curStory)
+        .save()
         .then((result) => {
             res.send(result);
         })

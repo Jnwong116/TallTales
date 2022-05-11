@@ -218,7 +218,7 @@ router.route("/edit/username/:username").post(async (req, res) => {
 
   const newUser = await updateUsername(curUser, req.body.username)
     .catch(err => {
-      res.status(400).json("Error: " + err);
+      res.status(400).send(err);
     });
   
   if (newUser === undefined) {
@@ -424,7 +424,7 @@ router.route("/stories/:username/:story").post(async (req, res) => {
 
   const newUser = await editTitle(curUser, story, req.body.title)
     .catch(err => {
-      res.status(400).json("Error: " + err);
+      res.status(400).send(err);
     });
 
   if (newUser === undefined) {
@@ -457,7 +457,7 @@ router.route("/stories/:username/:story").get(async (req, res) => {
 
   const storyRetrieved = await getStory(curUser, story)
     .catch(err => {
-      res.status(400).json("Error: " + err);
+      res.status(400).send(err);
     })
 
   if (storyRetrieved === undefined) {
