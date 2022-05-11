@@ -47,7 +47,8 @@ class App extends React.Component {
     page: "login",
     stage: 0,
     prompt: 0,
-    muted: false
+    muted: false,
+    room: 0
   };
 
   render() {
@@ -81,6 +82,19 @@ class App extends React.Component {
             volume={1}
             ref={(element) => { this.audio10Ref = element}}
         />
+        <ReactAudioPlayer
+            src={require("./assets/music/lobby.wav")}
+            autoPlay={false}
+            loop
+            volume={0.3}
+            ref={(element) => { this.audioLobby = element}}
+        />
+        <ReactAudioPlayer
+            src={require("./assets/audio/lobby_intro.mp3")}
+            autoPlay={false}
+            volume={0.7}
+            ref={(element) => { this.introRef = element}}
+        />
         <Router>
           <Switch>
             <Route 
@@ -94,18 +108,18 @@ class App extends React.Component {
                   )
                 ) : this.page === "lobby" ? (
                   <Lobby {...props} app={this} gameAudioRef={this.audioRef}
-                  audio60Ref={this.audio60Ref} audio30Ref={this.audio30Ref} audio10Ref={this.audio10Ref}/>
+                  audio60Ref={this.audio60Ref} audio30Ref={this.audio30Ref} audio10Ref={this.audio10Ref} audioLobby={this.audioLobby} introRef={this.introRef} />
                 ) : this.page === "inputStage" ? (
                   <InputStage {...props} app={this} gameAudioRef={this.audioRef}
                     audio60Ref={this.audio60Ref} audio30Ref={this.audio30Ref} audio10Ref={this.audio10Ref}/>
                 ) : this.page === "voteStage" ? (
                   <VoteStage {...props} app={this} gameAudioRef={this.audioRef}/>
                 ) : this.page === "dashboard" ? (
-                  <Dashboard {...props} app={this} gameAudioRef={this.audioRef}/>
+                  <Dashboard {...props} app={this} gameAudioRef={this.audioRef} audioLobby={this.audioLobby} introRef={this.introRef} />
                 ) : this.page === "leaderboard" ? (
                   <Leaderboard {...props} app={this} gameAudioRef={this.audioRef}/>
                 ) : this.page === "gamesList" ? (
-                  <GamesList {...props} app={this} />
+                  <GamesList {...props} app={this} audioLobby={this.audioLobby} introRef={this.introRef} />
                 ) : this.page === "adminMenu" ? (
                   <AdminBrowseUsers {...props} app={this} />
                 ) : (

@@ -37,60 +37,6 @@ app.use("/users", userRouter);
 app.use("/stories", storyRouter);
 app.use("/rooms", roomRouter);
 
-app.use(
-    session({
-        secret: "thisisasecretkeyasdfkl",
-        resave: false,
-        saveUninitialized: false,
-    })
-)
-
-const { User } = require("./models/user.model");
-
-// Login User
-/*
-    {
-        "username": <String>,
-        "password": <String>
-    }
-*/
-app.post('/users/login', (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
-
-  User.findByUsernamePassword(username, password)
-      .then(user => {
-          // Add the user's id to the session
-          req.session.userid = user._id;
-          req.session.username = user.username;
-          res.send({ currentUser: user.username });
-      })
-      .catch(error => {
-          res.status(400).send(error);
-      })
-})
-
-app.get('/users/logout', (req, res) => {
-  // Remove the session
-  req.session.destroy(error => {
-      if (error) {
-          res.status(500).send(error);
-      } else {
-          res.send();
-      }
-  });
-})
-
-
-// A route to check if a user is logged in on the session
-app.get("/users/check-session", (req, res) => {
-  if (req.session.userid) {
-      res.send({ currentUser: req.session.username });
-  } else {
-      res.status(401).send();
-  }
-});
-
 app.get("*", (req, res) => {
   const pageRoutes = ["/"];
   if (!pageRoutes.includes(req.url)) {
@@ -294,9 +240,12 @@ io.on("connection", socket => {
       if (rooms[currUser.room]) { // Game was in progress
         if (getRoomUsers(currUser.room).length === 1) { // If they are last person left in the room
           rooms[currUser.room] = false;
+          const users = getRoomUsers(currUser.room);
+          users[0].host = true;
           io.to(currUser.room).emit("game-forfeit", {
-            users: getRoomUsers(currUser.room),
-            str: "The game has ended since all players left"
+            users: users,
+            str: "The game has ended since all players left",
+            room: currUser.room
           });
           io.to(socket.id).emit("stop-audio");
         }
@@ -323,17 +272,24 @@ io.on("connection", socket => {
         }
       }
 
-      else { // User was not in game
-        io.to(currUser.room).emit("update-users", {
-          room: currUser.room,
-          users: getRoomUsers(currUser.room),
-          rooms: rooms
-        });
+      else { // Game was not in progress
+        if (getRoomUsers(currUser.room).length === 0) { // They were last person in the lobby
+          io.emit("destroy-room", {
+            room: currUser.room
+          });
+        }
 
-        io.emit("update-db", {
-          users: getRoomUsers(currUser.room),
-          room: currUser.room
-        })
+        else {
+          io.to(currUser.room).emit("update-users", { // Updates the lobby
+            room: currUser.room,
+            users: getRoomUsers(currUser.room),
+            rooms: rooms
+          });
+          io.emit("update-db", { // Updates the join rooms list
+            users: getRoomUsers(currUser.room),
+            room: currUser.room
+          })
+        }
       }
     }
   });

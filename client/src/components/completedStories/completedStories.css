@@ -23,3 +23,19 @@
   opacity: 50%;
   cursor: pointer;
 }
+
+.editIcon {
+  margin-left: 10px;
+  height: 25px;
+  width: 25px;
+}
+
+.editIcon:hover {
+  color: #757575;
+}
+
+[contenteditable=true] {
+  outline: 0px solid transparent;
+  background-color: #808080;
+  color: #cacaca;
+}

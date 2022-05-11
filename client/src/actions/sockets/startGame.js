@@ -1,5 +1,6 @@
 import { socket } from "./socket";
 import { userLeft, raconteurLeft, forfeitGame } from "./room";
+import { stop } from "../audio/stopAudio";
 // const log = console.log;
 
 export const startGame = (app, start, prompts) => {
@@ -19,13 +20,14 @@ export const startGame = (app, start, prompts) => {
   });
 };
 
-export const gameStarted = (app, gameAudioRef, audio60Ref, audio30Ref, audio10Ref) => {
+export const gameStarted = (app, gameAudioRef, audio60Ref, audio30Ref, audio10Ref, lobbyMusic, introMusic) => {
   socket.on("game-started", ({ storyStart, storyPrompts, users, rooms, room }) => {
       // Sets up listeners if someone leaves the game
       userLeft(app);
       raconteurLeft(app);
-      forfeitGame(app);
+      forfeitGame(app, this);
       gameAudioRef.audioEl.current.play();
+      stop([lobbyMusic, introMusic]);
       if(app.state.muted) {
         gameAudioRef.audioEl.current.muted = true;
         audio60Ref.audioEl.current.muted = true;

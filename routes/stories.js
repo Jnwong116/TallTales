@@ -1,9 +1,10 @@
-const express = require("express")
+const express = require("express");
+const { createGenre, editStartTitle, getGenres, getStarts, deleteGenre, addPrompt, getPrompts, deletePrompt, getStory, createStory, addContribution } = require("../api_functions/stories.functions");
+const { deleteStart } = require("../api_functions/users.function");
 
 const log = console.log
 
 const router = express.Router();
-const { ObjectID } = require('mongodb');
 
 const { Genre, Story } = require('../models/stories.model');
 
@@ -18,18 +19,8 @@ const { Genre, Story } = require('../models/stories.model');
 router.route('/genre/:genre').post(async (req, res) => {
     const genre = req.params.genre;
 
-    // Checks if genre exists already
-    let curGenre = await Genre.findOne({genre: genre});
-    if (curGenre === null) { // None exists
-        curGenre = new Genre({
-            genre: genre,
-            starts: []
-        });
-    }
-
-    curGenre.starts.push(req.body);
-
-    curGenre.save()
+    createGenre(genre, req.body.start)
+    .save()
         .then((result) => {
             res.send(result)
         })
@@ -56,29 +47,17 @@ router.route("/genre/:genre/:start").post(async (req, res) => {
       return;
     }
   
-    // Finds start
-    for (let i = 0; i < curGenre.starts.length; i++) {
-      if (curGenre.starts[i].id === start) {
-        
-        curStart = i;
-        break;
-      }
+    const newGenre = await editStartTitle(curGenre, start, req.body.title)
+        .catch(err => {
+            res.status(400).send(err);
+        });
+
+    if (newGenre === undefined) {
+        return;
     }
-  
-    // Checks to make sure start exists
-    if (curStart === null) {
-      res.status(404).send("Start not found");
-      return;
-    }
-  
-    // Edits title of start
-    const newStart = curGenre.starts[curStart];
-    newStart.title = req.body.title;
-    curGenre.starts.splice(curStart, 1);
-    curGenre.starts.push(newStart);
-  
-    curGenre
-      .save()
+
+    newGenre
+    .save()
       .then(result => {
         res.send(result);
       })
@@ -90,7 +69,7 @@ router.route("/genre/:genre/:start").post(async (req, res) => {
 
 // Gets all Genres
 router.route('/').get((req, res) => {
-    Genre.find()
+    getGenres()
         .then((genres) => {
             res.json(genres);
         })
@@ -104,7 +83,7 @@ router.route('/').get((req, res) => {
 router.route('/genre/:genre').get((req, res) => {
     const genre = req.params.genre;
 
-    Genre.findOne({genre: genre})
+    getGenre(genre)
         .then((result) => {
             if (!result) {
                 res.status(404).send('Genre not found');
@@ -122,7 +101,7 @@ router.route('/genre/:genre').get((req, res) => {
 router.route('/genre/:genre/starts').get(async (req, res) => {
     const genre = req.params.genre;
 
-    let curGenre = await Genre.findOne({genre: genre});
+    let curGenre = await getStarts(genre);
 
     // Checks to make sure it exists
     if (curGenre === null) {
@@ -137,7 +116,7 @@ router.route('/genre/:genre/starts').get(async (req, res) => {
 router.route('/genre/:genre/').delete((req, res) => {
     const genre = req.params.genre;
 
-    Genre.findOneAndDelete({genre: genre})
+    deleteGenre(genre)
         .then((result) => {
             if (!result) {
                 res.status(404).send('Genre not found');
@@ -171,8 +150,8 @@ router.route('/genre/:genre/starts').delete(async (req, res) => {
 
     const start = curGenre.starts[req.body.index];
 
-    curGenre.starts.splice(req.body.index, 1);
-    curGenre.save()
+    deleteStart(curGenre, req.body.index)
+    .save()
         .then((result) => {
             res.send({start, result});
         })
@@ -206,9 +185,8 @@ router.route('/prompt/:genre').post(async (req, res) => {
         return;
     }
 
-    curGenre.prompts.push(req.body);
-
-    curGenre.save()
+    addPrompt(curGenre, req.body)
+    .save()
         .then((result) => {
             res.send(result)
         })
@@ -222,7 +200,7 @@ router.route('/prompt/:genre').post(async (req, res) => {
 router.route('/prompt/:genre').get(async (req, res) => {
     const genre = req.params.genre;
 
-    let curGenre = await Genre.findOne({genre: genre});
+    let curGenre = await getPrompts(curGenre);
 
     // Checks to make sure it exists
     if (curGenre === null) {
@@ -253,23 +231,24 @@ router.route('/prompt/:genre/').delete(async (req, res) => {
         return;
     }
 
-    const prompts = curGenre.prompts;
+    const newGenre = await deletePrompt(curGenre, prompt_id)
+        .catch(err => {
+            res.status(400).send(err);
+        });
 
-    for (let i = 0; i < prompts.length; i++) {
-        if (prompts[i].id === prompt_id) {
-            const prompt = prompts[i];
-            curGenre.prompts.splice(i, 1);
-            curGenre.save()
-                .then((result) => {
-                    res.send({prompt, result});
-                })
-                .catch(err => {
-                    res.status(400).json('Error: ' + err);
-                });
-            return;
-        }
+    
+    if (newGenre === undefined) {
+        return;
     }
-    res.status(404).send('Prompt not found');
+
+    newGenre
+        .save()
+        .then((result) => {
+            res.send(result);
+        })
+        .catch(err => {
+            res.status(400).json('Error: ' + err);
+        });
 });
 
 
@@ -283,7 +262,7 @@ router.route('/prompt/:genre/').delete(async (req, res) => {
 router.route('/story/:story').get((req, res) => {
     const story = req.params.story;
 
-    Story.findById(story)
+    getStory(story)
         .then((story) => {
             if (!story) {
                 res.status(404).send('Story not found');
@@ -319,9 +298,8 @@ router.route('/story/:story').get((req, res) => {
     }
 */
 router.route('/start').post(async (req, res) => {
-    const story = new Story(req.body);
-
-    story.save()
+    createStory(req.body)
+        .save()
         .then((result) => {
             res.send(result);
         })
@@ -353,11 +331,8 @@ router.route('/contribute/:story').post(async (req, res) => {
         sentence: req.body.sentence
     }
 
-    // Adds contribution
-    curStory.contributions.push(contribution);
-    curStory.story = curStory.story + " " + contribution.sentence;
-
-    curStory.save()
+    addContribution(contribution, curStory)
+        .save()
         .then((result) => {
             res.send(result);
         })

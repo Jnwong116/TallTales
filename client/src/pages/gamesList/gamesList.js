@@ -17,7 +17,8 @@ import {
   joinRoom,
   updateRoom,
   denyRoomAccess,
-  updateNumPlayers
+  updateNumPlayers,
+  destroyRoom
 } from "../../actions/sockets/room.js";
 import { backButtonHandler } from "../../actions/router/render.js";
 import { menuRedirect } from "../../actions/dashboard/menu.js";
@@ -124,7 +125,7 @@ class GamesList extends React.Component {
             icon={<DoubleArrow />}
             label="Join"
             onClick={() => {
-              joinRoom(this.state.user, params.row.roomcode);
+              joinRoom(this.props.app, this.state.user, params.row.roomcode, this.props.audioLobby, this.props.introRef);
             }}
           />
         ]
@@ -140,8 +141,9 @@ class GamesList extends React.Component {
   componentDidMount() {
     getUser(this, this.props.app);
     getGames(this);
-    updateRoom(this.props.app);
-    updateNumPlayers(this.props.app);
+    updateRoom(this.props.app, this);
+    updateNumPlayers(this.props.app, this);
+    destroyRoom(this.props.app, this);
     denyRoomAccess();
   }
 
@@ -244,7 +246,7 @@ class GamesList extends React.Component {
                 maxRows="1"
                 onKeyUp={event => {
                   if (event.key === "Enter") {
-                    joinGame(this);
+                    joinGame(this.props.app, this, this.props.audioLobby, this.props.introRef);
                   }
                 }}
               />
@@ -253,7 +255,7 @@ class GamesList extends React.Component {
             <Button
               text="JOIN ROOM"
               handleClick={() => {
-                joinGame(this);
+                joinGame(this.props.app, this, this.props.audioLobby, this.props.introRef);
               }}
             />
           </span>

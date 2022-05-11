@@ -7,6 +7,9 @@ function checkPunctuation(char) {
 
 export const saveInput = (app) => {
     let input = document.getElementById("user-input").value;
+    if (input === "") {
+      input = "Did not type anything at all >:(";
+    }
     input = input.trim();
         // Adds period to end of sentence if sentence ends in a letter.
         if (checkPunctuation(input.charAt(input.length - 1))) {

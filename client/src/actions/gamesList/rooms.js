@@ -1,6 +1,6 @@
 import ENV from './../../config.js';
-import { errorToast, successToast } from "../../actions/toastify/toastify.js";
-import { joinRoom } from '../sockets/room.js';
+import { errorToast } from "../../actions/toastify/toastify.js";
+import { joinRoom, socketJoinRoom } from '../sockets/room.js';
 
 const API_HOST = ENV.api_host;
 const log = console.log
@@ -8,6 +8,7 @@ const log = console.log
 function parseRooms(rooms) {
     const newRooms = [];
     for (let i = 0; i < rooms.length; i++) {
+        if (!rooms[i].private)
         newRooms.push({
             id: i,
             host: rooms[i].host,
@@ -34,12 +35,19 @@ export const getGames = (page) => {
     })
     .then((result) => {
         if (typeof(result) === 'object') {
-            if (result.length === 0) {
-                errorToast('No public games available.');
+            if (page.games !== undefined) {
+                page.games = result;
+                socketJoinRoom(page);
             }
-            page.setState({
-                rows: parseRooms(result)
-            });
+            else {
+                if (parseRooms(result).length === 0) {
+                    errorToast('No public games available.');
+                }
+                
+                page.setState({
+                    rows: parseRooms(result)
+                });
+            }
             return;
         }
         else {
@@ -52,7 +60,7 @@ export const getGames = (page) => {
     })
 }
 
-export const joinGame = (page) => {
+export const joinGame = (app, page, lobbyMusic, introMusic) => {
     const room = document.getElementById('room-code').value;
 
     if (room === "") {
@@ -62,10 +70,10 @@ export const joinGame = (page) => {
 
     const user = page.state.user;
 
-    joinRoom(user, room);
+    joinRoom(app, user, room, lobbyMusic, introMusic);
 }
 
-export const updateRoomNum = (room, users) => {
+export const updateRoomNum = (room, users, page, app) => {
     const url = `${API_HOST}/rooms/join/${room}`;
     
     const user = {
@@ -92,7 +100,82 @@ export const updateRoomNum = (room, users) => {
     })
     .then((result) => {
         if (typeof(result) === 'object') {
+            if (app.state.page === "gamesList") {
+                getGames(page);
+            }
+          }
+          else {
+            errorToast(result);
             return;
+          }
+    })
+    .catch(err => {
+        log(err);
+    })
+}
+
+export const deleteRoom = (room, page, app) => {
+    const url = `${API_HOST}/rooms/delete/${room}`;
+
+    const request = new Request(url, {
+        method: "delete",
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    });
+
+    fetch(request)
+    .then((res) => {
+        if (res.status === 200) {
+            return res.json();
+        }
+        else {
+            return res.text();
+        }
+    })
+    .then((result) => {
+        if (typeof(result) === 'object') {
+            return;
+        }
+    })
+    .then(() => {
+        if (app.state.page === "gamesList") {
+            getGames(page);
+        }
+    })    
+}
+
+export const updateHost = (room, host, page, app) => {
+    const url = `${API_HOST}/rooms/host/${room}`;
+    
+    const newRoom = {
+        "host": host
+    }
+
+    const request = new Request(url, {
+        method: "post",
+        body: JSON.stringify(newRoom),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    });
+
+    fetch(request)
+    .then((res) => {
+        if (res.status === 200) {
+            return res.json();
+        }
+        else {
+            return res.text();
+        }
+    })
+    .then((result) => {
+        if (typeof(result) === 'object') {
+            if (app.state.page === "gamesList") {
+                getGames(page);
+            }
           }
           else {
             errorToast(result);

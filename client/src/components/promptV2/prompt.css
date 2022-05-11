@@ -1,0 +1,42 @@
+.promptContainer{
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 auto;
+    justify-content: center;
+    background-color: #dddddd;
+    border-top: 1px;
+    border-bottom: 1px;
+    border-left: 0px;
+    border-right: 0px;
+    border-style: dashed;
+}
+
+.promptLeft{
+  min-width: 40px;
+  display: block;
+}
+
+.promptMiddle{
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.promptRight{
+  min-width: 40px;
+  display: block;
+}
+
+.promptTitle{
+  text-align: left;
+  margin-bottom: 20px;
+}
+.promptBody{
+  text-align: left;
+  font-size: 80%;
+}
+
+.editButton{
+  background-color: #dddddd;
+  border: 0px;
+  margin-top: 40px;
+}

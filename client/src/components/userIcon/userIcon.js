@@ -12,6 +12,16 @@ class UserIcon extends React.Component {
           ></img>
         </div>
         <div className="user-icon-username">
+          {this.props.host ? (
+            <span className="user-name-crown">
+              <img
+                src={require("../../assets/images/crown.png")}
+                alt="crown"
+              ></img>
+            </span>
+          ) : (
+            undefined
+          )}
           {this.props.isDashboard ? (
             <span className="dashboard-welcome">
               {"Welcome back, "}
@@ -22,10 +32,7 @@ class UserIcon extends React.Component {
             this.props.username
           )}
           {this.props.host ? (
-            <img
-              src={require("../../assets/images/crown.png")}
-              alt="crown"
-            ></img>
+            <span className="user-name-spacer" />
           ) : (
             undefined
           )}

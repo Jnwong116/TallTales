@@ -20,9 +20,10 @@
 
 .user-icon-username {
   display: flex;
+  flex-direction: row;
+  align-items: center;
   font-family: "IBM Plex Mono";
   color: #5c5c5c;
-  flex-direction: row;
 }
 
 .dashboard-username {
@@ -64,4 +65,14 @@
   font-weight: bold;
   color: #7d7d7d;
   align-items: center;
+}
+
+.user-name-crown {
+  margin-right: 5px;
+}
+
+.user-name-spacer {
+  margin-left: 5px;
+  min-width: 30px;
+  min-height: 20px;
 }

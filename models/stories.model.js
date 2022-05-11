@@ -39,7 +39,7 @@ const storySchema = new Schema({
 
 const roomSchema = new Schema({
     code: {type: String, unique: true},
-    private: {type: Boolean, default: false},
+    private: {type: Boolean, default: true},
     host: {type: String},
     genre: {type: String, default: "Adventure"},
     users: {type: Number, required: true},

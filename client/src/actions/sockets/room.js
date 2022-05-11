@@ -1,42 +1,76 @@
 import { socket } from "./socket";
-import { warningToast } from "../toastify/toastify";
+import { errorToast, warningToast } from "../toastify/toastify";
 import { chooseRaconteur } from "../vote/raconteur";
 // import { isRaconteur } from "../prompt/displayPrompt";
 import { updateSentence } from "./updateUser";
-import { updateRoomNum } from "../gamesList/rooms"
+import { deleteRoom, getGames, updateHost, updateRoomNum } from "../gamesList/rooms"
 
 // const log = console.log;
 
-export const joinRoom = (user, room) => {
+export const joinRoom = (app, user, room, lobbyMusic, introMusic) => {
+  const rooms = {
+    games: [],
+    app: app,
+    user: user,
+    room: room,
+    lobbyMusic: lobbyMusic,
+    introMusic: introMusic
+  };
+  getGames(rooms);
+};
+
+export const socketJoinRoom = (roomsObj) => {
+  let roomExists = false;
+  for (let i = 0; i < roomsObj.games.length; i++) {
+    if (roomsObj.games[i].code === roomsObj.room) {
+      roomExists = true;
+      break;
+    }
+  }
+
+  if (!roomExists) {
+    errorToast("Room doesn't exist");
+    return;
+  } 
+
   socket.emit("join-room", {
     user: {
-      username: user.username,
-      icon: user.icon,
+      username: roomsObj.user.username,
+      icon: roomsObj.user.icon,
       score: 0,
       raconteur: false,
       currentSentence: ". . .",
       host: false
     },
-    room: room
+    room: roomsObj.room
   });
-};
+  roomsObj.lobbyMusic.audioEl.current.play();
+  roomsObj.introMusic.audioEl.current.play();
+  if (roomsObj.app.state.muted) {
+    roomsObj.lobbyMusic.audioEl.current.muted = true;
+    roomsObj.introMusic.audioEl.current.muted = true;
+  }
+}
 
-export const updateRoom = (app) => {
+export const updateRoom = (app, page) => {
   socket.on("update-users", ({ users, room, roomInProgress }) => {
     if (app.state.page === "dashboard" || app.state.page === "gamesList") {
-      updateRoomNum(room, users.length);
+      updateRoomNum(room, users.length, page, app);
       // User is on dashboard
       users[0].host = true;
       socket.emit("change-host", users);
+      updateHost(room, users[0].username, page, app);
       app.setState({
         page: "lobby",
         users: users,
+        room: room,
         roomInProgress
       });
     } else if (app.state.page === "lobby") {
       // User is on lobby page
       users[0].host = true;
       socket.emit("change-host", users);
+      updateHost(room, users[0].username, page, app);
       app.setState({
         users: users,
         roomInProgress
@@ -121,10 +155,17 @@ export const raconteurLeft = (app) => {
   })
 }
 
-export const forfeitGame = (app) => {
-  socket.on("game-forfeit", ({ users, str }) => {
+export const forfeitGame = (app, page) => {
+  socket.on("game-forfeit", ({ users, str, room }) => {
     if (app.state.page !== "leaderboard") {
       warningToast(str);
+      updateRoomNum(room, users.length, page, app);
+      updateHost(room, users[0].username, page, app);
+
+      socket.emit("update-users", {
+        users: users,
+        room: room
+      });
 
       app.setState({
         page: "lobby",
@@ -134,18 +175,14 @@ export const forfeitGame = (app) => {
   })
 }
 
-export const updateNumPlayers = (app) => {
+export const updateNumPlayers = (app, page) => {
   socket.on("update-db", ({ users, room }) => {
-    if (app.state.page === "gamesList") {
-      updateRoomNum(room, users.length);
-      
-      // Rerender gamesList page
-      app.setState({
-        page: "dashboard"
-      });
-      app.setState({
-        page: "gamesList"
-      })
-    }
+    updateRoomNum(room, users.length, page, app);
+  })
+}
+
+export const destroyRoom = (app, page) => {
+  socket.on("destroy-room", ({ room }) => {
+    deleteRoom(room, page, app);
   })
 }

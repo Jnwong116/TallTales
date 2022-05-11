@@ -35,7 +35,7 @@ class AdminBrowseUsers extends React.Component {
       }
     ],
     columns: [
-      { field: 'username',      editable: true,  type: 'string',   headerName: 'Username',       width: 150, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator',
+      { field: 'username',      editable: false,  type: 'string',   headerName: 'Username',       width: 150, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator',
       preProcessEditCellProps: (params) => { /* validates username change */
         let hasError;
         if (params.props.value.length < 1) {           /*  Ensures that username can't be less than 1 character
@@ -49,17 +49,12 @@ class AdminBrowseUsers extends React.Component {
         };
       },
     },
-    { field: 'isAdmin',       editable: true,  type: 'boolean',  headerName: 'Admin',          width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator',
-      preProcessEditCellProps: (params) => { /* validates isAdmin change */
-        const hasError = params.row.username === 'admin';         /*  Ensures that 'admin' user can't be demoted to regular user
-                                                                      Not really needed anymore, leaving in for levity. */
-        if(hasError) {
-          errorToast("Admin can't be demoted!");                       /* This needs to be a snack */
-        }
-        return {
-          ...params.props, error: hasError
-        };
-      },
+    { field: 'isAdmin',       editable: false,  type: 'actions',  headerName: 'Admin',          width: 100, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator',
+      getActions: (params) =>
+      [ <GridActionsCellItem icon={params.row.isAdmin ?
+        <DeleteIcon /> :
+      <RestartAltIcon />
+    } label="Change Admin" onClick={() => {console.log(params.row);}} />, ]
     },
     { field: 'divider',       editable: false, type: 'number',   headerName: '',                flex:   1, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
     { field: 'divider',       editable: false, type: 'number',   headerName: '',                flex:   1, headerAlign: 'center', align: 'center', headerClassName: 'lastcolumnSeparator' },
