@@ -54,7 +54,7 @@ export const socketJoinRoom = (roomsObj) => {
 
 export const updateRoom = (app, page) => {
   socket.on("update-users", ({ users, room, roomInProgress }) => {
-    if (app.state.page === "dashboard" || app.state.page === "gamesList") {
+    if (app.state.page === "dashboard" || app.state.page === "gamesList") { // Checks if user was on dashboard and clicked host game or on GamesList page
       updateRoomNum(room, users.length, page, app);
       // User is on dashboard
       users[0].host = true;

@@ -10,10 +10,9 @@ const { mongoose } = require("./db/mongoose");
 const MongoStore = require("connect-mongo");
 const { ObjectID } = require("mongodb");
 
-require("dotenv").config({ path: path.resolve(__dirname, "../config.env") });
+require("dotenv").config();
 
-const env = process.env.NODE_ENV;
-const port = process.env.PORT;
+const port = process.env.PORT || 5000;
 
 const app = require("express")();
 const server = require("http").createServer(app);
@@ -22,6 +21,9 @@ const io = require("socket.io")(server, {
     origin: "*"
   }
 });
+
+// Loads socket functions
+const roomHandler = require('./socket/roomHandler');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -46,125 +48,9 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/client/build/index.html"));
 });
 
-// HELPERS
-// TODO: Move to utils
-
-let users = [];
-let rooms = {
-  main: false
-};
-
-// Join user to chat
-function userJoin(
-  id,
-  username,
-  icon,
-  score,
-  raconteur,
-  currentSentence,
-  host,
-  room
-) {
-  const user = {
-    id,
-    username,
-    icon,
-    score,
-    raconteur,
-    currentSentence,
-    host,
-    room
-  };
-
-  users.push(user);
-
-  return user;
-}
-
-function getCurrentUser(id) {
-  return users.find(user => user.id === id);
-}
-function getRoomUsers(room) {
-  return users.filter(user => user.room === room);
-}
-
-function updateRaconteur(raconteur, prevRaconteur) {
-  for (let i = 0; i < users.length; i++) {
-    if (users[i].username === raconteur) { // Found the raconteur
-      users[i].raconteur = true;
-      users[i].currentSentence = "Raconteur";
-    }
-
-    if (users[i].username === prevRaconteur) { // Found the previous raconteur
-      users[i].raconteur = false;
-      users[i].currentSentence = ". . .";
-    }
-  }
-}
-
-function userLeave(id) {
-  const usersIndex = users.findIndex(user => user.id === id);
-  if (usersIndex !== -1) {
-    return users.splice(usersIndex, 1)[0];
-  }
-}
-
-function allUsersInput(users) {
-  for (let i = 0; i < users.length; i++) {
-    if (users[i].currentSentence === ". . .") {
-      return false;
-    }
-  }
-  return true;
-}
-
-function saveInput(newUsers, room) {
-  for (let i = 0; i < newUsers.length; i++) {
-    for (let j = 0; j < users.length; j++) {
-      if (users[j].username === newUsers[i].username) {
-        users[j].currentSentence = newUsers[i].currentSentence;
-      }
-    }
-  }
-}
 
 io.on("connection", socket => {
-  // Join user to room
-  socket.on("join-room", ({ user, room }) => {
-    if (!rooms[room] && getRoomUsers(room).length < 5) { // Checks if game is in progress or if game lobby already has 5 players
-      const currUser = userJoin(
-        socket.id,
-        user.username,
-        user.icon,
-        user.score,
-        user.raconteur,
-        user.currentSentence,
-        user.host,
-        room
-      );
-      socket.join(currUser.room);
-      io.emit("message", `${currUser.username} has joined ${currUser.room}`);
-      io.to(currUser.room).emit("update-users", {
-        users: getRoomUsers(currUser.room),
-        room: currUser.room
-      });
-      io.emit("update-db", {
-        users: getRoomUsers(currUser.room),
-        room: currUser.room
-      })
-    } else {
-      if (rooms[room]) { // If game is in progress
-        socket.emit("deny-room-access", "Room in Progress!");
-      }
-      else { // If room is full
-        socket.emit("deny-room-access", "Room is full!");
-      }
-    }
-  });
-
-  socket.on("change-host", changedUsers => {
-    users = changedUsers;
-  });
+  roomHandler(io, socket);
 
   socket.on("create-room", newRoom => {
     console.log(newRoom);

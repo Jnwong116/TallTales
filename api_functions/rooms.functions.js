@@ -12,8 +12,15 @@ const deleteRoom = (roomCode) => {
     return Room.findOneAndDelete({ code: roomCode });
 }
 
-const lockRoom = (room) => {
+const lockRoom = async (room) => {
     // Sets room to either public/private depending on what it was before
+    const curRoom = await Room.findOne({ code: room });
+
+    // Checks to make sure it exists
+    if (curRoom === null) {
+        throw 'Room not found';
+    }
+
     room.private = !room.private;
 
     return room;
@@ -25,7 +32,7 @@ const startRoom = (room) => {
     return room;
 }
 
-const joinRoom = (room, users) => {
+const updateNumUsers = (room, users) => {
     room.users = users;
 
     return room;
@@ -53,5 +60,5 @@ const getRooms = () => {
     })
 }
 
-module.exports = { createRoom, deleteRoom, lockRoom, startRoom, joinRoom, updateGenre, updateHost, getRoom, getRooms }
+module.exports = { createRoom, deleteRoom, lockRoom, startRoom, updateNumUsers, updateGenre, updateHost, getRoom, getRooms }
 
