@@ -107,12 +107,12 @@ const deletePrompt = async (genre, prompt_id) => {
         throw 'Genre not found';
     }
 
-    const prompts = genre.prompts;
+    const prompts = curGenre.prompts;
 
     for (let i = 0; i < prompts.length; i++) {
         if (prompts[i].id === prompt_id) {
-            genre.prompts.splice(i, 1);
-            return genre;
+            curGenre.prompts.splice(i, 1);
+            return curGenre;
         }
     }
 
