@@ -1,5 +1,5 @@
 const express = require("express");
-const { createGenre, editStartTitle, getGenres, getStarts, deleteGenre, addPrompt, getPrompts, deletePrompt, getStory, createStory, addContribution } = require("../api_functions/stories.functions");
+const { createGenre, editStartTitle, getGenres, getStarts, deleteGenre, addPrompt, getPrompts, deletePrompt, getStory, createStory, addContribution, getGenre } = require("../api_functions/stories.functions");
 const { deleteStart } = require("../api_functions/users.function");
 
 const log = console.log
@@ -38,18 +38,9 @@ router.route("/genre/:genre/:start").post(async (req, res) => {
     const genre = req.params.genre;
     const start = req.params.start;
   
-    let curGenre = await Genre.findOne({ genre: genre });
-    let curStart = null;
-  
-    // Checks to make sure it exists
-    if (curGenre === null) {
-      res.status(404).send("Genre not found");
-      return;
-    }
-  
-    const newGenre = await editStartTitle(curGenre, start, req.body.title)
+    const newGenre = await editStartTitle(genre, start, req.body.title)
         .catch(err => {
-            res.status(400).send(err);
+            res.status(404).send(err);
         });
 
     if (newGenre === undefined) {
@@ -101,7 +92,7 @@ router.route('/genre/:genre').get((req, res) => {
 router.route('/genre/:genre/starts').get(async (req, res) => {
     const genre = req.params.genre;
 
-    let curGenre = await getStarts(genre);
+    const curGenre = await getGenre(genre);
 
     // Checks to make sure it exists
     if (curGenre === null) {
@@ -140,17 +131,16 @@ router.route('/genre/:genre/').delete((req, res) => {
 router.route('/genre/:genre/starts').delete(async (req, res) => {
     const genre = req.params.genre;
 
-    let curGenre = await Genre.findOne({genre: genre});
+    const newGenre = await deleteStart(genre, req.body.index)
+        .catch(err => {
+            res.status(404).send(err);
+        });
 
-    // Checks to make sure it exists
-    if (curGenre === null) {
-        res.status(404).send('Genre not found');
+    if (newGenre === undefined) {
         return;
     }
 
-    const start = curGenre.starts[req.body.index];
-
-    deleteStart(curGenre, req.body.index)
+    newGenre
     .save()
         .then((result) => {
             res.send({start, result});
@@ -177,15 +167,16 @@ router.route('/genre/:genre/starts').delete(async (req, res) => {
 router.route('/prompt/:genre').post(async (req, res) => {
     const genre = req.params.genre;
 
-    let curGenre = await Genre.findOne({genre: genre});
+    const newGenre = await addPrompt(genre, req.body)
+        .catch(err => {
+            res.status(404).send(err);
+        });
 
-    // Checks to make sure it exists
-    if (curGenre === null) {
-        res.status(404).send('Genre not found');
+    if (newGenre === undefined) {
         return;
     }
 
-    addPrompt(curGenre, req.body)
+    newGenre
     .save()
         .then((result) => {
             res.send(result)
@@ -200,11 +191,12 @@ router.route('/prompt/:genre').post(async (req, res) => {
 router.route('/prompt/:genre').get(async (req, res) => {
     const genre = req.params.genre;
 
-    let curGenre = await getPrompts(curGenre);
+    const curGenre = await getPrompts(genre)
+        .catch(err => {
+            res.status(404).send(err);
+        });
 
-    // Checks to make sure it exists
-    if (curGenre === null) {
-        res.status(404).send('Genre not found');
+    if (curGenre === undefined) {
         return;
     }
 
@@ -223,17 +215,9 @@ router.route('/prompt/:genre/').delete(async (req, res) => {
     const genre = req.params.genre;
     const prompt_id = req.body.prompt_id
 
-    let curGenre = await Genre.findOne({genre: genre});
-
-    // Checks to make sure it exists
-    if (curGenre === null) {
-        res.status(404).send('Genre not found');
-        return;
-    }
-
-    const newGenre = await deletePrompt(curGenre, prompt_id)
+    const newGenre = await deletePrompt(genre, prompt_id)
         .catch(err => {
-            res.status(400).send(err);
+            res.status(404).send(err);
         });
 
     
@@ -318,20 +302,22 @@ router.route('/start').post(async (req, res) => {
 */
 router.route('/contribute/:story').post(async (req, res) => {
     const story = req.params.story;
-    const curStory = await Story.findById(story);
-
-    // Checks to make sure it exists
-    if (curStory === null) {
-        res.status(404).send('Story not found');
-        return;
-    }
     
     const contribution = {
         username: req.body.username,
         sentence: req.body.sentence
     }
 
-    addContribution(contribution, curStory)
+    const newStory = await addContribution(contribution, story)
+        .catch(err => {
+            res.status(404).send(err);
+        });
+
+    if (newStory === undefined) {
+        return;
+    }
+
+    newStory
         .save()
         .then((result) => {
             res.send(result);
