@@ -21,33 +21,61 @@ const lockRoom = async (room) => {
         throw 'Room not found';
     }
 
-    room.private = !room.private;
+    curRoom.private = !curRoom.private;
 
-    return room;
+    return curRoom;
 }
 
-const startRoom = (room) => {
-    room.inProgress = true;
+const startRoom = async (room) => {
+    const curRoom = await Room.findOne({ code: room });
 
-    return room;
+    // Checks to make sure it exists
+    if (curRoom === null) {
+        throw 'Room not found';
+    }
+
+    curRoom.inProgress = true;
+
+    return curRoom;
 }
 
-const updateNumUsers = (room, users) => {
-    room.users = users;
+const updateNumUsers = async (room, users) => {
+    const curRoom = await Room.findOne({ code: room });
 
-    return room;
+    // Checks to make sure it exists
+    if (curRoom === null) {
+        throw 'Room not found';
+    }
+
+    curRoom.users = users;
+
+    return curRoom;
 }
 
-const updateGenre = (room, genre) => {
-    room.genre = genre;
+const updateGenre = async (room, genre) => {
+    const curRoom = await Room.findOne({ code: room });
 
-    return room;
+    // Checks to make sure it exists
+    if (curRoom === null) {
+        throw 'Room not found';
+    }
+
+    curRoom.genre = genre;
+
+    return curRoom;
 }
 
-const updateHost = (room, host) => {
-    room.host = host;
+const updateHost = async (room, host) => {
+    const curRoom = await Room.findOne({ code: room });
 
-    return room;
+    // Checks to make sure it exists
+    if (curRoom === null) {
+        throw 'Room not found';
+    }
+
+    curRoom.host = host;
+
+    return curRoom;
 }
 
 const getRoom = (room) => {
