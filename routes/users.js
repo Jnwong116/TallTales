@@ -26,15 +26,16 @@ router.use(
     }
 */
 router.route('/register').post(async (req, res) => {
-    // Checks if user exists already
-    let curUser = await User.findOne({username: req.body.username});
+    const newUser = await addUser(req.body)
+      .catch(err => {
+        res.status(400).send(err);
+      });
 
-    if (curUser !== null) {
-        res.status(400).send('Username taken already');
-        return;
+    if (newUser === undefined) {
+      return;
     }
 
-    addUser(req.body)
+    newUser
         .then((user) => {
           const ret = {
             username: user.username,
@@ -159,15 +160,16 @@ router.route("/user/:username").delete((req, res) => {
 router.route("/admin/:username").post(async (req, res) => {
   const user = req.params.username;
 
-  let curUser = await User.findOne({ username: user });
+  const newUser = await makeAdmin(user)
+    .catch(err => {
+      res.status(404).send(err);
+    });
 
-  // Checks to make sure it exists
-  if (curUser === null) {
-    res.status(404).send("User not found");
+  if (newUser === undefined) {
     return;
   }
 
-  makeAdmin(curUser)
+  newUser
     .save()
     .then(result => {
       res.send(result);
@@ -181,15 +183,16 @@ router.route("/admin/:username").post(async (req, res) => {
 router.route("/admin/:username").delete(async (req, res) => {
   const user = req.params.username;
 
-  let curUser = await User.findOne({ username: user });
+  const newUser = await makeNormal(user)
+    .catch(err => {
+      res.status(404).send(err);
+    });
 
-  // Checks to make sure it exists
-  if (curUser === null) {
-    res.status(404).send("User not found");
+  if (newUser === undefined) {
     return;
   }
 
-  makeNormal(curUser)
+  newUser
     .save()
     .then(result => {
       res.send(result);
@@ -208,15 +211,7 @@ router.route("/admin/:username").delete(async (req, res) => {
 router.route("/edit/username/:username").post(async (req, res) => {
   const user = req.params.username;
 
-  let curUser = await User.findOne({ username: user });
-
-  // Checks to make sure it exists
-  if (curUser === null) {
-    res.status(404).send("User not found");
-    return;
-  }
-
-  const newUser = await updateUsername(curUser, req.body.username)
+  const newUser = await updateUsername(user, req.body.username)
     .catch(err => {
       res.status(400).send(err);
     });
@@ -244,15 +239,16 @@ router.route("/edit/username/:username").post(async (req, res) => {
 router.route("/edit/password/:username").post(async (req, res) => {
   const user = req.params.username;
 
-  let curUser = await User.findOne({ username: user });
+  const newUser = await updatePassword(user, req.body.password)
+    .catch(err => {
+      res.status(404).send(err);
+    });
 
-  // Checks to make sure it exists
-  if (curUser === null) {
-    res.status(404).send("User not found");
+  if (newUser === undefined) {
     return;
   }
 
-  updatePassword(curUser, req.body.password)
+  newUser
     .save()
     .then(user => {
       const ret = {
@@ -280,15 +276,16 @@ router.route("/edit/password/:username").post(async (req, res) => {
 router.route("/edit/avatar/:username").post(async (req, res) => {
   const user = req.params.username;
 
-  let curUser = await User.findOne({ username: user });
+  const newUser = await updateAvatar(user, req.body.icon)
+    .catch(err => {
+      res.status(404).send(err);
+    });
 
-  // Checks to make sure it exists
-  if (curUser === null) {
-    res.status(404).send("User not found");
+  if (newUser === undefined) {
     return;
   }
 
-  updateAvatar(curUser, req.body.icon)
+  newUser
     .save()
     .then(result => {
       res.send(result);
@@ -312,15 +309,16 @@ router.route("/edit/avatar/:username").post(async (req, res) => {
 router.route("/prompts/:username").post(async (req, res) => {
   const user = req.params.username;
 
-  let curUser = await User.findOne({ username: user });
+  const newUser = await addStart(user, req.body.start)
+    .catch(err => {
+      res.status(404).send(err);
+    });
 
-  // Checks to make sure it exists
-  if (curUser === null) {
-    res.status(404).send("User not found");
+  if (newUser === undefined) {
     return;
   }
 
-  addStart(curUser, req.body.start)
+  newUser
     .save()
     .then(result => {
       res.send(result);
@@ -339,20 +337,19 @@ router.route("/prompts/:username").post(async (req, res) => {
 router.route("/prompts/:username").delete(async (req, res) => {
   const user = req.params.username;
 
-  let curUser = await User.findOne({ username: user });
+  const newUser = await deleteStart(user, req.body.index)
+    .catch(err => {
+      res.status(404).send(err);
+    });
 
-  // Checks to make sure it exists
-  if (curUser === null) {
-    res.status(404).send("User not found");
+  if (newUser === undefined) {
     return;
   }
 
-  const start = curUser.prompts[req.body.index];
-
-  deleteStart(curUser, req.body.index)
+  newUser
     .save()
     .then(result => {
-      res.send({ start, result });
+      res.send(result);
     })
     .catch(err => {
       res.status(400).json("Error: " + err);
@@ -387,15 +384,16 @@ router.route("/prompts/:username").delete(async (req, res) => {
 router.route("/stories/:username").post(async (req, res) => {
   const user = req.params.username;
 
-  let curUser = await User.findOne({ username: user });
+  const newUser = await saveStory(user, req.body)
+    .catch(err => {
+      res.status(404).send(err);
+    });
 
-  // Checks to make sure it exists
-  if (curUser === null) {
-    res.status(404).send("User not found");
+  if (newUser === undefined) {
     return;
   }
 
-  saveStory(curUser, req.body)
+  newUser
     .save()
     .then(result => {
       res.send(result);
@@ -414,15 +412,7 @@ router.route("/stories/:username/:story").post(async (req, res) => {
   const user = req.params.username;
   const story = req.params.story;
 
-  let curUser = await User.findOne({ username: user });
-
-  // Checks to make sure it exists
-  if (curUser === null) {
-    res.status(404).send("User not found");
-    return;
-  }
-
-  const newUser = await editTitle(curUser, story, req.body.title)
+  const newUser = await editTitle(user, story, req.body.title)
     .catch(err => {
       res.status(400).send(err);
     });
@@ -447,15 +437,7 @@ router.route("/stories/:username/:story").get(async (req, res) => {
   const user = req.params.username;
   const story = req.params.story;
 
-  let curUser = await User.findOne({ username: user });
-
-  // Checks to make sure it exists
-  if (curUser === null) {
-    res.status(404).send("User not found");
-    return;
-  }
-
-  const storyRetrieved = await getStory(curUser, story)
+  const storyRetrieved = await getStory(user, story)
     .catch(err => {
       res.status(400).send(err);
     })
@@ -465,8 +447,6 @@ router.route("/stories/:username/:story").get(async (req, res) => {
   }
 
   res.send(storyRetrieved);
-
-
 });
 
 module.exports = router;

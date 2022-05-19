@@ -1,12 +1,10 @@
 const path = require('path');
 
-require('dotenv').config({ path: path.resolve(__dirname, '../config.env') });
+require('dotenv').config();
 
 const mongoose = require('mongoose');
 
 const mongoURI = process.env.ATLAS_URI;
-// console.log(process.env);
-// || 'mongodb://localhost:27017/TallTalesAPI';
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true});
 const connection = mongoose.connection;

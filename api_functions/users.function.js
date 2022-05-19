@@ -4,10 +4,17 @@ const log = console.log;
 
 const { User } = require("../models/user.model");
 
-const addUser = (user) => {
+const addUser = async (user) => {
+    // Checks if user exists already
+    const curUser = await User.findOne({username: user.username});
+
+    if (curUser !== null) {
+        throw 'Username taken already';
+    }
+
     const newUser = new User(user);
 
-    return newUser.save();
+    return newUser;
 }
 
 const login = (username, password) => {
@@ -26,19 +33,40 @@ const deleteUser = (username) => {
     return User.findOneAndDelete({ username: username });
 }
 
-const makeAdmin = (user) => {
-    user.admin = true;
+const makeAdmin = async (user) => {
+    const curUser = await User.findOne({ username: user });
 
-    return user;
+    // Checks to make sure it exists
+    if (curUser === null) {
+        throw 'User not found';
+    }
+
+    curUser.admin = true;
+
+    return curUser;
 }
 
-const makeNormal = (user) => {
-    user.admin = false;
+const makeNormal = async (user) => {
+    const curUser = await User.findOne({ username: user });
 
-    return user;
+    // Checks to make sure it exists
+    if (curUser === null) {
+        throw 'User not found';
+    }
+
+    curUser.admin = false;
+
+    return curUser;
 }
 
 const updateUsername = async (user, username) => {
+    const curUser = await User.findOne({ username: user });
+
+    // Checks to make sure it exists
+    if (curUser === null) {
+        throw 'User not found';
+    }
+
     // Checks username not taken
     let newUser = await User.findOne({ username: username });
 
@@ -46,47 +74,90 @@ const updateUsername = async (user, username) => {
         throw 'Username already taken';
     }
 
-    user.username = username;
+    curUser.username = username;
 
-    return user;
+    return curUser;
 }
 
-const updatePassword = (user, password) => {
-    user.password = password;
+const updatePassword = async (user, password) => {
+    const curUser = await User.findOne({ username: user });
 
-    return user;
+    // Checks to make sure it exists
+    if (curUser === null) {
+        throw 'User not found';
+    }
+
+    curUser.password = password;
+
+    return curUser;
 }
 
-const updateAvatar = (user, avatar) => {
-    user.icon = avatar;
+const updateAvatar = async (user, avatar) => {
+    const curUser = await User.findOne({ username: user });
 
-    return user;
+    // Checks to make sure it exists
+    if (curUser === null) {
+        throw 'User not found';
+    }
+
+    curUser.icon = avatar;
+
+    return curUser;
 }
 
-const addStart = (user, start) => {
-    user.prompts.push(start);
+const addStart = async (user, start) => {
+    const curUser = await User.findOne({ username: user });
 
-    return user;
+    // Checks to make sure it exists
+    if (curUser === null) {
+        throw 'User not found';
+    }
+
+
+    curUser.prompts.push(start);
+
+    return curUser;
 }
 
-const deleteStart = (user, start) => {
-    user.prompts.splice(start, 1);
+const deleteStart = async (user, start) => {
+    const curUser = await User.findOne({ username: user });
 
-    return user;
+    // Checks to make sure it exists
+    if (curUser === null) {
+        throw 'User not found';
+    }
+
+    curUser.prompts.splice(start, 1);
+
+    return curUser;
 }
 
-const saveStory = (user, story) => {
-    user.stories.push(story);
+const saveStory = async (user, story) => {
+    const curUser = await User.findOne({ username: user });
 
-    return user;
+    // Checks to make sure it exists
+    if (curUser === null) {
+        throw 'User not found';
+    }
+
+    curUser.stories.push(story);
+
+    return curUser;
 }
 
 const editTitle = async (user, story, title) => {
+    const curUser = await User.findOne({ username: user });
+
+    // Checks to make sure it exists
+    if (curUser === null) {
+        throw 'User not found';
+    }
+
     let curStory = null;
 
     // Finds the story
-    for (let i = 0; i < user.stories.length; i++) {
-        if (user.stories[i]._id === story) {
+    for (let i = 0; i < curUser.stories.length; i++) {
+        if (curUser.stories[i]._id === story) {
             curStory = i;
             break;
         }
@@ -97,15 +168,22 @@ const editTitle = async (user, story, title) => {
         throw 'Story not found';
     }
 
-    const newStory = user.stories[curStory];
+    const newStory = curUser.stories[curStory];
     newStory.title = title;
-    user.stories.splice(curStory, 1, newStory);
+    curUser.stories.splice(curStory, 1, newStory);
 
-    return user;
+    return curUser;
 }
 
 const getStory = async (user, story) => {
-    let currStory = null;
+    let curUser = await User.findOne({ username: user });
+
+    // Checks to make sure it exists
+    if (curUser === null) {
+        throw 'User not found';
+    }
+
+    let curStory = null;
 
     // Finds story
     for (let i = 0; i < user.stories.length; i++) {

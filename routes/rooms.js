@@ -1,5 +1,5 @@
 const express = require("express");
-const { createRoom, deleteRoom, lockRoom, startRoom, joinRoom, updateGenre, updateHost, getRoom, getRooms } = require("../api_functions/rooms.functions");
+const { createRoom, deleteRoom, lockRoom, startRoom, updateNumUsers, updateGenre, updateHost, getRoom, getRooms } = require("../api_functions/rooms.functions");
 
 const log = console.log
 
@@ -49,15 +49,16 @@ router.route('/delete/:room').delete(async (req, res) => {
 router.route('/lock/:room').post(async (req, res) => {
     const room = req.params.room;
 
-    let curRoom = await Room.findOne({ code: room });
+    const newRoom = await lockRoom(room)
+        .catch(err => {
+            res.status(404).send(err);
+        });
 
-    // Checks to make sure it exists
-    if (curRoom === null) {
-        res.status(404).send('Room not found');
+    if (newRoom === undefined) {
         return;
     }
 
-    lockRoom(curRoom)
+    newRoom
     .save()
         .then((result) => {
             res.send(result);
@@ -72,15 +73,16 @@ router.route('/lock/:room').post(async (req, res) => {
 router.route('/start/:room').post(async (req, res) => {
     const room = req.params.room;
 
-    let curRoom = await Room.findOne({ code: room });
+    const newRoom = await startRoom(room)
+        .catch(err => {
+            res.status(404).send(err);
+        });
 
-    // Checks to make sure it exists
-    if (curRoom === null) {
-        res.status(404).send('Room not found');
+    if (newRoom === undefined) {
         return;
     }
 
-    startRoom(curRoom)
+    newRoom
     .save()
         .then((result) => {
             res.send(result);
@@ -100,15 +102,16 @@ router.route('/start/:room').post(async (req, res) => {
 router.route('/join/:room').post(async (req, res) => {
     const room = req.params.room;
 
-    let curRoom = await Room.findOne({ code: room });
+    const newRoom = await updateNumUsers(room, req.body.users)
+        .catch(err => {
+            res.status(404).send(err);
+        });
 
-    // Checks to make sure it exists
-    if (curRoom === null) {
-        res.status(404).send('Room not found');
+    if (newRoom === undefined) {
         return;
     }
 
-    joinRoom(curRoom, req.body.users)
+    newRoom
     .save()
         .then((result) => {
             res.send(result);
@@ -127,15 +130,16 @@ router.route('/join/:room').post(async (req, res) => {
 router.route('/genre/:room').post(async (req, res) => {
     const room = req.params.room;
 
-    let curRoom = await Room.findOne({ code: room });
+    const newRoom = await updateGenre(room, req.body.genre)
+        .catch(err => {
+            res.status(404).send(err);
+        });
 
-    // Checks to make sure it exists
-    if (curRoom === null) {
-        res.status(404).send('Room not found');
+    if (newRoom === undefined) {
         return;
     }
 
-    updateGenre(curRoom, req.body.genre)
+    newRoom
     .save()
         .then((result) => {
             res.send(result);
@@ -154,15 +158,16 @@ router.route('/genre/:room').post(async (req, res) => {
 router.route('/host/:room').post(async (req, res) => {
     const room = req.params.room;
 
-    let curRoom = await Room.findOne({ code: room });
+    const newRoom = await updateHost(room, req.body.host)
+        .catch(err => {
+            res.status(404).send(err);
+        });
 
-    // Checks to make sure it exists
-    if (curRoom === null) {
-        res.status(404).send('Room not found');
+    if (newRoom === undefined) {
         return;
     }
 
-    updateHost(curRoom, req.body.host)
+    newRoom
     .save()
         .then((result) => {
             res.send(result);
@@ -177,7 +182,7 @@ router.route('/host/:room').post(async (req, res) => {
 router.route('/room/:room').get(async (req, res) => {
     const room = req.params.room;
 
-    let curRoom = await getRoom(room);
+    const curRoom = await getRoom(room);
 
     // Checks to make sure it exists
     if (curRoom === null) {

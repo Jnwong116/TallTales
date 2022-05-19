@@ -18,11 +18,18 @@ const createGenre = async (genre, start) => {
 }
 
 const editStartTitle = async (genre, start, title) => {
+    const curGenre = await Genre.findOne({ genre: genre });
+  
+    // Checks to make sure it exists
+    if (curGenre === null) {
+      throw 'Genre not found';
+    }
+
     let currStart = null;
 
     // Finds start
-    for (let i = 0; i < genre.starts.length; i++) {
-        if (genre.starts[i].id === start) {
+    for (let i = 0; i < curGenre.starts.length; i++) {
+        if (curGenre.starts[i].id === start) {
             
             currStart = i;
             break;
@@ -35,23 +42,19 @@ const editStartTitle = async (genre, start, title) => {
     }
 
     // Edits title of start
-    const newStart = genre.starts[currStart];
+    const newStart = curGenre.starts[currStart];
     newStart.title = title;
-    genre.starts.splice(currStart, 1);
-    genre.starts.push(newStart);
+    curGenre.starts.splice(currStart, 1);
+    curGenre.starts.push(newStart);
 
-    return genre;
+    return curGenre;
 }
 
 const getGenres = () => {
     return Genre.find();
 }
 
-const getGenre = (genre) => {
-    return Genre.findOne({genre: genre});
-}
-
-const getStarts = async (genre) => {
+const getGenre = async (genre) => {
     return Genre.findOne({genre: genre});
 }
 
@@ -59,29 +62,57 @@ const deleteGenre = (genre) => {
     return Genre.findOneAndDelete({genre: genre});
 }
 
-const deleteStart = (genre, start) => {
-    genre.starts.splice(start, 1);
+const deleteStart = async (genre, start) => {
+    const curGenre = await Genre.findOne({genre: genre});
 
-    return genre;
+    // Checks to make sure it exists
+    if (curGenre === null) {
+        throw 'Genre not found';
+    }
+
+    curGenre.starts.splice(start, 1);
+
+    return curGenre;
 }
 
-const addPrompt = (genre, prompt) => {
-    genre.prompts.push(prompt);
+const addPrompt = async (genre, prompt) => {
+    const curGenre = await Genre.findOne({genre: genre});
 
-    return genre;
+    // Checks to make sure it exists
+    if (curGenre === null) {
+        throw 'Genre not found';
+    }
+    
+    curGenre.prompts.push(prompt);
+
+    return curGenre;
 }
 
 const getPrompts = async (genre) => {
-    return Genre.findOne({genre: genre});
+    const curGenre = await Genre.findOne({genre: genre});
+
+    // Checks to make sure it exists
+    if (curGenre === null) {
+        throw 'Genre not found';
+    }
+
+    return curGenre;
 }
 
 const deletePrompt = async (genre, prompt_id) => {
-    const prompts = genre.prompts;
+    const curGenre = await Genre.findOne({genre: genre});
+
+    // Checks to make sure it exists
+    if (curGenre === null) {
+        throw 'Genre not found';
+    }
+
+    const prompts = curGenre.prompts;
 
     for (let i = 0; i < prompts.length; i++) {
         if (prompts[i].id === prompt_id) {
-            genre.prompts.splice(i, 1);
-            return genre;
+            curGenre.prompts.splice(i, 1);
+            return curGenre;
         }
     }
 
@@ -98,12 +129,19 @@ const createStory = (story) => {
     return newStory;
 }
 
-const addContribution = (contribution, story) => {
-    story.contributions.push(contribution);
-    story.story = story.story + " " + contribution.sentence;
+const addContribution = async (contribution, story) => {
+    const curStory = await Story.findById(story);
 
-    return story;
+    // Checks to make sure it exists
+    if (curStory === null) {
+        throw 'Story not found';
+    }
+
+    curStory.contributions.push(contribution);
+    curStory.story = curStory.story + " " + contribution.sentence;
+
+    return curStory;
 }
 
-module.exports = { createGenre, editStartTitle, getGenres, getGenre, getStarts, deleteGenre, deleteStart, addPrompt, 
+module.exports = { createGenre, editStartTitle, getGenres, getGenre, deleteGenre, deleteStart, addPrompt, 
     getPrompts, deletePrompt, getStory, createStory, addContribution }
