@@ -1,6 +1,5 @@
 const express = require("express");
-const { createGenre, editStartTitle, getGenres, getStarts, deleteGenre, addPrompt, getPrompts, deletePrompt, getStory, createStory, addContribution, getGenre } = require("../api_functions/stories.functions");
-const { deleteStart } = require("../api_functions/users.function");
+const { createGenre, editStartTitle, getGenres, deleteGenre, addPrompt, getPrompts, deletePrompt, getStory, createStory, addContribution, getGenre, deleteStart } = require("../api_functions/stories.functions");
 
 const log = console.log
 
